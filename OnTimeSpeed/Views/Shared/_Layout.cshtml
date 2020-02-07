@@ -1,0 +1,81 @@
+﻿@using OnTimeSpeed.Models
+
+@{
+    var currUser = Session["user"] as User;
+    var imgUrl = currUser?.ImageUrl;
+    var name = currUser?.name;
+    var loggedIn = currUser != null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="~/favicon.png" />
+    @*<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />*@
+    <title>OnTime Speed</title>
+    @Styles.Render("~/Content/Layout")
+    <link href="~/Content/fonts/materializeIcons.css" rel="stylesheet">
+
+
+</head>
+<body>
+    <div id="layout">
+        <div id="top">
+            <div id="header-container">
+                <div class="header-logo__image axosoft"></div>
+                @*<a href="default" class="header-logo__image axosoft" title="Axosoft"><span>Axosoft</span></a>*@
+                @if (Model != null)
+                {
+                    <div class="header_username">
+                        <div class="userImage" style="background-image: url(@imgUrl)">
+                        </div>
+                        <span class="userName">@name</span>
+                    </div>
+                    @*<ul id="topMenu">
+                        <li title="@name" style="background-image: url(@imgUrl)" id="ontime-header-user-button" class="ontime-header-button button button--small button--neutral">
+                            <span id="ontime-header-username" class="ontime-header-menu-text">@name</span>
+                        </li>
+                    </ul>*@
+                }
+            </div>
+        </div>
+    </div>
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>*@
+
+    @RenderBody()
+    @Scripts.Render("~/bundles/Layout")
+
+    <script type="text/javascript">
+        var appName = '@System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath';
+        var loggedIn = @loggedIn.ToString().ToLower();
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

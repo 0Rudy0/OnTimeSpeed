@@ -1,0 +1,87 @@
+﻿body {
+    background-color: #1c2933;
+    color: white;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+    .header-logo__image.axosoft {
+        background-image: url(../Content/images/logo-axo-light.svg);
+        width: 130px;
+        height: 40px;
+        background-position: 50%;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        margin: 10px;
+        /*height:*/
+    }
+
+.connectBtn {
+    background-color: #edf1f2;
+    color: #2a3e51;
+    padding: .4em .5em;
+    font-size: 40px;
+    font-weight: 700;
+    border-radius: 3px;
+    display: flex;
+    margin: auto;
+    width: 600px;
+    justify-content: center;
+    align-content: center;
+    height: 150px;
+    align-items: center;
+    border: 4px solid #d7e0e0;
+    margin-top: 100px;
+}
+
+    .connectBtn:hover {
+        background-color: #d8dfe3;
+    }
+
+    .connectBtn:active {
+        transform: scale(0.99);
+    }
+
+    .connectBtn i {
+        margin-right: 35px;
+        color: #337ab7;
+    }
+
+    #topMenu {
+        position: absolute;
+        top: 5px;
+        right: 100px;
+        transform: scale(1.5);
+    }
+
+.header_username {
+    height: 30px;
+    width: auto;
+    background-color: #37474f;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding: 0 10px 0 0;
+    border-radius: 3px;
+    font-weight: 700;
+    /*font-size: .65rem;*/
+    overflow: hidden;
+    border: 1px solid #4b5b72;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+}
+
+    .header_username .userImage {
+        width: 30px;
+        height: 30px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        display: inline-block
+    }
+
+    .header_username .userName {
+        display: inline-block;
+        margin-left: 7px;
+    }

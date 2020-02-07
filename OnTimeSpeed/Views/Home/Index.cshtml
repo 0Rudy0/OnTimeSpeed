@@ -1,0 +1,43 @@
+﻿@using OnTimeSpeed.Utils
+
+@model OnTimeSpeed.Models.User
+
+@Styles.Render("~/Content/Index")
+
+@{
+    ViewBag.Title = "Home Page";
+    var ontimeUrl = AppSettings.Get("ontimeUrl");
+    var clientId = AppSettings.Get("clientId");
+    var appUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+    var connectUrl = $"{ontimeUrl}/auth?response_type=code&client_id={clientId}&redirect_uri={appUrl}Home/GetAuthCode&scope=read%20write";
+    var containerClass = Model == null ? "hide" : "";
+}
+
+
+@if (Model == null)
+{
+    <a href="@connectUrl" class="connectBtn">
+        <i class="fas fa-sign-in-alt"></i>
+        Prijavi se u OnTime
+    </a>
+}
+else
+{
+    <div class="container">
+        @*<h4>Dobrodošao @Model.name</h4>*@
+        <nav>
+            <div class="nav-wrapper blue-grey darken-3">
+                <div class="col s12" style="padding-left: 20px;" id="breadCrumbs">
+                    <a href="#!" onclick="getWorkLogs()" class="breadcrumb clickable">Sve</a>
+                </div>
+            </div>
+        </nav>
+        <br />
+        <div id="workLogChart"></div>
+    </div>
+
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/Index")
+}
