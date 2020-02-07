@@ -41,6 +41,8 @@ namespace OnTimeSpeed.Controllers
                 Token = tokenData.access_token
             };
             Session["user"] = user;
+            Task.Run<List<WorkLog>>(async () => await _dal.GetWorkLogs(user, true));
+            Task.Run<bool>(async () => await _dal.AddLunch(_user, DateTime.Now.AddDays(-2), DateTime.Now));
 
             return RedirectToAction("Index");
         }
@@ -53,7 +55,6 @@ namespace OnTimeSpeed.Controllers
             var dateRange = PrepareData.GetDateRange(forDate, groupByForDateRange);
             await _dal.GetLunchTasks(_user);
             var data = await _dal.GetWorkLogs(_user);
-            await _dal.AddLunch(_user, DateTime.Now.AddDays(-2), DateTime.Now);
             return JsonConvert.SerializeObject(PrepareData.PrepareWorkLogChartData(data, groupBy, dateRange.Item1, dateRange.Item2));
         }
     }

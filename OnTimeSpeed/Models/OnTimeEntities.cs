@@ -16,6 +16,11 @@ namespace OnTimeSpeed.Models
         public int id { get; set; }
         public string description { get; set; }
         public DateTime date_time { get; set; }
+
+        public override string ToString()
+        {
+            return $"{date_time.Date.ToShortDateString()} - {item.name}: {work_done.duration_minutes / 60} h";
+        }
     }
 
     public class Item

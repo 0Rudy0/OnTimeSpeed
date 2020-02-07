@@ -19,6 +19,11 @@ namespace OnTimeSpeed.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public WorkItemType Type { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Id} - {Name}";
+        }
     }
 
 
@@ -35,6 +40,11 @@ namespace OnTimeSpeed.Models
         public Parent parent { get; set; }
         public Workflow_Step workflow_step { get; set; }
         public bool has_related_items { get; set; }
+
+        public override string ToString()
+        {
+            return $"{id} - {name}";
+        }
     }
 
     public class Status

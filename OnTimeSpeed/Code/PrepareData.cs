@@ -87,9 +87,9 @@ namespace OnTimeSpeed.Code
                         break;
                 }
 
-                if (!groupedData.ContainsKey(key))
+                if (!groupedData.ContainsKey(key) && (toDate == null || log.date_time <= toDate))
                     groupedData.Add(key, log.work_done.duration_minutes / 60);
-                else
+                else if (toDate == null || log.date_time <= toDate)
                     groupedData[key] += log.work_done.duration_minutes / 60;
             }
 
@@ -249,7 +249,7 @@ namespace OnTimeSpeed.Code
                     id = itemId,
                     item_type = itemType
                 },
-                date_time = forDate.ToString("yyyy-MM-dd")
+                date_time = forDate.ToString("yyyy-MM-ddT09:00:00")
             };
         }
 
@@ -272,19 +272,34 @@ namespace OnTimeSpeed.Code
             return null;
         }
 
-        public static bool DoesLogAlreadyExist(List<WorkLog> logs, WorkItem newItem, DateTime onDate)
+        public static bool CanAddWorkLog(List<WorkLog> logs, WorkItem newItem, DateTime onDate)
         {
-            var exist = false;
+            var canAdd = true;
+            var groupped = logs.GroupBy(g => g.date_time.Date).Select(g => new {
+                ForDate = g.Key,
+                TotalWorkLogged = g.Sum(l => l.work_done.duration_minutes / 60)
+            });
             foreach (var log in logs)
             {
                 if (log.date_time.Date == onDate.Date && log.item.id == newItem.Id)
                 {
-                    exist = true;
+                    canAdd = false;
+                    break;
+                }
+                else if (onDate.DayOfWeek == DayOfWeek.Saturday ||
+                    onDate.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    canAdd = false;
+                    break;
+                }
+                else if (groupped.Where(g => g.ForDate == onDate.Date).FirstOrDefault()?.TotalWorkLogged == 8)
+                {
+                    canAdd = false;
                     break;
                 }
             }
 
-            return exist;
+            return canAdd;
         }
     }
 }

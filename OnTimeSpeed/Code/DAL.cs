@@ -189,16 +189,16 @@ namespace OnTimeSpeed.Code
             return result;
         }
 
-        public async Task<List<WorkLog>> GetWorkLogs(User user)
+        public async Task<List<WorkLog>> GetWorkLogs(User user, bool forceRefresh = false)
         {
 
             string cacheKey = "workLogs_" + user.id;
             var fromDate = DateTime.Now;
-            fromDate.AddMonths(AppSettings.GetInt("monthsBack"));
+            fromDate = fromDate.AddMonths(AppSettings.GetInt("monthsBack"));
             fromDate = new DateTime(fromDate.Year, fromDate.Month, 1);
 
             var result = (List<WorkLog>)HttpRuntime.Cache.Get(cacheKey);
-            if (result == null)
+            if (result == null || forceRefresh)
             {
                 var parameters = new Dictionary<string, string>();
                 parameters.Add("start_date", fromDate.ToStringCustom());
@@ -207,6 +207,8 @@ namespace OnTimeSpeed.Code
 
                 var content = await GetRequestAsync($"api/v5/work_logs", user.Token, parameters);
                 result = ApiHelper.GetObjectFromApiResponse<List<WorkLog>>(content);
+
+                result = result.OrderBy(r => r.date_time).ToList();
 
                 HttpRuntime.Cache.Insert(cacheKey,
                     result,
@@ -267,10 +269,8 @@ namespace OnTimeSpeed.Code
             for (var i = fromDate; i <= toDate; i = i.AddDays(1))
             {
                 var lunchItem = PrepareData.GetLunchTaskForDate(lunchTasks, i);
-                var logExists = PrepareData.DoesLogAlreadyExist(workLogs, lunchItem, i);
-                if (logExists)
-                    continue;
-                else
+                var canAdd = PrepareData.CanAddWorkLog(workLogs, lunchItem, i);
+                if (canAdd)
                 {
                     var newLog = PrepareData.CreateLunchWorkLogObj(user.id, lunchItem.Id, i);
                     var content = await PostRequestAsync($"/work_logs", user.Token, newLog);
