@@ -9,10 +9,14 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Caching;
+using hrnet = HrNetMobile.Data;
+using hrnetModel = HrNetMobile.Models;
+using hrnetHelper = HrNetMobile.Common;
+using HrNetMobile.Models.Vacation;
 
 namespace OnTimeSpeed.Code
 {
-    public class DAL
+    public static class DAL
     {
         static string _apiUrl = AppSettings.Get("ontimeApiUrl");
         static string _ontimeUrl = AppSettings.Get("ontimeUrl");
@@ -88,7 +92,7 @@ namespace OnTimeSpeed.Code
         }
 
 
-        protected static string PostRequest(string endPoint, string token, Dictionary<string, string> formData)
+        private static string PostRequest(string endPoint, string token, Dictionary<string, string> formData)
         {
             try
             {
@@ -115,7 +119,7 @@ namespace OnTimeSpeed.Code
             }
         }
 
-        protected static string PostRequest(string endPoint, string token, object data)
+        private static string PostRequest(string endPoint, string token, object data)
         {
             try
             {
@@ -137,7 +141,7 @@ namespace OnTimeSpeed.Code
             }
         }
 
-        protected static string PostRequestAsync(string endPoint, string token, Dictionary<string, string> formData)
+        private static string PostRequestAsync(string endPoint, string token, Dictionary<string, string> formData)
         {
             try
             {
@@ -159,7 +163,7 @@ namespace OnTimeSpeed.Code
             }
         }
 
-        protected static async Task<string> PostRequestAsync(string endPoint, string token, object data)
+        private static async Task<string> PostRequestAsync(string endPoint, string token, object data)
         {
             try
             {
@@ -174,7 +178,7 @@ namespace OnTimeSpeed.Code
 
         #endregion
 
-        public TokenData GetToken(string authCode, string returnUrl)
+        public static TokenData GetToken(string authCode, string returnUrl)
         {         
             var parameters = new Dictionary<string, string>();
             parameters.Add("grant_type", "authorization_code");
@@ -189,12 +193,12 @@ namespace OnTimeSpeed.Code
             return result;
         }
 
-        public async Task<List<WorkLog>> GetWorkLogs(User user, bool forceRefresh = false)
+        public static async Task<List<WorkLog>> GetWorkLogs(User user, bool forceRefresh = false)
         {
 
             string cacheKey = "workLogs_" + user.id;
             var fromDate = DateTime.Now;
-            fromDate = fromDate.AddMonths(AppSettings.GetInt("monthsBack"));
+            fromDate = fromDate.AddMonths(AppSettings.GetInt("monthsBack") * -1);
             fromDate = new DateTime(fromDate.Year, fromDate.Month, 1);
 
             var result = (List<WorkLog>)HttpRuntime.Cache.Get(cacheKey);
@@ -209,6 +213,7 @@ namespace OnTimeSpeed.Code
                 result = ApiHelper.GetObjectFromApiResponse<List<WorkLog>>(content);
 
                 result = result.OrderBy(r => r.date_time).ToList();
+                result.ForEach(r => r.date_time.ToLocalTime());
 
                 HttpRuntime.Cache.Insert(cacheKey,
                     result,
@@ -222,32 +227,43 @@ namespace OnTimeSpeed.Code
             return result;
         }
 
-        public async Task<List<WorkItem>> GetLunchTasks(User user)
+        private static async Task<List<WorkItem>> GetWorkItems(
+            User user,
+            IEnumerable<string> searchStrings,
+            List<string> itemTypes,
+            string cacheKey)
         {
-            string cacheKey = "lunchTasks";
             var result = (List<WorkItem>)HttpRuntime.Cache.Get(cacheKey);
 
             if (result == null)
             {
-                var parameters = new Dictionary<string, string>();
-                parameters.Add("search_field", "[ID_NAME]");
-                parameters.Add("search_string", "Pauza ručak");
-                parameters.Add("columns", "status,id,item_type,name");
-
-                var content = await GetRequestAsync($"api/v5/tasks", user.Token, parameters);
-                var resultRaw = ApiHelper.GetObjectFromApiResponse<List<WorkItemRaw>>(content);
-
-                result = new List<WorkItem>();
-                resultRaw.ForEach(r =>
+                foreach (var type in itemTypes)
                 {
-                    result.Add(new WorkItem
+                    foreach (var str in searchStrings)
                     {
-                        Id = r.id,
-                        Name = r.name,
-                        Type = WorkItemType.Item
-                    });
-                });
+                        var parameters = new Dictionary<string, string>();
+                        parameters.Add("search_field", "[ID_NAME]");
+                        parameters.Add("search_string", str);
+                        parameters.Add("columns", "status,id,item_type,name");
 
+                        var content = await GetRequestAsync($"api/v5/{type}", user.Token, parameters);
+                        var resultRaw = ApiHelper.GetObjectFromApiResponse<List<WorkItemRaw>>(content);
+
+                        result = new List<WorkItem>();
+                        resultRaw.ForEach(rr =>
+                        {
+                            if (!result.Any(r => r.Id == rr.id))
+                            {
+                                result.Add(new WorkItem
+                                {
+                                    Id = rr.id,
+                                    Name = rr.name,
+                                    Type = WorkItemType.Item
+                                });
+                            }
+                        });
+                    }
+                }
 
                 HttpRuntime.Cache.Insert(cacheKey,
                     result,
@@ -261,10 +277,52 @@ namespace OnTimeSpeed.Code
             return result;
         }
 
-        public async Task<bool> AddLunch(User user, DateTime fromDate, DateTime toDate)
+        #region AUTH
+
+        public static hrnetModel.User AuthHrNet(hrnetModel.User user)
+        {
+            var token = hrnet.DAL.DALWebApi.AuthenticateWebApiWin(user);
+            user.TokenWebApi = token.ApiToken;
+            user.LoggedContact = new hrnetModel.Contact
+            {
+                Name = token.EmployeeName,
+                Email = token.EmployeeEmail,
+                ID = token.EmployeeId
+            };
+
+            //try
+            //{
+            //    user.LoggedContact.ProfilePicture = hrnetHelper.HelpFunctions.GetProfilePicture(user.LoggedContact.ID, 100, user.TokenWebApi);
+
+            //}
+            //catch
+            //{
+            //    user.LoggedContact.ProfilePictureFallback = appAbsoluteUrl + "/Content/images/personPlaceholder.png";
+            //}
+
+            return user;
+        }
+
+        #endregion
+
+
+        #region Lunch
+
+        public static async Task<List<WorkItem>> GetLunchTasks(User user)
+        {
+            string cacheKey = "lunchTasks";
+            var searchStrings = SearchStrings.Get().FirstOrDefault(s => s.Name == "rucakSearchString").SearchStrings;
+            var result = await GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);           
+
+            return result;
+        }
+        
+
+        public static async Task<List<string>> AddLunch(User user, DateTime fromDate, DateTime toDate)
         {
             var lunchTasks = await GetLunchTasks(user);
-            var workLogs = await GetWorkLogs(user);
+            var workLogs = await GetWorkLogs(user, true);
+            var addedOnDates = new List<string> ();
 
             for (var i = fromDate; i <= toDate; i = i.AddDays(1))
             {
@@ -275,10 +333,54 @@ namespace OnTimeSpeed.Code
                     var newLog = PrepareData.CreateLunchWorkLogObj(user.id, lunchItem.Id, i);
                     var content = await PostRequestAsync($"/work_logs", user.Token, newLog);
                     var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
+                    addedOnDates.Add(i.ToShortDateString());
                 }
             }
+            if (addedOnDates.Count > 0)
+                HttpRuntime.Cache.Remove("workLogs_" + user.id);
 
-            return true;
+            return addedOnDates;
         }
+
+        #endregion
+
+        #region Holiday
+
+        public static async Task<List<WorkItem>> GetHolidayTasks(User user)
+        {
+            string cacheKey = "holidayTasks";
+            var searchStrings = SearchStrings.Get().FirstOrDefault(s => s.Name == "holidaySearchString").SearchStrings;
+            var result = await GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);
+
+            return result;
+        }
+
+
+        public static async Task<List<string>> AddHolidays(User user, DateTime fromDate, DateTime toDate)
+        {
+            var tasks = await GetHolidayTasks(user);
+            var workLogs = await GetWorkLogs(user, true);
+            var addedOnDates = new List<string>();
+
+            for (var i = fromDate; i <= toDate && i.IsHoliday(); i = i.AddDays(1))
+            {
+                var lunchItem = PrepareData.GetHolidayTaskForDate(tasks, i);
+                var canAdd = PrepareData.CanAddWorkLog(workLogs, lunchItem, i, false);
+                if (canAdd)
+                {
+                    var newLog = PrepareData.CreateLunchWorkLogObj(user.id, lunchItem.Id, i);
+                    var content = await PostRequestAsync($"/work_logs", user.Token, newLog);
+                    var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
+                    addedOnDates.Add(i.ToShortDateString());
+
+                }
+            }
+            if (addedOnDates.Count > 0)
+                HttpRuntime.Cache.Remove("workLogs_" + user.id);
+
+            return addedOnDates;
+        }
+
+        #endregion
     }
 }

@@ -1,0 +1,72 @@
+[
+  {
+    "yearFrom": null,
+    "yearTo": null,
+    "holidays": [
+      {
+        "name": "Nova Godina",
+        "date": "01.01."
+      },
+      {
+        "name": "Sveta tri kralja",
+        "date": "06.01."
+      },
+      {
+        "name": "Praznik rada",
+        "date": "01.05."
+      },
+      {
+        "name": "Dan antifašistièke borbe",
+        "date": "22.06."
+      },
+      {
+        "name": "Dan domovinske zahvalnosti",
+        "date": "05.08."
+      },
+      {
+        "name": "Velika gospa",
+        "date": "15.08."
+      },
+      {
+        "name": "Dan svih svetih",
+        "date": "01.11."
+      },
+      {
+        "name": "Božiæ",
+        "date": "25.12."
+      },
+      {
+        "name": "Štefanje",
+        "date": "26.12."
+      }
+    ]
+  },
+  {
+    "yearFrom": null,
+    "yearTo": 2019,
+    "holidays": [
+      {
+        "name": "Dan državnosti",
+        "date": "25.06."
+      },
+      {
+        "name": "Dan nezavisnosti",
+        "date": "01.10."
+      }
+    ]
+  },
+  {
+    "yearFrom": 2020,
+    "yearTo": null,
+    "holidays": [
+      {
+        "name": "Dan državnosti",
+        "date": "30.05."
+      },
+      {
+        "name": "Dan sjeæanja na žrtve Domovinskog rata",
+        "date": "18.11."
+      }
+    ]
+  }
+]

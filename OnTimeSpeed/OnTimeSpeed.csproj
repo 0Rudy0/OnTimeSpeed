@@ -45,6 +45,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HrNetMobile.Common">
+      <HintPath>lib\HrNetMobile.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="HrNetMobile.Data">
+      <HintPath>lib\HrNetMobile.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="HrNetMobile.Models">
+      <HintPath>lib\HrNetMobile.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="HrPro.HrNet.Framework, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\HrPro.HrNet.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="HrPro.HrNet.Framework.Web, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\HrPro.HrNet.Framework.Web.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -121,13 +138,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\DAL.cs" />
+    <Compile Include="Code\DAL_HrProApi.cs" />
+    <Compile Include="Code\Holidays.cs" />
     <Compile Include="Code\PrepareData.cs" />
+    <Compile Include="Code\SearchStrings.cs" />
+    <Compile Include="Code\Templates.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\HighCharts.cs" />
+    <Compile Include="Models\HrProUser.cs" />
     <Compile Include="Models\JsLogEvent.cs" />
     <Compile Include="Models\OnTimeResponseClass.cs" />
     <Compile Include="Models\TokenData.cs" />
@@ -140,6 +162,7 @@
     <Compile Include="Utils\DateUtils.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\LogUtils.cs" />
+    <Compile Include="Utils\VariousUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -174,10 +197,16 @@
     <Content Include="Content\ontime1.css" />
     <Content Include="Content\ontime3.css" />
     <Content Include="Content\ontime2.css" />
+    <Content Include="Content\spinner.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="lib\HrNetMobile.Common.dll" />
+    <Content Include="lib\HrNetMobile.Data.dll" />
+    <Content Include="lib\HrNetMobile.Models.dll" />
+    <Content Include="lib\HrPro.HrNet.Framework.dll" />
+    <Content Include="lib\HrPro.HrNet.Framework.Web.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\FontAwesome\fonts\fa-brands-400.eot" />
@@ -293,6 +322,9 @@
     <Content Include="Content\highcharts\themes\sand-signika.scss" />
     <Content Include="Content\fonts\materializeIcons.woff2" />
     <Content Include="PrivateSettings.config" />
+    <Content Include="config\searchStrings.json" />
+    <Content Include="config\holidays.json" />
+    <None Include="config\templates.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\highcharts\es-modules\annotations\annotations.src.js" />
     <Content Include="Scripts\highcharts\es-modules\annotations\controllable\ControllableCircle.js" />

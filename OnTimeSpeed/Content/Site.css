@@ -15,6 +15,10 @@
         /*height:*/
     }
 
+.container {
+    display: none;
+}
+
 .connectBtn {
     background-color: #edf1f2;
     color: #2a3e51;
@@ -85,3 +89,85 @@
         display: inline-block;
         margin-left: 7px;
     }
+
+    .spinner {
+        display: block;
+    }
+
+    #workLogChart {
+        margin-bottom: 13px;
+    }
+
+.btn-large.withIcon span {
+    position: relative;
+    top: -3px;
+}
+
+.btn-large i {
+    margin-right: 15px;
+}
+
+.buttons {
+    display: flex;
+}
+
+.buttons > .btn-large {
+    flex-grow: 1;
+    margin: 0 20px;
+}
+.datepicker-modal {
+    color: black;
+}
+
+.dateRangePickers {
+    display: flex;
+    flex-direction: row;
+}
+
+.dateRangePickers .dateHolder {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0 50px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+    .dateRangePickers .dateHolder input {
+        text-align: center;
+        color: white;
+    }
+
+.buttonPreselects {
+    display: flex;
+
+}
+
+.buttonPreselects .btn {
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+.buttonPreselects {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.workTypes {
+    margin-top: 20px;
+    display: flex;
+}
+
+.workTypes label {
+    flex-grow: 1;
+}
+
+    .workTypes label.workTypeLabel span {
+        color: white;
+        font-size: 20px;
+    }
+
+[type="radio"]:not(:checked) + span:before, [type="radio"]:not(:checked) + span:after {
+    border-color: white;
+}

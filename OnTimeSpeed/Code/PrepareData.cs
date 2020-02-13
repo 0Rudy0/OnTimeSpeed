@@ -16,7 +16,7 @@ namespace OnTimeSpeed.Code
         Day = 3
     }
     public static class PrepareData
-    {
+    {      
         public static HighChartsData PrepareWorkLogChartData(
             List<WorkLog> workLogs, 
             GroupBy groupBy, 
@@ -43,7 +43,7 @@ namespace OnTimeSpeed.Code
                         key = i.ToString("dd.MM.yyyy.");
                         break;
                     case GroupBy.Week:
-                        key = $"{forWeek} tj @ {forYear}.";
+                        key = $"{forWeek}. tj @ {forYear}.";
                         break;
                     case GroupBy.Month:
                         key = i.ToString("MMMM yyyy.");// $"{forMonth}/{forYear}";
@@ -80,16 +80,16 @@ namespace OnTimeSpeed.Code
                         key = forDate.ToString("dd.MM.yyyy.");
                         break;
                     case GroupBy.Week:
-                        key = $"{forWeek} tj @ {forYear}.";
+                        key = $"{forWeek}. tj @ {forYear}.";
                         break;
                     case GroupBy.Month:
                         key = forDate.ToString("MMMM yyyy.");// $"{forMonth}/{forYear}";
                         break;
                 }
 
-                if (!groupedData.ContainsKey(key) && (toDate == null || log.date_time <= toDate))
+                if (!groupedData.ContainsKey(key) && (fromDate == null || log.date_time.Date >= fromDate) && (toDate == null || log.date_time.Date <= toDate))
                     groupedData.Add(key, log.work_done.duration_minutes / 60);
-                else if (toDate == null || log.date_time <= toDate)
+                else if (groupedData.ContainsKey(key) && (fromDate == null || log.date_time.Date >= fromDate) && (toDate == null || log.date_time.Date <= toDate))
                     groupedData[key] += log.work_done.duration_minutes / 60;
             }
 
@@ -138,7 +138,7 @@ namespace OnTimeSpeed.Code
         {
             var dateFrom = DateTime.Now;
             DateTime? dateTo = null;
-            var prevMonthStart = dateFrom.AddMonths(-1);
+            var prevMonthStart = dateFrom.AddMonths(AppSettings.GetInt("monthsBack") * -1);
             prevMonthStart = new DateTime(prevMonthStart.Year, prevMonthStart.Month, 1);
             dateFrom = prevMonthStart;
 
@@ -159,7 +159,7 @@ namespace OnTimeSpeed.Code
                         break;
                     case GroupBy.Week:
                         parts = forDate.Split('@');
-                        var week = int.Parse(parts[0].Replace(" tj ", "").Trim());
+                        var week = int.Parse(parts[0].Replace(". tj ", "").Trim());
                         var year = int.Parse(parts[1].Replace(".", "").Trim());
                         var fromSet = false;
 
@@ -175,7 +175,7 @@ namespace OnTimeSpeed.Code
                                     fromSet = true;
                                 }
                             }
-                            else if (forWeek > week)
+                            else if (forWeek > week && i.Year >= year)
                                 break;
                         }
                         break;
@@ -186,37 +186,50 @@ namespace OnTimeSpeed.Code
 
         }
 
-        public static DateTime? DateFromName(string date, string template)
+        public static DateTime? DateFromName(string date, IEnumerable<string> templates)
         {
-            if (template.Length != date.Length)
+            var yearChar = AppSettings.Get("templateYearChar")[0];
+            var monthChar = AppSettings.Get("templateMonthChar")[0];
+            var dayChar = AppSettings.Get("templateDayChar")[0];
+
+            if (templates == null)
                 return null;
 
-            try
+            foreach (var template in templates)
             {
-                var monthStr = "";
-                var yearStr = "";
-                for (var i = 0; i < template.Length; i++)
+                if (template.Length != date.Length)
+                    continue;
+
+                try
                 {
-                    if (template[i] == 'M')
-                        monthStr += date[i];
-                    else if (template[i] == 'y')
-                        yearStr += date[i];
+                    var monthStr = "";
+                    var yearStr = "";
+                    var dayStr = "";
 
-                    //if (template[i] == '?')
-                    //{
-                    //    date = date.Remove(i, 1);
-                    //    date = date.Insert(i, "?");
-                    //}
+                    for (var i = 0; i < template.Length; i++)
+                    {
+                        if (template[i] == monthChar)
+                            monthStr += date[i];
+                        else if (template[i] == yearChar)
+                            yearStr += date[i];
+                        else if (template[i] == dayChar)
+                            dayStr += date[i];
+                        else if (template[i] != date[i])
+                            continue;
+                    }
+
+                    var dateFrom = DateTime.ParseExact($"{monthStr}/{yearStr}", "MM/yyyy", CultureInfo.InvariantCulture);
+
+                    return dateFrom;
                 }
-
-                var dateFrom = DateTime.ParseExact($"{monthStr}/{yearStr}", "MM/yyyy", CultureInfo.InvariantCulture);
-
-                return dateFrom;
+                catch (Exception ex)
+                {
+                    LogUtils.LogException(ex);
+                    return null;
+                }
             }
-            catch (Exception ex)
-            {
-                return null;
-            }
+
+            return null;
         }
 
         public static object CreateLunchWorkLogObj(int userId, int itemId, DateTime forDate)
@@ -244,36 +257,70 @@ namespace OnTimeSpeed.Code
                 {
                     id = logType
                 },
+                description = "(via OnTimeSpeed)",
                 item = new
                 {
                     id = itemId,
                     item_type = itemType
                 },
-                date_time = forDate.ToString("yyyy-MM-ddT09:00:00")
+                date_time = forDate.ToString("yyyy-MM-ddT12:00:00")
             };
         }
 
         public static WorkItem GetLunchTaskForDate(List<WorkItem> lunchItems, DateTime forDate)
-        {            
-            foreach (var lunchItem in lunchItems)
+        {
+            return GetTaskForDate(lunchItems, forDate, "rucakDateFromTemplate", "rucakDateToTemplate");
+        }
+
+        public static WorkItem GetHolidayTaskForDate(List<WorkItem> holidayItems, DateTime forDate)
+        {
+            return GetTaskForDate(holidayItems, forDate, "praznikTemplate");
+        }
+
+        private static WorkItem GetTaskForDate(
+            List<WorkItem> items, 
+            DateTime forDate, 
+            string dateFromTemplateName, 
+            string dateToTemplateName = null)
+        {
+            var templates = Templates.Get();
+
+            foreach (var item in items)
             {
-                var fromDate = DateFromName(lunchItem.Name, AppSettings.Get("rucakDateFromTemplate"));
-                var toDate = DateFromName(lunchItem.Name, AppSettings.Get("rucakDateToTemplate"));
+                var fromDate = DateFromName(item.Name, templates.FirstOrDefault(t => t.Name == dateFromTemplateName).Templates);
+                DateTime? toDate = null;
+
+                if (String.IsNullOrEmpty(dateToTemplateName))
+                    toDate = fromDate?.AddYears(1).AddDays(-1);
+                else
+                    toDate = DateFromName(item.Name, templates.FirstOrDefault(t => t.Name == dateToTemplateName).Templates);
 
                 if (fromDate == null || toDate == null)
                     continue;
                 else
                 {
                     if (fromDate <= forDate && forDate <= toDate)
-                        return lunchItem;
+                        return item;
                 }
             }
 
             return null;
         }
 
-        public static bool CanAddWorkLog(List<WorkLog> logs, WorkItem newItem, DateTime onDate)
+
+        /// <summary>
+        /// Provjerava da li je datum za koji se želi dodati novi work log vikend, da li već ima 8 logiranih sati za taj dan, da li već postoji
+        /// work log za isti ItemId, te da li tog dana praznik - ako je bilo što od ovoga istina, vraća false
+        /// </summary>
+        /// <param name="logs"></param>
+        /// <param name="newItem"></param>
+        /// <param name="onDate"></param>
+        /// <returns></returns>
+        public static bool CanAddWorkLog(List<WorkLog> logs, WorkItem newItem, DateTime onDate, bool checkHolidays = true)
         {
+            if (newItem == null)
+                return false;
+
             var canAdd = true;
             var groupped = logs.GroupBy(g => g.date_time.Date).Select(g => new {
                 ForDate = g.Key,
@@ -286,13 +333,17 @@ namespace OnTimeSpeed.Code
                     canAdd = false;
                     break;
                 }
-                else if (onDate.DayOfWeek == DayOfWeek.Saturday ||
-                    onDate.DayOfWeek == DayOfWeek.Sunday)
+                else if (onDate.IsWeekend())
                 {
                     canAdd = false;
                     break;
                 }
                 else if (groupped.Where(g => g.ForDate == onDate.Date).FirstOrDefault()?.TotalWorkLogged == 8)
+                {
+                    canAdd = false;
+                    break;
+                }
+                else if (onDate.IsHoliday() && checkHolidays)
                 {
                     canAdd = false;
                     break;

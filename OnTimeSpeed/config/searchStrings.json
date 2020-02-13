@@ -1,0 +1,16 @@
+[
+	{
+		"Name": "rucakSearchString",
+		"SearchStrings": [
+			"Pauza - ručak: 2019",
+			"Pauza - ručak: 2020"
+		]
+	},
+	{
+		"Name": "holidaySearchString",
+		"SearchStrings": [
+			"Državni praznik/Neradni dan/Slobodni dan",
+			"Državni praznik - Neradni dan - Slobodni dan"
+		]
+	}
+]

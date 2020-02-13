@@ -25,6 +25,7 @@ namespace OnTimeSpeed
 
             bundles.Add(new ScriptBundle("~/bundles/Layout").Include(
                       "~/Scripts/materialize.min.js",
+                      "~/Scripts/moment.js",
                       "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Index").Include(
@@ -38,11 +39,12 @@ namespace OnTimeSpeed
                       //"~/Content/ontime2.css",
                       //"~/Content/ontime3.css",
                       "~/Content/materialize.min.css",
+                      "~/Content/spinner.css",
                       "~/Content/site.css")
                 .Include("~/Content/FontAwesome/all.css", new CssRewriteUrlTransformWrapper())
                 .Include("~/Content/materializeIcons.css", new CssRewriteUrlTransformWrapper()));
 
-            bundles.Add(new StyleBundle("~/Content/Index").Include(
+            bundles.Add(new StyleBundle("~/Content/Index").Include(                      
                       "~/Content/highcharts/highcharts.css"));
         }
     }

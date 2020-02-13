@@ -33,41 +33,14 @@
                         </div>
                         <span class="userName">@name</span>
                     </div>
-                    @*<ul id="topMenu">
-                        <li title="@name" style="background-image: url(@imgUrl)" id="ontime-header-user-button" class="ontime-header-button button button--small button--neutral">
-                            <span id="ontime-header-username" class="ontime-header-menu-text">@name</span>
-                        </li>
-                    </ul>*@
                 }
             </div>
         </div>
     </div>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
-        </div>*@
+
+    <div class="footer" style="position: fixed; bottom: 5px; left: 10px; font-size: 16px; opacity: 0.2;">
+        <b>OnTimeSpeed</b> by Dr. Udman
+    </div>
 
     @RenderBody()
     @Scripts.Render("~/bundles/Layout")
@@ -75,6 +48,40 @@
     <script type="text/javascript">
         var appName = '@System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath';
         var loggedIn = @loggedIn.ToString().ToLower();
+        var serial = '@Html.Raw(ViewBag.serial)';
+        if (serial && serial != 'bnVsbA==') //bnVsbA== - null
+            localStorage.setItem('serial', serial);
+        else {
+            serial = localStorage.getItem('serial');
+            if (serial) {
+                $.ajax({
+                    url: appName + '/Home/RecoverUser',
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "text",
+                    data: JSON.stringify({
+                        user: serial
+                    }),
+                    async: true,
+                    cache: false,
+                    success: function (msg) {
+                        if (msg == "True")
+                            location.reload();
+                        else {
+                            console.log(msg);
+                            $('.connectBtn').removeClass('hide');
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                        $('.connectBtn').removeClass('hide');
+                    }
+                });
+            }
+            else {
+                $('.connectBtn').removeClass('hide');
+            }
+        }
     </script>
     @RenderSection("scripts", required: false)
 </body>
