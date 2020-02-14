@@ -112,7 +112,8 @@ namespace OnTimeSpeed.Controllers
         public async Task<string> AddLunchToToday()
         {
             var addedOnDates = await DAL.AddLunch(
-                _user, 
+                _user,
+                _hrproUser,
                 DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(), 
                 DateTime.Now);
 
@@ -120,12 +121,36 @@ namespace OnTimeSpeed.Controllers
         }
 
         [HttpPost]
-        public async Task<string> AddHolidaysToToday()
+        public async Task<string> AddHolidays()
         {
             var addedOnDates = await DAL.AddHolidays(
                 _user, 
                 DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(), 
-                DateTime.Now);
+                DateTime.Now.ToLastOfMonth());
+
+            return JsonConvert.SerializeObject(addedOnDates);
+        }
+
+        [HttpPost]
+        public async Task<string> AddVacations()
+        {
+            var addedOnDates = await DAL.AddVacations(
+                _user,
+                _hrproUser,
+                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
+                DateTime.Now.ToLastOfMonth());
+
+            return JsonConvert.SerializeObject(addedOnDates);
+        }
+
+        [HttpPost]
+        public async Task<string> AddPaidLeaves()
+        {
+            var addedOnDates = await DAL.AddPaidLeave(
+                _user,
+                _hrproUser,
+                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
+                DateTime.Now.ToLastOfMonth());
 
             return JsonConvert.SerializeObject(addedOnDates);
         }

@@ -17,5 +17,17 @@ namespace OnTimeSpeed
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        void Application_Error(object sender, EventArgs e)
+        {
+            // Code that runs when an unhandled error occurs
+
+            // Get the exception object.
+            Exception exc = Server.GetLastError();
+
+
+            // Log the exception and notify system operators
+            Utils.LogUtils.LogException(exc, null, null);
+        }
     }
 }

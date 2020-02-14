@@ -2,26 +2,32 @@
 	{
 		"Name": "rucakDateFromTemplate",
 		"Templates": [
-			"Pauza - Ručak: ????: MM - ??/yyyy" 
-		]	
+			"Pauza - Ručak: ????: MM - ??/YYYY"
+		]
 	},
 	{
 		"Name": "rucakDateToTemplate",
 		"Templates": [
-			"Pauza - Ručak: ????: ?? - MM/yyyy" 
-		]	
+			"Pauza - Ručak: ????: ?? - MM/YYYY"
+		]
 	},
 	{
 		"Name": "praznikTemplate",
 		"Templates": [
-			"HRPRO - yyyy - Državni praznik/Neradni dan/Slobodni dan",
-			"Državni praznik - Neradni dan - Slobodni dan - yyyy"
-		]	
+			"HRPRO - YYYY - Državni praznik/Neradni dan/Slobodni dan",
+			"Državni praznik - Neradni dan - Slobodni dan - YYYY"
+		]
 	},
 	{
 		"Name": "godisnjiTemplate",
 		"Templates": [
-			"HRPRO - yyyy - Godišnji odmor / plaćeni dopust"
+			"HRPRO - YYYY - Godišnji odmor / plaćeni dopust"
+		]
+	},
+	{
+		"Name": "placeniDopustTemplate",
+		"Templates": [
+			"HRPRO - YYYY - Godišnji odmor / plaćeni dopust"
 		]
 	}
 ]

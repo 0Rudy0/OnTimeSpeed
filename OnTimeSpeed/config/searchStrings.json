@@ -12,5 +12,11 @@
 			"Državni praznik/Neradni dan/Slobodni dan",
 			"Državni praznik - Neradni dan - Slobodni dan"
 		]
+	},
+	{
+		"Name": "vacationSearchString",
+		"SearchStrings": [
+			"Godišnji odmor / plaćeni dopust"
+		]
 	}
 ]

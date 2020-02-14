@@ -36,11 +36,11 @@ namespace OnTimeSpeed.Utils
 							{
 								var external = "<script type=\"text/javascript\" src=\"files/jquery-2.2.4.min.js\"></script>\n";
 								external += "<script type=\"text/javascript\" src=\"files/Kendo/js/kendo.custom-2015.3.930.js\"></script>\n";
-								external += "<script type=\"text/javascript\" src=\"../Scripts/bootstrap.min.js\"></script>\n";
+								external += "<script type=\"text/javascript\" src=\"files/bootstrap.min.js\"></script>\n";
 								external += "<script type=\"text/javascript\" src=\"files/moment.js\"></script>\n";
 								external += "<script type=\"text/javascript\" src=\"files/log.js\"></script>\n";
 								external += "<link type=\"text/css\" rel=\"stylesheet\" href=\"files/log.css\"/>\n";
-								external += "<link type=\"text/css\" rel=\"stylesheet\" href=\"../Content/Bootstrap/bootstrap.min.css\"/>\n";
+								external += "<link type=\"text/css\" rel=\"stylesheet\" href=\"files//bootstrap.min.css\"/>\n";
 								external += "<link type=\"text/css\" rel=\"stylesheet\" href=\"files/Kendo/css/kendo.common.css\"/>\n";
 								external += "<link type=\"text/css\" rel=\"stylesheet\" href=\"files/Kendo/css/kendo.silver.css\"/>\n";
 								external += "<head><title>" + fileName.Replace(".html", "") + "</title></head>";

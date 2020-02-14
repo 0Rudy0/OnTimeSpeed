@@ -1,0 +1,221 @@
+﻿html, body 0{
+	margin: 0;
+	padding: 0;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Verdana;
+	margin-top: 60px !important;
+}
+
+.header {
+	width: 100%;
+	height: 50px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding: 10px 0 0 10px;
+	background: white;
+}
+
+nav.navbar {
+	-webkit-box-shadow: 3px 7px 8px -2px rgba(0,0,0,0.49);
+	-moz-box-shadow: 3px 7px 8px -2px rgba(0,0,0,0.49);
+	box-shadow: 3px 7px 8px -2px rgba(0,0,0,0.49);
+	border: 0px !important;
+	border-radius: 0 !important;
+}
+
+nav.navbar.server {
+	background-color: #006363 !important;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+nav.navbar.client {
+	background-color: #11436b !important;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+a.navbar-brand, #afterDateHolder, #onDateHolder {
+	color: white !important;
+	/*font-weight: bold;*/
+}
+
+#badgeHolder button {
+    margin: 0 0.2rem;
+    color: black;
+    border: none;
+    background-color: white;
+}
+
+#badgeHolder button:hover {
+    background-color: #e2e6ea;
+}
+
+#badgeHolder button .badge {
+    background-color: #404040;
+    color: white;
+}
+
+#dateHolder {
+    position: absolute;
+    left: 320px;
+    top: 9px;
+}
+
+#afterDateHolder, #onDateHolder {
+	float: left;
+	padding-left: 20px;
+}
+
+.k-datepicker  {
+	margin-left: 5px;
+}
+
+.header .filterItem {
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #072034;
+	color: #072034;
+	text-align: left;
+	margin-left: 10px;
+	position: relative;
+	padding-left: 5px;
+	cursor: pointer;
+}
+
+.filterItem {
+	position: relative;
+	top: 8px;
+	width: 150px;
+}
+
+.filterItem:hover {
+	background-color: gray;
+}
+
+.header .filterItem.active, .header .filterItem:hover {
+	background: #072034;
+	color: #fff;
+}
+
+.header .filterItem .count {
+	display: inline-block;
+	padding: 0 5px;
+}
+
+div.exception, div.cache, div.debug {
+	font-size: 9pt;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 10px;
+	border-bottom: 1px solid #808080;
+
+}
+
+h1 {
+	color: maroon;
+	font-size: 14pt;
+	font-style: italic;
+	font-weight: normal;
+}
+
+div.exception span, div.cache span {
+	font-size: 9pt;
+}
+
+.card-body {
+	background-color: #ececec;
+    padding:15px;
+}
+
+.card-header {
+    padding: 0.5rem 1.25rem;
+}
+
+.card-header h3 {
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+.card-danger .card-header,
+#exceptionCount.selected {
+    background-color: rgb(255, 210, 210);
+}
+
+.card-primary .card-header,
+#debugCount.selected {
+    background-color: rgb(210, 230, 255);
+}
+
+.card-success .card-header,
+#dataCount.selected {
+    background-color: rgb(210, 255, 210);
+}
+
+.title {
+	font-weight: bold;
+	font-size: 10pt;
+}
+
+.exceptionStacktrace {
+	background-color: #ffffcc;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 10px;
+	display: block;
+}
+
+#btnReset {
+	/*float:left;*/
+	position: absolute;
+	/*left: 1250px;*/
+    top: 9px;
+	right: 20px;
+    padding: 0.25rem 0.75rem;
+}
+
+.k-widget.k-combobox.k-header {
+    position: absolute;
+	right: 160px;
+    top: 9px;
+    width: calc(100vw - 1200px);
+    min-width: 200px;
+    max-width: 700px;
+}
+
+@media (max-width: 1270px) {
+    body {
+        margin-top: 120px !important;
+    }
+    nav.navbar {
+        height: 100px;
+    }
+    #badgeHolder {
+        position: absolute;
+        top: 9px;
+    }
+    #dateHolder {
+        position: absolute;
+        left: 20px;
+        top: 60px;
+    }
+    .k-widget.k-combobox.k-header {
+        width: calc(100vw - 600px);
+    }
+}

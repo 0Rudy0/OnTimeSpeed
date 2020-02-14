@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<script type="text/javascript" src="files/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="files/Kendo/js/kendo.custom-2015.3.930.js"></script>
+<script type="text/javascript" src="files/bootstrap.min.js"></script>
+<script type="text/javascript" src="files/moment.js"></script>
+<script type="text/javascript" src="files/log.js"></script>
+<link type="text/css" rel="stylesheet" href="files/log.css"/>
+<link type="text/css" rel="stylesheet" href="files//bootstrap.min.css"/>
+<link type="text/css" rel="stylesheet" href="files/Kendo/css/kendo.common.css"/>
+<link type="text/css" rel="stylesheet" href="files/Kendo/css/kendo.silver.css"/>
+<head><title>ServerLog</title></head>
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 13:43:37</span><span class='timeUtc' style='display: none'>2020-02-14T13:43:37.3416333+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>testing</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>OnTimeSpeed</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.Web.Mvc.ActionResult Index()</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at OnTimeSpeed.Controllers.HomeController.Index() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 53
+  <br>at lambda_method(Closure , ControllerBase , Object[] )
+  <br>at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c.<BeginInvokeSynchronousActionMethod>b__9_0(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+  <br>at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+  <br>at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.5213371+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.5760308+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.5790254+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.6189188+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.6209115+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.6199174+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.6309033+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.6448517+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.6558183+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.6608053+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.6767650+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.6887313+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.7136645+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.7585526+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.7595418+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.7645496+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.7815061+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.7964710+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.8124012+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.8542904+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.8373401+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 16:55:10</span><span class='timeUtc' style='display: none'>2020-02-14T16:55:10.8572825+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Code.PrepareData.DateFromName(String date, IEnumerable`1 templates) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\PrepareData.cs:line 222
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>14.2.2020. 17:01:21</span><span class='timeUtc' style='display: none'>2020-02-14T17:01:21.9810114+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Object reference not set to an instance of an object.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>OnTimeSpeed</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void MoveNext()</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at OnTimeSpeed.Code.DAL.<GetWorkItems>d__13.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 265
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+  <br>at OnTimeSpeed.Code.DAL.<GetVacationTasks>d__17.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 368
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+  <br>at OnTimeSpeed.Code.DAL.<GetPaidLeaveTasks>d__18.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 375
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+  <br>at OnTimeSpeed.Code.DAL.<AddPaidLeave>d__22.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 448
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+  <br>at OnTimeSpeed.Controllers.HomeController.<AddPaidLeaves>d__11.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 149
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass8_0.<BeginInvokeAsynchronousActionMethod>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+  <br>at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+  <br>at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+		</div>
+	</div>
+

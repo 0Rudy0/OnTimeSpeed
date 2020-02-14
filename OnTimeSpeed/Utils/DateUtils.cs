@@ -8,7 +8,7 @@ namespace OnTimeSpeed.Utils
 {
     public static class DateUtils
     {
-        public static List<DateTime> Holidays = new List<DateTime>();
+        public static Dictionary<DateTime, string> Holidays = new Dictionary<DateTime, string>();
 
         public static string ToStringCustom(this DateTime date)
         {
@@ -21,10 +21,20 @@ namespace OnTimeSpeed.Utils
             var returnDate = new DateTime(date.Year, date.Month, 1);
             return returnDate;
         }
+        public static DateTime ToLastOfMonth(this DateTime date)
+        {
+            var returnDate = date.ToFirstOfMonth().AddMonths(1).AddDays(-1);
+            return returnDate;
+        }
 
         public static bool IsHoliday(this DateTime date)
         {
-            return Holidays.Contains(date.Date);
+            return Holidays.ContainsKey(date.Date);
+        }
+
+        public static string HolidayName(this DateTime date)
+        {
+            return Holidays.ContainsKey(date.Date) ? Holidays[date.Date] : String.Empty;
         }
 
         public static bool IsWeekend(this DateTime date)

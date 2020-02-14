@@ -5,6 +5,7 @@ var breadCrumbs = [];
 var toastObj = null;
 var toastShort = 5000;
 var toastLong = 15000;
+var maxDetailsLng = 20;
 var toastClasses = 'cyan lighten-4';
 
 $(function () {
@@ -14,7 +15,9 @@ $(function () {
     }
     $('.container').show();
     $('#addLunchBtn').click(addLunch);
-    $('#addHolidaysButtons').click(addHolidays);
+    $('#addHolidaysButton').click(addHolidays);
+    $('#addVacationButton').click(addVacations);
+    $('#addPaidLeaveButton').click(addPaidLeaves);
 
     var elems = document.querySelectorAll('.datepicker');
     var instances = M.Datepicker.init(elems, {
@@ -196,7 +199,7 @@ function addLunch() {
         async: true,
         cache: false,
         success: function (msg) {
-            if (msg.length > 10) {
+            if (msg.length > maxDetailsLng) {
                 toastObj = {
                     html: '<span style="color: black; text-align: right">Ručak je unesen <b>' + msg.length + '</b> puta</span>',
                     classes: toastClasses,
@@ -234,14 +237,14 @@ function addLunch() {
 function addHolidays() {
     $('.spinner').show();
     $.ajax({
-        url: appName + '/Home/AddHolidaysToToday',
+        url: appName + '/Home/AddHolidays',
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: true,
         cache: false,
         success: function (msg) {
-            if (msg.length > 5) {
+            if (msg.length > maxDetailsLng) {
                 toastObj = {
                     html: '<span style="color: black; text-align: right">Praznik je unesen <b>' + msg.length + '</b> puta</span>',
                     classes: toastClasses,
@@ -267,7 +270,7 @@ function addHolidays() {
             else {
                 $('.spinner').hide();
                 toastObj = {
-                    html: '<span style="color: black; text-align: right">Svi praznici su već uneseni</span>',
+                    html: '<span style="color: black; text-align: right">Nije pronađen ni jedan praznik za unijeti</span>',
                     classes: toastClasses,
                     displayLength: toastShort
                 };
@@ -276,6 +279,99 @@ function addHolidays() {
         }
     });
 }
+
+function addVacations() {
+    $('.spinner').show();
+    $.ajax({
+        url: appName + '/Home/AddVacations',
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: true,
+        cache: false,
+        success: function (msg) {
+            if (msg.length > maxDetailsLng) {
+                toastObj = {
+                    html: '<span style="color: black; text-align: right">GO je unesen <b>' + msg.length + '</b> puta</span>',
+                    classes: toastClasses,
+                    displayLength: toastLong
+                };
+            }
+            else if (msg.length > 1) {
+                var str = '<span style="font-size:12px">';
+                for (var i = 0; i < msg.length; i++) {
+                    str += '</br>' + msg[i];
+                }
+                str += '</span>';
+                toastObj = {
+                    html: '<span style="color: black; text-align: right">GO je unesen <b>' + msg.length + '</b> puta za sljedeće datume:' + str + '</span>',
+                    classes: toastClasses,
+                    displayLength: toastLong
+                };
+            }
+            else {
+            }
+            if (msg.length > 1)
+                getWorkLogs();
+            else {
+                $('.spinner').hide();
+                toastObj = {
+                    html: '<span style="color: black; text-align: right">Nije pronađen novi GO za unijeti</span>',
+                    classes: toastClasses,
+                    displayLength: toastShort
+                };
+                M.toast(toastObj);
+            }
+        }
+    });
+}
+
+function addPaidLeaves() {
+    $('.spinner').show();
+    $.ajax({
+        url: appName + '/Home/AddPaidLeaves',
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: true,
+        cache: false,
+        success: function (msg) {
+            if (msg.length > maxDetailsLng) {
+                toastObj = {
+                    html: '<span style="color: black; text-align: right">Plaćeni dopust je unesen <b>' + msg.length + '</b> puta</span>',
+                    classes: toastClasses,
+                    displayLength: toastLong
+                };
+            }
+            else if (msg.length > 1) {
+                var str = '<span style="font-size:12px">';
+                for (var i = 0; i < msg.length; i++) {
+                    str += '</br>' + msg[i];
+                }
+                str += '</span>';
+                toastObj = {
+                    html: '<span style="color: black; text-align: right">Plaćeni dopust je unesen <b>' + msg.length + '</b> puta za sljedeće datume:' + str + '</span>',
+                    classes: toastClasses,
+                    displayLength: toastLong
+                };
+            }
+            else {
+            }
+            if (msg.length > 1)
+                getWorkLogs();
+            else {
+                $('.spinner').hide();
+                toastObj = {
+                    html: '<span style="color: black; text-align: right">Nije pronađen novi plaćeni dopust za unijeti</span>',
+                    classes: toastClasses,
+                    displayLength: toastShort
+                };
+                M.toast(toastObj);
+            }
+        }
+    });
+}
+
 
 function preselectRange(range) {
     var dateFromPicker = M.Datepicker.getInstance($('#dateFromPicker')[0]);
