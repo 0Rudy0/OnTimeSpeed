@@ -14,6 +14,7 @@ namespace OnTimeSpeed.Models
 		public List<string> Categories_names { get; set; }
 		public List<object> AdditionalCategoriesInfo1 { get; set; }
 		public List<object> AdditionalCategoriesInfo2 { get; set; }
+		public Dictionary<string, List<WorkLogFriendly>> WorkLogs { get; set; }
 
 		public HighChartsData()
 		{

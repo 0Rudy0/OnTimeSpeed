@@ -29,5 +29,29 @@
 		"Templates": [
 			"HRPRO - YYYY - Godišnji odmor / plaćeni dopust"
 		]
+	},
+	{
+		"Name": "bolovanjeTemplate",
+		"Templates": [
+			"HRPRO - YYYY - Bolovanje"
+		]
+	},
+	{
+		"Name": "interniSastanakTemplate",
+		"Templates": [
+			"HRPRO - YYYY - Interni sastanci"
+		]
+	},
+	{
+		"Name": "ontimeUnosTemplate",
+		"Templates": [
+			"HRPRO - YYYY - Unos sati/Održavanje OnTime"
+		]
+	},
+	{
+		"Name": "podrskaKolegiTemplate",
+		"Templates": [
+			"HRPRO - YYYY - Podrška kolegi/Edukacija kolege"
+		]
 	}
 ]

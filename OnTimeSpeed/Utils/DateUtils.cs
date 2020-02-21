@@ -16,6 +16,21 @@ namespace OnTimeSpeed.Utils
             return date.ToString(dateFormat, CultureInfo.InvariantCulture);
         }
 
+        public static DateTime? ToDate(this string dateStr)
+        {
+            try
+            {
+                var dateFormat = "dd.MM.yyyy";
+                return DateTime.ParseExact(dateStr, dateFormat, CultureInfo.InvariantCulture);
+            }
+            catch (Exception ex)
+            {
+                LogUtils.LogException(ex);
+                return null;
+            }
+
+        }
+
         public static DateTime ToFirstOfMonth(this DateTime date)
         {
             var returnDate = new DateTime(date.Year, date.Month, 1);

@@ -137,6 +137,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\AuthorizeAttribute.cs" />
     <Compile Include="Code\DAL.cs" />
     <Compile Include="Code\DAL_HrProApi.cs" />
     <Compile Include="Code\Holidays.cs" />
@@ -152,9 +153,11 @@
     <Compile Include="Models\HrProUser.cs" />
     <Compile Include="Models\JsLogEvent.cs" />
     <Compile Include="Models\OnTimeResponseClass.cs" />
+    <Compile Include="Models\OnTimeUser.cs" />
     <Compile Include="Models\TokenData.cs" />
     <Compile Include="Models\OnTimeEntities.cs" />
     <Compile Include="Models\WorkItem.cs" />
+    <Compile Include="Models\WorkType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ApiHelper.cs" />
     <Compile Include="Utils\AppSettings.cs" />
@@ -207,6 +210,7 @@
     <Content Include="lib\HrNetMobile.Models.dll" />
     <Content Include="lib\HrPro.HrNet.Framework.dll" />
     <Content Include="lib\HrPro.HrNet.Framework.Web.dll" />
+    <Content Include="Scripts\ajaxJs.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\FontAwesome\fonts\fa-brands-400.eot" />
@@ -325,6 +329,7 @@
     <Content Include="config\searchStrings.json" />
     <Content Include="config\holidays.json" />
     <None Include="config\templates.json" />
+    <Content Include="config\response.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\highcharts\es-modules\annotations\annotations.src.js" />
     <Content Include="Scripts\highcharts\es-modules\annotations\controllable\ControllableCircle.js" />
@@ -843,6 +848,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="config\workTypes.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -179,7 +179,7 @@ namespace OnTimeSpeed.Code
         #endregion
 
         public static TokenData GetToken(string authCode, string returnUrl)
-        {         
+        {
             var parameters = new Dictionary<string, string>();
             parameters.Add("grant_type", "authorization_code");
             parameters.Add("code", authCode);
@@ -223,7 +223,7 @@ namespace OnTimeSpeed.Code
                     CacheItemPriority.Normal,
                     null);
             }
-            
+
             return result;
         }
 
@@ -243,13 +243,16 @@ namespace OnTimeSpeed.Code
             return groupped;
         }
 
-        private static async Task<List<WorkItem>> GetWorkItems(
+        public static async Task<List<WorkItem>> GetWorkItems(
             User user,
             IEnumerable<string> searchStrings,
             List<string> itemTypes,
-            string cacheKey)
+            string cacheKey = null)
         {
-            var result = (List<WorkItem>)HttpRuntime.Cache.Get(cacheKey);
+            List<WorkItem> result = null;
+            
+            if (!String.IsNullOrEmpty(cacheKey))
+                result = (List<WorkItem>)HttpRuntime.Cache.Get(cacheKey);
 
             if (result == null)
             {
@@ -274,20 +277,24 @@ namespace OnTimeSpeed.Code
                                 {
                                     Id = rr.id,
                                     Name = rr.name,
-                                    Type = WorkItemType.Item
+                                    Type = WorkItemType.Item,
+                                    TypeString = rr.item_type
                                 });
                             }
                         });
                     }
                 }
 
-                HttpRuntime.Cache.Insert(cacheKey,
-                    result,
-                    null,
-                    Cache.NoAbsoluteExpiration,
-                    TimeSpan.FromMinutes(600),
-                    CacheItemPriority.Normal,
-                    null);
+                if (!String.IsNullOrEmpty(cacheKey))
+                {
+                    HttpRuntime.Cache.Insert(cacheKey,
+                        result,
+                        null,
+                        Cache.NoAbsoluteExpiration,
+                        TimeSpan.FromMinutes(600),
+                        CacheItemPriority.Normal,
+                        null);
+                }
             }
 
             return result;
@@ -319,6 +326,19 @@ namespace OnTimeSpeed.Code
             return user;
         }
 
+        public static async Task<OnTimeUser> GetMe(User user)
+        {
+            var parameters = new Dictionary<string, string>();
+            //parameters.Add("search_field", "[ID_NAME]");
+            //parameters.Add("search_string", str);
+            //parameters.Add("columns", "status,id,item_type,name");
+
+            var content = await GetRequestAsync($"api/v5/me", user.Token, parameters);
+            var result = ApiHelper.GetObjectFromApiResponse<OnTimeUser>(content);
+
+            return result;
+        }
+
         #endregion
 
 
@@ -328,18 +348,18 @@ namespace OnTimeSpeed.Code
         {
             string cacheKey = "lunchTasks";
             var searchStrings = SearchStrings.Get().FirstOrDefault(s => s.Name == "rucakSearchString").SearchStrings;
-            var result = await GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);           
+            var result = await GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);
 
             return result;
         }
-        
+
 
         public static async Task<List<string>> AddLunch(User user, hrnetModel.User hrproUser, DateTime fromDate, DateTime toDate)
         {
             var lunchTasks = await GetLunchTasks(user);
             var workLogs = await GetWorkLogs(user, true);
             var vacations = await DAL_HrProApi.GetApprovedVacationDays(hrproUser);
-            var addedOnDates = new List<string> ();
+            var addedOnDates = new List<string>();
 
             for (var i = fromDate; i <= toDate; i = i.AddDays(1))
             {
@@ -463,6 +483,100 @@ namespace OnTimeSpeed.Code
                         var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
                         addedOnDates.Add(i.ToShortDateString());
                     }
+                }
+            }
+            if (addedOnDates.Count > 0)
+                HttpRuntime.Cache.Remove("workLogs_" + user.id);
+
+            return addedOnDates;
+        }
+
+        public static async Task<List<OnTimeUser>> GetUser(string searchString, User user)
+        {
+            var cacheKey = "allHrProOnTimeUsers";
+
+            var allUsers = (List<OnTimeUser>)HttpRuntime.Cache.Get(cacheKey);
+
+            if (allUsers == null)
+            {
+                var parameters = new Dictionary<string, string>();
+                parameters.Add("include_inactive", "false");
+
+                var content = await GetRequestAsync($"api/v5/users", user.Token, parameters);
+                allUsers = ApiHelper.GetObjectFromApiResponse<List<OnTimeUser>>(content);
+            }
+
+            HttpRuntime.Cache.Insert(cacheKey,
+                allUsers,
+                null,
+                Cache.NoAbsoluteExpiration,
+                TimeSpan.FromMinutes(600),
+                CacheItemPriority.Normal,
+                null);
+
+
+            return allUsers.Where(u => $"{u.first_name.ToLower()} {u.last_name.ToLower()}".Contains(searchString.Trim().ToLower()) ||
+                $"{u.last_name.ToLower()} {u.first_name.ToLower()}".Contains(searchString.Trim().ToLower())).ToList();
+        }
+
+        public static List<Work_Log_Type> GetWorkTypes()
+        {
+            var cacheKey = "workLogTypes";
+            var allTypes = (List<Work_Log_Type>)HttpRuntime.Cache.Get(cacheKey);
+            if (allTypes == null)
+            {
+                var content = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/config/workTypes.json");
+                allTypes = JsonConvert.DeserializeObject<List<Work_Log_Type>>(content);
+
+                HttpRuntime.Cache.Insert(cacheKey,
+                    allTypes,
+                    null,
+                    Cache.NoAbsoluteExpiration,
+                    TimeSpan.FromMinutes(99999),
+                    CacheItemPriority.Normal,
+                    null);
+            }
+
+            return allTypes;
+        }
+
+        //ne koristi se nigdje aktivno, po potrebi će se iskoristiti za dohvat svih work typeova iz postojećih logova
+        public static List<Work_Log_Type> GetWorkTypesFromResponse(User user)
+        {
+
+            var content = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/config/response.json");
+            var result = ApiHelper.GetObjectFromApiResponse<List<WorkLog>>(content);
+            var allTypes = result.Select(l => l.work_log_type).Where(wl => !String.IsNullOrEmpty(wl.name) && !wl.name.ToLower().Contains("ne koristiti"))
+                .GroupBy(wl => wl.id).Select(group => group.First()).OrderBy(gg => gg.name).ToList();
+
+            return allTypes;
+        }
+
+        public static async Task<List<string>> AddCustom(User user, DateTime? fromDate, DateTime? toDate,
+            int itemId, int workTypeId, float amount, string itemType, string description)
+        {
+            var addedOnDates = new List<string>();
+
+            if (fromDate == null || toDate == null)
+                throw new Exception("Ne postoji datumski raspon za unos");
+
+            var workLogs = await GetWorkLogsGroupped(user, true);
+
+            for (var i = fromDate; i <= toDate; i = i.Value.AddDays(1))
+            {
+                var alreadyLogedAmount = 0f;
+                if (workLogs.ContainsKey(i.Value.Date))
+                    alreadyLogedAmount = workLogs[i.Value.Date];
+
+                if (!i.Value.IsHoliday() && !i.Value.IsWeekend() && alreadyLogedAmount < 8)
+                {
+                    var amountToLog = amount == -1 ? 8 - alreadyLogedAmount : amount;
+                    var newWorkLog = PrepareData.CreateWorkLogObject(user.id, amountToLog, workTypeId, itemId, itemType, i.Value, description);
+                    var content = await PostRequestAsync($"/work_logs", user.Token, newWorkLog);
+                    if (content == null)
+                        throw new Exception("Unos nije uspio");
+                    var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
+                    addedOnDates.Add(i.Value.ToShortDateString());
                 }
             }
             if (addedOnDates.Count > 0)

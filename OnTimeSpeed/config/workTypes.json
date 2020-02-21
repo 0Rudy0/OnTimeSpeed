@@ -1,0 +1,130 @@
+[
+  {
+    "name": "Analiza zahtjeva korisnika",
+    "id": 4
+  },
+  {
+    "name": "Ažuriranje podataka",
+    "id": 73
+  },
+  {
+    "name": "Dijagnostika i popravak grešaka",
+    "id": 23
+  },
+  {
+    "name": "Dizajn",
+    "id": 76
+  },
+  {
+    "name": "Dokumentacija",
+    "id": 11
+  },
+  {
+    "name": "Hardware – inhouse održavanje",
+    "id": 40
+  },
+  {
+    "name": "Hardware – održavanje kod klijenta",
+    "id": 49
+  },
+  {
+    "name": "Implementacija",
+    "id": 58
+  },
+  {
+    "name": "Import podataka",
+    "id": 7
+  },
+  {
+    "name": "Prilagodba zakonskim propisima",
+    "id": 29
+  },
+  {
+    "name": "INTERNO - Bolovanje",
+    "id": 41
+  },
+  {
+    "name": "INTERNO - Godišnji odmor",
+    "id": 16
+  },
+  {
+    "name": "INTERNO - Neradni dan - praznik",
+    "id": 48
+  },
+  {
+    "name": "INTERNO - onTime unos sati",
+    "id": 46
+  },
+  {
+    "name": "INTERNO - Pauza - Ručak",
+    "id": 52
+  },
+  {
+    "name": "INTERNO - Plaćeni dopust",
+    "id": 72
+  },
+  {
+    "name": "INTERNO - Prekovremeni po odobrenju",
+    "id": 68
+  },
+  {
+    "name": "Obuka korisnika",
+    "id": 10
+  },
+  {
+    "name": "Održavanje ",
+    "id": 63
+  },
+  {
+    "name": "Podrška kolegama",
+    "id": 20
+  },
+  {
+    "name": "Podrška korisniku",
+    "id": 56
+  },
+  {
+    "name": "Prezentacija",
+    "id": 6
+  },
+  {
+    "name": "Prilagodba zakonskim propisima",
+    "id": 29
+  },
+  {
+    "name": "Pripravnost po planu",
+    "id": 69
+  },
+  {
+    "name": "Programiranje",
+    "id": 17
+  },
+  {
+    "name": "Promjena podataka (promjena u bazi)",
+    "id": 9
+  },
+  {
+    "name": "Putovanje",
+    "id": 66
+  },
+  {
+    "name": "Sastanak-Dogovor",
+    "id": 15
+  },
+  {
+    "name": "Software – održavanje inhouse baza i OS-ova",
+    "id": 36
+  },
+  {
+    "name": "Software – održavanje klijentskih baza i OS-ova",
+    "id": 50
+  },
+  {
+    "name": "Školovanje/Edukacija",
+    "id": 71
+  },
+  {
+    "name": "Testiranje",
+    "id": 12
+  }
+]

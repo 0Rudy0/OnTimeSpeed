@@ -65,21 +65,30 @@
                     async: true,
                     cache: false,
                     success: function (msg) {
+                        $('.spinner').hide();
+
                         if (msg == "True")
                             location.reload();
                         else {
                             console.log(msg);
                             $('.connectBtn').removeClass('hide');
+                            localStorage.removeItem('serial');
+                            console.log('removing user from local storage');
                         }
                     },
                     error: function (err) {
                         console.log(err);
                         $('.connectBtn').removeClass('hide');
+                        localStorage.removeItem('serial');
+                        console.log('removing user from local storage');
+                        
+                        $('.spinner').hide();
                     }
                 });
             }
             else {
                 $('.connectBtn').removeClass('hide');
+                $('.spinner').hide();
             }
         }
     </script>

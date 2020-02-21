@@ -23,6 +23,14 @@ namespace OnTimeSpeed.Models
         }
     }
 
+    public class WorkLogFriendly
+    {
+        public string ItemName { get; set; }
+        public string Descripton { get; set; }
+        public float Amount { get; set; }
+        public string WorkType { get; set; }
+    }
+
     public class Item
     {
         public int id { get; set; }
@@ -73,6 +81,13 @@ namespace OnTimeSpeed.Models
         public object path { get; set; }
     }
 
+    public class MainModel
+    {
+        public User OnTimeUser { get; set; }
+        public HrNetMobile.Models.User HrProUser { get; set; }
+        public List<Work_Log_Type> AllWorkTypes { get; set; }
+    }
+
     public class User
     {
         public string Token { get; set; }
@@ -87,10 +102,20 @@ namespace OnTimeSpeed.Models
         }
     }
 
-    public class Work_Log_Type
+    public class Work_Log_Type : IEquatable<Work_Log_Type>
     {
         public string name { get; set; }
         public int id { get; set; }
+
+        public bool Equals(Work_Log_Type other)
+        {
+            return this.id == other.id;
+        }
+
+        public override string ToString()
+        {
+            return $"{id} - {name}";
+        }
     }
 
     public class Work_Done

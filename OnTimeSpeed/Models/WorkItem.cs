@@ -19,6 +19,7 @@ namespace OnTimeSpeed.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public WorkItemType Type { get; set; }
+        public string TypeString { get; set; }
 
         public override string ToString()
         {

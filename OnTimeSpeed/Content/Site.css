@@ -2,18 +2,23 @@
     background-color: #1c2933;
     color: white;
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    overflow-y: scroll !important;
 }
 
-    .header-logo__image.axosoft {
-        background-image: url(../Content/images/logo-axo-light.svg);
-        width: 130px;
-        height: 40px;
-        background-position: 50%;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        margin: 10px;
-        /*height:*/
-    }
+.modal-overlay {
+    /*overflow-y: scroll;*/
+}
+
+.header-logo__image.axosoft {
+    background-image: url(../Content/images/logo-axo-light.svg);
+    width: 130px;
+    height: 40px;
+    background-position: 50%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin: 10px;
+    /*height:*/
+}
 
 .container {
     display: none;
@@ -50,12 +55,20 @@
         color: #337ab7;
     }
 
-    #topMenu {
-        position: absolute;
-        top: 5px;
-        right: 100px;
-        transform: scale(1.5);
-    }
+#topMenu {
+    position: absolute;
+    top: 5px;
+    right: 100px;
+    transform: scale(1.5);
+}
+
+.card .card-title {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 20px;
+    /*font-weight: bold;*/
+    margin-bottom: 30px !important;
+}
 
 .header_username {
     height: 30px;
@@ -90,13 +103,13 @@
         margin-left: 7px;
     }
 
-    .spinner {
-        display: block;
-    }
+.spinner {
+    display: block;
+}
 
-    #workLogChart {
-        margin-bottom: 13px;
-    }
+#workLogChart {
+    margin-bottom: 13px;
+}
 
 .btn-large.withIcon span {
     position: relative;
@@ -107,14 +120,24 @@
     margin-right: 15px;
 }
 
+.btn-sm span {
+    margin-left: 5px;
+}
+
+.btn-sm.withIcon span {
+    position: relative;
+    top: -2px;
+}
+
 .buttons {
     display: flex;
 }
 
-.buttons > .btn-large {
-    flex-grow: 1;
-    margin: 0 20px;
-}
+    .buttons > .btn-large {
+        flex-grow: 1;
+        margin: 0 20px;
+    }
+
 .datepicker-modal {
     color: black;
 }
@@ -124,29 +147,95 @@
     flex-direction: row;
 }
 
-.dateRangePickers .dateHolder {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    padding: 0 50px;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-}
-
-    .dateRangePickers .dateHolder input {
-        text-align: center;
-        color: white;
+    .dateRangePickers .dateHolder {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        padding: 0 50px;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
     }
 
-.buttonPreselects {
-    display: flex;
+        .dateRangePickers .dateHolder input {
+            text-align: center;
+            color: white;
+        }
 
+    .dateRangePickers .timeHolder.maxAmountSelected a,
+    .dateRangePickers .timeHolder.maxAmountSelected input {
+        opacity: 0.3;
+    }
+
+    .dateRangePickers .timeHolder {
+        position: relative;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .dateRangePickers .timeHolder input {
+            margin-left: 60px;
+            width: auto;
+            margin-right: 90px;
+            text-align: center;
+            color: white;
+        }
+
+        .dateRangePickers .timeHolder .btn-plus {
+            position: absolute;
+            right: 50px;
+            top: 25px;
+            padding: 0 10px;
+            border-radius: 10px;
+        }
+
+        .dateRangePickers .timeHolder .btn-plusMax {
+            position: absolute;
+            right: 15px;
+            top: 25px;
+            padding: 0 10px;
+        }
+
+        .dateRangePickers .timeHolder.maxAmountSelected a.btn-plusMax {
+            opacity: 1 !important;
+            /*background-color: #00332a !important;*/
+        }
+
+.teal.darken-3 .dateRangePickers .timeHolder.maxAmountSelected a.btn-plusMax {
+    background-color: #004d40 !important;
 }
 
-.buttonPreselects .btn {
-    flex-grow: 1;
-    margin: 0 10px;
+.blue-grey.darken-3 .dateRangePickers .timeHolder.maxAmountSelected a.btn-plusMax {
+    background-color: #263238 !important;
+}
+
+.dateRangePickers .timeHolder .btn-plusMax i {
+    font-size: 15px;
+}
+
+.dateRangePickers .timeHolder .btn-minus {
+    position: absolute;
+    left: 15px;
+    top: 25px;
+    padding: 0 10px;
+    font-size: 10px;
+    border-radius: 10px;
+}
+
+.buttonPreselects,
+.activityButtons {
+    display: flex;
+}
+
+    .buttonPreselects .btn,
+    .activityButtons .btn {
+        flex-grow: 1;
+        margin: 0 10px;
+    }
+
+.activityButtons {
+    margin-top: 10px;
 }
 
 .buttonPreselects {
@@ -154,20 +243,150 @@
     margin-bottom: 30px;
 }
 
-.workTypes {
-    margin-top: 20px;
-    display: flex;
-}
-
-.workTypes label {
-    flex-grow: 1;
-}
-
-    .workTypes label.workTypeLabel span {
-        color: white;
-        font-size: 20px;
+    .buttonPreselects .btn {
+        border-radius: 20px;
     }
+
+.workTypes {
+    /*margin-top: 20px;*/
+    /*display: flex;*/
+}
+
+    .workTypes label {
+        flex-grow: 1;
+    }
+
+        .workTypes label.workTypeLabel span {
+            color: white;
+            font-size: 20px;
+        }
 
 [type="radio"]:not(:checked) + span:before, [type="radio"]:not(:checked) + span:after {
     border-color: white;
+}
+
+.totalsWorkLogTable td {
+    padding: 5px 10px !important;
+}
+
+.totalsWorkLogTable tr.totalWorkLog {
+    background-color: black !important;
+    color: white !important;
+}
+
+.grey-text.text-darken-4 label,
+.grey-text.text-darken-4 input {
+    color: white;
+    border-color: white;
+}
+
+.grey-text.text-darken-4 textarea {
+    border-color: white;
+}
+
+.detailsHolder {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+    .detailsHolder > div {
+        flex-grow: 1;
+        flex-basis: 0;
+        margin: 0 10px;
+    }
+
+.description textarea {
+    margin: .5rem 0 1rem 0;
+    padding: 11px;
+    color: white;
+}
+
+#customEntry textarea {
+    min-height: 100px;
+}
+
+#addMoreWorkTypesModal .workTypeItem.chosen,
+#addMoreWorkItemsModal .workItem.chosen {
+    /*background-color: #263238 !important;*/
+    background-color: #3b4c54 !important;
+}
+
+.chosenWorkItemsList .workItem.active,
+.chosenWorkTypesList .workType.active {
+    /*background-color: red !important;*/
+    color: white;
+    background-color: #263238 !important;
+    border-left: 5px solid white !important;
+    /*background-color: #455a64 !important;*/
+}
+
+.workAmountInput::-webkit-outer-spin-button,
+.workAmountInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.workAmountInput.maxAmount {
+    color: transparent !important;
+}
+
+.chosenWorkItemsList .workItem,
+.chosenWorkTypesList .workType {
+    position: relative;
+}
+
+    .chosenWorkItemsList .workItem .removeWorkItem,
+    .chosenWorkTypesList .workType .removeWorkType {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 23px;
+        color: #c81f1f;
+    }
+
+        .chosenWorkItemsList .workItem .removeWorkItem:hover,
+        .chosenWorkTypesList .workType .removeWorkType:hover {
+            /*transform: scale(1.1);*/
+            color: #df2f2f;
+        }
+
+        .chosenWorkItemsList .workItem .removeWorkItem:active,
+        .chosenWorkTypesList .workType .removeWorkType:active {
+            transform: scale(0.95);
+        }
+
+.chosenWorkItemsList .collection,
+.chosenWorkTypesList .collection,
+#addMoreWorkTypesModal .collection,
+#addMoreWorkItemsModal .collection {
+    /*border-color: transparent;*/
+    border: 0;
+}
+
+    .chosenWorkItemsList .collection .collection-item,
+    .chosenWorkTypesList .collection .collection-item,
+    #addMoreWorkTypesModal .collection .collection-item,
+    #addMoreWorkItemsModal .collection .collection-item {
+        color: white !important;
+        border-color: transparent;
+    }
+
+.card.teal.darken-2 .btn.disabled {
+    /*display: none;*/
+    background-color: #80cbc4 !important;
+    cursor: not-allowed !important;
+}
+
+.card.blue-grey.darken-3 .btn.disabled {
+    background-color: #b0bec5 !important;
+    cursor: not-allowed !important;
+}
+
+.modal-close {
+    color: white;
+}
+
+.modal input {
+    color: white;
 }

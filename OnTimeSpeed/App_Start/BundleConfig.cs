@@ -26,7 +26,10 @@ namespace OnTimeSpeed
             bundles.Add(new ScriptBundle("~/bundles/Layout").Include(
                       "~/Scripts/materialize.min.js",
                       "~/Scripts/moment.js",
-                      "~/Scripts/jquery-{version}.js"));
+                      "~/Scripts/ajaxJs.js",
+                      "~/Scripts/jquery-{version}.js",
+                      "~/Scripts/knockout-3.4.1.js",
+                      "~/Scripts/knockout.mapping.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Index").Include(
                       "~/Scripts/highcharts/highcharts.js",

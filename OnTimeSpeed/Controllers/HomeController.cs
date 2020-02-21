@@ -1,5 +1,6 @@
 ﻿using HrNetMobile.Models.Vacation;
 using Newtonsoft.Json;
+using OnTimeSpeed.Attributes;
 using OnTimeSpeed.Code;
 using OnTimeSpeed.Models;
 using OnTimeSpeed.Utils;
@@ -14,6 +15,7 @@ using hrnetModel = HrNetMobile.Models;
 
 namespace OnTimeSpeed.Controllers
 {
+    [AuthorizeOnTime]
     public class HomeController : Controller
     {
         private User _user;
@@ -39,22 +41,39 @@ namespace OnTimeSpeed.Controllers
 
         public ActionResult Index()
         {
+            var model = new MainModel();
             var user = User.Identity.Name;
             if (_hrproUser == null)
             {
-                _hrproUser = DAL.AuthHrNet(new hrnetModel.User
+                try
                 {
-                    Username = user
-                });
+                    _hrproUser = DAL.AuthHrNet(new hrnetModel.User
+                    {
+                        Username = user
+                    });
 
-                Session["hrproUser"] = _hrproUser;
+                    model.HrProUser = _hrproUser;
+                    Session["hrproUser"] = _hrproUser;
+                }
+                catch (Exception ex)
+                {
+                    LogUtils.LogException(ex);
+                }
+            }
+            else
+            {
+                model.HrProUser = _hrproUser;
             }
 
+            model.OnTimeUser = _user;
+            if (_user != null)
+                model.AllWorkTypes = DAL.GetWorkTypes();
+
             ViewBag.serial = VariousUtils.SerializeAndEncodeUser(_user);
-            return View(_user);
+            return View(model);
         }
 
-        public bool RecoverUser(string user)
+        public async Task<bool> RecoverUser(string user)
         {
             if (String.IsNullOrEmpty(user))
             {
@@ -67,8 +86,14 @@ namespace OnTimeSpeed.Controllers
                     var userObj = VariousUtils.DecodeAndDeserializeUser(user);
                     if (userObj != null)
                     {
-                        Session["user"] = userObj;
-                        return true;
+                        var ontimeUser = await DAL.GetMe(userObj);
+                        if (ontimeUser != null)
+                        {
+                            Session["user"] = userObj;
+                            return true;
+                        }
+                        else
+                            return false;
                     }
                     else
                         return false;
@@ -109,6 +134,7 @@ namespace OnTimeSpeed.Controllers
         }
 
         [HttpPost]
+        [AuthorizeHrPro]
         public async Task<string> AddLunchToToday()
         {
             var addedOnDates = await DAL.AddLunch(
@@ -121,6 +147,7 @@ namespace OnTimeSpeed.Controllers
         }
 
         [HttpPost]
+        [AuthorizeHrPro]
         public async Task<string> AddHolidays()
         {
             var addedOnDates = await DAL.AddHolidays(
@@ -132,6 +159,7 @@ namespace OnTimeSpeed.Controllers
         }
 
         [HttpPost]
+        [AuthorizeHrPro]
         public async Task<string> AddVacations()
         {
             var addedOnDates = await DAL.AddVacations(
@@ -144,6 +172,7 @@ namespace OnTimeSpeed.Controllers
         }
 
         [HttpPost]
+        [AuthorizeHrPro]
         public async Task<string> AddPaidLeaves()
         {
             var addedOnDates = await DAL.AddPaidLeave(
@@ -153,6 +182,37 @@ namespace OnTimeSpeed.Controllers
                 DateTime.Now.ToLastOfMonth());
 
             return JsonConvert.SerializeObject(addedOnDates);
+        }
+
+        public async Task<string> AddCustom(
+            int itemId,
+            int workTypeId,
+            float amount,
+            string dateFromStr,
+            string dateToStr,
+            string itemType,
+            string description)
+        {
+            var addedOnDates = await DAL.AddCustom(
+                _user,
+                dateFromStr.ToDate(),
+                String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
+                itemId,
+                workTypeId,
+                amount,
+                itemType,
+                description);
+
+            return JsonConvert.SerializeObject(addedOnDates);
+        }
+
+        public async Task<string> SearchWorkItems(string searchStr)
+        {
+            var items = await DAL.GetWorkItems(_user,
+                new List<string> { searchStr },
+                new List<string> { "items" });
+
+            return JsonConvert.SerializeObject(items);
         }
     }
 }

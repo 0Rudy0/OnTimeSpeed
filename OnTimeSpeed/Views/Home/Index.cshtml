@@ -1,6 +1,7 @@
 ﻿@using OnTimeSpeed.Utils
+@using Newtonsoft.Json
 
-@model OnTimeSpeed.Models.User
+@model OnTimeSpeed.Models.MainModel
 
 @Styles.Render("~/Content/Index")
 
@@ -11,10 +12,14 @@
     var appUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
     var connectUrl = $"{ontimeUrl}/auth?response_type=code&client_id={clientId}&redirect_uri={appUrl}Home/GetAuthCode&scope=read%20write";
     var containerClass = Model == null ? "hide" : "";
+
+    var serializedHrPro = JsonConvert.SerializeObject(Model.HrProUser);
+    var raw = serializedHrPro.Replace("HRPRO\\\\", "");
+
 }
 
 
-@if (Model == null)
+@if (Model.OnTimeUser == null)
 {
     <a href="@connectUrl" class="connectBtn hide">
         <i class="fas fa-sign-in-alt"></i>
@@ -31,16 +36,16 @@ else
     <div class="container">
         @*<h4>Dobrodošao @Model.name</h4>*@
         @*<div class="buttons">
-            <a class="waves-effect waves-light btn-large blue-grey darken-1 withIcon" id="addLunchBtn">
-                <i class="fad fa-utensils-alt"></i>
-                <span>unesi ručak do danas</span>
-            </a>
-            <a class="waves-effect waves-light btn-large deep-orange darken-4 withIcon" id="addHolidaysButtons">
-                <i class="fad fa-lights-holiday"></i>
-                <span>unesi praznike do kraja mjeseca</span>
-            </a>
-        </div>
-        <br />*@
+                <a class="waves-effect waves-light btn-large blue-grey darken-1 withIcon" id="addLunchBtn">
+                    <i class="fad fa-utensils-alt"></i>
+                    <span>unesi ručak do danas</span>
+                </a>
+                <a class="waves-effect waves-light btn-large deep-orange darken-4 withIcon" id="addHolidaysButtons">
+                    <i class="fad fa-lights-holiday"></i>
+                    <span>unesi praznike do kraja mjeseca</span>
+                </a>
+            </div>
+            <br />*@
 
         <div class="row">
             <div class="col s12">
@@ -56,93 +61,310 @@ else
                 <div id="workLogChart"></div>
             </div>
             <br />
+            <!---------------------->
+            <!-- AUTOMATIČNI UNOS -->
+            <!---------------------->
             <div class="col s12">
-                <div class="card blue-grey darken-1">
-                    <div class="card-content white-text">
+                <div class="card" data-bind="with: automaticEntry">
+                    <div data-bind="attr: {class : 'card-content ' + $data.styleClass + ' ' + $data.styleType + ' ' + $data.textClass + ' ' + $data.textType}">
                         <span class="card-title">Automagični unos</span>
-                        <div class="buttonPreselects">
-                            <a class="waves-effect waves-light btn btn-large blue-grey darken-2 withIcon" id="addLunchBtn">
+                        <div class="activityButtons">
+                            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                               id="addLunchBtn">
                                 <i class="fad fa-utensils-alt"></i>
                                 <span>Ručak</span>
                             </a>
-                            <a class="waves-effect waves-light btn btn-large blue-grey darken-2 withIcon" id="addHolidaysButton">
+                            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                               id="addHolidaysButton">
                                 <i class="fad fa-lights-holiday"></i>
                                 <span>Praznici</span>
                             </a>
-                            <a class="waves-effect waves-light btn btn-large blue-grey darken-2 withIcon" id="addVacationButton">
+                            <!-- ko if: $parent.hrproUser() != null -->
+                            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                               id="addVacationButton">
                                 <i class="fad fa-umbrella-beach"></i>
                                 <span>Godišnji odmor</span>
                             </a>
-                            <a class="waves-effect waves-light btn btn-large blue-grey darken-2 withIcon" id="addPaidLeaveButton">
+                            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                               id="addPaidLeaveButton">
                                 <i class="fad fa-umbrella-beach"></i>
                                 <span>Plaćeni dopust</span>
                             </a>
-                            @*<a class="waves-effect waves-light btn btn-large blue-grey darken-2 withIcon" id="addHolidaysButtons">
-            <i class="fad fa-business-time"></i>
-            <span>Službeni put</span>
-        </a>*@
+                            <!-- /ko -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col s12 m12">
-                <div class="card blue-grey darken-1">
-                    <div class="card-content white-text">
-                        <span class="card-title">Ručni unos</span>
-                        <div class="buttonPreselects">
-                            <a class="waves-effect waves-light btn btn-largee blue-grey darken-3" onclick="preselectRange('lastM')">
-                                <span>Prošli mjesec</span>
-                            </a>
-                            <a class="waves-effect waves-light btn btn-largee blue-grey darken-3" onclick="preselectRange('lastW')">
-                                <span>Prošli tjedan</span>
-                            </a>
-                            <a class="waves-effect waves-light btn btn-largee blue-grey darken-3" onclick="preselectRange('thisW')">
-                                <span>Ovaj tjedan</span>
-                            </a>
-                            <a class="waves-effect waves-light btn btn-largee blue-grey darken-3" onclick="preselectRange('thisM')">
-                                <span>Ovaj mjesec</span>
-                            </a>
-                        </div>
-                        <div class="dateRangePickers">
-                            <div class="dateFromHolder dateHolder">
-                                <label>Datum od</label>
-                                <input type="text" id="dateFromPicker" class="datepicker">
-                            </div>
-                            <div class="dateToHolder dateHolder">
-                                <label>Datum do</label>
-                                <input type="text" id="dateToPicker" class="datepicker">
-                            </div>
-                        </div>
-                        <div class="workTypes">
-                            <label class="workTypeLabel">
-                                <input name="workType" type="radio" />
-                                <span>Ručak</span>
-                            </label>
-                            <label class="workTypeLabel">
-                                <input name="workType" type="radio" />
-                                <span>Bolovanje</span>
-                            </label>
-                            <label class="workTypeLabel">
-                                <input name="workType" type="radio" />
-                                <span>GO</span>
-                            </label>
-                            <label class="workTypeLabel">
-                                <input name="workType" type="radio" />
-                                <span>Nešto drugo</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">Unesi</a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
+            <!--------------------------->
+            <!-- POLU AUTOMAGIČNI UNOS -->
+            <!--------------------------->
+            <div class="col s12">
+                <div class="card" id="semiAutomaticEntry" data-bind="with: semiAutomaticEntry">
+                    <div data-bind="attr: {class : 'card-content ' + $data.styleClass + ' ' + $data.styleType + ' ' + $.data.textClass + ' ' + $data.textType}">
+                        <span class="card-title">Polu-automagični unos</span>
+
+                        <div data-bind="template: { name: 'entry-template', data: $data }"></div>
+                        <div class="description">
+                            <label>Opis</label>
+                            <textarea data-bind="value: $data.description"></textarea>
+                        </div>
+                        <div class="activityButtons">
+                            <a data-bind="attr: {class : 'waves-effect waves-light btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                               id="addLunchBtn">
+                                <i class="fad fa-thermometer"></i>
+                                <span>Bolovanje</span>
+                            </a>
+                            <a data-bind="attr: {class : 'waves-effect waves-light btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                               id="addHolidaysButton">
+                                <i class="fad fa-handshake-alt"></i>
+                                <span>Interni sastanak</span>
+                            </a>
+                            <a data-bind="attr: {class : 'waves-effect waves-light btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                               id="addVacationButton">
+                                <i class="fad fa-user-clock"></i>
+                                <span>OnTime unos sati</span>
+                            </a>
+                            <a data-bind="attr: {class : 'waves-effect waves-light btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                               id="addPaidLeaveButton">
+                                <i class="fad fa-user-graduate"></i>
+                                <span>Podrška kolegi</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!---------------->
+            <!-- RUČNI UNOS -->
+            <!---------------->
+            <div class="col s12 m12">
+                <div class="card" id="customEntry" data-bind="with: customEntry">
+                    <div data-bind="attr: {class : 'card-content white-text ' + $data.styleClass + ' ' + $data.styleType + ' ' + $data.textClass + ' ' + $data.textType}">
+                        <span class="card-title">Ručni unos</span>
+
+                        <div data-bind="template: { name: 'entry-template', data: $data }"></div>
+                        <div class="detailsHolder">
+                            <div class="chosenWorkItemsList">
+                                <label>Predmet</label>
+                                <div class="collection" data-bind="foreach: $parent.userSettings().chosenWorkItems">
+                                    <a href="#!" data-bind="attr: {class : 'collection-item workItem darken-2 ' + $parent.styleClass},
+                                       css: {'active': $data.active()}, click: selectWorkItem">
+                                        <span data-bind="text: $data.Name"></span>
+                                        <i class="fad fa-trash-alt removeWorkItem" data-bind="click: unchooseWorkItem"></i>
+                                    </a>
+                                </div>
+                                <a data-bind="attr: {class : 'waves-effect waves-light btn btn-sm darken-2 withIcon ' + $data.styleClass},
+                                   click: addMoreWorkItems">
+                                    <i class="fad fa-plus"></i>
+                                </a>
+                            </div>
+                            <div class="chosenWorkTypesList">
+                                <label>Vrsta rada</label>
+                                <div class="collection" data-bind="foreach: $parent.chosenWorkTypes">
+                                    <a href="#!" data-bind="attr: {class : 'collection-item workType darken-2 ' + $parent.styleClass},
+                                       css: {'active': $data.active()}, click: selectWorkType">
+                                        <span data-bind="text: $data.name"></span>
+                                        <i class="fad fa-trash-alt removeWorkType" data-bind="click: unchooseWorkType"></i>
+                                    </a>
+                                </div>
+                                <a data-bind="attr: {class : 'waves-effect waves-light btn btn-sm darken-2 withIcon ' + $data.styleClass},
+                                   click: addMoreWorkTypes">
+                                    <i class="fad fa-plus"></i>
+                                </a>
+                            </div>
+                            <div class="description">
+                                <label>Opis</label>
+                                <textarea data-bind="value: $data.description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="attr: {class : 'card-action white-text darken-3 ' + $data.styleClass}">
+                        @*<a href="#" style="float: left;">Dodaj kao template</a>*@
+                        <a href="#" style="float: right;"
+                           data-bind="attr: {class : 'btn btn-large darken-4 ' + $data.styleClass},
+                           click: addNewWorkLog">Unesi</a>
+                        <div style="clear: both;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
+    <div id="addMoreWorkItemsModal" 
+         data-bind="attr: {class: 'modal modal-fixed-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+        <div class="modal-content">
+            <h4>Dodaj predmet</h4>
+            <input type="text" id="searchWorkItems" data-bind="event: {'keyup': searchWorkItemsPush}" />
+            <!-- ko if: $data.searchResultWorkItems().length > 0 -->
+            <div class="collection", data-bind="foreach: $data.searchResultWorkItems">
+                <a href="#!" data-bind="attr: {class: 'collection-item workItem darken-1 ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().textClass},
+                    text: $data.Name, css: {'chosen': $data.chosen()}, click: choseWorkItem"></a>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div data-bind="attr: {class: 'modal-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
+        </div>
+    </div>
+
+    <div id="addMoreWorkTypesModal"
+         data-bind="attr: {class: 'modal modal-fixed-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+        <div class="modal-content">
+            <h4>Dodaj vrstu rada</h4>
+            <input type="text" id="searchWorkTypes" data-bind="textInput: $data.workTypeSearchStr" />
+            <!-- ko if: $data.searchResultWorkTypes().length > 0 -->
+            <div class="collection" data-bind="foreach: $data.searchResultWorkTypes">
+                <a href="#!"
+                   data-bind="attr: {class: 'collection-item workTypeItem darken-1 ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().textClass},
+                   text: $data.name, css: {'chosen': $data.chosen()}, click: choseWorkType"></a>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div data-bind="attr: {class: 'modal-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
+        </div>
+    </div>
 }
 
 @section scripts {
+    <script type="text/html" id="entry-template">
+        <div class="buttonPreselects">
+            <a data-bind="attr: {class : 'waves-effect waves-light btn ' + $data.styleClass + ' ' + $data.preselectsType},
+               click: preselectRange.bind($data, 'lastM')">
+                <span>Prošli mjesec</span>
+            </a>
+            <a data-bind="attr: {class : 'waves-effect waves-light btn ' + $data.styleClass + ' ' + $data.preselectsType},
+               click: preselectRange.bind($data, 'lastW')">
+                <span>Prošli tjedan</span>
+            </a>
+            <a data-bind="attr: {class : 'waves-effect waves-light btn ' + $data.styleClass + ' ' + $data.preselectsType},
+               click: preselectRange.bind($data, 'thisW')">
+                <span>Ovaj tjedan</span>
+            </a>
+            <a data-bind="attr: {class : 'waves-effect waves-light btn ' + $data.styleClass + ' ' + $data.preselectsType},
+               click: preselectRange.bind($data, 'thisM')">
+                <span>Ovaj mjesec</span>
+            </a>
+        </div>
+        <div class="dateRangePickers">
+            <div class="dateFromHolder dateHolder">
+                <label>Datum od</label>
+                <input type="text" class="datepicker dateFrom">
+            </div>
+            <div class="dateToHolder dateHolder">
+                <label>Datum do</label>
+                <input type="text" class="datepicker dateTo">
+            </div>
+            <div class="timeHolder" data-bind="css: {'maxAmountSelected': $data.workAmount() > 8}">
+                <label>Broj sati po danu</label>
+                <a href="#" class="btn btn-plus btn-small teal darken-3"
+                   data-bind="click: increaseWorkAmount, attr: {class : 'btn btn-plus btn-small ' + $data.styleClass + ' ' + $data.preselectsType}, css: {'disabled': $data.workAmount() > 8 }">
+                    <i class="fal fa-plus"></i>
+                </a>
+                <a href="#"
+                   data-bind="click: decreaseWorkAmount, attr: {class : 'btn btn-minus btn-small ' + $data.styleClass + ' ' + $data.preselectsType}, css: {'disabled': $data.workAmount() <= 0 }">
+                    <i class="fal fa-minus"></i>
+                </a>
+                <a href="#"
+                   data-bind="click: maxWorkAmount, attr: {class : 'btn btn-plusMax btn-small ' + $data.styleClass + ' ' + $data.preselectsType}" title="Napuni do 8h po danu">
+                    <i class="fal fa-chevron-double-right"></i>
+                </a>
+                <input type="number" class="workAmountInput" min="-1" max="8"
+                       data-bind="value: $data.workAmount, css: {'maxAmount': $data.workAmount() > 8}" />
+            </div>
+        </div>
+    </script>
+
+    <script type="text/javascript">
+        var allWorkTypes = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model.AllWorkTypes))');
+        if (allWorkTypes) {
+            for (var i = 0; i < allWorkTypes.length; i++) {
+                allWorkTypes[i].chosen = ko.observable(false);
+                allWorkTypes[i].active = ko.observable(false);
+            }
+        }
+        function ViewModel() {
+            var self = this;
+
+            self.userSettings = ko.observable({
+                chosenWorkTypes: ko.observableArray([]),
+                chosenWorkItems: ko.observableArray([]),
+                templates: ko.observableArray([])
+            });
+
+            self.breadCrumbs = ko.observableArray([]);
+            self.ontimeUser = ko.observable(JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model.OnTimeUser))'));
+            self.hrproUser = ko.observable(JSON.parse('@Html.Raw(raw)'));
+
+            self.activeWorkItem = ko.observable();
+            self.activeWorkType = ko.observable();
+
+            self.searchResultWorkItems = ko.observableArray([]);
+            self.allWorkTypes = ko.observableArray(allWorkTypes);
+
+            self.workTypeSearchStr = ko.observable();
+
+            self.searchResultWorkTypes = ko.computed(function () {
+                return self.allWorkTypes().filter(function(type){
+                    if(!self.workTypeSearchStr() || type.name.toLowerCase().indexOf(self.workTypeSearchStr().toLowerCase()) !== -1)
+                        return type;
+                });
+            }, this);
+
+            self.chosenWorkTypes = ko.computed(function () {
+                var result = [];
+                for (var i = 0; i < self.allWorkTypes().length; i++) {
+                    var item = self.allWorkTypes()[i];
+                    for (var j = 0; j < self.userSettings().chosenWorkTypes().length; j++) {
+                        if (item.id == self.userSettings().chosenWorkTypes()[j].id) {
+                            result.push(item);
+                            break;
+                        }
+                    }
+                }
+                return result;
+            });
+
+            self.automaticEntry = ko.observable({
+                styleClass: 'grey',
+                styleType: 'darken-3',
+                textClass:'white-text',
+                textType: '',
+                buttonType: 'darken-4'
+            });
+
+            self.semiAutomaticEntry = ko.observable({
+                elementId: 'semiAutomaticEntry',
+                styleClass: 'teal',
+                styleType: 'darken-3',
+                textClass:'grey-text',
+                textType: 'text-darken-4',
+                buttonType: 'darken-4',
+                preselectsType: 'darken-2',
+                workAmount: ko.observable(0),
+                description: ko.observable('')
+            });
+
+            self.customEntry = ko.observable({
+                elementId: 'customEntry',
+                styleClass: 'blue-grey',
+                styleType: 'darken-3',
+                textClass:'white-text',
+                textType: '',
+                buttonType: 'darken-4',
+                preselectsType: 'darken-2',
+                workAmount: ko.observable(0),
+                description: ko.observable('')
+            });
+        }
+
+    </script>
     @Scripts.Render("~/bundles/Index")
 }

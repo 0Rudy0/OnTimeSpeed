@@ -18,5 +18,29 @@
 		"SearchStrings": [
 			"Godišnji odmor / plaćeni dopust"
 		]
+	},
+	{
+		"Name": "bolovanjeSearchString",
+		"SearchStrings": [
+			"hrpro bolovanje"
+		]
+	},
+	{
+		"Name": "interniSastanakSearchString",
+		"SearchStrings": [
+			"hrpro interni sastanci"
+		]
+	},
+	{
+		"Name": "ontimeUnosSearchString",
+		"SearchStrings": [
+			"hrpro ontime"
+		]
+	},
+	{
+		"Name": "podrskaKolegiSearchString",
+		"SearchStrings": [
+			"hrpro podrška kolegi"
+		]
 	}
 ]

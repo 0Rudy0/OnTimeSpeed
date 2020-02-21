@@ -25,6 +25,8 @@ namespace OnTimeSpeed.Code
             var chartData = new HighChartsData();
             var groupedData = new Dictionary<string, float>();
             var plannedAmount = new Dictionary<string, float>();
+            var workLogsOnDate = new Dictionary<string, List<WorkLogFriendly>>();
+
             toDate = toDate ?? DateTime.Now;
 
             for (var i = fromDate; i <= toDate; i = i.AddDays(1))
@@ -88,9 +90,40 @@ namespace OnTimeSpeed.Code
                 }
 
                 if (!groupedData.ContainsKey(key) && (fromDate == null || log.date_time.Date >= fromDate) && (toDate == null || log.date_time.Date <= toDate))
+                {
                     groupedData.Add(key, log.work_done.duration_minutes / 60);
+
+                    if (!workLogsOnDate.ContainsKey(key))
+                    {
+                        workLogsOnDate.Add(key, new List<WorkLogFriendly>());
+                    }
+                    workLogsOnDate[key].Add(new WorkLogFriendly
+                    {
+                        ItemName = log.item.name,
+                        Amount = log.work_done.duration_minutes / 60,
+                        Descripton = log.description,
+                        WorkType = log.work_log_type.name
+                    });
+                    workLogsOnDate[key] = workLogsOnDate[key].OrderByDescending(v => v.Amount).ToList();
+                }
                 else if (groupedData.ContainsKey(key) && (fromDate == null || log.date_time.Date >= fromDate) && (toDate == null || log.date_time.Date <= toDate))
+                {
                     groupedData[key] += log.work_done.duration_minutes / 60;
+
+                    if (!workLogsOnDate.ContainsKey(key))
+                    {
+                        workLogsOnDate.Add(key, new List<WorkLogFriendly>());
+                    }
+                    workLogsOnDate[key].Add(new WorkLogFriendly
+                    {
+                        ItemName = log.item.name,
+                        Amount = log.work_done.duration_minutes / 60,
+                        Descripton = log.description,
+                        WorkType = log.work_log_type.name
+                    });
+
+                    workLogsOnDate[key] = workLogsOnDate[key].OrderByDescending(v => v.Amount).ToList();
+                }                
             }
 
             var categories = plannedAmount.Select(g => g.Key).ToList();
@@ -110,6 +143,7 @@ namespace OnTimeSpeed.Code
                 SerieName = "Ostvareno",
                 ValuesArray = new List<float>()
             });
+            chartData.WorkLogs = workLogsOnDate;
 
             foreach (var key in chartData.Categories_names)
             {
