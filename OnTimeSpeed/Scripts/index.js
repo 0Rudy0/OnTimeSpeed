@@ -230,7 +230,7 @@ function generateToastObjs(msg, title, noNewEntryMsg) {
         };
 
     }
-    else if (msg.length > 1) {
+    else if (msg.length > 0) {
         var str = '<span style="font-size:12px">';
         for (var i = 0; i < msg.length; i++) {
             str += '</br>' + msg[i];
@@ -242,7 +242,7 @@ function generateToastObjs(msg, title, noNewEntryMsg) {
             displayLength: toastLong
         };
     }
-    if (msg.length > 1)
+    if (msg.length > 0)
         getWorkLogs();
     else {
         $('.spinner').hide();
@@ -441,7 +441,7 @@ function searchWorkItemsPush() {
     setTimeout(function () {
         searchStack.pop();
         var searchStr = $('#searchWorkItems').val();
-        if (searchStack.length == 0 && searchStr.length > 4)
+        if (searchStack.length == 0 && searchStr.length > 2)
             searchItems(searchStr);
     }, 1000);
 }

@@ -210,7 +210,7 @@ namespace OnTimeSpeed.Controllers
         {
             var items = await DAL.GetWorkItems(_user,
                 new List<string> { searchStr },
-                new List<string> { "items" });
+                new List<string> { "items" }, null);
 
             return JsonConvert.SerializeObject(items);
         }

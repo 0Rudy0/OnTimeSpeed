@@ -271,7 +271,7 @@ namespace OnTimeSpeed.Code
                         result = new List<WorkItem>();
                         resultRaw.ForEach(rr =>
                         {
-                            if (!result.Any(r => r.Id == rr.id))
+                            if (!result.Any(r => r.Id == rr.id && r.TypeString == rr.item_type))
                             {
                                 result.Add(new WorkItem
                                 {

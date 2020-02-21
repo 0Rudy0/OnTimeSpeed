@@ -2621,3 +2621,116 @@ Parameter name: key</code></span><br />
 		</div>
 	</div>
 
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.2.2020. 16:14:59</span><span class='timeUtc' style='display: none'>2020-02-21T16:14:59.2609938+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>The remote name could not be resolved: 'dev03'</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>System</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.IO.Stream GetRequestStream(System.Net.TransportContext ByRef)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>endpoint: https://dev03/HrNetApi_HrPro/Auth/WinAuthorize-----formData:AuthData=x69G7FyiX1%2fIjlF0PA%2f5t7aRRfCLkc5brObd5cRHI8VnuU%2btkn9fjoEgL59Fb%2f8W8OoYQrrFPCm3LGKV01Ol2Q88QIOzHTohe50jH9G58UuoTC4Y7W7IG6Fym3J8cBtrZeZnMCSBWCnRM8wZM%2fu0%2bye%2bHqga4VHEJzXSyjQHLv77l3Z3PNToq8YtGjnNoEk01pjQBJRCrmRFwfL%2fm3zOBASfIgWKEDR4InxHrLkC1yA%3d ; </code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+  <br>at System.Net.HttpWebRequest.GetRequestStream()
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBody(String url, Dictionary`2 formData, String token)
+  <br>at HrNetMobile.Data.DAL.DALWebApi.PostRequest(String endPoint, String token, Dictionary`2 formData)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.2.2020. 16:14:59</span><span class='timeUtc' style='display: none'>2020-02-21T16:14:59.2679763+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Failed to login to WEB API for user HRPRO\danijel.rudman</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>HrNetMobile.Data</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>HrNetMobile.Models.TokenDataWebApi AuthenticateWebApiWin(HrNetMobile.Models.User)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at HrNetMobile.Data.DAL.DALWebApi.AuthenticateWebApiWin(User info)
+  <br>at OnTimeSpeed.Code.DAL.AuthHrNet(User user) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 307
+  <br>at OnTimeSpeed.Controllers.HomeController.Index() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 50
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.2.2020. 16:15:16</span><span class='timeUtc' style='display: none'>2020-02-21T16:15:16.7820801+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>The remote name could not be resolved: 'dev03'</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>System</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.IO.Stream GetRequestStream(System.Net.TransportContext ByRef)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>endpoint: https://dev03/HrNetApi_HrPro/Auth/WinAuthorize-----formData:AuthData=x69G7FyiX1%2fIjlF0PA%2f5t7aRRfCLkc5brObd5cRHI8VnuU%2btkn9fjoEgL59Fb%2f8W8OoYQrrFPCm3LGKV01Ol2Q88QIOzHTohe50jH9G58UuoTC4Y7W7IG6Fym3J8cBtrnnKNKV4cHxsCrK%2bH%2bNNc%2fm6zU%2fea63LhAm%2bLP21cNYkEpG8b%2f1uEjoNPF%2ftTc9Vbj0q6VG6iKk%2f860xoRPYOQb3O8FzwhFDysxpMp8wEnpQ%3d ; </code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+  <br>at System.Net.HttpWebRequest.GetRequestStream()
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBody(String url, Dictionary`2 formData, String token)
+  <br>at HrNetMobile.Data.DAL.DALWebApi.PostRequest(String endPoint, String token, Dictionary`2 formData)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.2.2020. 16:16:40</span><span class='timeUtc' style='display: none'>2020-02-21T16:16:40.8939476+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>The remote name could not be resolved: 'dev03'</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>System</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.IO.Stream GetRequestStream(System.Net.TransportContext ByRef)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>endpoint: https://dev03/HrNetApi_HrPro/Auth/WinAuthorize-----formData:AuthData=x69G7FyiX1%2fIjlF0PA%2f5t7aRRfCLkc5brObd5cRHI8VnuU%2btkn9fjoEgL59Fb%2f8W8OoYQrrFPCm3LGKV01Ol2Q88QIOzHTohe50jH9G58UuoTC4Y7W7IG6Fym3J8cBtrtmG%2fDIMxXLTk3r4jcG5F4dgXQQxbLXDNGPrwdIMhKUg3TMWWL0wIM6AxxxqRZnDIxiQl2Rx5d3IdBSdBJ3SjSiaFLNQacCBHxjTfVFr0xMw%3d ; </code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+  <br>at System.Net.HttpWebRequest.GetRequestStream()
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBody(String url, Dictionary`2 formData, String token)
+  <br>at HrNetMobile.Data.DAL.DALWebApi.PostRequest(String endPoint, String token, Dictionary`2 formData)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.2.2020. 16:16:46</span><span class='timeUtc' style='display: none'>2020-02-21T16:16:46.9015405+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>The remote name could not be resolved: 'dev03'</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>System</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.IO.Stream GetRequestStream(System.Net.TransportContext ByRef)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>endpoint: https://dev03/HrNetApi_HrPro/Auth/WinAuthorize-----formData:AuthData=x69G7FyiX1%2fIjlF0PA%2f5t7aRRfCLkc5brObd5cRHI8VnuU%2btkn9fjoEgL59Fb%2f8W8OoYQrrFPCm3LGKV01Ol2Q88QIOzHTohe50jH9G58UuoTC4Y7W7IG6Fym3J8cBtrE%2fi727GLZL3Mm4K7C0nBjzQGPgg0ekLo%2bWf5yvhiuzA64WtNMmGR6MWBLosJ5wDNqVBaLxV79TN8vc%2frJnMuJu1Q7SpMq3GAMFIRYG47xuI%3d ; </code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+  <br>at System.Net.HttpWebRequest.GetRequestStream()
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBody(String url, Dictionary`2 formData, String token)
+  <br>at HrNetMobile.Data.DAL.DALWebApi.PostRequest(String endPoint, String token, Dictionary`2 formData)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.2.2020. 16:16:47</span><span class='timeUtc' style='display: none'>2020-02-21T16:16:47.2415954+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>The remote name could not be resolved: 'dev03'</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>System</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.IO.Stream GetRequestStream(System.Net.TransportContext ByRef)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>endpoint: https://dev03/HrNetApi_HrPro/Auth/WinAuthorize-----formData:AuthData=x69G7FyiX1%2fIjlF0PA%2f5t7aRRfCLkc5brObd5cRHI8VnuU%2btkn9fjoEgL59Fb%2f8W8OoYQrrFPCm3LGKV01Ol2Q88QIOzHTohe50jH9G58UuoTC4Y7W7IG6Fym3J8cBtrE%2fi727GLZL3Mm4K7C0nBj7DSZddzByDyCaEOS%2bT12Fq7rBHjxp%2bOs%2fyben4dikOzTualhTRAa0tX%2bCpaWRJtrxw5viZt63qeA4fxOeS6uog%3d ; </code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+  <br>at System.Net.HttpWebRequest.GetRequestStream()
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBody(String url, Dictionary`2 formData, String token)
+  <br>at HrNetMobile.Data.DAL.DALWebApi.PostRequest(String endPoint, String token, Dictionary`2 formData)
+		</div>
+	</div>
+
