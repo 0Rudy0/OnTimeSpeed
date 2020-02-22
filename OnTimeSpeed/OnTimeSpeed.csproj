@@ -141,10 +141,20 @@
     <Compile Include="Code\DAL.cs" />
     <Compile Include="Code\DAL_HrProApi.cs" />
     <Compile Include="Code\Holidays.cs" />
+    <Compile Include="EntryImplementations\ColleagueSupportEntry.cs" />
+    <Compile Include="EntryImplementations\OnTimeEntry.cs" />
+    <Compile Include="EntryImplementations\ISemiAutomaticEntry.cs" />
+    <Compile Include="EntryImplementations\PaidLeaveEntry.cs" />
+    <Compile Include="EntryImplementations\InternalMeetingEntry.cs" />
+    <Compile Include="EntryImplementations\SickLeaveEntry.cs" />
+    <Compile Include="EntryImplementations\VacationEntry.cs" />
+    <Compile Include="EntryImplementations\IAutomaticEntry.cs" />
     <Compile Include="Code\PrepareData.cs" />
     <Compile Include="Code\SearchStrings.cs" />
     <Compile Include="Code\Templates.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="EntryImplementations\HolidayEntry.cs" />
+    <Compile Include="EntryImplementations\LunchEntry.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -172,6 +182,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\buttonsHover.css" />
     <Content Include="Content\FontAwesome\all.css" />
     <Content Include="Content\FontAwesome\brands.css" />
     <Content Include="Content\FontAwesome\duotone.css" />
@@ -838,6 +849,7 @@
     <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\settings.js" />
+    <Content Include="Scripts\viewModel.js" />
     <Content Include="Scripts\workAmount.js" />
     <Content Include="Scripts\workItems.js" />
     <Content Include="Scripts\workTypes.js" />
@@ -854,6 +866,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="config\workTypes.json" />
+    <Content Include="Views\Home\_AutomaticEntry.cshtml" />
+    <Content Include="Views\Home\_SemiAutomaticEntry.cshtml" />
+    <Content Include="Views\Home\_CustomEntry.cshtml" />
+    <Content Include="Views\Home\_Modals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

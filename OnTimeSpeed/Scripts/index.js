@@ -9,10 +9,17 @@ var toastClasses = 'cyan lighten-4';
 var viewModel;
 var searchStack = [];
 
+var dateFromPickers = {
+    semiAutomaticDateFrom: null
+}
+
 $(function () {
     if (loggedIn) {
         getWorkLogs();
         initWorkLogChart([], []);
+    }
+    else {
+        $('.spinner').hide();
     }
     $('.container').show();
     $('#addLunchBtn').click(addLunch);
@@ -63,19 +70,69 @@ function getWorkLogsAction(forDate) {
             M.toast(toastObj);
             toastObj = null;
         }
-        var elems = document.querySelectorAll('.datepicker');
-        var instances = M.Datepicker.init(elems, {
+        M.Datepicker.init(document.querySelectorAll('#semiAutomaticEntry .datepicker.dateFrom'), {
             autoClose: true,
             format: 'dd.mm.yyyy',
             firstDay: 1,
             showDaysInNextAndPreviousMonths: true,
-            showClearBtn: true
+            showClearBtn: true,
+            defaultDate: new Date(),
+            setDefaultDate: true,
+            onSelect: onDateFromSelect.bind(viewModel.semiAutomaticEntry)
         });
+        M.Datepicker.init(document.querySelectorAll('#semiAutomaticEntry .datepicker.dateTo'), {
+            autoClose: true,
+            format: 'dd.mm.yyyy',
+            firstDay: 1,
+            showDaysInNextAndPreviousMonths: true,
+            showClearBtn: true,
+            onSelect: onDateToSelect.bind(viewModel.semiAutomaticEntry)
+        });
+
+        M.Datepicker.init(document.querySelectorAll('#customEntry .datepicker.dateFrom'), {
+            autoClose: true,
+            format: 'dd.mm.yyyy',
+            firstDay: 1,
+            showDaysInNextAndPreviousMonths: true,
+            showClearBtn: true,
+            defaultDate: new Date(),
+            setDefaultDate: true,
+            onSelect: onDateFromSelect.bind(viewModel.semiAutomaticEntry)
+        });
+        M.Datepicker.init(document.querySelectorAll('#customEntry .datepicker.dateTo'), {
+            autoClose: true,
+            format: 'dd.mm.yyyy',
+            firstDay: 1,
+            showDaysInNextAndPreviousMonths: true,
+            showClearBtn: true,
+            onSelect: onDateToSelect.bind(viewModel.customEntry)
+        });
+
+        //var instances = M.Datepicker.init(document.querySelectorAll('.datepicker.dateTo'), {
+        //    autoClose: true,
+        //    format: 'dd.mm.yyyy',
+        //    firstDay: 1,
+        //    showDaysInNextAndPreviousMonths: true,
+        //    showClearBtn: true,
+        //    onSelect: onDateToSelect
+        //});
 
         $('.modal').modal();
 
         console.log(instances);
     });
+}
+
+function onDateFromSelect() {
+    var dateFromPicker = M.Datepicker.getInstance($(selectorDateFrom)[0]);
+    var dateToPicker = M.Datepicker.getInstance($(selectorDateTo)[0]);
+
+    //dateFromPicker.setDate(dateFrom);
+    //dateToPicker.setDate(dateTo);
+}
+
+function onDateToSelect() {
+
 }
 
 function initWorkLogChart(categories, series) {

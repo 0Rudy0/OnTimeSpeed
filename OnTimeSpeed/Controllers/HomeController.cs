@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using OnTimeSpeed.Attributes;
 using OnTimeSpeed.Code;
+using OnTimeSpeed.EntryImplementations;
 using OnTimeSpeed.Models;
 using OnTimeSpeed.Utils;
 using System;
@@ -15,7 +16,7 @@ using hrnetModel = HrNetMobile.Models;
 
 namespace OnTimeSpeed.Controllers
 {
-    [AuthorizeOnTime]
+    //[AuthorizeOnTime]
     public class HomeController : Controller
     {
         private User _user;
@@ -64,6 +65,13 @@ namespace OnTimeSpeed.Controllers
             {
                 model.HrProUser = _hrproUser;
             }
+
+            _user = new User
+            {
+                id = 5,
+                name = "Danijel Rudman",
+                Token = "bla"
+            };
 
             model.OnTimeUser = _user;
             if (_user != null)
@@ -128,7 +136,6 @@ namespace OnTimeSpeed.Controllers
             var groupBy = groupType == null ? GroupBy.Month : (GroupBy)(groupType);
 
             var dateRange = PrepareData.GetDateRange(forDate, groupByForDateRange);
-            await DAL.GetLunchTasks(_user);
             var data = await DAL.GetWorkLogs(_user);
             return JsonConvert.SerializeObject(PrepareData.PrepareWorkLogChartData(data, groupBy, dateRange.Item1, dateRange.Item2));
         }
@@ -148,10 +155,11 @@ namespace OnTimeSpeed.Controllers
         [AuthorizeHrPro]
         public async Task<string> AddLunchToToday()
         {
-            var addedOnDates = await DAL.AddLunch(
+            var addedOnDates = await DAL.AddAutomatic(
+                new LunchEntry(),
                 _user,
                 _hrproUser,
-                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(), 
+                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
                 DateTime.Now);
 
             return JsonConvert.SerializeObject(addedOnDates);
@@ -161,10 +169,12 @@ namespace OnTimeSpeed.Controllers
         [AuthorizeHrPro]
         public async Task<string> AddHolidays()
         {
-            var addedOnDates = await DAL.AddHolidays(
-                _user, 
-                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(), 
-                DateTime.Now.ToLastOfMonth());
+            var addedOnDates = await DAL.AddAutomatic(
+                new HolidayEntry(),
+                _user,
+                _hrproUser,
+                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
+                DateTime.Now);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
@@ -173,11 +183,12 @@ namespace OnTimeSpeed.Controllers
         [AuthorizeHrPro]
         public async Task<string> AddVacations()
         {
-            var addedOnDates = await DAL.AddVacations(
-                _user,
-                _hrproUser,
-                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
-                DateTime.Now.ToLastOfMonth());
+            var addedOnDates = await DAL.AddAutomatic(
+               new VacationEntry(),
+               _user,
+               _hrproUser,
+               DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
+               DateTime.Now);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
@@ -186,11 +197,92 @@ namespace OnTimeSpeed.Controllers
         [AuthorizeHrPro]
         public async Task<string> AddPaidLeaves()
         {
-            var addedOnDates = await DAL.AddPaidLeave(
+            var addedOnDates = await DAL.AddAutomatic(
+              new PaidLeaveEntry(),
+              _user,
+              _hrproUser,
+              DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
+              DateTime.Now);          
+
+            return JsonConvert.SerializeObject(addedOnDates);
+        }
+
+        [HttpPost]
+        [AuthorizeHrPro]
+        public async Task<string> AddSickLeave(
+            float amount,
+            string dateFromStr,
+            string dateToStr,
+            string description)
+        {
+            var addedOnDates = await DAL.AddSemiAutomatic(
+                new SickLeaveEntry(),
                 _user,
                 _hrproUser,
-                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
-                DateTime.Now.ToLastOfMonth());
+                dateFromStr.ToDate(),
+                dateToStr.ToDate(),
+                amount,
+                description);
+
+            return JsonConvert.SerializeObject(addedOnDates);
+        }
+
+        [HttpPost]
+        [AuthorizeHrPro]
+        public async Task<string> AddInternalMeeting(
+            float amount,
+            string dateFromStr,
+            string dateToStr,
+            string description)
+        {
+            var addedOnDates = await DAL.AddSemiAutomatic(
+                new InternalMeetingEntry(),
+                _user,
+                _hrproUser,
+                dateFromStr.ToDate(),
+                dateToStr.ToDate(),
+                amount,
+                description);
+
+            return JsonConvert.SerializeObject(addedOnDates);
+        }
+
+        [HttpPost]
+        [AuthorizeHrPro]
+        public async Task<string> AddOnTimeEntry(
+            float amount,
+            string dateFromStr,
+            string dateToStr,
+            string description)
+        {
+            var addedOnDates = await DAL.AddSemiAutomatic(
+                new OnTimeEntry(),
+                _user,
+                _hrproUser,
+                dateFromStr.ToDate(),
+                dateToStr.ToDate(),
+                amount,
+                description);
+
+            return JsonConvert.SerializeObject(addedOnDates);
+        }
+
+        [HttpPost]
+        [AuthorizeHrPro]
+        public async Task<string> AddColegueSupport(
+            float amount,
+            string dateFromStr,
+            string dateToStr,
+            string description)
+        {
+            var addedOnDates = await DAL.AddSemiAutomatic(
+                new ColleagueSupportEntry(),
+                _user,
+                _hrproUser,
+                dateFromStr.ToDate(),
+                dateToStr.ToDate(),
+                amount,
+                description);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
@@ -206,17 +298,24 @@ namespace OnTimeSpeed.Controllers
             string itemType,
             string description)
         {
-            var addedOnDates = await DAL.AddCustom(
-                _user,
-                dateFromStr.ToDate(),
-                String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
-                itemId,
-                workTypeId,
-                amount,
-                itemType,
-                description);
+            if (amount > 0)
+            {
+                var addedOnDates = await DAL.AddCustom(
+                    _user,
+                    dateFromStr.ToDate(),
+                    String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
+                    itemId,
+                    workTypeId,
+                    amount,
+                    itemType,
+                    description);
 
-            return JsonConvert.SerializeObject(addedOnDates);
+                return JsonConvert.SerializeObject(addedOnDates);
+            }
+            else
+            {
+                return "Iznos radnih sati je 0";
+            }
         }
 
         #endregion

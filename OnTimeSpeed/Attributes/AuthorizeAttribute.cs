@@ -115,6 +115,10 @@ namespace OnTimeSpeed.Attributes
                 actionContext.HttpContext.Response.AddHeader("REQUIRES_AUTH_ONTIME", "1");
                 actionContext.Result = new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
             }
+            else
+            {
+                actionContext.Result = new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
+            }
         }
     }
 

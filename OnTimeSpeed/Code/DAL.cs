@@ -13,6 +13,7 @@ using hrnet = HrNetMobile.Data;
 using hrnetModel = HrNetMobile.Models;
 using hrnetHelper = HrNetMobile.Common;
 using HrNetMobile.Models.Vacation;
+using OnTimeSpeed.EntryImplementations;
 
 namespace OnTimeSpeed.Code
 {
@@ -300,49 +301,6 @@ namespace OnTimeSpeed.Code
             return result;
         }
 
-        #region AUTH
-
-        public static hrnetModel.User AuthHrNet(hrnetModel.User user)
-        {
-            var token = hrnet.DAL.DALWebApi.AuthenticateWebApiWin(user);
-            user.TokenWebApi = token.ApiToken;
-            user.LoggedContact = new hrnetModel.Contact
-            {
-                Name = token.EmployeeName,
-                Email = token.EmployeeEmail,
-                ID = token.EmployeeId
-            };
-
-            //try
-            //{
-            //    user.LoggedContact.ProfilePicture = hrnetHelper.HelpFunctions.GetProfilePicture(user.LoggedContact.ID, 100, user.TokenWebApi);
-
-            //}
-            //catch
-            //{
-            //    user.LoggedContact.ProfilePictureFallback = appAbsoluteUrl + "/Content/images/personPlaceholder.png";
-            //}
-
-            return user;
-        }
-
-        public static async Task<OnTimeUser> GetMe(User user)
-        {
-            var parameters = new Dictionary<string, string>();
-            //parameters.Add("search_field", "[ID_NAME]");
-            //parameters.Add("search_string", str);
-            //parameters.Add("columns", "status,id,item_type,name");
-
-            var content = await GetRequestAsync($"api/v5/me", user.Token, parameters);
-            var result = ApiHelper.GetObjectFromApiResponse<OnTimeUser>(content);
-
-            return result;
-        }
-
-        #endregion
-
-        #region GET WORK TASKS
-
         public static async Task<List<OnTimeUser>> GetUser(string searchString, User user)
         {
             var cacheKey = "allHrProOnTimeUsers";
@@ -392,57 +350,69 @@ namespace OnTimeSpeed.Code
             return allTypes;
         }
 
-        public static async Task<List<WorkItem>> GetLunchTasks(User user)
+
+        #region AUTH
+
+        public static hrnetModel.User AuthHrNet(hrnetModel.User user)
         {
-            string cacheKey = "lunchTasks";
-            var searchStrings = SearchStrings.Get().FirstOrDefault(s => s.Name == "rucakSearchString").SearchStrings;
-            var result = await GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);
+            var token = hrnet.DAL.DALWebApi.AuthenticateWebApiWin(user);
+            user.TokenWebApi = token.ApiToken;
+            user.LoggedContact = new hrnetModel.Contact
+            {
+                Name = token.EmployeeName,
+                Email = token.EmployeeEmail,
+                ID = token.EmployeeId
+            };
+
+            //try
+            //{
+            //    user.LoggedContact.ProfilePicture = hrnetHelper.HelpFunctions.GetProfilePicture(user.LoggedContact.ID, 100, user.TokenWebApi);
+
+            //}
+            //catch
+            //{
+            //    user.LoggedContact.ProfilePictureFallback = appAbsoluteUrl + "/Content/images/personPlaceholder.png";
+            //}
+
+            return user;
+        }
+
+        public static async Task<OnTimeUser> GetMe(User user)
+        {
+            var parameters = new Dictionary<string, string>();
+            //parameters.Add("search_field", "[ID_NAME]");
+            //parameters.Add("search_string", str);
+            //parameters.Add("columns", "status,id,item_type,name");
+
+            var content = await GetRequestAsync($"api/v5/me", user.Token, parameters);
+            var result = ApiHelper.GetObjectFromApiResponse<OnTimeUser>(content);
 
             return result;
         }
 
-        public static async Task<List<WorkItem>> GetVacationTasks(User user)
-        {
-            string cacheKey = "vacationTasks";
-            var searchStrings = SearchStrings.Get().FirstOrDefault(s => s.Name == "vacationSearchString").SearchStrings;
-            var result = await GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);
-
-            return result;
-        }
-
-        public static async Task<List<WorkItem>> GetPaidLeaveTasks(User user)
-        {
-            return await GetVacationTasks(user);
-        }
-
-        public static async Task<List<WorkItem>> GetHolidayTasks(User user)
-        {
-            string cacheKey = "holidayTasks";
-            var searchStrings = SearchStrings.Get().FirstOrDefault(s => s.Name == "holidaySearchString").SearchStrings;
-            var result = await GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);
-
-            return result;
-        }
-
-        #endregion
+        #endregion        
 
         #region ADD WORK ITEMS
 
-
-        public static async Task<List<string>> AddLunch(User user, hrnetModel.User hrproUser, DateTime fromDate, DateTime toDate)
+        public static async Task<List<string>> AddAutomatic(
+            IAutomaticEntry entry,
+            User user,
+            hrnetModel.User hrproUser,
+            DateTime fromDate,
+            DateTime toDate)
         {
-            var lunchTasks = await GetLunchTasks(user);
+            var tasks = await entry.GetAllRelatedTasks(user);
             var workLogs = await GetWorkLogs(user, true);
-            var vacations = await DAL_HrProApi.GetApprovedVacationDays(hrproUser);
+            var vacations = await entry.GetApprovedVacationDays(hrproUser);
             var addedOnDates = new List<string>();
 
             for (var i = fromDate; i <= toDate; i = i.AddDays(1))
             {
-                var workItem = PrepareData.GetLunchTaskForDate(lunchTasks, i);
-                var canAdd = PrepareData.CanAddLunchLog(workLogs, workItem, i);
+                var workItem = entry.GetTaskForDate(tasks, i);
+                var canAdd = entry.CanAddWorkLog(workLogs, vacations, workItem, i, out float addAmount);
                 if (canAdd)
                 {
-                    var newLog = PrepareData.CreateLunchWorkLogObj(user.id, workItem.Id, i);
+                    var newLog = entry.CreateWorkLogObj(user.id, workItem.Id, i, addAmount, vacations);
                     var content = await PostRequestAsync($"/work_logs", user.Token, newLog);
                     var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
                     addedOnDates.Add(i.ToShortDateString());
@@ -454,79 +424,54 @@ namespace OnTimeSpeed.Code
             return addedOnDates;
         }
 
-        public static async Task<List<string>> AddHolidays(User user, DateTime fromDate, DateTime toDate)
+        public static async Task<List<string>> AddSemiAutomatic(
+            ISemiAutomaticEntry entry,
+            User user,
+            hrnetModel.User hrproUser,
+            DateTime? fromDate,
+            DateTime? toDate,
+            float amount,
+            string description)
         {
-            var tasks = await GetHolidayTasks(user);
-            var workLogs = await GetWorkLogs(user, true);
+            if (fromDate == null || toDate == null)
+                throw new Exception("Ne postoji datumski raspon za unos");
+
+            var tasks = await entry.GetAllRelatedTasks(user);
+
             var addedOnDates = new List<string>();
 
-            for (var i = fromDate; i <= toDate; i = i.AddDays(1))
+            var workLogs = await GetWorkLogsGroupped(user, true);
+
+            for (var i = fromDate; i <= toDate; i = i.Value.AddDays(1))
             {
-                var workItem = PrepareData.GetHolidayTaskForDate(tasks, i);
-                var addAmount = PrepareData.CanAddHoliday(workLogs, workItem, i);
-                if (addAmount > 0)
+                var alreadyLogedAmount = 0f;
+                if (workLogs.ContainsKey(i.Value.Date))
+                    alreadyLogedAmount = workLogs[i.Value.Date];
+
+                if (!i.Value.IsHoliday() && !i.Value.IsWeekend() && alreadyLogedAmount < 8)
                 {
-                    var newLog = PrepareData.CreateHolidayWorkLogObj(user.id, workItem.Id, i, addAmount);
-                    var content = await PostRequestAsync($"/work_logs", user.Token, newLog);
-                    var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
-                    addedOnDates.Add(i.ToShortDateString());
-
-                }
-            }
-            if (addedOnDates.Count > 0)
-                HttpRuntime.Cache.Remove("workLogs_" + user.id);
-
-            return addedOnDates;
-        }
-
-        public static async Task<List<string>> AddVacations(User user, hrnetModel.User hrproUser, DateTime fromDate, DateTime toDate)
-        {
-            var tasks = await GetVacationTasks(user);
-            var workLogs = await GetWorkLogs(user, true);
-            var vacations = await DAL_HrProApi.GetApprovedVacationDays(hrproUser);
-            var addedOnDates = new List<string>();
-
-            for (var i = fromDate; i <= toDate; i = i.AddDays(1))
-            {
-                if (vacations.Contains(i.Date))
-                {
-                    var workItem = PrepareData.GetVacationTaskForDate(tasks, i);
-                    var addAmount = PrepareData.CanAddVacation(workLogs, workItem, i);
-                    if (addAmount > 0)
+                    var amountToLog = amount > 8 ? 8 - alreadyLogedAmount : amount;
+                    if (amountToLog > 0)
                     {
-                        var newLog = PrepareData.CreateVacationWorkLogObj(user.id, workItem.Id, i, addAmount);
+                        var workItem = entry.GetTaskForDate(tasks, i.Value);
+                        var newLog = entry.CreateWorkLogObj(user.id, workItem.Id, i.Value, amountToLog, description);
                         var content = await PostRequestAsync($"/work_logs", user.Token, newLog);
-                        var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
-                        addedOnDates.Add(i.ToShortDateString());
+                        if (content == null)
+                            addedOnDates.Add($"Unos nije uspio - {i.Value.ToShortDateString()}");
+                        else
+                        {
+                            var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
+                            addedOnDates.Add(i.Value.ToShortDateString());
+                        }
+                    }
+                    else
+                    {
+                        addedOnDates.Add($"Dan je već popunjen - {i.Value.ToShortDateString()}");
                     }
                 }
-            }
-            if (addedOnDates.Count > 0)
-                HttpRuntime.Cache.Remove("workLogs_" + user.id);
-
-            return addedOnDates;
-        }
-
-        public static async Task<List<string>> AddPaidLeave(User user, hrnetModel.User hrproUser, DateTime fromDate, DateTime toDate)
-        {
-            var tasks = await GetPaidLeaveTasks(user);
-            var workLogs = await GetWorkLogs(user, true);
-            var paidLeaves = await DAL_HrProApi.GetPaidLeaves(hrproUser);
-            var addedOnDates = new List<string>();
-
-            for (var i = fromDate; i <= toDate; i = i.AddDays(1))
-            {
-                if (paidLeaves.ContainsKey(i.Date))
+                else if (alreadyLogedAmount >= 8)
                 {
-                    var workItem = PrepareData.GetHolidayTaskForDate(tasks, i);
-                    var addAmount = PrepareData.CanAddVacation(workLogs, workItem, i);
-                    if (addAmount > 0)
-                    {
-                        var newLog = PrepareData.CreatePaidLeaveWorkLogObj(user.id, workItem.Id, i, addAmount, paidLeaves[i.Date]);
-                        var content = await PostRequestAsync($"/work_logs", user.Token, newLog);
-                        var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
-                        addedOnDates.Add(i.ToShortDateString());
-                    }
+                    addedOnDates.Add($"Dan je već popunjen - {i.Value.ToShortDateString()}");
                 }
             }
             if (addedOnDates.Count > 0)
@@ -553,13 +498,24 @@ namespace OnTimeSpeed.Code
 
                 if (!i.Value.IsHoliday() && !i.Value.IsWeekend() && alreadyLogedAmount < 8)
                 {
-                    var amountToLog = amount == -1 ? 8 - alreadyLogedAmount : amount;
-                    var newWorkLog = PrepareData.CreateWorkLogObject(user.id, amountToLog, workTypeId, itemId, itemType, i.Value, description);
-                    var content = await PostRequestAsync($"/work_logs", user.Token, newWorkLog);
-                    if (content == null)
-                        throw new Exception("Unos nije uspio");
-                    var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
-                    addedOnDates.Add(i.Value.ToShortDateString());
+                    var amountToLog = amount > 8 ? 8 - alreadyLogedAmount : amount;
+                    if (amountToLog > 0)
+                    {
+                        var newWorkLog = PrepareData.CreateWorkLogObject(user.id, amountToLog, workTypeId, itemId, itemType, i.Value, description);
+                        var content = await PostRequestAsync($"/work_logs", user.Token, newWorkLog);
+                        if (content == null)
+                            throw new Exception("Unos nije uspio");
+                        var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
+                        addedOnDates.Add(i.Value.ToShortDateString());
+                    }
+                    else
+                    {
+                        addedOnDates.Add($"Dan je već popunjen - {i.Value.ToShortDateString()}");
+                    }
+                }
+                else if (alreadyLogedAmount >= 8)
+                {
+                    addedOnDates.Add($"Dan je već popunjen - {i.Value.ToShortDateString()}");
                 }
             }
             if (addedOnDates.Count > 0)

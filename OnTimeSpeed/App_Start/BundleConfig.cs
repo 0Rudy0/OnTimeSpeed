@@ -34,6 +34,7 @@ namespace OnTimeSpeed
             bundles.Add(new ScriptBundle("~/bundles/Index").Include(
                       "~/Scripts/highcharts/highcharts.js",
                       "~/Scripts/highcharts/themes/sand-signika.js",
+                      "~/Scripts/viewModel.js",
                       "~/Scripts/breadcrumbs.js",
                       "~/Scripts/addingWorkLogs.js",
                       "~/Scripts/settings.js",
@@ -50,6 +51,7 @@ namespace OnTimeSpeed
                       //"~/Content/ontime3.css",
                       "~/Content/materialize.min.css",
                       "~/Content/spinner.css",
+                      "~/Content/buttonsHover.css",
                       "~/Content/site.css")
                 .Include("~/Content/FontAwesome/all.css", new CssRewriteUrlTransformWrapper())
                 .Include("~/Content/materializeIcons.css", new CssRewriteUrlTransformWrapper()));

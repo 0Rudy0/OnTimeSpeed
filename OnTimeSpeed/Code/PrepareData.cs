@@ -267,25 +267,6 @@ namespace OnTimeSpeed.Code
             return null;
         }
 
-        public static object CreateLunchWorkLogObj(int userId, int itemId, DateTime forDate)
-        {
-            return CreateWorkLogObject(userId, 0.5f, AppSettings.GetInt("rucakWorkLogType"), itemId, "tasks", forDate);
-        }
-
-        public static object CreateHolidayWorkLogObj(int userId, int itemId, DateTime forDate, float workHours)
-        {
-            return CreateWorkLogObject(userId, workHours, AppSettings.GetInt("praznikWorkType"), itemId, "tasks", forDate);
-        }
-
-        public static object CreateVacationWorkLogObj(int userId, int itemId, DateTime forDate, float workHours)
-        {
-            return CreateWorkLogObject(userId, workHours, AppSettings.GetInt("godisnjiWorkType"), itemId, "tasks", forDate);
-        }
-        public static object CreatePaidLeaveWorkLogObj(int userId, int itemId, DateTime forDate, float workHours, string description)
-        {
-            return CreateWorkLogObject(userId, workHours, AppSettings.GetInt("placeniDopustWorkType"), itemId, "tasks", forDate, description);
-        }
-
         public static object CreateWorkLogObject(int userId, float durationHrs, int logType, int itemId, string itemType, DateTime forDate, string description = null)
         {
             return new
@@ -316,27 +297,7 @@ namespace OnTimeSpeed.Code
             };
         }
 
-        public static WorkItem GetLunchTaskForDate(List<WorkItem> lunchItems, DateTime forDate)
-        {
-            return GetTaskForDate(lunchItems, forDate, "rucakDateFromTemplate", "rucakDateToTemplate");
-        }
-
-        public static WorkItem GetHolidayTaskForDate(List<WorkItem> workItems, DateTime forDate)
-        {
-            return GetTaskForDate(workItems, forDate, "praznikTemplate");
-        }
-
-        public static WorkItem GetVacationTaskForDate(List<WorkItem> workItems, DateTime forDate)
-        {
-            return GetTaskForDate(workItems, forDate, "godisnjiTemplate");
-        }
-
-        public static WorkItem GetPaidLeaveTasksForDate(List<WorkItem> workItems, DateTime forDate)
-        {
-            return GetTaskForDate(workItems, forDate, "placeniDopustTemplate");
-        }
-
-        private static WorkItem GetTaskForDate(
+        public static WorkItem GetTaskForDate(
             List<WorkItem> items, 
             DateTime forDate, 
             string dateFromTemplateName, 
@@ -364,83 +325,6 @@ namespace OnTimeSpeed.Code
             }
 
             return null;
-        }
-
-
-        /// <summary>
-        /// Provjerava da li je datum za koji se želi dodati novi work log vikend, da li već ima 8 logiranih sati za taj dan, da li već postoji
-        /// work log za isti ItemId, te da li tog dana praznik - ako je bilo što od ovoga istina, vraća false
-        /// </summary>
-        /// <param name="logs"></param>
-        /// <param name="newItem"></param>
-        /// <param name="onDate"></param>
-        /// <returns></returns>
-        public static bool CanAddLunchLog(List<WorkLog> logs, WorkItem newItem, DateTime onDate)
-        {
-            if (newItem == null || onDate.IsWeekend() || onDate.IsHoliday())
-                return false;
-
-            var canAdd = true;
-            var logsForDay = logs.Where(l => l.date_time.Date == onDate.Date);
-            var workedOnDay = logsForDay.Sum(l => l.work_done.duration_minutes / 60);
-
-            if (workedOnDay >= 7.5)
-                return false; //nema mjesta za dodati ručak
-
-            foreach (var log in logsForDay)
-            {
-                if (log.item.id == newItem.Id)
-                {
-                    canAdd = false;
-                    break;
-                }
-            }
-
-            return canAdd;
-        }
-
-        public static float CanAddHoliday(List<WorkLog> logs, WorkItem newItem, DateTime onDate)
-        {
-            if (newItem == null || onDate.IsWeekend() || !onDate.IsHoliday())
-                return 0;
-
-            var logsForDay = logs.Where(l => l.date_time.Date == onDate.Date);
-            var workedOnDay = logsForDay.Sum(l => l.work_done.duration_minutes / 60);
-
-            if (workedOnDay >= 8)
-                return 0; //nema mjesta za dodati praznik, očito se radilo već taj dan
-
-            foreach (var log in logsForDay)
-            {
-                if (log.item.id == newItem.Id)
-                {
-                    return 0;
-                }
-            }
-
-            return 8 - workedOnDay;
-        }
-
-        public static float CanAddVacation(List<WorkLog> logs, WorkItem newItem, DateTime onDate)
-        {
-            if (newItem == null || onDate.IsWeekend() || onDate.IsHoliday())
-                return 0;
-
-            var logsForDay = logs.Where(l => l.date_time.Date == onDate.Date);
-            var workedOnDay = logsForDay.Sum(l => l.work_done.duration_minutes / 60);
-
-            if (workedOnDay >= 8)
-                return 0; //nema mjesta za dodati praznik, očito se radilo već taj dan
-
-            foreach (var log in logsForDay)
-            {
-                if (log.item.id == newItem.Id)
-                {
-                    return 0;
-                }
-            }
-
-            return 8 - workedOnDay;
         }
     }
 }

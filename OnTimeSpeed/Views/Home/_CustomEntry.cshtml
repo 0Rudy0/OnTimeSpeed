@@ -1,0 +1,50 @@
+﻿<div class="col s12 m12">
+    <div class="card" id="customEntry" data-bind="with: customEntry">
+        <div data-bind="attr: {class : 'card-content white-text ' + $data.styleClass + ' ' + $data.styleType + ' ' + $data.textClass + ' ' + $data.textType}">
+            <span class="card-title">Ručni unos</span>
+
+            <div data-bind="template: { name: 'entry-template', data: $data }"></div>
+            <div class="detailsHolder">
+                <div class="chosenWorkItemsList">
+                    <label>Predmet</label>
+                    <div class="collection" data-bind="foreach: $parent.userSettings().chosenWorkItems">
+                        <a href="#!" data-bind="attr: {class : 'collection-item workItem darken-2 ' + $parent.styleClass},
+                                       css: {'active': $data.active()}, click: selectWorkItem">
+                            <span data-bind="text: $data.Name"></span>
+                            <i class="fad fa-trash-alt removeWorkItem" data-bind="click: unchooseWorkItem"></i>
+                        </a>
+                    </div>
+                    <a data-bind="attr: {class : 'waves-effect waves-light btn btn-sm darken-2 withIcon ' + $data.styleClass},
+                                   click: addMoreWorkItems">
+                        <i class="fad fa-plus"></i>
+                    </a>
+                </div>
+                <div class="chosenWorkTypesList">
+                    <label>Vrsta rada</label>
+                    <div class="collection" data-bind="foreach: $parent.chosenWorkTypes">
+                        <a href="#!" data-bind="attr: {class : 'collection-item workType darken-2 ' + $parent.styleClass},
+                                       css: {'active': $data.active()}, click: selectWorkType">
+                            <span data-bind="text: $data.name"></span>
+                            <i class="fad fa-trash-alt removeWorkType" data-bind="click: unchooseWorkType"></i>
+                        </a>
+                    </div>
+                    <a data-bind="attr: {class : 'waves-effect waves-light btn btn-sm darken-2 withIcon ' + $data.styleClass},
+                                   click: addMoreWorkTypes">
+                        <i class="fad fa-plus"></i>
+                    </a>
+                </div>
+                <div class="description">
+                    <label>Opis</label>
+                    <textarea data-bind="value: $data.description"></textarea>
+                </div>
+            </div>
+        </div>
+        <div data-bind="attr: {class : 'card-action white-text darken-3 ' + $data.styleClass}">
+            @*<a href="#" style="float: left;">Dodaj kao template</a>*@
+            <a href="#" style="float: right;"
+               data-bind="attr: {class : 'btn btn-large darken-4 ' + $data.styleClass},
+                           click: addNewWorkLog">Unesi</a>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+</div>

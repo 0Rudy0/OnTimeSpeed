@@ -1,0 +1,39 @@
+﻿<div id="addMoreWorkItemsModal"
+     data-bind="attr: {class: 'modal modal-fixed-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+    <div class="modal-content">
+        <h4>Dodaj predmet</h4>
+        <input type="text" id="searchWorkItems" data-bind="event: {'keyup': searchWorkItemsPush}" />
+        <!-- ko if: $data.searchResultWorkItems().length > 0 -->
+        <div class="collection" , data-bind="foreach: $data.searchResultWorkItems">
+            <a href="#!" data-bind="attr: {class: 'collection-item workItem darken-1 ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().textClass},
+                    text: $data.Name, css: {'chosen': $data.chosen()}, click: choseWorkItem"></a>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div data-bind="attr: {class: 'modal-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
+    </div>
+</div>
+
+<div id="addMoreWorkTypesModal"
+     data-bind="attr: {class: 'modal modal-fixed-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+    <div class="modal-content">
+        <h4>Dodaj vrstu rada</h4>
+        <input type="text" id="searchWorkTypes" data-bind="textInput: $data.workTypeSearchStr" />
+        <!-- ko if: $data.searchResultWorkTypes().length > 0 -->
+        <div class="collection" data-bind="foreach: $data.searchResultWorkTypes">
+            <a href="#!"
+               data-bind="attr: {class: 'collection-item workTypeItem darken-1 ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().textClass},
+                   text: $data.name, css: {'chosen': $data.chosen()}, click: choseWorkType"></a>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div data-bind="attr: {class: 'modal-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
+    </div>
+</div>

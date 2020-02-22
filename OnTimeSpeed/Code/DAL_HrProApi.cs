@@ -38,16 +38,16 @@ namespace OnTimeSpeed.Code
             return holidays;
         }
 
-        public static async Task<List<DateTime>> GetApprovedVacationDays(hrnetModel.User hrproUser)
+        public static async Task<Dictionary<DateTime, string>> GetApprovedVacationDays(hrnetModel.User hrproUser)
         {
             var cacheKey = "vacations_" + hrproUser.Username;
 
-            var vacationDays = (List<DateTime>)HttpRuntime.Cache.Get(cacheKey);
+            var vacationDays = (Dictionary<DateTime, string>)HttpRuntime.Cache.Get(cacheKey);
             if (vacationDays == null)
             {
                 var userId = hrproUser.LoggedContact.ID;
                 var token = hrproUser.TokenWebApi;
-                vacationDays = new List<DateTime>();
+                vacationDays = new Dictionary<DateTime, string>();
 
                 var vacationRequests = new List<VacationRequest>();
                 var vacationRequests1 = await _vacationAPI.GetVacationRequestsAsync(DateTime.Now.Year - 1, userId, userId, false, token);
@@ -66,7 +66,7 @@ namespace OnTimeSpeed.Code
                     for (var i = req.DateFrom; i <= req.DateTo; i = i.AddDays(1))
                     {
                         if (i.DayOfWeek != DayOfWeek.Saturday && i.DayOfWeek != DayOfWeek.Sunday)
-                            vacationDays.Add(i);
+                            vacationDays.Add(i, "GO");
                     }
                 }
 

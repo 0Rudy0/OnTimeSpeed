@@ -1,0 +1,36 @@
+﻿
+<div class="col s12">
+    <div class="card" id="semiAutomaticEntry" data-bind="with: semiAutomaticEntry">
+        <div data-bind="attr: {class : 'card-content ' + $data.styleClass + ' ' + $data.styleType + ' ' + $.data.textClass + ' ' + $data.textType}">
+            <span class="card-title">Polu-automagični unos</span>
+
+            <div data-bind="template: { name: 'entry-template', data: $data }"></div>
+            <div class="description">
+                <label>Opis</label>
+                <textarea data-bind="value: $data.description"></textarea>
+            </div>
+            <div class="activityButtons">
+                <a data-bind="click: addSickLeave, attr: {class : 'waves-effect waves-light btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                   id="addLunchBtn">
+                    <i class="fad fa-thermometer"></i>
+                    <span>Bolovanje</span>
+                </a>
+                <a data-bind="click: addInternalMeeting, attr: {class : 'waves-effect waves-light btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                   id="addHolidaysButton">
+                    <i class="fad fa-handshake-alt"></i>
+                    <span>Interni sastanak</span>
+                </a>
+                <a data-bind="click: addOnTimeEntry, attr: {class : 'waves-effect waves-light btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                   id="addVacationButton">
+                    <i class="fad fa-user-clock"></i>
+                    <span>OnTime unos sati</span>
+                </a>
+                <a data-bind="click: addColegueSupport, attr: {class : 'waves-effect waves-light btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+                   id="addPaidLeaveButton">
+                    <i class="fad fa-user-graduate"></i>
+                    <span>Podrška kolegi</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
