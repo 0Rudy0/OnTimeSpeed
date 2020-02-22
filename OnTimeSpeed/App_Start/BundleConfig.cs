@@ -34,6 +34,13 @@ namespace OnTimeSpeed
             bundles.Add(new ScriptBundle("~/bundles/Index").Include(
                       "~/Scripts/highcharts/highcharts.js",
                       "~/Scripts/highcharts/themes/sand-signika.js",
+                      "~/Scripts/breadcrumbs.js",
+                      "~/Scripts/addingWorkLogs.js",
+                      "~/Scripts/settings.js",
+                      "~/Scripts/workItems.js",
+                      "~/Scripts/workTypes.js",
+                      "~/Scripts/workAmount.js",
+                      "~/Scripts/datePreselects.js",
                       "~/Scripts/index.js"
                       ));
 

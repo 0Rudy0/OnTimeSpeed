@@ -250,7 +250,7 @@ namespace OnTimeSpeed.Code
             string cacheKey = null)
         {
             List<WorkItem> result = null;
-            
+
             if (!String.IsNullOrEmpty(cacheKey))
                 result = (List<WorkItem>)HttpRuntime.Cache.Get(cacheKey);
 
@@ -341,8 +341,56 @@ namespace OnTimeSpeed.Code
 
         #endregion
 
+        #region GET WORK TASKS
 
-        #region Lunch
+        public static async Task<List<OnTimeUser>> GetUser(string searchString, User user)
+        {
+            var cacheKey = "allHrProOnTimeUsers";
+
+            var allUsers = (List<OnTimeUser>)HttpRuntime.Cache.Get(cacheKey);
+
+            if (allUsers == null)
+            {
+                var parameters = new Dictionary<string, string>();
+                parameters.Add("include_inactive", "false");
+
+                var content = await GetRequestAsync($"api/v5/users", user.Token, parameters);
+                allUsers = ApiHelper.GetObjectFromApiResponse<List<OnTimeUser>>(content);
+            }
+
+            HttpRuntime.Cache.Insert(cacheKey,
+                allUsers,
+                null,
+                Cache.NoAbsoluteExpiration,
+                TimeSpan.FromMinutes(600),
+                CacheItemPriority.Normal,
+                null);
+
+
+            return allUsers.Where(u => $"{u.first_name.ToLower()} {u.last_name.ToLower()}".Contains(searchString.Trim().ToLower()) ||
+                $"{u.last_name.ToLower()} {u.first_name.ToLower()}".Contains(searchString.Trim().ToLower())).ToList();
+        }
+
+        public static List<Work_Log_Type> GetWorkTypes()
+        {
+            var cacheKey = "workLogTypes";
+            var allTypes = (List<Work_Log_Type>)HttpRuntime.Cache.Get(cacheKey);
+            if (allTypes == null)
+            {
+                var content = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/config/workTypes.json");
+                allTypes = JsonConvert.DeserializeObject<List<Work_Log_Type>>(content);
+
+                HttpRuntime.Cache.Insert(cacheKey,
+                    allTypes,
+                    null,
+                    Cache.NoAbsoluteExpiration,
+                    TimeSpan.FromMinutes(99999),
+                    CacheItemPriority.Normal,
+                    null);
+            }
+
+            return allTypes;
+        }
 
         public static async Task<List<WorkItem>> GetLunchTasks(User user)
         {
@@ -352,6 +400,33 @@ namespace OnTimeSpeed.Code
 
             return result;
         }
+
+        public static async Task<List<WorkItem>> GetVacationTasks(User user)
+        {
+            string cacheKey = "vacationTasks";
+            var searchStrings = SearchStrings.Get().FirstOrDefault(s => s.Name == "vacationSearchString").SearchStrings;
+            var result = await GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);
+
+            return result;
+        }
+
+        public static async Task<List<WorkItem>> GetPaidLeaveTasks(User user)
+        {
+            return await GetVacationTasks(user);
+        }
+
+        public static async Task<List<WorkItem>> GetHolidayTasks(User user)
+        {
+            string cacheKey = "holidayTasks";
+            var searchStrings = SearchStrings.Get().FirstOrDefault(s => s.Name == "holidaySearchString").SearchStrings;
+            var result = await GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);
+
+            return result;
+        }
+
+        #endregion
+
+        #region ADD WORK ITEMS
 
 
         public static async Task<List<string>> AddLunch(User user, hrnetModel.User hrproUser, DateTime fromDate, DateTime toDate)
@@ -379,35 +454,6 @@ namespace OnTimeSpeed.Code
             return addedOnDates;
         }
 
-        #endregion
-
-        public static async Task<List<WorkItem>> GetVacationTasks(User user)
-        {
-            string cacheKey = "vacationTasks";
-            var searchStrings = SearchStrings.Get().FirstOrDefault(s => s.Name == "vacationSearchString").SearchStrings;
-            var result = await GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);
-
-            return result;
-        }
-
-        public static async Task<List<WorkItem>> GetPaidLeaveTasks(User user)
-        {
-            return await GetVacationTasks(user);
-        }
-
-
-        #region Holiday
-
-        public static async Task<List<WorkItem>> GetHolidayTasks(User user)
-        {
-            string cacheKey = "holidayTasks";
-            var searchStrings = SearchStrings.Get().FirstOrDefault(s => s.Name == "holidaySearchString").SearchStrings;
-            var result = await GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);
-
-            return result;
-        }
-
-
         public static async Task<List<string>> AddHolidays(User user, DateTime fromDate, DateTime toDate)
         {
             var tasks = await GetHolidayTasks(user);
@@ -432,8 +478,6 @@ namespace OnTimeSpeed.Code
 
             return addedOnDates;
         }
-
-        #endregion
 
         public static async Task<List<string>> AddVacations(User user, hrnetModel.User hrproUser, DateTime fromDate, DateTime toDate)
         {
@@ -491,67 +535,6 @@ namespace OnTimeSpeed.Code
             return addedOnDates;
         }
 
-        public static async Task<List<OnTimeUser>> GetUser(string searchString, User user)
-        {
-            var cacheKey = "allHrProOnTimeUsers";
-
-            var allUsers = (List<OnTimeUser>)HttpRuntime.Cache.Get(cacheKey);
-
-            if (allUsers == null)
-            {
-                var parameters = new Dictionary<string, string>();
-                parameters.Add("include_inactive", "false");
-
-                var content = await GetRequestAsync($"api/v5/users", user.Token, parameters);
-                allUsers = ApiHelper.GetObjectFromApiResponse<List<OnTimeUser>>(content);
-            }
-
-            HttpRuntime.Cache.Insert(cacheKey,
-                allUsers,
-                null,
-                Cache.NoAbsoluteExpiration,
-                TimeSpan.FromMinutes(600),
-                CacheItemPriority.Normal,
-                null);
-
-
-            return allUsers.Where(u => $"{u.first_name.ToLower()} {u.last_name.ToLower()}".Contains(searchString.Trim().ToLower()) ||
-                $"{u.last_name.ToLower()} {u.first_name.ToLower()}".Contains(searchString.Trim().ToLower())).ToList();
-        }
-
-        public static List<Work_Log_Type> GetWorkTypes()
-        {
-            var cacheKey = "workLogTypes";
-            var allTypes = (List<Work_Log_Type>)HttpRuntime.Cache.Get(cacheKey);
-            if (allTypes == null)
-            {
-                var content = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/config/workTypes.json");
-                allTypes = JsonConvert.DeserializeObject<List<Work_Log_Type>>(content);
-
-                HttpRuntime.Cache.Insert(cacheKey,
-                    allTypes,
-                    null,
-                    Cache.NoAbsoluteExpiration,
-                    TimeSpan.FromMinutes(99999),
-                    CacheItemPriority.Normal,
-                    null);
-            }
-
-            return allTypes;
-        }
-
-        //ne koristi se nigdje aktivno, po potrebi će se iskoristiti za dohvat svih work typeova iz postojećih logova
-        public static List<Work_Log_Type> GetWorkTypesFromResponse(User user)
-        {
-
-            var content = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/config/response.json");
-            var result = ApiHelper.GetObjectFromApiResponse<List<WorkLog>>(content);
-            var allTypes = result.Select(l => l.work_log_type).Where(wl => !String.IsNullOrEmpty(wl.name) && !wl.name.ToLower().Contains("ne koristiti"))
-                .GroupBy(wl => wl.id).Select(group => group.First()).OrderBy(gg => gg.name).ToList();
-
-            return allTypes;
-        }
-
         public static async Task<List<string>> AddCustom(User user, DateTime? fromDate, DateTime? toDate,
             int itemId, int workTypeId, float amount, string itemType, string description)
         {
@@ -584,5 +567,25 @@ namespace OnTimeSpeed.Code
 
             return addedOnDates;
         }
+
+        #endregion
     }
+
+
+    #region NO USE FOR NOW 
+
+    //ne koristi se nigdje aktivno, po potrebi će se iskoristiti za dohvat svih work typeova iz postojećih logova
+    public static List<Work_Log_Type> GetWorkTypesFromResponse(User user)
+    {
+
+        var content = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/config/response.json");
+        var result = ApiHelper.GetObjectFromApiResponse<List<WorkLog>>(content);
+        var allTypes = result.Select(l => l.work_log_type).Where(wl => !String.IsNullOrEmpty(wl.name) && !wl.name.ToLower().Contains("ne koristiti"))
+            .GroupBy(wl => wl.id).Select(group => group.First()).OrderBy(gg => gg.name).ToList();
+
+        return allTypes;
+    }
+
+    #endregion
+
 }
