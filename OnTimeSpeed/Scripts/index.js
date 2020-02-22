@@ -14,6 +14,9 @@ var dateFromPickers = {
 }
 
 $(function () {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, {});
+
     if (loggedIn) {
         getWorkLogs();
         initWorkLogChart([], []);
