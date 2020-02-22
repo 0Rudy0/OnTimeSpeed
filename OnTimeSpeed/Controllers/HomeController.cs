@@ -133,17 +133,6 @@ namespace OnTimeSpeed.Controllers
             return JsonConvert.SerializeObject(PrepareData.PrepareWorkLogChartData(data, groupBy, dateRange.Item1, dateRange.Item2));
         }
 
-        public async Task<string> SearchWorkItems(string searchStr)
-        {
-            var items = await DAL.GetWorkItems(_user,
-                new List<string> { searchStr },
-                new List<string> { "items" }, null);
-
-            return JsonConvert.SerializeObject(items);
-        }
-
-        #region Adding new
-
         [HttpPost]
         [AuthorizeHrPro]
         public async Task<string> AddLunchToToday()
@@ -195,8 +184,6 @@ namespace OnTimeSpeed.Controllers
             return JsonConvert.SerializeObject(addedOnDates);
         }
 
-        [HttpPost]
-        [AuthorizeHrPro]
         public async Task<string> AddCustom(
             int itemId,
             int workTypeId,
@@ -219,6 +206,13 @@ namespace OnTimeSpeed.Controllers
             return JsonConvert.SerializeObject(addedOnDates);
         }
 
-        #endregion
+        public async Task<string> SearchWorkItems(string searchStr)
+        {
+            var items = await DAL.GetWorkItems(_user,
+                new List<string> { searchStr },
+                new List<string> { "items" }, null);
+
+            return JsonConvert.SerializeObject(items);
+        }
     }
 }

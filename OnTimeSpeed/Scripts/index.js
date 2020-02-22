@@ -1,6 +1,7 @@
 ﻿var workLogData;
 var groupTypes = [null, 2, 3];
 var currGroupIndex = 0;
+var breadCrumbs = [];
 var toastObj = null;
 var toastShort = 5000;
 var toastLong = 15000;
@@ -32,6 +33,9 @@ function getWorkLogs(forDate, groupIndex) {
     if (groupIndex) {
         if (groupIndex < currGroupIndex) {
             removeBreadCrumb(forDate);
+            //for (var i = 0; i < (currGroupIndex - groupIndex); i++) {
+            //    removeBreadCrumb();
+            //}
         }
         currGroupIndex = groupIndex;
     }
@@ -42,10 +46,6 @@ function getWorkLogs(forDate, groupIndex) {
 
     refreshBreadCrumbs();
 
-    getWorkLogsAction(forDate);
-}
-
-function getWorkLogsAction(forDate) {
     ajaxGET({
         url: '/Home/getWorkLogs',
         data: {
@@ -195,6 +195,32 @@ function initWorkLogChart(categories, series) {
     });
 }
 
+function addBreadCrumb(forDate) {
+    breadCrumbs.push(forDate);
+    refreshBreadCrumbs();
+}
+
+function removeBreadCrumb(toString) {
+    while (breadCrumbs.length > 0 && breadCrumbs[breadCrumbs.length - 1] != toString) {
+        breadCrumbs.pop();
+    }
+}
+
+function refreshBreadCrumbs() {
+    $('#breadCrumbs').html('<a href="#!" onclick="getWorkLogs()" class="breadcrumb clickable">Sve</a>');
+
+    for (var i = 0; i < breadCrumbs.length; i++) {
+        var html = '<a href="#!" onclick="getWorkLogs(#forDate1#,' + (i + 1) + ')" class="breadcrumb clickable">#forDate2#</a>';
+        if (i == breadCrumbs.length - 1)
+            html = '<a href="#!" class="breadcrumb nonClickable">#forDate2#</a>';
+
+        html = html.replace('#forDate1#', '\'' + breadCrumbs[i] + '\'');
+        html = html.replace('#forDate2#', breadCrumbs[i]);
+
+        $('#breadCrumbs').append(html)
+    }
+}
+
 function generateToastObjs(msg, title, noNewEntryMsg) {
     if (msg.length > maxDetailsLng) {
         toastObj = {
@@ -229,6 +255,322 @@ function generateToastObjs(msg, title, noNewEntryMsg) {
     }
 }
 
+function addLunch() {
+    $('.spinner').show();
+    ajaxPOST({
+        url: '/Home/AddLunchToToday'
+    }, function (msg) {
+        generateToastObjs(msg, "Ručak", "Za sve dane je već unesen ručak");
+    });
+}
 
+function addHolidays() {
+    $('.spinner').show();
+    ajaxPOST({
+        url: '/Home/AddHolidays'
+    }, function (msg) {
+        generateToastObjs(msg, "Praznik", "Nije pronađen novi GO za unijeti");
+    });
+}
 
+function addVacations() {
+    $('.spinner').show();
+    ajaxPOST({
+        url: '/Home/AddVacations'
+    }, function (msg) {
+        generateToastObjs(msg, "GO", "Nije pronađen novi GO za unijeti");
+    });
+}
 
+function addPaidLeaves() {
+    $('.spinner').show();
+    ajaxPOST({
+        url: '/Home/AddPaidLeaves'
+    }, function (msg) {
+        generateToastObjs(msg, "Plaćeni dopust", "Nije pronađen novi plaćeni dopust za unijeti");
+    });
+}
+
+function preselectRange(range, a, b) {
+    var parentId = this.elementId;
+    var selectorDateFrom = '#' + parentId + ' .dateFrom';
+    var selectorDateTo = '#' + parentId + ' .dateTo';
+
+    var dateFromPicker = M.Datepicker.getInstance($(selectorDateFrom)[0]);
+    var dateToPicker = M.Datepicker.getInstance($(selectorDateTo)[0]);
+
+    var dateFrom = moment();
+    var dateTo = moment();
+    switch (range) {
+        case 'lastM':
+            var d = dateFrom.subtract(1, 'months')._d;
+            d = moment(new Date(d.getFullYear(), d.getMonth() + 1, 1));
+            dateFrom = toDate(d);
+            dateTo = toDate(d.add(1, 'months').subtract(1, 'days'));
+            break;
+
+        case 'lastW':
+            var d = dateFrom.subtract(7, 'days')._d;
+            while (d.getDay() > 1) {
+                d = moment(d).subtract(1, 'days')._d;
+            }
+            dateFrom = d;
+            dateTo = toDate(moment(d).add(7, 'days').subtract(1, 'days'));
+            break;
+
+        case 'thisW':
+            var d = dateFrom._d;
+            while (d.getDay() > 1) {
+                d = moment(d).subtract(1, 'days')._d;
+            }
+            dateFrom = d;
+            dateTo = toDate(moment(d).add(7, 'days').subtract(1, 'days'));
+            break;
+
+        case 'thisM':
+            var d = dateFrom._d;
+            d = moment(new Date(d.getFullYear(), d.getMonth() + 1, 1));
+            dateFrom = toDate(d);
+            dateTo = toDate(d.add(1, 'months').subtract(1, 'days'));
+            break;
+
+        default:
+            break;
+
+    }
+    var d = new Date();
+
+    dateFromPicker.setDate(dateFrom);
+    dateToPicker.setDate(dateTo);
+    $(selectorDateFrom).val(dateFromPicker.toString());
+    $(selectorDateTo).val(dateToPicker.toString());
+}
+
+function toDate(mom) {
+    return new Date(mom._d.getTime());
+}
+
+function selectWorkItem() {
+    for (var i = 0; i < viewModel.userSettings().chosenWorkItems().length; i++) {
+        viewModel.userSettings().chosenWorkItems()[i].active(false);
+    }
+    this.active(!this.active());
+    viewModel.activeWorkItem(this);
+    $('#workItemsList')
+}
+
+function selectWorkType() {
+    for (var i = 0; i < viewModel.chosenWorkTypes().length; i++) {
+        viewModel.chosenWorkTypes()[i].active(false);
+    }
+    this.active(!this.active());
+    viewModel.activeWorkType(this);
+}
+
+function searchItems(searchStr) {
+    $('#addMoreWorkItemsModal .spinner').show();
+
+    ajaxGET({
+        url: '/Home/SearchWorkItems',
+        data: {
+            searchStr: searchStr
+        }
+    }, function (msg) {
+        $('#addMoreWorkItemsModal .spinner').hide();
+
+        viewModel.searchResultWorkItems.splice(0);
+        for (var i = 0; i < msg.length; i++) {
+            msg[i].active = ko.observable(false);
+            msg[i].chosen = ko.observable(false);
+            for (var j = 0; j < viewModel.userSettings().chosenWorkItems().length; j++) {
+                if (msg[i].Id == viewModel.userSettings().chosenWorkItems()[j].Id) {
+                    msg[i].chosen(true);
+                    break;
+                }
+            }
+            viewModel.searchResultWorkItems.push(msg[i]);
+        }
+    });
+}
+
+function addMoreWorkItems() {
+    M.Modal.getInstance($('#addMoreWorkItemsModal')[0]).open();
+    $('#searchWorkItems').focus();
+}
+
+function addMoreWorkTypes() {
+    M.Modal.getInstance($('#addMoreWorkTypesModal')[0]).open();
+    $('#searchWorkTypes').focus();
+}
+
+function choseWorkItem() {
+    this.chosen(!this.chosen());
+
+    if (this.chosen())
+        viewModel.userSettings().chosenWorkItems.push(this);
+    else {
+        for (var i = 0; i < viewModel.userSettings().chosenWorkItems().length; i++) {
+            if (this.Id == viewModel.userSettings().chosenWorkItems()[i].Id) {
+                viewModel.userSettings().chosenWorkItems.splice(i, 1);
+                break;
+            }
+        }
+    }
+
+    saveSettings();
+}
+
+function choseWorkType() {
+    this.chosen(!this.chosen());
+
+    if (this.chosen())
+        viewModel.userSettings().chosenWorkTypes.push(this);
+    else {
+        for (var i = 0; i < viewModel.chosenWorkTypes().length; i++) {
+            if (this.id == viewModel.userSettings().chosenWorkTypes()[i].id) {
+                viewModel.userSettings().chosenWorkTypes.splice(i, 1);
+                break;
+            }
+        }
+    }
+    saveSettings();
+}
+
+function searchWorkItemsPush() {
+    searchStack.push('0');
+    setTimeout(function () {
+        searchStack.pop();
+        var searchStr = $('#searchWorkItems').val();
+        if (searchStack.length == 0 && searchStr.length > 2)
+            searchItems(searchStr);
+    }, 1000);
+}
+
+function loadSettings() {
+    var settingsJson = localStorage.getItem("userSettings");
+    if (settingsJson) {
+        var settings = JSON.parse(settingsJson);
+
+        for (var i = 0; i < settings.chosenWorkItems.length; i++) {
+            settings.chosenWorkItems[i].active = ko.observable(false);
+        }
+
+        viewModel.userSettings().chosenWorkTypes(settings.chosenWorkTypes);
+        viewModel.userSettings().chosenWorkItems(settings.chosenWorkItems);
+        viewModel.userSettings().templates(settings.templates);
+
+        for (var i = 0; i < viewModel.allWorkTypes().length; i++) {
+            var item = viewModel.allWorkTypes()[i];
+            for (var j = 0; j < viewModel.userSettings().chosenWorkTypes().length; j++) {
+                if (item.id == viewModel.userSettings().chosenWorkTypes()[j].id) {
+                    item.chosen(true);
+                }
+            }
+        }
+
+    }
+}
+
+function saveSettings() {
+    var settings = ko.mapping.toJS(viewModel.userSettings);
+    localStorage.setItem("userSettings", JSON.stringify(settings));
+}
+
+function addNewWorkLog() {
+    var data = {
+        itemId: viewModel.activeWorkItem && viewModel.activeWorkItem() ? viewModel.activeWorkItem().Id : 0,
+        itemType: viewModel.activeWorkItem && viewModel.activeWorkItem() ? viewModel.activeWorkItem().TypeString : '',
+        workTypeId: viewModel.activeWorkType && viewModel.activeWorkType() ? viewModel.activeWorkType().id : 0,
+        amount: this.workAmount(),
+        dateFromStr: $('#customEntry .dateFrom').val(),
+        dateToStr: $('#customEntry .dateTo').val(),
+        description: this.description()
+    }
+
+    if (validateForm.apply(data)) {
+        $('.spinner').show();
+        ajaxPOST({
+            url: '/Home/AddCustom',
+            data: data
+        }, function (msg) {
+            generateToastObjs(msg, "Work log", "Nije bilo mjesta za unijeti log");
+        });
+    }
+    else {
+        var tempToast = {
+            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
+            classes: toastClasses,
+            displayLength: toastLong
+        };
+        M.toast(tempToast);
+    }
+
+    console.log(data);
+}
+
+function validateForm() {
+    var isValid = true;
+
+    if (!this.itemId) {
+        isValid = false;
+    }
+    if (!this.workTypeId) {
+        isValid = false;
+    }
+    if (!this.amount) {
+        isValid = false;
+    }
+    if (!this.dateFromStr) {
+        isValid = false;
+    }
+    return isValid;
+}
+
+function increaseWorkAmount() {
+    if (this.workAmount() <= 0)
+        this.workAmount(0);
+
+    this.workAmount(Math.min(this.workAmount() + 0.5), 8);
+}
+
+function decreaseWorkAmount() {
+    if (this.workAmount() >= 8)
+        this.workAmount(8);
+
+    this.workAmount(Math.max(0, this.workAmount() - 0.5));
+}
+
+function maxWorkAmount() {
+    if (this.workAmount() > 8) {
+        this.workAmount(0);
+    }
+    else {
+        this.workAmount(99);
+    }
+}
+
+function unchooseWorkItem() {
+    for (var i = 0; i < viewModel.userSettings().chosenWorkItems().length; i++) {
+        if (this.Id == viewModel.userSettings().chosenWorkItems()[i].Id) {
+            viewModel.userSettings().chosenWorkItems.splice(i, 1);
+            break;
+        }
+    }
+    saveSettings();
+}
+
+function unchooseWorkType() {
+    for (var i = 0; i < viewModel.chosenWorkTypes().length; i++) {
+        if (this.id == viewModel.userSettings().chosenWorkTypes()[i].id) {
+            viewModel.userSettings().chosenWorkTypes.splice(i, 1);
+            break;
+        }
+    }
+    for (var i = 0; i < viewModel.allWorkTypes().length; i++) {
+        if (this.id == viewModel.allWorkTypes()[i].id) {
+            viewModel.allWorkTypes()[i].chosen(false);
+            break;
+        }
+    }
+    saveSettings();
+}
