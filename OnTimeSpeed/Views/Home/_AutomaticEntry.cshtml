@@ -1,31 +1,29 @@
-﻿<div class="col s12">
-    <div class="card" data-bind="with: automaticEntry">
-        <div data-bind="attr: {class : 'card-content ' + $data.styleClass + ' ' + $data.styleType + ' ' + $data.textClass + ' ' + $data.textType}">
-            <span class="card-title">Automagični unos</span>
-            <div class="activityButtons">
-                <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
-                   id="addLunchBtn">
-                    <i class="fad fa-utensils-alt"></i>
-                    <span>Ručak</span>
-                </a>
-                <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
-                   id="addHolidaysButton">
-                    <i class="fad fa-lights-holiday"></i>
-                    <span>Praznici</span>
-                </a>
-                <!-- ko if: $parent.hrproUser() != null -->
-                <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
-                   id="addVacationButton">
-                    <i class="fad fa-umbrella-beach"></i>
-                    <span>Godišnji odmor</span>
-                </a>
-                <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
-                   id="addPaidLeaveButton">
-                    <i class="fad fa-umbrella-beach"></i>
-                    <span>Plaćeni dopust</span>
-                </a>
-                <!-- /ko -->
-            </div>
+﻿
+<div class="card">
+    <div data-bind="attr: {class : 'card-content ' + $data.styleClass + ' ' + $data.styleType + ' ' + $data.textClass + ' ' + $data.textType}">
+        <div class="activityButtons">
+            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+               id="addLunchBtn">
+                <i class="fad fa-utensils-alt"></i>
+                <span>Ručak</span>
+            </a>
+            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+               id="addHolidaysButton">
+                <i class="fad fa-lights-holiday"></i>
+                <span>Praznici</span>
+            </a>
+            <!-- ko if: $parent.hrproUser() != null -->
+            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+               id="addVacationButton">
+                <i class="fad fa-umbrella-beach"></i>
+                <span>Godišnji odmor</span>
+            </a>
+            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+               id="addPaidLeaveButton">
+                <i class="fad fa-umbrella-beach"></i>
+                <span>Plaćeni dopust</span>
+            </a>
+            <!-- /ko -->
         </div>
     </div>
 </div>

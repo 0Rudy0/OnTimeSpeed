@@ -390,3 +390,11 @@
 .modal input {
     color: white;
 }
+
+.collapsible .collapsible-body {
+    padding: 0 !important;
+}
+
+.collapsible .card {
+    margin: 0 !important;
+}

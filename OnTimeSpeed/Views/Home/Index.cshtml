@@ -49,43 +49,49 @@ else
                 <div id="workLogChart"></div>
             </div>
             <br />
-
-            @*<ul class="collapsible">
-                <li>
-                    <div class="collapsible-header">
-                        <i class="material-icons">filter_drama</i>
-                        First
-                    </div>
-                    <div class="collapsible-body">
-                        @Html.Partial("_AutomaticEntry")
-                        <div style="clear: both"></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <i class="material-icons">place</i>
-                        Second
-                    </div>
-                    <div class="collapsible-body">
-                        @Html.Partial("_SemiAutomaticEntry")
-                        <div style="clear: both"></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <i class="material-icons">whatshot</i>
-                        Third
-                    </div>
-                    <div class="collapsible-body">
-                        @Html.Partial("_CustomEntry")
-                        <div style="clear: both"></div>
-                    </div>
-                </li>
-            </ul>*@
-
-            @Html.Partial("_AutomaticEntry")
-            @Html.Partial("_SemiAutomaticEntry")
-            @Html.Partial("_CustomEntry")
+            <div class="col s12">
+                <ul class="collapsible popout">
+                    <li data-bind="with: automaticEntry">
+                        <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 0),
+                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $data.textClass + ' ' + $data.textType}">
+                            <i class="fad fa-magic"></i>
+                            Automagični unos
+                        </div>
+                        <div class="collapsible-body">
+                            @Html.Partial("_AutomaticEntry")
+                        </div>
+                    </li>
+                    <li data-bind="with: semiAutomaticEntry">
+                        <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 1),
+                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $.data.textClass + ' ' + $data.textType}">
+                            <i class="fad fa-sparkles"></i>
+                            Polu-automagični unos
+                        </div>
+                        <div class="collapsible-body">
+                            @Html.Partial("_SemiAutomaticEntry")
+                        </div>
+                    </li>
+                    <li data-bind="with: customEntry">
+                        <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 2),
+                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $.data.textClass + ' ' + $data.textType}">
+                            <i class="fad fa-user-edit"></i>
+                            Ručni unos
+                        </div>
+                        <div class="collapsible-body">
+                            @Html.Partial("_CustomEntry")
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            @*<div class="col s12 m12">
+                    @Html.Partial("_AutomaticEntry")
+                </div>
+                <div class="col s12 m12">
+                    @Html.Partial("_SemiAutomaticEntry")
+                </div>
+                <div class="col s12 m12">
+                    @Html.Partial("_CustomEntry")
+                </div>*@
 
 
 
@@ -153,80 +159,9 @@ else
                 allWorkTypes[i].active = ko.observable(false);
             }
         }
-        function ViewModel() {
-            var self = this;
 
-            self.userSettings = ko.observable({
-                chosenWorkTypes: ko.observableArray([]),
-                chosenWorkItems: ko.observableArray([]),
-                templates: ko.observableArray([])
-            });
-
-            self.breadCrumbs = ko.observableArray([]);
-            self.ontimeUser = ko.observable(JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model.OnTimeUser))'));
-            self.hrproUser = ko.observable(JSON.parse('@Html.Raw(raw)'));
-
-            self.activeWorkItem = ko.observable();
-            self.activeWorkType = ko.observable();
-
-            self.searchResultWorkItems = ko.observableArray([]);
-            self.allWorkTypes = ko.observableArray(allWorkTypes);
-
-            self.workTypeSearchStr = ko.observable();
-
-            self.searchResultWorkTypes = ko.computed(function () {
-                return self.allWorkTypes().filter(function (type) {
-                    if (!self.workTypeSearchStr() || type.name.toLowerCase().indexOf(self.workTypeSearchStr().toLowerCase()) !== -1)
-                        return type;
-                });
-            }, this);
-
-            self.chosenWorkTypes = ko.computed(function () {
-                var result = [];
-                for (var i = 0; i < self.allWorkTypes().length; i++) {
-                    var item = self.allWorkTypes()[i];
-                    for (var j = 0; j < self.userSettings().chosenWorkTypes().length; j++) {
-                        if (item.id == self.userSettings().chosenWorkTypes()[j].id) {
-                            result.push(item);
-                            break;
-                        }
-                    }
-                }
-                return result;
-            });
-
-            self.automaticEntry = ko.observable({
-                styleClass: 'grey',
-                styleType: 'darken-3',
-                textClass: 'white-text',
-                textType: '',
-                buttonType: 'darken-4'
-            });
-
-            self.semiAutomaticEntry = ko.observable({
-                elementId: 'semiAutomaticEntry',
-                styleClass: 'teal',
-                styleType: 'darken-3',
-                textClass: 'grey-text',
-                textType: 'text-darken-4',
-                buttonType: 'darken-4',
-                preselectsType: 'darken-2',
-                workAmount: ko.observable(1),
-                description: ko.observable('')
-            });
-
-            self.customEntry = ko.observable({
-                elementId: 'customEntry',
-                styleClass: 'blue-grey',
-                styleType: 'darken-3',
-                textClass: 'white-text',
-                textType: '',
-                buttonType: 'darken-4',
-                preselectsType: 'darken-2',
-                workAmount: ko.observable(1),
-                description: ko.observable('')
-            });
-        }
+        var onTimeUserSerialized = '@Html.Raw(JsonConvert.SerializeObject(Model.OnTimeUser))';
+        var hrproUserSerialized = '@Html.Raw(raw)';
 
     </script>
     @Scripts.Render("~/bundles/Index")

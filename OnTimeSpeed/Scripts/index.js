@@ -15,7 +15,9 @@ var dateFromPickers = {
 
 $(function () {
     var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems, {});
+    var instances = M.Collapsible.init(elems, {
+    });
+   
 
     if (loggedIn) {
         getWorkLogs();
@@ -36,6 +38,11 @@ $(function () {
     //ko.applyBindings(viewModel, $('.modal'));
 
     loadSettings();
+    var openedIndex = viewModel.userSettings().openedAccordion;
+    if (openedIndex != null) {
+        var instance = M.Collapsible.getInstance($('.collapsible')[0]);
+        instance.open(openedIndex);
+    }
 })
 
 
@@ -292,4 +299,10 @@ function generateToastObjs(msg, title, noNewEntryMsg) {
 
 
 
-
+function onAccordionOpen(index) {
+    //console.log(this);
+    //console.log(index);
+    viewModel.userSettings().openedAccordion = index;
+    saveSettings();
+    //M.Collapsible.getInstance($('.collapsible')[0]).open(2);
+}

@@ -9,6 +9,7 @@
 
         viewModel.userSettings().chosenWorkTypes(settings.chosenWorkTypes);
         viewModel.userSettings().chosenWorkItems(settings.chosenWorkItems);
+        viewModel.userSettings().openedAccordion = settings.openedAccordion;
         viewModel.userSettings().templates(settings.templates);
 
         for (var i = 0; i < viewModel.allWorkTypes().length; i++) {
