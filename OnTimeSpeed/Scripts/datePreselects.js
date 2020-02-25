@@ -1,5 +1,18 @@
 ﻿
 
+function onDateFromSelect() {
+    //var dateFromPicker = M.Datepicker.getInstance($(selectorDateFrom)[0]);
+    //var dateToPicker = M.Datepicker.getInstance($(selectorDateTo)[0]);
+
+    //dateFromPicker.setDate(dateFrom);
+    //dateToPicker.setDate(dateTo);
+}
+
+function onDateToSelect() {
+
+}
+
+
 function preselectRange(range, a, b) {
     var parentId = this.elementId;
     var selectorDateFrom = '#' + parentId + ' .dateFrom';

@@ -1,4 +1,8 @@
-﻿function loadSettings() {
+﻿function openSettings() {
+    M.Modal.getInstance($('#settingsModal')[0]).open();
+}
+
+function loadSettings() {
     var settingsJson = localStorage.getItem("userSettings");
     if (settingsJson) {
         var settings = JSON.parse(settingsJson);
@@ -10,7 +14,14 @@
         viewModel.userSettings().chosenWorkTypes(settings.chosenWorkTypes);
         viewModel.userSettings().chosenWorkItems(settings.chosenWorkItems);
         viewModel.userSettings().openedAccordion = settings.openedAccordion;
-        viewModel.userSettings().templates(settings.templates);
+        for (var i = 0; i < settings.templates.length; i++) {
+            viewModel.userSettings().templates.push({
+                workItem: settings.templates[i].workItem,
+                workType: settings.templates[i].workType,
+                description: ko.observable(settings.templates[i].description),
+                workAmount: ko.observable(settings.templates[i].workAmount)
+            })
+        }
 
         for (var i = 0; i < viewModel.allWorkTypes().length; i++) {
             var item = viewModel.allWorkTypes()[i];

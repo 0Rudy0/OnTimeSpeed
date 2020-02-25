@@ -5,7 +5,8 @@
         chosenWorkTypes: ko.observableArray([]),
         chosenWorkItems: ko.observableArray([]),
         templates: ko.observableArray([]),
-        openedAccordion: null
+        openedAccordion: null,
+        templates: ko.observableArray()
     });
 
     self.breadCrumbs = ko.observableArray([]);
@@ -60,7 +61,8 @@
         titleType: 'darken-4',
         preselectsType: 'darken-2',
         workAmount: ko.observable(1),
-        description: ko.observable('')
+        description: ko.observable(''),
+        showTimePicker: true
     });
 
     self.customEntry = ko.observable({
@@ -73,6 +75,21 @@
         titleType: 'darken-4',
         preselectsType: 'darken-2',
         workAmount: ko.observable(1),
-        description: ko.observable('')
+        description: ko.observable(''),
+        showTimePicker: true
+    });
+
+    self.templateModel = ko.observable({
+        elementId: 'templates',
+        styleClass: 'blue-grey',
+        styleType: 'darken-3',
+        textClass: 'white-text',
+        textType: '',
+        buttonType: 'darken-4',
+        titleType: 'darken-4',
+        preselectsType: 'darken-2',
+        workAmount: ko.observable(1),
+        templates: ko.observableArray([]),
+        showTimePicker: false
     });
 }

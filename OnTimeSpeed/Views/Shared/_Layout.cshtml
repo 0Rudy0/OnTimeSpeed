@@ -28,7 +28,7 @@
                 @*<a href="default" class="header-logo__image axosoft" title="Axosoft"><span>Axosoft</span></a>*@
                 @if (Model.OnTimeUser != null)
                 {
-                    <div class="header_username">
+                    <div class="header_username" data-bind="click: openSettings">
                         <div class="userImage" style="background-image: url(@imgUrl)">
                         </div>
                         <span class="userName">@name</span>
@@ -38,13 +38,16 @@
         </div>
     </div>
 
+
     <div class="footer" style="position: fixed; bottom: 5px; left: 10px; font-size: 16px; opacity: 0.2;">
-        <b>OnTimeSpeed</b> by Dr. Udman
-    </div>
+            <b>OnTimeSpeed</b> by Dr. Udman
+        </div>
 
     @RenderBody()
     @Scripts.Render("~/bundles/Layout")
-
+    @*<footer class="page-footer">
+        <b>OnTimeSpeed</b> by Dr. Udman
+    </footer>*@
     <script type="text/javascript">
         var appName = '@System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath';
         var loggedIn = @loggedIn.ToString().ToLower();
@@ -81,7 +84,7 @@
                         $('.connectBtn').removeClass('hide');
                         localStorage.removeItem('serial');
                         console.log('removing user from local storage');
-                        
+
                         $('.spinner').hide();
                     }
                 });

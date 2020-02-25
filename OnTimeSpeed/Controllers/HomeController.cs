@@ -16,7 +16,7 @@ using hrnetModel = HrNetMobile.Models;
 
 namespace OnTimeSpeed.Controllers
 {
-    //[AuthorizeOnTime]
+    [AuthorizeOnTime]
     public class HomeController : Controller
     {
         private User _user;
@@ -66,12 +66,12 @@ namespace OnTimeSpeed.Controllers
                 model.HrProUser = _hrproUser;
             }
 
-            _user = new User
-            {
-                id = 5,
-                name = "Danijel Rudman",
-                Token = "bla"
-            };
+            //_user = new User
+            //{
+            //    id = 5,
+            //    name = "Danijel Rudman",
+            //    Token = "bla"
+            //};
 
             model.OnTimeUser = _user;
             if (_user != null)
@@ -202,7 +202,7 @@ namespace OnTimeSpeed.Controllers
               _user,
               _hrproUser,
               DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
-              DateTime.Now);          
+              DateTime.Now);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
@@ -220,7 +220,7 @@ namespace OnTimeSpeed.Controllers
                 _user,
                 _hrproUser,
                 dateFromStr.ToDate(),
-                dateToStr.ToDate(),
+                String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
                 description);
 
@@ -240,7 +240,7 @@ namespace OnTimeSpeed.Controllers
                 _user,
                 _hrproUser,
                 dateFromStr.ToDate(),
-                dateToStr.ToDate(),
+                String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
                 description);
 
@@ -260,7 +260,7 @@ namespace OnTimeSpeed.Controllers
                 _user,
                 _hrproUser,
                 dateFromStr.ToDate(),
-                dateToStr.ToDate(),
+                String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
                 description);
 
@@ -280,7 +280,7 @@ namespace OnTimeSpeed.Controllers
                 _user,
                 _hrproUser,
                 dateFromStr.ToDate(),
-                dateToStr.ToDate(),
+                String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
                 description);
 

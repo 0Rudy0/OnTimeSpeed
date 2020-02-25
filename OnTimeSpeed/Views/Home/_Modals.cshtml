@@ -37,3 +37,37 @@
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
     </div>
 </div>
+
+<div id="settingsModal" data-bind="attr: {class: 'modal modal-fixed-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType},
+     with: userSettings">
+    <div class="modal-content">
+        <h4>Postavke</h4>
+        <div id="settingsForm">
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-fieldd col s6">
+                        <label>Iznos sati za ručak</label>
+
+                        <input id="lunchAmount" type="number">
+                    </div>
+                </div>
+            </div>
+            <div class="switch">
+                <label>
+                    Off
+                    <input type="checkbox">
+                    <span class="lever"></span>
+                    On
+                </label>
+                <span style="margin-left: 25px;">Spoji automatične gumbe u jedan</span>
+            </div>
+            @*<label>
+                <input type="checkbox" />
+                <span>Spoji automatične gumbe u jedan</span>
+            </label>*@
+        </div>
+    </div>
+    <div data-bind="attr: {class: 'modal-footer ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().styleType}">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
+    </div>
+</div>

@@ -342,6 +342,7 @@
     <Content Include="PrivateSettings.config" />
     <Content Include="config\searchStrings.json" />
     <Content Include="config\holidays.json" />
+    <Content Include="config\jsconfig.json" />
     <None Include="config\templates.json" />
     <Content Include="config\response.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -849,6 +850,7 @@
     <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\settings.js" />
+    <Content Include="Scripts\templates.js" />
     <Content Include="Scripts\viewModel.js" />
     <Content Include="Scripts\workAmount.js" />
     <Content Include="Scripts\workItems.js" />
@@ -870,6 +872,7 @@
     <Content Include="Views\Home\_SemiAutomaticEntry.cshtml" />
     <Content Include="Views\Home\_CustomEntry.cshtml" />
     <Content Include="Views\Home\_Modals.cshtml" />
+    <Content Include="Views\Home\_Templates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

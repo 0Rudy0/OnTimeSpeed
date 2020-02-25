@@ -253,6 +253,12 @@ namespace OnTimeSpeed.Code
                             continue;
                     }
 
+                    if (String.IsNullOrEmpty(monthStr))
+                        monthStr = "01";
+
+                    if (String.IsNullOrEmpty(dayStr))
+                        dayStr = "01";
+
                     var dateFrom = DateTime.ParseExact($"{monthStr}/{yearStr}", "MM/yyyy", CultureInfo.InvariantCulture);
 
                     return dateFrom;
@@ -287,7 +293,8 @@ namespace OnTimeSpeed.Code
                 {
                     id = logType
                 },
-                description = (description ?? "") + " (via OnTimeSpeed)",
+                //description = (description ?? "") + " (via OnTimeSpeed)",
+                description = description,
                 item = new
                 {
                     id = itemId,

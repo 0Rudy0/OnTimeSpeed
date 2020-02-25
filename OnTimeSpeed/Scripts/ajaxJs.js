@@ -11,7 +11,7 @@
         error: function (er) {
             $('.spinner').hide();
             var tempToast = {
-                html: '<span style="color: black">Greška</span>',
+                html: '<span style="color: white">Dogodila se greška</span>',
                 classes: toastClasses,
                 displayLength: toastLong
             };
@@ -34,7 +34,7 @@ function ajaxPOST(ajaxObj, callback) {
             $('.spinner').hide();
 
             var tempToast = {
-                html: '<span style="color: black">Greška</span>',
+                html: '<span style="color: white">Dogodila se greška</span>',
                 classes: 'red darken-2',
                 displayLength: toastLong
             };

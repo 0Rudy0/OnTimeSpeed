@@ -162,6 +162,7 @@ function validateSemiAutomaticForm() {
 function addNewWorkLog() {
     var data = {
         itemId: viewModel.activeWorkItem && viewModel.activeWorkItem() ? viewModel.activeWorkItem().Id : 0,
+        itemName: viewModel.activeWorkItem && viewModel.activeWorkItem() ? viewModel.activeWorkItem().Name : 0,
         itemType: viewModel.activeWorkItem && viewModel.activeWorkItem() ? viewModel.activeWorkItem().TypeString : '',
         workTypeId: viewModel.activeWorkType && viewModel.activeWorkType() ? viewModel.activeWorkType().id : 0,
         amount: this.workAmount(),
@@ -170,24 +171,22 @@ function addNewWorkLog() {
         description: this.description()
     }
 
-    if (validateForm.apply(data)) {
-        $('.spinner').show();
-        ajaxPOST({
-            url: '/Home/AddCustom',
-            data: data
-        }, function (msg) {
-            generateToastObjs(msg, "Work log", "Nije bilo mjesta za unijeti log");
-        });
+    addWorkLogDo.apply(data);   
+}
+
+function addNewTemplateWorkLog() {
+    var data = {
+        itemId: this.workItem.Id,
+        itemName: this.workItem.Name,
+        itemType: this.workItem.TypeString,
+        workTypeId: this.workType.id,
+        amount: this.workAmount(),
+        dateFromStr: $('#templates .dateFrom').val(),
+        dateToStr: $('#templates .dateTo').val(),
+        description: this.description()
     }
-    else {
-        var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
-            classes: toastClasses,
-            displayLength: toastLong
-        };
-        M.toast(tempToast);
-    }
-    console.log(data);
+
+    addWorkLogDo.apply(data);
 }
 
 function validateForm() {
@@ -206,4 +205,31 @@ function validateForm() {
         isValid = false;
     }
     return isValid;
+}
+
+function addWorkLogDo() {
+    var data = this;
+
+    if (validateForm.apply(data)) {
+        $('.spinner').show();
+        ajaxPOST({
+            url: '/Home/AddCustom',
+            data: data
+        }, onAddWorkLogSuccess.bind(this));
+    }
+    else {
+        var tempToast = {
+            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
+            classes: toastClasses,
+            displayLength: toastLong
+        };
+        M.toast(tempToast);
+    }
+    console.log(data);
+}
+
+function onAddWorkLogSuccess(msg) {
+    var data = this;
+    generateToastObjs(msg, this.itemName + ' - ', "Nije bilo mjesta za unijeti log");
+    saveSettings();
 }

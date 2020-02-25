@@ -1,0 +1,96 @@
+﻿
+<div class="card" id="templates">
+    <div data-bind="attr: {class : 'card-content white-text ' + $data.styleClass + ' ' + $data.styleType + ' ' + $data.textClass + ' ' + $data.textType}">
+
+        <div data-bind="template: { name: 'entry-template', data: $data }"></div>
+        <div class="templatesList" data-bind="foreach: $parent.userSettings().templates">
+            <div class="card">
+                <i class="fad fa-trash-alt removeTemplate" data-bind="click: removeTemplate"></i>
+                <div data-bind="attr: {class : 'card-content white-text ' + $parentContext.$parent.templateModel().styleClass + ' ' + $parentContext.$parent.templateModel().styleType + ' ' + $parentContext.$parent.templateModel().textClass + ' ' + $parentContext.$parent.templateModel().textType}">
+                    <span class="card-titlee">
+                        <span class="templateWorkItem" data-bind="text: $data.workItem.Id + ' - ' + $data.workItem.Name"></span>
+                        <span class="templateWorkType" data-bind="text: '(' + $data.workType.name + ')'"></span>
+                    </span>
+                    <div class="templateDescAndAmount">
+                        <div class="dateRangePickers">
+                            <div class="timeHolder" data-bind="css: {'maxAmountSelected': $data.workAmount() > 8}">
+                                <label>Broj sati po danu</label>
+                                <a href="#" class="btn btn-plus btn-small teal darken-3"
+                                   data-bind="click: increaseWorkAmount, attr: {class : 'btn btn-plus btn-small ' + $parentContext.$parent.templateModel().styleClass + ' ' + $parentContext.$parent.templateModel().preselectsType}, css: {'disabled': $data.workAmount() > 8 }">
+                                    <i class="fal fa-plus"></i>
+                                </a>
+                                <a href="#"
+                                   data-bind="click: decreaseWorkAmount, attr: {class : 'btn btn-minus btn-small ' + $parentContext.$parent.templateModel().styleClass + ' ' + $parentContext.$parent.templateModel().preselectsType}, css: {'disabled': $data.workAmount() <= 0 }">
+                                    <i class="fal fa-minus"></i>
+                                </a>
+                                <a href="#"
+                                   data-bind="click: maxWorkAmount, attr: {class : 'btn btn-plusMax btn-small ' + $parentContext.$parent.templateModel().styleClass + ' ' + $parentContext.$parent.templateModel().preselectsType}" title="Napuni do 8h po danu">
+                                    <i class="fal fa-chevron-double-right"></i>
+                                </a>
+                                <input type="number" class="workAmountInput" min="-1" max="8"
+                                       data-bind="value: $data.workAmount, css: {'maxAmount': $data.workAmount() > 8}" />
+                            </div>
+                        </div>
+                        <div class="description">
+                            <label>Opis</label>
+                            <textarea data-bind="value: $data.description"></textarea>
+                        </div>
+                        <div class="addTemplateWorkLog">
+                            <a href="#" style="float: right;"
+                               data-bind="attr: {class : 'btn btn-large darken-4 noText ' + $parentContext.$parent.templateModel().styleClass},
+                           click: addNewTemplateWorkLog">
+                                <i class="fal fa-plus"></i>
+                                @*<span>Unesi</span>*@
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                @*<div data-bind="with: $parentContext.$parent.templateModel()">
+            <div data-bind="attr: {class : 'card-action white-text darken-4 ' + $data.styleClass}">
+                <a href="#" style="float: right;"
+                   data-bind="attr: {class : 'btn btn-sm darken-3 ' + $data.styleClass},
+                   click: addNewWorkLog">Unesi</a>
+                <div style="clear: both;"></div>
+            </div>
+        </div>*@
+            </div>
+        </div>
+        @*<div class="detailsHolder">
+                <div class="chosenWorkItemsList">
+                    <label>Predmet</label>
+                    <div class="collection" data-bind="foreach: $parent.userSettings().chosenWorkItems">
+                        <a href="#!" data-bind="attr: {class : 'collection-item workItem darken-2 ' + $parent.styleClass},
+                                           css: {'active': $data.active()}, click: selectWorkItem">
+                            <span data-bind="text: $data.Name"></span>
+                            <i class="fad fa-trash-alt removeWorkItem" data-bind="click: unchooseWorkItem"></i>
+                        </a>
+                    </div>
+                    <a data-bind="attr: {class : 'waves-effect waves-light btn btn-sm darken-2 withIcon ' + $data.styleClass},
+                                       click: addMoreWorkItems">
+                        <i class="fad fa-plus"></i>
+                    </a>
+                </div>
+                <div class="chosenWorkTypesList">
+                    <label>Vrsta rada</label>
+                    <div class="collection" data-bind="foreach: $parent.chosenWorkTypes">
+                        <a href="#!" data-bind="attr: {class : 'collection-item workType darken-2 ' + $parent.styleClass},
+                                           css: {'active': $data.active()}, click: selectWorkType">
+                            <span data-bind="text: $data.name"></span>
+                            <i class="fad fa-trash-alt removeWorkType" data-bind="click: unchooseWorkType"></i>
+                        </a>
+                    </div>
+                    <a data-bind="attr: {class : 'waves-effect waves-light btn btn-sm darken-2 withIcon ' + $data.styleClass},
+                                       click: addMoreWorkTypes">
+                        <i class="fad fa-plus"></i>
+                    </a>
+                </div>
+                <div class="description">
+                    <label>Opis</label>
+                    <textarea data-bind="value: $data.description"></textarea>
+                </div>
+            </div>*@
+    </div>
+   
+</div>
+

@@ -81,6 +81,18 @@ else
                             @Html.Partial("_CustomEntry")
                         </div>
                     </li>
+                    <!-- ko if: $data.userSettings().templates().length > 0-->
+                    <li data-bind="with: templateModel">
+                        <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 3),
+                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $.data.textClass + ' ' + $data.textType}">
+                            <i class="fad fa-stream"></i>
+                            Predlošci
+                        </div>
+                        <div class="collapsible-body">
+                            @Html.Partial("_Templates")
+                        </div>
+                    </li>
+                    <!-- /ko -->
                 </ul>
             </div>
             @*<div class="col s12 m12">
@@ -131,6 +143,7 @@ else
                 <label>Datum do</label>
                 <input type="text" class="datepicker dateTo">
             </div>
+            <!-- ko if: $data.showTimePicker -->
             <div class="timeHolder" data-bind="css: {'maxAmountSelected': $data.workAmount() > 8}">
                 <label>Broj sati po danu</label>
                 <a href="#" class="btn btn-plus btn-small teal darken-3"
@@ -148,6 +161,7 @@ else
                 <input type="number" class="workAmountInput" min="-1" max="8"
                        data-bind="value: $data.workAmount, css: {'maxAmount': $data.workAmount() > 8}" />
             </div>
+            <!-- /ko -->
         </div>
     </script>
 

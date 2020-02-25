@@ -39,7 +39,8 @@
 	{
 		"Name": "interniSastanakTemplate",
 		"Templates": [
-			"HRPRO - YYYY - Interni sastanci"
+			"HRPRO - YYYY - Interni sastanci",
+			"HRPRO - YYYY -  Interni sastanci"
 		]
 	},
 	{

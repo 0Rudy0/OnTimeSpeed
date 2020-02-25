@@ -42,6 +42,7 @@ namespace OnTimeSpeed
                       "~/Scripts/workTypes.js",
                       "~/Scripts/workAmount.js",
                       "~/Scripts/datePreselects.js",
+                      "~/Scripts/templates.js",
                       "~/Scripts/index.js"
                       ));
 

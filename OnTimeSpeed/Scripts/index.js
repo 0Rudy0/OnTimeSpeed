@@ -39,7 +39,7 @@ $(function () {
 
     loadSettings();
     var openedIndex = viewModel.userSettings().openedAccordion;
-    if (openedIndex != null) {
+    if (loggedIn && openedIndex != null) {
         var instance = M.Collapsible.getInstance($('.collapsible')[0]);
         instance.open(openedIndex);
     }
@@ -88,7 +88,7 @@ function getWorkLogsAction(forDate) {
             showClearBtn: true,
             defaultDate: new Date(),
             setDefaultDate: true,
-            onSelect: onDateFromSelect.bind(viewModel.semiAutomaticEntry)
+            onSelect: onDateFromSelect.bind(viewModel.semiAutomaticEntry())
         });
         M.Datepicker.init(document.querySelectorAll('#semiAutomaticEntry .datepicker.dateTo'), {
             autoClose: true,
@@ -96,7 +96,7 @@ function getWorkLogsAction(forDate) {
             firstDay: 1,
             showDaysInNextAndPreviousMonths: true,
             showClearBtn: true,
-            onSelect: onDateToSelect.bind(viewModel.semiAutomaticEntry)
+            onSelect: onDateToSelect.bind(viewModel.semiAutomaticEntry())
         });
 
         M.Datepicker.init(document.querySelectorAll('#customEntry .datepicker.dateFrom'), {
@@ -107,7 +107,7 @@ function getWorkLogsAction(forDate) {
             showClearBtn: true,
             defaultDate: new Date(),
             setDefaultDate: true,
-            onSelect: onDateFromSelect.bind(viewModel.semiAutomaticEntry)
+            onSelect: onDateFromSelect.bind(viewModel.semiAutomaticEntry())
         });
         M.Datepicker.init(document.querySelectorAll('#customEntry .datepicker.dateTo'), {
             autoClose: true,
@@ -115,8 +115,27 @@ function getWorkLogsAction(forDate) {
             firstDay: 1,
             showDaysInNextAndPreviousMonths: true,
             showClearBtn: true,
-            onSelect: onDateToSelect.bind(viewModel.customEntry)
+            onSelect: onDateToSelect.bind(viewModel.customEntry())
         });
+
+            M.Datepicker.init(document.querySelectorAll('#templates .datepicker.dateFrom'), {
+                autoClose: true,
+                format: 'dd.mm.yyyy',
+                firstDay: 1,
+                showDaysInNextAndPreviousMonths: true,
+                showClearBtn: true,
+                defaultDate: new Date(),
+                setDefaultDate: true,
+                onSelect: onDateFromSelect.bind(viewModel.templateModel())
+            });
+            M.Datepicker.init(document.querySelectorAll('#templates .datepicker.dateTo'), {
+                autoClose: true,
+                format: 'dd.mm.yyyy',
+                firstDay: 1,
+                showDaysInNextAndPreviousMonths: true,
+                showClearBtn: true,
+                onSelect: onDateToSelect.bind(viewModel.customEntry())
+            });
 
         //var instances = M.Datepicker.init(document.querySelectorAll('.datepicker.dateTo'), {
         //    autoClose: true,
@@ -129,22 +148,9 @@ function getWorkLogsAction(forDate) {
 
         $('.modal').modal();
 
-        console.log(instances);
+        //console.log(instances);
     });
 }
-
-function onDateFromSelect() {
-    var dateFromPicker = M.Datepicker.getInstance($(selectorDateFrom)[0]);
-    var dateToPicker = M.Datepicker.getInstance($(selectorDateTo)[0]);
-
-    //dateFromPicker.setDate(dateFrom);
-    //dateToPicker.setDate(dateTo);
-}
-
-function onDateToSelect() {
-
-}
-
 function initWorkLogChart(categories, series) {
     var tooltipFormatter = function () {
         var txt = '<table class="totalsWorkLogTable striped"><tr><th>Predmet</th><th>Work type</th><th>Opis</th><th>Broj sati</th></tr>';
@@ -266,7 +272,7 @@ function initWorkLogChart(categories, series) {
 function generateToastObjs(msg, title, noNewEntryMsg) {
     if (msg.length > maxDetailsLng) {
         toastObj = {
-            html: '<span style="color: black; text-align: right">' + title + ' je unesen <b>' + msg.length + '</b> puta</span>',
+            html: '<span style="color: black; text-align: right">' + title + ' je unesen <b>' + msg.length + '</b> puta</span><button class="btn-flat toast-action">X</button>',
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -279,7 +285,7 @@ function generateToastObjs(msg, title, noNewEntryMsg) {
         }
         str += '</span>';
         toastObj = {
-            html: '<span style="color: black; text-align: right">' + title + ' je unesen <b>' + msg.length + '</b> puta za sljedeće datume:' + str + '</span>',
+            html: '<span style="color: black; text-align: right">' + title + ' je unesen <b>' + msg.length + '</b> puta za sljedeće datume:' + str + '</span><button class="btn-flat toast-action">X</button>',
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -289,7 +295,7 @@ function generateToastObjs(msg, title, noNewEntryMsg) {
     else {
         $('.spinner').hide();
         toastObj = {
-            html: '<span style="color: black; text-align: right">' + noNewEntryMsg + '</span>',
+            html: '<span style="color: black; text-align: right">' + noNewEntryMsg + '</span><button class="btn-flat toast-action">X</button>',
             classes: toastClasses,
             displayLength: toastShort
         };
@@ -304,5 +310,14 @@ function onAccordionOpen(index) {
     //console.log(index);
     viewModel.userSettings().openedAccordion = index;
     saveSettings();
+    //$(this).scrollTop($(this).height());
+
+    setTimeout(function () {
+        if ($(window).scrollTop() < $($(".collapsible li")[index]).offset().top + 50) {
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $($(".collapsible li")[index]).offset().top + 50
+            }, 1000);
+        }
+    }, 0);
     //M.Collapsible.getInstance($('.collapsible')[0]).open(2);
 }

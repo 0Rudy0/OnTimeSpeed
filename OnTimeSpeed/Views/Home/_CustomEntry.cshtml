@@ -9,7 +9,7 @@
                 <div class="collection" data-bind="foreach: $parent.userSettings().chosenWorkItems">
                     <a href="#!" data-bind="attr: {class : 'collection-item workItem darken-2 ' + $parent.styleClass},
                                        css: {'active': $data.active()}, click: selectWorkItem">
-                        <span data-bind="text: $data.Name"></span>
+                        <span data-bind="html: '<i>' + $data.Id + '</i> - ' + $data.Name"></span>
                         <i class="fad fa-trash-alt removeWorkItem" data-bind="click: unchooseWorkItem"></i>
                     </a>
                 </div>
@@ -41,8 +41,14 @@
     <div data-bind="attr: {class : 'card-action white-text darken-3 ' + $data.styleClass}">
         @*<a href="#" style="float: left;">Dodaj kao template</a>*@
         <a href="#" style="float: right;"
+           data-bind="attr: {class : 'btn btn-large darken-4 withIcon ' + $data.styleClass},
+                           click: addNewWorkLog">
+            <i class="fad fa-plus"></i>
+            <span>Unesi</span>
+        </a>
+        <a href="#" style="float: left;"
            data-bind="attr: {class : 'btn btn-large darken-4 ' + $data.styleClass},
-                           click: addNewWorkLog">Unesi</a>
+                           click: addNewTemplate">Dodaj kao predložak</a>
         <div style="clear: both;"></div>
     </div>
 </div>

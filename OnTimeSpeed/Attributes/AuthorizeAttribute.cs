@@ -90,6 +90,16 @@ namespace OnTimeSpeed.Attributes
         {
             base.OnAuthorization(actionContext);
 
+            var user = actionContext.HttpContext.User.Identity.Name;
+            var allowedUsers = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(
+                System.IO.File.ReadAllText(
+                    AppDomain.CurrentDomain.BaseDirectory + "/config/jsconfig.json"));
+            if (allowedUsers.Count > 0 && allowedUsers.Any(u => u.ToLower().Trim() == user.ToLower().Trim()) == false)
+            {
+                actionContext.Result = new HttpStatusCodeResult(System.Net.HttpStatusCode.Forbidden);
+            }
+                
+
             var action = actionContext.RouteData.Values["action"].ToString();
             var type = actionContext.Controller.GetType();
 
@@ -115,10 +125,10 @@ namespace OnTimeSpeed.Attributes
                 actionContext.HttpContext.Response.AddHeader("REQUIRES_AUTH_ONTIME", "1");
                 actionContext.Result = new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
             }
-            else
-            {
-                actionContext.Result = new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
-            }
+            //else
+            //{
+            //    actionContext.Result = new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
+            //}
         }
     }
 
