@@ -176,6 +176,7 @@ else
 
         var onTimeUserSerialized = '@Html.Raw(JsonConvert.SerializeObject(Model.OnTimeUser))';
         var hrproUserSerialized = '@Html.Raw(raw)';
+        var monthsBack = @AppSettings.GetInt("monthsBack");
 
     </script>
     @Scripts.Render("~/bundles/Index")

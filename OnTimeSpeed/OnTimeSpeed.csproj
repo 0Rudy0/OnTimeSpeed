@@ -142,6 +142,7 @@
     <Compile Include="Code\DAL_HrProApi.cs" />
     <Compile Include="Code\Holidays.cs" />
     <Compile Include="EntryImplementations\ColleagueSupportEntry.cs" />
+    <Compile Include="EntryImplementations\EducationEntry.cs" />
     <Compile Include="EntryImplementations\OnTimeEntry.cs" />
     <Compile Include="EntryImplementations\ISemiAutomaticEntry.cs" />
     <Compile Include="EntryImplementations\PaidLeaveEntry.cs" />

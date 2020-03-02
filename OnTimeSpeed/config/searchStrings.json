@@ -42,5 +42,11 @@
 		"SearchStrings": [
 			"hrpro podrška kolegi"
 		]
+	},
+	{
+		"Name": "skolovanjeSearchString",
+		"SearchStrings": [
+			"hrpro edukacija"
+		]
 	}
 ]

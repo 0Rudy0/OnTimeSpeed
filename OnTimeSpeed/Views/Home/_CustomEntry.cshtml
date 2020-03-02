@@ -9,7 +9,7 @@
                 <div class="collection" data-bind="foreach: $parent.userSettings().chosenWorkItems">
                     <a href="#!" data-bind="attr: {class : 'collection-item workItem darken-2 ' + $parent.styleClass},
                                        css: {'active': $data.active()}, click: selectWorkItem">
-                        <span data-bind="html: '<i>' + $data.Id + '</i> - ' + $data.Name"></span>
+                        <span data-bind="html: '<b>' + $data.Id + '</b> - ' + $data.Name"></span>
                         <i class="fad fa-trash-alt removeWorkItem" data-bind="click: unchooseWorkItem"></i>
                     </a>
                 </div>

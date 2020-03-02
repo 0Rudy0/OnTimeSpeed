@@ -399,7 +399,9 @@ namespace OnTimeSpeed.Code
             User user,
             hrnetModel.User hrproUser,
             DateTime fromDate,
-            DateTime toDate)
+            DateTime toDate,
+            bool detailedLog = false,
+            float lunchAmount = 0)
         {
             var tasks = await entry.GetAllRelatedTasks(user);
             var workLogs = await GetWorkLogs(user, true);
@@ -409,17 +411,26 @@ namespace OnTimeSpeed.Code
             for (var i = fromDate; i <= toDate; i = i.AddDays(1))
             {
                 var workItem = entry.GetTaskForDate(tasks, i);
-                var canAdd = entry.CanAddWorkLog(workLogs, vacations, workItem, i, out float addAmount);
+                var canAdd = entry.CanAddWorkLog(workLogs, vacations, workItem, i, lunchAmount, out float addAmount);
                 if (canAdd)
                 {
                     var newLog = entry.CreateWorkLogObj(user.id, workItem.Id, i, addAmount, vacations);
                     var content = await PostRequestAsync($"/work_logs", user.Token, newLog);
                     var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
-                    addedOnDates.Add(i.ToShortDateString());
+                    if (detailedLog)
+                        addedOnDates.Add($"{i.ToShortDateString()} - {entry.GetEntryDescription()}");
+                    else
+                        addedOnDates.Add(i.ToShortDateString());
                 }
             }
             if (addedOnDates.Count > 0)
+            {
                 HttpRuntime.Cache.Remove("workLogs_" + user.id);
+
+                if (detailedLog)
+                    addedOnDates.Add("----------------------"); //separator
+            }
+
 
             return addedOnDates;
         }
@@ -431,7 +442,8 @@ namespace OnTimeSpeed.Code
             DateTime? fromDate,
             DateTime? toDate,
             float amount,
-            string description)
+            string description,
+            bool ignoreFullDays)
         {
             if (fromDate == null || toDate == null)
                 throw new Exception("Ne postoji datumski raspon za unos");
@@ -448,7 +460,7 @@ namespace OnTimeSpeed.Code
                 if (workLogs.ContainsKey(i.Value.Date))
                     alreadyLogedAmount = workLogs[i.Value.Date];
 
-                if (!i.Value.IsHoliday() && !i.Value.IsWeekend() && alreadyLogedAmount < 8)
+                if (!i.Value.IsHoliday() && !i.Value.IsWeekend() && (alreadyLogedAmount < 8 || ignoreFullDays))
                 {
                     var amountToLog = amount > 8 ? 8 - alreadyLogedAmount : amount;
                     if (amountToLog > 0)
@@ -461,7 +473,10 @@ namespace OnTimeSpeed.Code
                         else
                         {
                             var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
-                            addedOnDates.Add(i.Value.ToShortDateString());
+                            var warningMsg = "";
+                            if (alreadyLogedAmount + amountToLog > 8)
+                                warningMsg = " *** više od 8h zalograno ***";
+                            addedOnDates.Add(i.Value.ToShortDateString() + warningMsg);
                         }
                     }
                     else
@@ -481,7 +496,7 @@ namespace OnTimeSpeed.Code
         }
 
         public static async Task<List<string>> AddCustom(User user, DateTime? fromDate, DateTime? toDate,
-            int itemId, int workTypeId, float amount, string itemType, string description)
+            int itemId, int workTypeId, float amount, string itemType, string description, bool ignoreFullDays)
         {
             var addedOnDates = new List<string>();
 
@@ -496,7 +511,7 @@ namespace OnTimeSpeed.Code
                 if (workLogs.ContainsKey(i.Value.Date))
                     alreadyLogedAmount = workLogs[i.Value.Date];
 
-                if (!i.Value.IsHoliday() && !i.Value.IsWeekend() && alreadyLogedAmount < 8)
+                if (!i.Value.IsHoliday() && !i.Value.IsWeekend() && (alreadyLogedAmount < 8 || ignoreFullDays))
                 {
                     var amountToLog = amount > 8 ? 8 - alreadyLogedAmount : amount;
                     if (amountToLog > 0)
@@ -506,7 +521,10 @@ namespace OnTimeSpeed.Code
                         if (content == null)
                             throw new Exception("Unos nije uspio");
                         var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
-                        addedOnDates.Add(i.Value.ToShortDateString());
+                        var warningMsg = "";
+                        if (alreadyLogedAmount + amountToLog > 8)
+                            warningMsg = " *** više od 8h zalograno ***";
+                        addedOnDates.Add(i.Value.ToShortDateString() + warningMsg);
                     }
                     else
                     {

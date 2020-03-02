@@ -151,58 +151,111 @@ namespace OnTimeSpeed.Controllers
 
         #region Adding new
 
+        #region Add automatic
+
         [HttpPost]
         [AuthorizeHrPro]
-        public async Task<string> AddLunchToToday()
+        public async Task<string> AddAllAutomatic(string amount = "0.5")
         {
-            var addedOnDates = await DAL.AddAutomatic(
-                new LunchEntry(),
-                _user,
-                _hrproUser,
-                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
-                DateTime.Now);
+            var addedOnDates = JsonConvert.DeserializeObject<List<string>>(await AddHolidays(true));
+            addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddVacations(true)));
+            addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddPaidLeaves(true)));
+            addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddLunchToToday(amount, true)));
+                       
+            if (addedOnDates.Count > 0 && addedOnDates.ElementAt(addedOnDates.Count - 1).Contains("-------"))
+                addedOnDates.RemoveAt(addedOnDates.Count - 1); //remove last separator
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
 
         [HttpPost]
         [AuthorizeHrPro]
-        public async Task<string> AddHolidays()
+        public async Task<string> AddLunchToToday(
+            string amount, bool detailedLog = false)
+        {
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, new System.Globalization.CultureInfo("en"), out var amount1);
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, System.Threading.Thread.CurrentThread.CurrentCulture, out var amount2);
+            var amountParsed = amount1 > amount2 && amount2 > 0 ? amount2 : amount1;
+
+            var addedOnDates = await DAL.AddAutomatic(
+                new LunchEntry(),
+                _user,
+                _hrproUser,
+                DateTime.Now.AddDays(AppSettings.GetInt("daysBackToStartAdding") * -1),
+                DateTime.Now,
+                detailedLog,
+                amountParsed);
+
+            return JsonConvert.SerializeObject(addedOnDates);
+        }
+
+        [HttpPost]
+        [AuthorizeHrPro]
+        public async Task<string> AddHolidays(bool detailedLog = false)
         {
             var addedOnDates = await DAL.AddAutomatic(
                 new HolidayEntry(),
                 _user,
                 _hrproUser,
-                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
-                DateTime.Now);
+                DateTime.Now.AddDays(AppSettings.GetInt("daysBackToStartAdding") * -1).ToFirstOfMonth(),
+                DateTime.Now,
+                detailedLog);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
 
         [HttpPost]
         [AuthorizeHrPro]
-        public async Task<string> AddVacations()
+        public async Task<string> AddVacations(bool detailedLog = false)
         {
             var addedOnDates = await DAL.AddAutomatic(
                new VacationEntry(),
                _user,
                _hrproUser,
-               DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
-               DateTime.Now);
+                DateTime.Now.AddDays(AppSettings.GetInt("daysBackToStartAdding") * -1).ToFirstOfMonth(),
+               DateTime.Now,
+               detailedLog);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
 
         [HttpPost]
         [AuthorizeHrPro]
-        public async Task<string> AddPaidLeaves()
+        public async Task<string> AddPaidLeaves(bool detailedLog = false)
         {
             var addedOnDates = await DAL.AddAutomatic(
               new PaidLeaveEntry(),
               _user,
               _hrproUser,
-              DateTime.Now.AddMonths(AppSettings.GetInt("monthsBack") * -1).ToFirstOfMonth(),
-              DateTime.Now);
+                DateTime.Now.AddDays(AppSettings.GetInt("daysBackToStartAdding") * -1).ToFirstOfMonth(),
+              DateTime.Now,
+               detailedLog);
+
+            return JsonConvert.SerializeObject(addedOnDates);
+        }
+
+        #endregion
+
+        #region Add semi automatic
+
+        [HttpPost]
+        [AuthorizeHrPro]
+        public async Task<string> AddLunch(
+           float amount,
+           string dateFromStr,
+           string dateToStr,
+           string description,
+           bool ignoreFullDays)
+        {
+            var addedOnDates = await DAL.AddSemiAutomatic(
+                new LunchEntry(),
+                _user,
+                _hrproUser,
+                dateFromStr.ToDate(),
+                String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
+                amount,
+                description,
+                ignoreFullDays);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
@@ -213,7 +266,8 @@ namespace OnTimeSpeed.Controllers
             float amount,
             string dateFromStr,
             string dateToStr,
-            string description)
+            string description,
+            bool ignoreFullDays)
         {
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new SickLeaveEntry(),
@@ -222,7 +276,8 @@ namespace OnTimeSpeed.Controllers
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
-                description);
+                description,
+                ignoreFullDays);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
@@ -233,7 +288,8 @@ namespace OnTimeSpeed.Controllers
             float amount,
             string dateFromStr,
             string dateToStr,
-            string description)
+            string description,
+            bool ignoreFullDays)
         {
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new InternalMeetingEntry(),
@@ -242,7 +298,8 @@ namespace OnTimeSpeed.Controllers
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
-                description);
+                description,
+                ignoreFullDays);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
@@ -253,7 +310,8 @@ namespace OnTimeSpeed.Controllers
             float amount,
             string dateFromStr,
             string dateToStr,
-            string description)
+            string description,
+            bool ignoreFullDays)
         {
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new OnTimeEntry(),
@@ -262,7 +320,8 @@ namespace OnTimeSpeed.Controllers
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
-                description);
+                description,
+                ignoreFullDays);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
@@ -273,7 +332,8 @@ namespace OnTimeSpeed.Controllers
             float amount,
             string dateFromStr,
             string dateToStr,
-            string description)
+            string description,
+            bool ignoreFullDays)
         {
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new ColleagueSupportEntry(),
@@ -282,10 +342,35 @@ namespace OnTimeSpeed.Controllers
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
-                description);
+                description,
+                ignoreFullDays);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
+
+        [HttpPost]
+        [AuthorizeHrPro]
+        public async Task<string> AddEducation(
+            float amount,
+            string dateFromStr,
+            string dateToStr,
+            string description,
+            bool ignoreFullDays)
+        {
+            var addedOnDates = await DAL.AddSemiAutomatic(
+                new EducationEntry(),
+                _user,
+                _hrproUser,
+                dateFromStr.ToDate(),
+                String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
+                amount,
+                description,
+                ignoreFullDays);
+
+            return JsonConvert.SerializeObject(addedOnDates);
+        }
+
+        #endregion
 
         [HttpPost]
         [AuthorizeHrPro]
@@ -296,7 +381,8 @@ namespace OnTimeSpeed.Controllers
             string dateFromStr,
             string dateToStr,
             string itemType,
-            string description)
+            string description,
+            bool ignoreFullDays)
         {
             if (amount > 0)
             {
@@ -308,7 +394,8 @@ namespace OnTimeSpeed.Controllers
                     workTypeId,
                     amount,
                     itemType,
-                    description);
+                    description,
+                    ignoreFullDays);
 
                 return JsonConvert.SerializeObject(addedOnDates);
             }

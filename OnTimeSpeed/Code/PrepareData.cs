@@ -46,6 +46,7 @@ namespace OnTimeSpeed.Code
                         break;
                     case GroupBy.Week:
                         key = $"{forWeek}. tj @ {forYear}.";
+                        //key = $"{i.}"
                         break;
                     case GroupBy.Month:
                         key = i.ToString("MMMM yyyy.");// $"{forMonth}/{forYear}";
@@ -220,18 +221,24 @@ namespace OnTimeSpeed.Code
 
         }
 
-        public static DateTime? DateFromName(string date, IEnumerable<string> templates)
+        public static DateTime? DateFromName(string date, IEnumerable<string> templates, out bool monthSpecified, out bool daySpecified)
         {
             var yearChar = AppSettings.Get("templateYearChar")[0];
             var monthChar = AppSettings.Get("templateMonthChar")[0];
             var dayChar = AppSettings.Get("templateDayChar")[0];
             var wildChar = AppSettings.Get("templateWildcardChar")[0];
+            monthSpecified = false;
+            daySpecified = false;
+
 
             if (templates == null)
                 return null;
 
             foreach (var template in templates)
             {
+                monthSpecified = false;
+                daySpecified = false;
+
                 if (template.Length != date.Length)
                     continue;
 
@@ -255,11 +262,15 @@ namespace OnTimeSpeed.Code
 
                     if (String.IsNullOrEmpty(monthStr))
                         monthStr = "01";
+                    else
+                        monthSpecified = true;
 
                     if (String.IsNullOrEmpty(dayStr))
                         dayStr = "01";
+                    else
+                        daySpecified = true;
 
-                    var dateFrom = DateTime.ParseExact($"{monthStr}/{yearStr}", "MM/yyyy", CultureInfo.InvariantCulture);
+                    var dateFrom = DateTime.ParseExact($"{monthStr}/{yearStr}", "MM/yyyy", CultureInfo.InvariantCulture);                   
 
                     return dateFrom;
                 }
@@ -314,13 +325,23 @@ namespace OnTimeSpeed.Code
 
             foreach (var item in items)
             {
-                var fromDate = DateFromName(item.Name, templates.FirstOrDefault(t => t.Name == dateFromTemplateName).Templates);
+                var fromDate = DateFromName(item.Name, templates.FirstOrDefault(t => t.Name == dateFromTemplateName).Templates, out var dateFromMonthSpecified, out var dateFromDaySpecified);
                 DateTime? toDate = null;
 
                 if (String.IsNullOrEmpty(dateToTemplateName))
                     toDate = fromDate?.AddYears(1).AddDays(-1);
                 else
-                    toDate = DateFromName(item.Name, templates.FirstOrDefault(t => t.Name == dateToTemplateName).Templates);
+                {
+                    toDate = DateFromName(item.Name, templates.FirstOrDefault(t => t.Name == dateToTemplateName).Templates, out var dateToMonthSpecified, out var dateToDaySpecified);
+                    if (toDate != null && !dateToMonthSpecified)
+                    {
+                        toDate = toDate.Value.AddYears(1).AddDays(-1);
+                    }
+                    if (toDate != null && !dateToDaySpecified)
+                    {
+                        toDate = toDate.Value.AddMonths(1).AddDays(-1);
+                    }
+                }
 
                 if (fromDate == null || toDate == null)
                     continue;

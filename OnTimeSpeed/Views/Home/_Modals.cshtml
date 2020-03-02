@@ -10,8 +10,7 @@
         <input type="text" id="searchWorkItems" data-bind="event: {'keyup': searchWorkItemsPush}" />
         <!-- ko if: $data.searchResultWorkItems().length > 0 -->
         <div class="collection" , data-bind="foreach: $data.searchResultWorkItems">
-            <a href="#!" data-bind="attr: {class: 'collection-item workItem darken-1 ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().textClass},
-                    text: $data.Name, css: {'chosen': $data.chosen()}, click: choseWorkItem"></a>
+            <a href="#!" data-bind="attr: {class: 'collection-item workItem darken-1 ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().textClass}, html: '<b>' + $data.Id + '</b> - ' + $data.Name + ' (<i>' + $data.TypeString + '</i>)', css: {'chosen': $data.chosen()}, click: choseWorkItem"></a>
         </div>
         <!-- /ko -->
     </div>
@@ -41,33 +40,135 @@
 <div id="settingsModal" data-bind="attr: {class: 'modal modal-fixed-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType},
      with: userSettings">
     <div class="modal-content">
-        <h4>Postavke</h4>
+        <h4 style="text-align: center;">Postavke</h4>
+        @*<br />*@
         <div id="settingsForm">
             <div class="row">
                 <div class="col s12">
-                    <div class="input-fieldd col s6">
-                        <label>Iznos sati za ručak</label>
+                    <div class="card blue-grey darken-4">
+                        <br />
+                        <h4 class="card-title white-text">Automagija</h4>
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col s12 m6 l6 xl3">
+                                    <div class="input-field">
+                                        <label for="lunchAmount">Iznos sati za ručak</label>
+                                        <input id="lunchAmount" type="number" placeholder="iznos" data-bind="value: $data.lunchWorkAmount">
+                                    </div>
+                                </div>
+                                <div class="col s12 m6 l6 xl6">
+                                    <div class="input-field">
+                                        <label for="logMonthAmount">Povijest ispunjenosti za koliko  mjeseci</label>
+                                        <input id="logMonthAmount" type="number" min="1" max="10" placeholder="iznos" data-bind="value: $data.monthsBack">
+                                    </div>
+                                </div>
+                                <div class="col s12 m6 l6 xl3">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: $data.mergeAutoButtons" />
+                                        <span>Spoji automatične gumbe u jedan</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
 
-                        <input id="lunchAmount" type="number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card blue-grey darken-4" id="semiAutomaticSettings">
+                        <br />
+                        <h4 class="card-title white-text">Polu-automagija</h4>
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col xl3">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: $data.showLunch" />
+                                        <span>Ručak</span>
+                                    </label>
+                                </div>
+                                <div class="col xl3">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: $data.showSickLeave" />
+                                        <span>Bolovanje</span>
+                                    </label>
+                                </div>
+                                <div class="col xl3">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: $data.showInternalMeeting" />
+                                        <span>Interni sastanak</span>
+                                    </label>
+                                </div>
+                                <div class="col xl3">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: $data.showOnTime" />
+                                        <span>OnTime unos</span>
+                                    </label>
+                                </div>
+                                <div class="col xl3">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: $data.showCollegueSupport" />
+                                        <span>Podrška kolegi</span>
+                                    </label>
+                                </div>
+                                <div class="col xl3">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: $data.showEducation" />
+                                        <span>Edukacija</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col xl12">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: $data.overrideFullDaySemiAutomatic" />
+                                        <span>Ignoriraj puni dan kod unosa</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="switch">
-                <label>
-                    Off
-                    <input type="checkbox">
-                    <span class="lever"></span>
-                    On
-                </label>
-                <span style="margin-left: 25px;">Spoji automatične gumbe u jedan</span>
+            <div class="row">
+                <div class="col s12">
+                    <div class="card blue-grey darken-4" id="manualSettings">
+                        <br />
+                        <h4 class="card-title white-text">Ručni unos</h4>
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col xl12">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: $data.overrideFullDayCustom" />
+                                        <span>Ignoriraj puni dan kod unosa</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-            @*<label>
-                <input type="checkbox" />
-                <span>Spoji automatične gumbe u jedan</span>
-            </label>*@
+            @*<div class="switch">
+                    <label>
+                        Off
+                        <input type="checkbox">
+                        <span class="lever"></span>
+                        On
+                    </label>
+                    <span style="margin-left: 25px;">Spoji automatične gumbe u jedan</span>
+                </div>*@
+
         </div>
     </div>
-    <div data-bind="attr: {class: 'modal-footer ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().styleType}">
+    <div data-bind="attr: {class: 'modal-footer ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().styleType}, click: saveSettings">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
     </div>
 </div>

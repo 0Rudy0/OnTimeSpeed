@@ -11,7 +11,7 @@ namespace OnTimeSpeed.EntryImplementations
 {
     public class PaidLeaveEntry : IAutomaticEntry
     {
-        public bool CanAddWorkLog(List<WorkLog> logs, Dictionary<DateTime, string> vacationDays, WorkItem newItem, DateTime onDate, out float addAmount)
+        public bool CanAddWorkLog(List<WorkLog> logs, Dictionary<DateTime, string> vacationDays, WorkItem newItem, DateTime onDate, float lunchAmount, out float addAmount)
         {
             addAmount = 0;
 
@@ -24,7 +24,7 @@ namespace OnTimeSpeed.EntryImplementations
                 var workedOnDay = logsForDay.Sum(l => l.work_done.duration_minutes / 60);
 
                 if (workedOnDay >= 8)
-                    return false; //nema mjesta za dodati praznik, očito se radilo već taj dan
+                    return false; //nema mjesta za dodati plaćeni dopus, očito se radilo već taj dan
 
                 foreach (var log in logsForDay)
                 {
@@ -58,6 +58,11 @@ namespace OnTimeSpeed.EntryImplementations
         public async Task<Dictionary<DateTime, string>> GetApprovedVacationDays(HrNetMobile.Models.User hrproUser)
         {
             return await DAL_HrProApi.GetPaidLeaves(hrproUser);
+        }
+
+        public string GetEntryDescription()
+        {
+            return "Plaćeni dopust";
         }
 
         public WorkItem GetTaskForDate(List<WorkItem> items, DateTime forDate)

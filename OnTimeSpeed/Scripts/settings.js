@@ -13,6 +13,17 @@ function loadSettings() {
 
         viewModel.userSettings().chosenWorkTypes(settings.chosenWorkTypes);
         viewModel.userSettings().chosenWorkItems(settings.chosenWorkItems);
+        viewModel.userSettings().mergeAutoButtons(settings.mergeAutoButtons);
+        viewModel.userSettings().lunchWorkAmount(settings.lunchWorkAmount);
+        viewModel.userSettings().showLunch(settings.showLunch);
+        viewModel.userSettings().showEducation(settings.showEducation);
+        viewModel.userSettings().showCollegueSupport(settings.showCollegueSupport);
+        viewModel.userSettings().showOnTime(settings.showOnTime);
+        viewModel.userSettings().showInternalMeeting(settings.showInternalMeeting);
+        viewModel.userSettings().showSickLeave(settings.showSickLeave);
+        viewModel.userSettings().overrideFullDayCustom(settings.overrideFullDayCustom);
+        viewModel.userSettings().overrideFullDaySemiAutomatic(settings.overrideFullDaySemiAutomatic);
+
         viewModel.userSettings().openedAccordion = settings.openedAccordion;
         for (var i = 0; i < settings.templates.length; i++) {
             viewModel.userSettings().templates.push({

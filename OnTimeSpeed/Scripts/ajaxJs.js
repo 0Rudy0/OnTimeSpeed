@@ -9,13 +9,7 @@
         cache: false,
         success: callback.bind(this),
         error: function (er) {
-            $('.spinner').hide();
-            var tempToast = {
-                html: '<span style="color: white">Dogodila se greška</span>',
-                classes: toastClasses,
-                displayLength: toastLong
-            };
-            M.toast(tempToast);
+            $('.spinner').hide();            
         }
     });
 }
@@ -32,13 +26,6 @@ function ajaxPOST(ajaxObj, callback) {
         success: callback.bind(this),
         error: function (er) {
             $('.spinner').hide();
-
-            var tempToast = {
-                html: '<span style="color: white">Dogodila se greška</span>',
-                classes: 'red darken-2',
-                displayLength: toastLong
-            };
-            M.toast(tempToast);
         }
     });
 }
@@ -46,8 +33,23 @@ function ajaxPOST(ajaxObj, callback) {
 $(document).ajaxError(function (event, request, settings, thrownError) {
     //debugger;
 
-    if (request.getResponseHeader('REQUIRES_AUTH') === '1') {
+    if (request.getResponseHeader('REQUIRES_AUTH_ONTIME') === '1') {
+        $('.spinner').show();
+        sessionStorage.setItem("reauthPreformed", 1);
         location.reload();
+    }
+    if (request.getResponseHeader('REQUIRES_AUTH_HRPRO') === '1') {
+        $('.spinner').show();
+        sessionStorage.setItem("reauthPreformed", 1);
+        location.reload();
+    }
+    else if (request.getResponseHeader('REQUIRES_AUTH_ONTIME') != '1' && request.getResponseHeader('REQUIRES_AUTH_HRPRO') != '1') {
+        var tempToast = {
+            html: '<span style="color: white">Dogodila se greška</span>',
+            classes: 'red darken-2',
+            displayLength: toastLong
+        };
+        M.toast(tempToast);
     }
 });
 
@@ -55,9 +57,13 @@ $(document).ajaxSuccess(function (event, request, settings) {
     //debugger;
 
     if (request.getResponseHeader('REQUIRES_AUTH_ONTIME') === '1') {
+        $('.spinner').show();
+        sessionStorage.setItem("reauthPreformed", 1);
         location.reload();
     }
     if (request.getResponseHeader('REQUIRES_AUTH_HRPRO') === '1') {
+        $('.spinner').show();
+        sessionStorage.setItem("reauthPreformed", 1);
         location.reload();
     }
 });

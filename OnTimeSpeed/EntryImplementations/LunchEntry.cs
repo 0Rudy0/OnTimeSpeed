@@ -9,9 +9,9 @@ using System.Web;
 
 namespace OnTimeSpeed.EntryImplementations
 {
-    public class LunchEntry : IAutomaticEntry
+    public class LunchEntry : IAutomaticEntry, ISemiAutomaticEntry
     {
-        public bool CanAddWorkLog(List<WorkLog> logs, Dictionary<DateTime, string> vacationDays, WorkItem newItem, DateTime onDate, out float addAmount)
+        public bool CanAddWorkLog(List<WorkLog> logs, Dictionary<DateTime, string> vacationDays, WorkItem newItem, DateTime onDate, float lunchAmount, out float addAmount)
         {
             addAmount = 0;
 
@@ -24,7 +24,7 @@ namespace OnTimeSpeed.EntryImplementations
                 var logsForDay = logs.Where(l => l.date_time.Date == onDate.Date);
                 var workedOnDay = logsForDay.Sum(l => l.work_done.duration_minutes / 60);
 
-                if (workedOnDay >= 7.5)
+                if (workedOnDay + lunchAmount > 8)
                     return false; //nema mjesta za dodati ručak
 
                 foreach (var log in logsForDay)
@@ -36,7 +36,7 @@ namespace OnTimeSpeed.EntryImplementations
                     }
                 }
 
-                addAmount = 0.5f;
+                addAmount = lunchAmount;
                 return canAdd;
             }
             else
@@ -46,6 +46,11 @@ namespace OnTimeSpeed.EntryImplementations
         public object CreateWorkLogObj(int userId, int itemId, DateTime forDate, float addAmount, Dictionary<DateTime, string> vacationDays)
         {
             return PrepareData.CreateWorkLogObject(userId, addAmount, AppSettings.GetInt("rucakWorkLogType"), itemId, "tasks", forDate);
+        }
+
+        public object CreateWorkLogObj(int userId, int itemId, DateTime forDate, float addAmount, string description)
+        {
+            return CreateWorkLogObj(userId, itemId, forDate, addAmount, new Dictionary<DateTime, string>());
         }
 
         public async Task<List<WorkItem>> GetAllRelatedTasks(Models.User user)
@@ -68,6 +73,11 @@ namespace OnTimeSpeed.EntryImplementations
                     dict.Add(d.Key, d.Value);
             }
             return dict;
+        }
+
+        public string GetEntryDescription()
+        {
+            return "Ručak";
         }
 
         public WorkItem GetTaskForDate(List<WorkItem> items, DateTime forDate)

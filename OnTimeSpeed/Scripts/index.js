@@ -18,7 +18,6 @@ $(function () {
     var instances = M.Collapsible.init(elems, {
     });
    
-
     if (loggedIn) {
         getWorkLogs();
         initWorkLogChart([], []);
@@ -27,10 +26,11 @@ $(function () {
         $('.spinner').hide();
     }
     $('.container').show();
-    $('#addLunchBtn').click(addLunch);
-    $('#addHolidaysButton').click(addHolidays);
-    $('#addVacationButton').click(addVacations);
-    $('#addPaidLeaveButton').click(addPaidLeaves);
+    //$('#addLunchBtn').click(addLunch);
+    //$('#addHolidaysButton').click(addHolidays);
+    //$('#addVacationButton').click(addVacations);
+    //$('#addPaidLeaveButton').click(addPaidLeaves);
+    //$('#addAllAutomatic').click(addAllAutomatic);
 
 
     viewModel = new ViewModel();
@@ -43,6 +43,7 @@ $(function () {
         var instance = M.Collapsible.getInstance($('.collapsible')[0]);
         instance.open(openedIndex);
     }
+    
 })
 
 
@@ -57,7 +58,6 @@ function getWorkLogs(forDate, groupIndex) {
         currGroupIndex = 0;
         breadCrumbs = [];
     }
-
     refreshBreadCrumbs();
 
     getWorkLogsAction(forDate);
@@ -147,13 +147,23 @@ function getWorkLogsAction(forDate) {
         //});
 
         $('.modal').modal();
+        var authPerformed = sessionStorage.getItem("reauthPreformed");
+        if (authPerformed) {
+            sessionStorage.removeItem("reauthPreformed");
+            var tempToast = {
+                html: '<span style="color: black">Ponovno ste prijavljeni u aplikaciju.<br>Ponovite zadnju akciju</span><button class="btn-flat toast-action" onclick="closeNotification(this)">X</button>',
+                classes: toastClasses,
+                displayLength: toastLong
+            };
+            M.toast(tempToast);
+        }
 
         //console.log(instances);
     });
 }
 function initWorkLogChart(categories, series) {
     var tooltipFormatter = function () {
-        var txt = '<table class="totalsWorkLogTable striped"><tr><th>Predmet</th><th>Work type</th><th>Opis</th><th>Broj sati</th></tr>';
+        var txt = '<h4 class="workLogsTableTitle">' + this.x + '</h4><table class="totalsWorkLogTable striped blue-grey lighten-2"><tr><th>Predmet</th><th>Work type</th><th>Opis</th><th>Broj sati</th></tr>';
         var total = 0;
         for (var prop in workLogData.WorkLogs) {
             if (Object.prototype.hasOwnProperty.call(workLogData.WorkLogs, prop)) {
@@ -269,39 +279,6 @@ function initWorkLogChart(categories, series) {
     });
 }
 
-function generateToastObjs(msg, title, noNewEntryMsg) {
-    if (msg.length > maxDetailsLng) {
-        toastObj = {
-            html: '<span style="color: black; text-align: right">' + title + ' je unesen <b>' + msg.length + '</b> puta</span><button class="btn-flat toast-action">X</button>',
-            classes: toastClasses,
-            displayLength: toastLong
-        };
-
-    }
-    else if (msg.length > 0) {
-        var str = '<span style="font-size:12px">';
-        for (var i = 0; i < msg.length; i++) {
-            str += '</br>' + msg[i];
-        }
-        str += '</span>';
-        toastObj = {
-            html: '<span style="color: black; text-align: right">' + title + ' je unesen <b>' + msg.length + '</b> puta za sljedeće datume:' + str + '</span><button class="btn-flat toast-action">X</button>',
-            classes: toastClasses,
-            displayLength: toastLong
-        };
-    }
-    if (msg.length > 0)
-        getWorkLogs();
-    else {
-        $('.spinner').hide();
-        toastObj = {
-            html: '<span style="color: black; text-align: right">' + noNewEntryMsg + '</span><button class="btn-flat toast-action">X</button>',
-            classes: toastClasses,
-            displayLength: toastShort
-        };
-        M.toast(toastObj);
-    }
-}
 
 
 
@@ -320,4 +297,9 @@ function onAccordionOpen(index) {
         }
     }, 0);
     //M.Collapsible.getInstance($('.collapsible')[0]).open(2);
+}
+
+function closeNotification(element) {
+    $(element).parent().hide();
+    //console.log(event.targetElement);
 }

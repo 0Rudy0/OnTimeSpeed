@@ -2,26 +2,40 @@
 <div class="card">
     <div data-bind="attr: {class : 'card-content ' + $data.styleClass + ' ' + $data.styleType + ' ' + $data.textClass + ' ' + $data.textType}">
         <div class="activityButtons">
-            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+            <!-- ko if: !$parent.userSettings().mergeAutoButtons()-->
+            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType},
+               click: addLunch"
                id="addLunchBtn">
                 <i class="fad fa-utensils-alt"></i>
                 <span>Ručak</span>
             </a>
-            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType},
+               click: addHolidays"
                id="addHolidaysButton">
                 <i class="fad fa-lights-holiday"></i>
                 <span>Praznici</span>
             </a>
             <!-- ko if: $parent.hrproUser() != null -->
-            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType},
+               click: addVacations"
                id="addVacationButton">
                 <i class="fad fa-umbrella-beach"></i>
                 <span>Godišnji odmor</span>
             </a>
-            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType}"
+            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType},
+               click: addPaidLeaves"
                id="addPaidLeaveButton">
                 <i class="fad fa-umbrella-beach"></i>
                 <span>Plaćeni dopust</span>
+            </a>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: $parent.userSettings().mergeAutoButtons()-->
+            <a data-bind="attr: {class : 'waves-effect btn btn-large withIcon ' + $data.styleClass + ' ' + $data.buttonType},
+               click: addAllAutomatic"
+               id="addAllAutomatic">
+                <i class="fad fa-magic"></i>
+                <span>Ručak , Praznici , GO , Plaćeni dopust</span>
             </a>
             <!-- /ko -->
         </div>

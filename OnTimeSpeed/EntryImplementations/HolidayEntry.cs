@@ -11,7 +11,7 @@ namespace OnTimeSpeed.EntryImplementations
 {
     public class HolidayEntry : IAutomaticEntry
     {
-        public bool CanAddWorkLog(List<WorkLog> logs, Dictionary<DateTime, string> vacationDays, WorkItem newItem, DateTime onDate, out float addAmount)
+        public bool CanAddWorkLog(List<WorkLog> logs, Dictionary<DateTime, string> vacationDays, WorkItem newItem, DateTime onDate, float lunchAmount, out float addAmount)
         {
             addAmount = 0;
 
@@ -53,6 +53,11 @@ namespace OnTimeSpeed.EntryImplementations
         public async Task<Dictionary<DateTime, string>> GetApprovedVacationDays(HrNetMobile.Models.User hrproUser)
         {
             return new Dictionary<DateTime, string>();
+        }
+
+        public string GetEntryDescription()
+        {
+            return "Praznik";
         }
 
         public WorkItem GetTaskForDate(List<WorkItem> items, DateTime forDate)

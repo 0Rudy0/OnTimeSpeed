@@ -6,7 +6,18 @@
         chosenWorkItems: ko.observableArray([]),
         templates: ko.observableArray([]),
         openedAccordion: null,
-        templates: ko.observableArray()
+        templates: ko.observableArray(),
+        mergeAutoButtons: ko.observable(false),
+        lunchWorkAmount: ko.observable(0.5),
+        monthsBack: monthsBack,
+        showLunch: ko.observable(true),
+        showSickLeave: ko.observable(true),
+        showInternalMeeting: ko.observable(true),
+        showOnTime: ko.observable(true),
+        showCollegueSupport: ko.observable(true),
+        showEducation: ko.observable(true),
+        overrideFullDayCustom: ko.observable(false),
+        overrideFullDaySemiAutomatic: ko.observable(false)
     });
 
     self.breadCrumbs = ko.observableArray([]);

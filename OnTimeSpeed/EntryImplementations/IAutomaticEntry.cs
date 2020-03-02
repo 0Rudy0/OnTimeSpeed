@@ -16,8 +16,10 @@ namespace OnTimeSpeed.EntryImplementations
 
         WorkItem GetTaskForDate(List<WorkItem> items, DateTime forDate);
 
-        bool CanAddWorkLog(List<WorkLog> logs, Dictionary<DateTime, string> vacationDays, WorkItem newItem, DateTime onDate, out float addAmount);
+        bool CanAddWorkLog(List<WorkLog> logs, Dictionary<DateTime, string> vacationDays, WorkItem newItem, DateTime onDate, float lunchAmount, out float addAmount);
 
         object CreateWorkLogObj(int userId, int itemId, DateTime forDate, float addAmount, Dictionary<DateTime, string> vacationDays);
+
+        string GetEntryDescription();
     }
 }

@@ -54,5 +54,11 @@
 		"Templates": [
 			"HRPRO - YYYY - Podrška kolegi/Edukacija kolege"
 		]
+	},
+	{
+		"Name": "skolovanjeSastanakTemplate",
+		"Templates": [
+			"HRPRO - YYYY - Edukacija"
+		]
 	}
 ]

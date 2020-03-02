@@ -14,6 +14,16 @@
     /*overflow-y: scroll;*/
 }
 
+.modal-content,
+.modal-close {
+    display: none;
+}
+
+.modal .modal-content,
+.modal .modal-close {
+    display: block !important;
+}
+
 .header-logo__image.axosoft {
     background-image: url(../Content/images/logo-axo-light.svg);
     width: 130px;
@@ -115,7 +125,7 @@
 
     .header_username .userName {
         display: inline-block;
-        margin-left: 7px;
+        margin-left: 10px;
     }
 
 .spinner {
@@ -282,13 +292,28 @@
     border-color: white;
 }
 
-.totalsWorkLogTable td {
-    padding: 5px 10px !important;
+.totalsWorkLogTable td,
+.totalsWorkLogTable th {
+    padding: 15px 20px !important;
+    /*font-size: 13px;*/
+}
+
+.totalsWorkLogTable th {
+    text-transform: uppercase;
+    background-color: #607d8b !important;
+    color: white !important;
 }
 
 .totalsWorkLogTable tr.totalWorkLog {
-    background-color: black !important;
+    background-color: #263238 !important;
     color: white !important;
+}
+
+.workLogsTableTitle {
+    font-size: 17px;
+    text-align: center;
+    margin: 10px;
+
 }
 
 .grey-text.text-darken-4 label,
@@ -394,6 +419,14 @@
         border-color: transparent;
     }
 
+        #addMoreWorkTypesModal .collection .collection-item.chosen,
+        #addMoreWorkItemsModal .collection .collection-item.chosen {
+            /*border-left: 5px solid white;*/
+            padding-left: 30px;
+            background-color: white !important;
+            color: black !important;
+        }
+
 .card.teal.darken-2 .btn.disabled {
     /*display: none;*/
     background-color: #80cbc4 !important;
@@ -476,4 +509,51 @@
 
 #templates .templatesList > .card > .card-content {
     background-color: #324047 !important;
+}
+
+#toast-container .toast {
+    padding-right: 50px;
+}
+
+#toast-container .toast-action {
+    color: #9c1a1a !important;
+    font-weight: bold !important;
+    position: absolute;
+    top: 5px;
+    right: 25px;
+}
+
+    #toast-container .toast-action:hover {
+        color: #db2929 !important;
+        /*transform: scale(1.1);*/
+    }
+
+    #toast-container .toast-action:active {
+        transform: scale(0.9);
+    }
+
+#settingsModal input {
+    width: 100px;
+}
+
+.activityButtons .row {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.activityButtons .col {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#semiAutomaticSettings .row:last-child {
+    margin-bottom: 0;
+}
+
+#semiAutomaticSettings .row .col {
+    margin-bottom: 10px;
+}
+
+#addEducationButton {
+    padding: 0 15px;
 }
