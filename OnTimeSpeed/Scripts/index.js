@@ -8,6 +8,7 @@ var maxDetailsLng = 20;
 var toastClasses = 'cyan lighten-4';
 var viewModel;
 var searchStack = [];
+var closeBtnHtml = '<button class="btn-flat toast-action" onclick="closeNotification(this)">X</button>';
 
 var dateFromPickers = {
     semiAutomaticDateFrom: null
@@ -151,7 +152,7 @@ function getWorkLogsAction(forDate) {
         if (authPerformed) {
             sessionStorage.removeItem("reauthPreformed");
             var tempToast = {
-                html: '<span style="color: black">Ponovno ste prijavljeni u aplikaciju.<br>Ponovite zadnju akciju</span><button class="btn-flat toast-action" onclick="closeNotification(this)">X</button>',
+                html: '<span style="color: black">Ponovno ste prijavljeni u aplikaciju.<br>Ponovite zadnju akciju</span>' + closeBtn,
                 classes: toastClasses,
                 displayLength: toastLong
             };
@@ -170,13 +171,16 @@ function initWorkLogChart(categories, series) {
                 if (prop == this.x) {
                     for (var i = 0; i < workLogData.WorkLogs[prop].length; i++) {
                         var log = workLogData.WorkLogs[prop][i];
+                        log.Description = log.Description == null ? '' : log.Description;
                         txt += '<tr><td>' + log.ItemName + '</td><td>' + log.WorkType + '</td><td>' + log.Descripton + '</td><td>' + log.Amount + ' hrs' + '</td></tr>';
                         total += log.Amount;
                     }
                 }
             }
         }
-        txt += '<tr class="totalWorkLog"><td>UKUPNO</td><td></td><td></td><td>' + total + ' hrs' + '</td></tr>';
+        if (total < 8 || true) {
+            txt += '<tr class="totalWorkLog"><td>UKUPNO</td><td></td><td></td><td>' + total + ' hrs' + '</td></tr>';
+        }
         txt += '</table>'
         //for (var i = 0; i < workLogData.WorkLogs.length; i++) {
         //    if ()
@@ -302,4 +306,24 @@ function onAccordionOpen(index) {
 function closeNotification(element) {
     $(element).parent().hide();
     //console.log(event.targetElement);
+}
+
+function openAutomaticEntryModalInfo(a, event) {
+    event.stopPropagation();
+    M.Modal.getInstance($('#automaticEntryModalInfo')[0]).open();
+}
+
+function openSemiAutomaticEntryModalInfo(a, event) {
+    event.stopPropagation();
+    M.Modal.getInstance($('#semiAutomaticEntryModalInfo')[0]).open();
+}
+
+function openCustomEntryModalInfo(a, event) {
+    event.stopPropagation();
+    M.Modal.getInstance($('#customEntryModalInfo')[0]).open();
+}
+
+function openTemplateEntryModalInfo(a, event) {
+    event.stopPropagation();
+    M.Modal.getInstance($('#templateEntryModalInfo')[0]).open();
 }

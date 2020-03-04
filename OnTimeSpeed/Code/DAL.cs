@@ -214,7 +214,11 @@ namespace OnTimeSpeed.Code
                 result = ApiHelper.GetObjectFromApiResponse<List<WorkLog>>(content);
 
                 result = result.OrderBy(r => r.date_time).ToList();
-                result.ForEach(r => r.date_time.ToLocalTime());
+                result.ForEach(r =>
+                {
+                    r.date_time.ToLocalTime();
+                    r.description = String.IsNullOrEmpty(r.description) ? String.Empty : r.description;
+                });
 
                 HttpRuntime.Cache.Insert(cacheKey,
                     result,
@@ -390,7 +394,7 @@ namespace OnTimeSpeed.Code
             return result;
         }
 
-        #endregion        
+        #endregion
 
         #region ADD WORK ITEMS
 

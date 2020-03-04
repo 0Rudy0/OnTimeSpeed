@@ -6,28 +6,40 @@
         workAmount: ko.observable(viewModel.customEntry().workAmount())
     }
 
-    viewModel.userSettings().templates.push(data);
-    saveSettings();
-
-    var tempToast = {
-        html: '<span style="color: black">Predložak dodan</span><button class="btn-flat toast-action" onclick="closeNotification(this)">X</button>',
-        classes: toastClasses,
-        displayLength: toastShort
-    };
-    M.toast(tempToast); 
-
-    /*if (validateForm.apply(data)) {    
-        viewModel.userSettings().templates.push(data);
-        saveSettings();
+    if (!data.workItem || !data.workType) {
+         var tempToast = {
+            html: '<span style="color: black">Predmet i vrsta rada trebaju biti odabrani</span>' + closeBtnHtml,
+            classes: toastClasses,
+            displayLength: toastShort
+        };
+        M.toast(tempToast); 
+        return;
     }
     else {
+
+        viewModel.userSettings().templates.push(data);
+        saveSettings();
+
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
+            html: '<span style="color: black">Predložak dodan</span>' + closeBtnHtml,
             classes: toastClasses,
-            displayLength: toastLong
+            displayLength: toastShort
         };
-        M.toast(tempToast);        
-    }*/
+        M.toast(tempToast); 
+
+        /*if (validateForm.apply(data)) {    
+            viewModel.userSettings().templates.push(data);
+            saveSettings();
+        }
+        else {
+            var tempToast = {
+                html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
+                classes: toastClasses,
+                displayLength: toastLong
+            };
+            M.toast(tempToast);        
+        }*/
+    }
 }
 
 function removeTemplate() {

@@ -6129,3 +6129,127 @@ Parameter name: parameters</code></span><br />
 		</div>
 	</div>
 
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>2.3.2020. 16:35:55</span><span class='timeUtc' style='display: none'>2020-03-02T16:35:55.0260689+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Object reference not set to an instance of an object.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>WebGrease</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Microsoft.Ajax.Utilities.AstNode ParseExpression(Microsoft.Ajax.Utilities.AstNode, Boolean, Boolean, Microsoft.Ajax.Utilities.JSToken)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseExpression(AstNode leftHandSide, Boolean single, Boolean bCanAssign, JSToken inToken)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseExpression(AstNode leftHandSide, Boolean single, Boolean bCanAssign, JSToken inToken)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseLeftHandSideExpression(Boolean isMinus)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseUnaryExpression(Boolean& isLeftHandSideExpr, Boolean isMinus)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseExpression(AstNode leftHandSide, Boolean single, Boolean bCanAssign, JSToken inToken)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseExpressionStatement(Boolean fSourceElement)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseStatement(Boolean fSourceElement, Boolean skipImportantComment)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseBlock()
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseForStatement()
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseBlock()
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseIfStatement()
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseBlock()
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseIfStatement()
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseBlock()
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseForStatement()
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseFunctionBody(Block body)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseFunction(FunctionType functionType, Context fncCtx)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseLeftHandSideExpression(Boolean isMinus)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseUnaryExpression(Boolean& isLeftHandSideExpr, Boolean isMinus)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseVarDecl(JSToken inToken)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseVariableStatement()
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseFunctionBody(Block body)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseFunction(FunctionType functionType, Context fncCtx)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseStatement(Boolean fSourceElement, Boolean skipImportantComment)
+  <br>at Microsoft.Ajax.Utilities.JSParser.ParseStatements(Block block)
+  <br>at Microsoft.Ajax.Utilities.JSParser.InternalParse()
+  <br>at Microsoft.Ajax.Utilities.Minifier.MinifyJavaScript(String source, CodeSettings codeSettings)
+  <br>at System.Web.Optimization.JsMinify.Process(BundleContext context, BundleResponse response)
+  <br>at System.Web.Optimization.Bundle.ApplyTransforms(BundleContext context, String bundleContent, IEnumerable`1 bundleFiles)
+  <br>at System.Web.Optimization.Bundle.GetBundleResponse(BundleContext context)
+  <br>at System.Web.Optimization.BundleResolver.GetBundleContents(String virtualPath)
+  <br>at System.Web.Optimization.AssetManager.DeterminePathsToRender(IEnumerable`1 assets)
+  <br>at System.Web.Optimization.AssetManager.RenderExplicit(String tagFormat, String[] paths)
+  <br>at ASP._Page_Views_Home_Index_cshtml.<>c__DisplayClass3_0.<Execute>b__0() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Views\Home\Index.cshtml:line 182
+  <br>at System.Web.WebPages.WebPageBase.<>c__DisplayClass42_0.<RenderSection>b__0(TextWriter tw)
+  <br>at System.Web.WebPages.WebPageBase.Write(HelperResult result)
+  <br>at ASP._Page_Views_Shared__Layout_cshtml.Execute() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Views\Shared\_Layout.cshtml:line 98
+  <br>at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+  <br>at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+  <br>at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+  <br>at System.Web.WebPages.WebPageBase.<>c__DisplayClass40_0.<RenderPageCore>b__0(TextWriter writer)
+  <br>at System.Web.WebPages.WebPageBase.Write(HelperResult result)
+  <br>at System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+  <br>at System.Web.WebPages.WebPageBase.PopContext()
+  <br>at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+  <br>at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+  <br>at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+  <br>at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+  <br>at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+  <br>at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>4.3.2020. 8:52:33</span><span class='timeUtc' style='display: none'>2020-03-04T08:52:33.6467660+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Object reference not set to an instance of an object.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>OnTimeSpeed</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.Web.Mvc.ActionResult Index()</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at OnTimeSpeed.Controllers.HomeController.Index() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 58
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>4.3.2020. 12:38:58</span><span class='timeUtc' style='display: none'>2020-03-04T12:38:58.8594333+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Object reference not set to an instance of an object.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>OnTimeSpeed</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.Web.Mvc.ActionResult Index()</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at OnTimeSpeed.Controllers.HomeController.Index() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 58
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>4.3.2020. 13:33:56</span><span class='timeUtc' style='display: none'>2020-03-04T13:33:56.4377436+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Object reference not set to an instance of an object.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>OnTimeSpeed</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.Web.Mvc.ActionResult Index()</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at OnTimeSpeed.Controllers.HomeController.Index() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 58
+		</div>
+	</div>
+

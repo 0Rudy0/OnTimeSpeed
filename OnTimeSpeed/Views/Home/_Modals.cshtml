@@ -1,4 +1,10 @@
-﻿<div id="addMoreWorkItemsModal"
+﻿@using OnTimeSpeed.Utils
+
+@{ 
+    var startAddingFrom = DateTime.Now.AddMonths(AppSettings.GetInt("monthsBackToStartAdding") * -1).ToFirstOfMonth().ToShortDateString();
+}
+
+<div id="addMoreWorkItemsModal"
      data-bind="attr: {class: 'modal modal-fixed-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
     <div class="spinner">
         <div class="bounce1"></div>
@@ -39,8 +45,10 @@
 
 <div id="settingsModal" data-bind="attr: {class: 'modal modal-fixed-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType},
      with: userSettings">
-    <div class="modal-content">
+    <div class="modal-title">
         <h4 style="text-align: center;">Postavke</h4>
+    </div>
+    <div class="modal-content">
         @*<br />*@
         <div id="settingsForm">
             <div class="row">
@@ -50,28 +58,26 @@
                         <h4 class="card-title white-text">Automagija</h4>
                         <div class="card-content">
                             <div class="row">
-                                <div class="col s12 m6 l6 xl3">
+                                <div class="col s12 m6 l6 xl4">
                                     <div class="input-field">
                                         <label for="lunchAmount">Iznos sati za ručak</label>
                                         <input id="lunchAmount" type="number" placeholder="iznos" data-bind="value: $data.lunchWorkAmount">
                                     </div>
                                 </div>
-                                <div class="col s12 m6 l6 xl6">
+                                @*<div class="col s12 m6 l6 xl6">
                                     <div class="input-field">
                                         <label for="logMonthAmount">Povijest ispunjenosti za koliko  mjeseci</label>
                                         <input id="logMonthAmount" type="number" min="1" max="10" placeholder="iznos" data-bind="value: $data.monthsBack">
                                     </div>
-                                </div>
-                                <div class="col s12 m6 l6 xl3">
+                                </div>*@
+                                <div class="col s12 m6 l6 xl8">
                                     <label>
                                         <input type="checkbox" data-bind="checked: $data.mergeAutoButtons" />
                                         <span>Spoji automatične gumbe u jedan</span>
                                     </label>
                                 </div>
                             </div>
-                            <div class="row">
-
-                            </div>
+                            @*  *@
                         </div>
                     </div>
                 </div>
@@ -127,7 +133,7 @@
                                 <div class="col xl12">
                                     <label>
                                         <input type="checkbox" data-bind="checked: $data.overrideFullDaySemiAutomatic" />
-                                        <span>Ignoriraj puni dan kod unosa</span>
+                                        <span>Ignoriraj puni dan kod unosa <b>*</b></span>
                                     </label>
                                 </div>
                             </div>
@@ -145,7 +151,7 @@
                                 <div class="col xl12">
                                     <label>
                                         <input type="checkbox" data-bind="checked: $data.overrideFullDayCustom" />
-                                        <span>Ignoriraj puni dan kod unosa</span>
+                                        <span>Ignoriraj puni dan kod unosa <b>*</b></span>
                                     </label>
                                 </div>
                             </div>
@@ -167,8 +173,111 @@
                 </div>*@
 
         </div>
+        <br />
+        * ako se ignorira puni dan kod unosa, aplikacija će unijeti željeni work log na odabrani datum čak i ako za taj dan već ima zalogiranih 8h (no upozoriti će ako se takav unos dogodi). U slučaju da je ignoriranje isključeno, takav unos se neće dogoditi.
     </div>
     <div data-bind="attr: {class: 'modal-footer ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().styleType}, click: saveSettings">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
+    </div>
+</div>
+
+<div id="automaticEntryModalInfo"
+     data-bind="attr: {class: 'modal modal-fixed-footer modalInfo ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+    <div class="modal-content">
+        <h5>Informacije o automagičnom unosu</h5>
+        
+            <i>Svi automagični unosi se sami brinu o tome da ne unesu 2 puta isti work log za isti dan što znači da ih možete klikati bilo kada koliko god puta želite.</i>
+        
+        <br />
+        <p><span class="subtitle">Ručak</span> - Unosi ručno postavljeni iznos sati za ručak u iznosu od
+        <span data-bind="text: ($data.userSettings().lunchWorkAmount() * 60) + ' minuta'"></span> (iznos je moguće promijeniti u postavkama)
+        za svaki dan od @startAddingFrom pa do danas, uz uvjet da na taj dan nije praznik te da za taj dan ne postoji zahtjev za GO / plaćeni dopust (praznik / GO / plaćeni dopust ne mora biti unesen u OnTime). </p>
+        <p><span class="subtitle">Praznici</span> - Unosi sve praznike od @startAddingFrom param do kraja tekućeg mjeseca, 8h na dan po prazniku neovisno o logovima koji eventualno već postoje za taj dan. Neće unijeti 2 puta praznike ako se gumb klikne više puta</p>
+        <p><span class="subtitle">Godišnji odmor</span> - Unosi sve godišnje odmore iz HrNet-a od @startAddingFrom pa do kraja tekućeg mjeseca koji su odobreni, 8h na dan neovisno o logovima koji eventualno već postoje za taj dan</p>
+        <p><span class="subtitle">Plaćeni dopust</span> - Unosi sve plaćene dopuste iz HrNet-a od @startAddingFrom pa do kraja tekućeg mjeseca koji su odobreni, 8h na dan neovisno o logovima koji eventualno već postoje za taj dan</p>
+        <br />
+        <p>Opcionalno, u postavkama možete spojiti sve automagične gumbe u jedan radi jednostavnosti koji onda slijedno izvršava unos sva 4 tipa automatičnog unosa. </p>
+    </div>
+    <div data-bind="attr: {class: 'modal-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
+    </div>
+</div>
+
+<div id="semiAutomaticEntryModalInfo"
+     data-bind="attr: {class: 'modal modal-fixed-footer modalInfo ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+    <div class="modal-content">
+        <h5>Informacije o polu-automagičnom unosu</h5>
+        <p>
+            Za određenje radnje postoje HRPRO taskovi za specifični period (npr poseban task za ručak za svaki kvartal, task za bolovanje za svaku godinu posebno, itd). 
+            <br />
+            Aplikacija zna prepoznati određeni set takvih taskova (pa ne trebate sami odabrati task i work type) te se oni nalaze u ovoj sekciji.
+        </p>
+        <br />
+        <i>
+            <b>Upozorenje:</b> polu-automatika <u>ne provjerava</u> da li već postoji isti unos za dan za koji se pokušava dodati work log pa treba pripaziti.
+            Međutim u postavkama postoji opcija "Ignoriraj puni dan kod unosa" koja je po defaultu uključena pa polu automagični unosi neće unijeti work log za željeni dan ako za taj dan već postoji logiranih 8h.
+         </i>
+        
+    </div>
+    <div data-bind="attr: {class: 'modal-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
+    </div>
+</div>
+
+<div id="customEntryModalInfo"
+     data-bind="attr: {class: 'modal modal-fixed-footer modalInfo ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+    <div class="modal-content">
+        <h5>Informacije o ručnom unosu</h5>
+        <p>
+            Ovdje možete sami proizvoljno dodavati work logove za jedan dan ili za određeni period. Kako bi odabrali <i>Predmet</i> i <i>vrstu rada</i>, potrebno ih je prvo dodati u svoju listu klikom na
+            <a class="waves-effect waves-light btn btn-small darken-2 withIcon blue-grey">
+                <i class="fad fa-plus"></i>
+            </a>
+            <br />
+            <i>Predmeti</i> se mogu pretraživati po ID-u ili po nazivu.
+            <br />
+            <i>Predmeti</i> i <i>vrste rada</i>, jednom dodani, ostaju na listi i nakon refresha stranice.
+            <br /><br />
+            Broj sati po danu može varirati od 0.1h do 8h, ili opcionalno klikom na
+            <a href="#" class="waves-effect waves-light btn btn-plusMax btn-small blue-grey darken-2">
+                <i class="fal fa-chevron-double-right"></i>
+            </a>
+            će aplikacija unijeti maksimalno koliko može s obzirom na već postojeće logove a da se ne pređe 8h. (npr ako već postoje logovi ukupne sume 5h, unijeti će se 3h. Ako već postoje logovi ukupne sume 8h, neće se ništa unijeti)
+            <br />
+            <a href="#" class="waves-effect waves-light btn btn-minus btn-small blue-grey darken-2">
+                <i class="fal fa-minus"></i>
+            </a>
+            i
+            <a href="#" class="waves-effect waves-light btn btn-minus btn-small blue-grey darken-2">
+                <i class="fal fa-plus"></i>
+            </a>
+            smanjuju/povećavaju iznos u razmacima od 0.5h
+            <br /><br />
+            Jednom kada odaberete predmet, vrstu rada, broj sati po danu te opis, osim akcije
+            <a href="#" class="waves-effect waves-light btn btn-small darken-4 withIcon blue-grey">
+                <i class="fad fa-plus"></i>
+                <span>Unesi</span>
+            </a>
+            postoji i akcija
+            <a href="#" class="waves-effect waves-light btn btn-small darken-4 blue-grey">Dodaj kao predložak</a>
+            koja sve uneseno dodaje u posebnu sekciju "Predlošci" za akcije koje se znaju ponavljati (npr interni sastanci tima).
+        </p>
+     </div>
+    <div data-bind="attr: {class: 'modal-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
+    </div>
+</div>
+
+<div id="templateEntryModalInfo"
+     data-bind="attr: {class: 'modal modal-fixed-footer modalInfo ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+    <div class="modal-content">
+        <h5>Informacije o predlošcima</h5>
+        <p><span class="subtitle">Ručak</span> - Unosi ručno postavljeni iznos sati za ručak (defaultno 30 minuta) za svaki dan do danas, uz uvjet da na taj dan nije praznik te da za taj dan ne postoji zahtjev za GO/plaćeni dopust (praznik/GO/plaćeni dopust ne mora biti unesen u OnTime).</p>
+        <p><span class="subtitle">Praznici</span> - Unosi sve praznike za tekući mjesec, 8h na dan po prazniku neovisno o logovima koji eventualno već postoje za taj dan</p>
+        <p><span class="subtitle">Godišnji odmor</span> - Unosi sve godišnje odmore iz HrNet-a koji su odobreni, 8h na dan neovisno o logovima koji eventualno već postoje za taj dan</p>
+        <p><span class="subtitle">Plaćeni dopust</span> - Unosi sve plaćene dopuste iz HrNet-a koji su odobreni, 8h na dan neovisno o logovima koji eventualno već postoje za taj dan</p>
+    </div>
+    <div data-bind="attr: {class: 'modal-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
     </div>
 </div>

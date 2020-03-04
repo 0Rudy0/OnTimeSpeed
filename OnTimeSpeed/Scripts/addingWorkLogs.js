@@ -7,7 +7,7 @@ function generateToastObjs(msg, title, noNewEntryMsg) {
     }
     if (msg.length > maxDetailsLng) {
         toastObj = {
-            html: '<span style="color: black; text-align: right">' + title + ' <b>' + realCounter + '</b> puta</span><button class="btn-flat toast-action" onclick="closeNotification(this)">X</button>',
+            html: '<span style="color: black; text-align: right">' + title + ' <b>' + realCounter + '</b> puta</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -20,7 +20,7 @@ function generateToastObjs(msg, title, noNewEntryMsg) {
         }
         str += '</span>';
         toastObj = {
-            html: '<span style="color: black; text-align: right">' + title + ' <b>' + realCounter + '</b> puta za sljedeće datume:' + str + '</span><button class="btn-flat toast-action" onclick="closeNotification(this)">X</button>',
+            html: '<span style="color: black; text-align: right">' + title + ' <b>' + realCounter + '</b> puta za sljedeće datume:' + str + '</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -30,7 +30,7 @@ function generateToastObjs(msg, title, noNewEntryMsg) {
     else {
         $('.spinner').hide();
         toastObj = {
-            html: '<span style="color: black; text-align: right">' + noNewEntryMsg + '</span><button class="btn-flat toast-action" onclick="closeNotification(this)">X</button>',
+            html: '<span style="color: black; text-align: right">' + noNewEntryMsg + '</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: 99999999
         };
@@ -113,7 +113,7 @@ function addLunchSemi() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
+            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -141,7 +141,7 @@ function addSickLeave() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
+            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -169,7 +169,7 @@ function addInternalMeeting() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
+            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -197,7 +197,7 @@ function addOnTimeEntry() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
+            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -224,7 +224,7 @@ function addColegueSupport() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
+            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -251,7 +251,7 @@ function addEducationButton() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
+            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -311,11 +311,11 @@ function validateForm() {
 
     if (!this.itemId) {
         isValid = false;
-        invalidFields += '<br>Work item';
+        invalidFields += '<br>Predmet';
     }
     if (!this.workTypeId) {
         isValid = false;
-        invalidFields += '<br>Work type';
+        invalidFields += '<br>Vrsta rada';
     }
     if (!this.amount) {
         isValid = false;
@@ -325,13 +325,14 @@ function validateForm() {
         isValid = false;
         invalidFields += '<br>Datum od';
     }
-    return isValid;
+    return invalidFields;
 }
 
 function addWorkLogDo() {
     var data = this;
 
-    if (validateForm.apply(data)) {
+    var validMsg = validateForm.apply(data);
+    if (validMsg.length === 0) {
         $('.spinner').show();
         ajaxPOST({
             url: '/Home/AddCustom',
@@ -340,7 +341,7 @@ function addWorkLogDo() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>',
+            html: '<span style="color: black">Nedostaju podaci u formi za unos:<br>' + validMsg + '</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };

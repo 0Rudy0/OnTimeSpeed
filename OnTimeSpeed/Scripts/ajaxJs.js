@@ -45,7 +45,7 @@ $(document).ajaxError(function (event, request, settings, thrownError) {
     }
     else if (request.getResponseHeader('REQUIRES_AUTH_ONTIME') != '1' && request.getResponseHeader('REQUIRES_AUTH_HRPRO') != '1') {
         var tempToast = {
-            html: '<span style="color: white">Dogodila se greška</span>',
+            html: '<span style="color: white">Dogodila se greška</span>' + closeBtnHtml,
             classes: 'red darken-2',
             displayLength: toastLong
         };

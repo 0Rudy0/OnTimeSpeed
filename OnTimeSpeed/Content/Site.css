@@ -25,6 +25,7 @@
 }
 
 .header-logo__image.axosoft {
+    position: fixed;
     background-image: url(../Content/images/logo-axo-light.svg);
     width: 130px;
     height: 40px;
@@ -37,7 +38,29 @@
 
 .container {
     display: none;
+    padding-top: 50px;
 }
+
+.collapsible-header {
+    position: relative;
+}
+
+.infoIcon {
+    position: absolute !important;
+    top: 6px;
+    right: -12px;
+    cursor: pointer;
+    font-size: 26px !important;
+    opacity: 0.4;
+}
+
+    .infoIcon:hover {
+        opacity: 1;
+    }
+
+    .infoIcon:active {
+        transform: scale(0.9);
+    }
 
 .connectBtn {
     background-color: #edf1f2;
@@ -93,7 +116,7 @@
     align-content: center;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 10px;
     right: 15px;
     padding: 0 10px 0 0;
@@ -126,11 +149,16 @@
     .header_username .userName {
         display: inline-block;
         margin-left: 10px;
+        margin-right: 17px;
     }
 
-.spinner {
-    display: block;
-}
+    .header_username i {
+        font-size: 18px;
+    }
+
+    .spinner {
+        display: block;
+    }
 
 #workLogChart {
     margin-bottom: 13px;
@@ -245,9 +273,13 @@
     position: absolute;
     left: 15px;
     top: 25px;
+}
+
+.btn-minus,
+.btn-plus {
+    border-radius: 10px;
     padding: 0 10px;
     font-size: 10px;
-    border-radius: 10px;
 }
 
 .buttonPreselects,
@@ -294,7 +326,8 @@
 
 .totalsWorkLogTable td,
 .totalsWorkLogTable th {
-    padding: 15px 20px !important;
+    padding: 5px 20px !important;
+    border-radius: 0;
     /*font-size: 13px;*/
 }
 
@@ -309,11 +342,15 @@
     color: white !important;
 }
 
+    .totalsWorkLogTable tr.totalWorkLog td {
+        /*padding: 10px 20px !important;*/
+        /*font-size: 16px;*/
+    }
+
 .workLogsTableTitle {
     font-size: 17px;
     text-align: center;
     margin: 10px;
-
 }
 
 .grey-text.text-darken-4 label,
@@ -507,9 +544,9 @@
     box-shadow: 0px 0px 5px rgba(255,255,255,0.24);
 }
 
-#templates .templatesList > .card > .card-content {
-    background-color: #324047 !important;
-}
+    #templates .templatesList > .card > .card-content {
+        background-color: #324047 !important;
+    }
 
 #toast-container .toast {
     padding-right: 50px;
@@ -546,7 +583,7 @@
     margin-bottom: 20px;
 }
 
-#semiAutomaticSettings .row:last-child {
+#settingsModal .row:last-child {
     margin-bottom: 0;
 }
 
@@ -557,3 +594,50 @@
 #addEducationButton {
     padding: 0 15px;
 }
+
+.modalInfo h5 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.modalInfo .subtitle {
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#settingsModal {
+    max-height: none;
+    height: 90%;
+    top: 5% !important;
+    overflow: hidden !important;
+}
+
+    #settingsModal.modal.modal-fixed-footer .modal-content {
+        height: calc(100% - 125px);
+    }
+
+.modal-title {
+    padding: 15px 0;
+    -webkit-box-shadow: 0px 1px 4px 0px rgba(82,104,115,0.73);
+    -moz-box-shadow: 0px 1px 4px 0px rgba(82,104,115,0.73);
+    box-shadow: 0px 1px 4px 0px rgba(82,104,115,0.73);
+    margin-bottom: 2px;
+}
+
+    .modal-title h4 {
+        margin-bottom: 0;
+    }
+
+    #customEntryModalInfo {
+        max-height: none;
+        height: 80%;
+    }
+
+    #customEntryModalInfo .btn {
+        margin: 0 10px;
+    }
+
+    #customEntryModalInfo p {
+        line-height: 35px;
+    }

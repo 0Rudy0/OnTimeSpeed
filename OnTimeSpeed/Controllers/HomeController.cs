@@ -55,6 +55,7 @@ namespace OnTimeSpeed.Controllers
 
                     model.HrProUser = _hrproUser;
                     Session["hrproUser"] = _hrproUser;
+                    HttpRuntime.Cache.Remove("workLogs_" + _user.id);
                 }
                 catch (Exception ex)
                 {
@@ -161,7 +162,7 @@ namespace OnTimeSpeed.Controllers
             addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddVacations(true)));
             addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddPaidLeaves(true)));
             addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddLunchToToday(amount, true)));
-                       
+
             if (addedOnDates.Count > 0 && addedOnDates.ElementAt(addedOnDates.Count - 1).Contains("-------"))
                 addedOnDates.RemoveAt(addedOnDates.Count - 1); //remove last separator
 
@@ -181,7 +182,7 @@ namespace OnTimeSpeed.Controllers
                 new LunchEntry(),
                 _user,
                 _hrproUser,
-                DateTime.Now.AddDays(AppSettings.GetInt("daysBackToStartAdding") * -1),
+                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBackToStartAdding") * -1).ToFirstOfMonth(),
                 DateTime.Now,
                 detailedLog,
                 amountParsed);
@@ -197,8 +198,8 @@ namespace OnTimeSpeed.Controllers
                 new HolidayEntry(),
                 _user,
                 _hrproUser,
-                DateTime.Now.AddDays(AppSettings.GetInt("daysBackToStartAdding") * -1).ToFirstOfMonth(),
-                DateTime.Now,
+                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBackToStartAdding") * -1).ToFirstOfMonth(),
+                DateTime.Now.ToLastOfMonth(),
                 detailedLog);
 
             return JsonConvert.SerializeObject(addedOnDates);
@@ -212,8 +213,8 @@ namespace OnTimeSpeed.Controllers
                new VacationEntry(),
                _user,
                _hrproUser,
-                DateTime.Now.AddDays(AppSettings.GetInt("daysBackToStartAdding") * -1).ToFirstOfMonth(),
-               DateTime.Now,
+               DateTime.Now.AddMonths(AppSettings.GetInt("monthsBackToStartAdding") * -1).ToFirstOfMonth(),
+               DateTime.Now.ToLastOfMonth(),
                detailedLog);
 
             return JsonConvert.SerializeObject(addedOnDates);
@@ -227,9 +228,9 @@ namespace OnTimeSpeed.Controllers
               new PaidLeaveEntry(),
               _user,
               _hrproUser,
-                DateTime.Now.AddDays(AppSettings.GetInt("daysBackToStartAdding") * -1).ToFirstOfMonth(),
-              DateTime.Now,
-               detailedLog);
+              DateTime.Now.AddMonths(AppSettings.GetInt("monthsBackToStartAdding") * -1).ToFirstOfMonth(),
+              DateTime.Now.ToLastOfMonth(),
+              detailedLog);
 
             return JsonConvert.SerializeObject(addedOnDates);
         }
