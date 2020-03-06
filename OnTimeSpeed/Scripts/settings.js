@@ -14,7 +14,7 @@ function loadSettings() {
         viewModel.userSettings().chosenWorkTypes(settings.chosenWorkTypes);
         viewModel.userSettings().chosenWorkItems(settings.chosenWorkItems);
         viewModel.userSettings().mergeAutoButtons(settings.mergeAutoButtons);
-        viewModel.userSettings().lunchWorkAmount(settings.lunchWorkAmount);
+        viewModel.userSettings().lunchWorkAmount(settings.lunchWorkAmount ? settings.lunchWorkAmount : 0.5);
         viewModel.userSettings().showLunch(settings.showLunch);
         viewModel.userSettings().showEducation(settings.showEducation);
         viewModel.userSettings().showCollegueSupport(settings.showCollegueSupport);

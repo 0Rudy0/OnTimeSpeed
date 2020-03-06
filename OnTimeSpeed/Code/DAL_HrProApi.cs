@@ -14,23 +14,38 @@ namespace OnTimeSpeed.Code
     {
         private static hrnet.DAL.VacationAPI _vacationAPI = new hrnet.DAL.VacationAPI();
 
-        public static async Task<List<DateTime>> GetHolidays(hrnetModel.User hrproUser)
+        public static async Task<Dictionary<DateTime, string>> GetHolidays(hrnetModel.User hrproUser)
         {
-            string cacheKey = "holidays";
-            List<DateTime> holidays = (List<DateTime>)HttpRuntime.Cache.Get(cacheKey);
-            if (holidays == null)
+            string cacheKey = "holidaysHrProAPI";
+            Dictionary<DateTime, string> holidays = (Dictionary<DateTime, string>)HttpRuntime.Cache.Get(cacheKey);
+            if (holidays == null && hrproUser != null)
             {
-                holidays = new List<DateTime>();
+                holidays = new Dictionary<DateTime, string>();
 
-                holidays.AddRange((await _vacationAPI.GetHolidaysAsync(DateTime.Now.Year - 1, hrproUser.LoggedContact.ID, hrproUser.TokenWebApi)).Select(h => h.DateFrom).ToList());
-                holidays.AddRange((await _vacationAPI.GetHolidaysAsync(DateTime.Now.Year, hrproUser.LoggedContact.ID, hrproUser.TokenWebApi)).Select(h => h.DateFrom).ToList());
-                holidays.AddRange((await _vacationAPI.GetHolidaysAsync(DateTime.Now.Year + 1, hrproUser.LoggedContact.ID, hrproUser.TokenWebApi)).Select(h => h.DateFrom).ToList());
+                //holidays.AddRange((await _vacationAPI.GetHolidaysAsync(DateTime.Now.Year - 1, hrproUser.LoggedContact.ID, hrproUser.TokenWebApi)).Select(h => h.DateFrom).ToList());
+                var result1 = await _vacationAPI.GetHolidaysAsync(DateTime.Now.Year - 1, hrproUser.LoggedContact.ID, hrproUser.TokenWebApi);
+
+                var dict1 = result1.ToDictionary(x => x.DateFrom, y => y.Name);
+                var dict2 = (await _vacationAPI.GetHolidaysAsync(DateTime.Now.Year, hrproUser.LoggedContact.ID, hrproUser.TokenWebApi)).ToDictionary(x => x.DateFrom, y => y.Name);
+                var dict3 = (await _vacationAPI.GetHolidaysAsync(DateTime.Now.Year + 1, hrproUser.LoggedContact.ID, hrproUser.TokenWebApi)).ToDictionary(x => x.DateFrom, y => y.Name);
+
+                foreach (var d in dict1)
+                    if (holidays.ContainsKey(d.Key) == false)
+                        holidays.Add(d.Key, d.Value);
+
+                foreach (var d in dict2)
+                    if (holidays.ContainsKey(d.Key) == false)
+                        holidays.Add(d.Key, d.Value);
+                foreach (var d in dict3)
+
+                    if (holidays.ContainsKey(d.Key) == false)
+                        holidays.Add(d.Key, d.Value);
 
                 HttpRuntime.Cache.Insert(cacheKey,
                     holidays,
                     null,
                     Cache.NoAbsoluteExpiration,
-                    TimeSpan.FromMinutes(9999),
+                    TimeSpan.FromMinutes(1440), //1 dan
                     CacheItemPriority.Normal,
                     null);
             }
@@ -43,7 +58,7 @@ namespace OnTimeSpeed.Code
             var cacheKey = "vacations_" + hrproUser.Username;
 
             var vacationDays = (Dictionary<DateTime, string>)HttpRuntime.Cache.Get(cacheKey);
-            if (vacationDays == null)
+            if (vacationDays == null && hrproUser != null)
             {
                 var userId = hrproUser.LoggedContact.ID;
                 var token = hrproUser.TokenWebApi;
@@ -87,7 +102,7 @@ namespace OnTimeSpeed.Code
             var cacheKey = "paidLeaves_" + hrproUser.Username;
             var paidLeaves = (Dictionary<DateTime, string>)HttpRuntime.Cache.Get(cacheKey);
 
-            if (paidLeaves == null)
+            if (paidLeaves == null && hrproUser != null)
             {
                 var userId = hrproUser.LoggedContact.ID;
                 var token = hrproUser.TokenWebApi;

@@ -36,8 +36,9 @@ namespace OnTimeSpeed.Controllers
 
             daysBack = AppSettings.GetInt("daysBackToStartAdding") * -1;
 
-            //if (DateUtils.Holidays.Count == 0)
-            //    DateUtils.Holidays = DAL_HrProApi.GetHolidays();
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
+            
         }
 
         public ActionResult Index()
@@ -48,14 +49,18 @@ namespace OnTimeSpeed.Controllers
             {
                 try
                 {
+                    LogUtils.Debug("Pokušaj logina s " + user);
                     _hrproUser = DAL.AuthHrNet(new hrnetModel.User
                     {
                         Username = user
                     });
+                    if (_hrproUser == null)
+                        LogUtils.Debug("neuspješna prijava");
+                    else
+                        LogUtils.Debug("Prijava uspješna!");
 
                     model.HrProUser = _hrproUser;
                     Session["hrproUser"] = _hrproUser;
-                    HttpRuntime.Cache.Remove("workLogs_" + _user.id);
                 }
                 catch (Exception ex)
                 {
@@ -66,7 +71,8 @@ namespace OnTimeSpeed.Controllers
             {
                 model.HrProUser = _hrproUser;
             }
-
+            if (_user != null) 
+                HttpRuntime.Cache.Remove("workLogs_" + _user.id);
             //_user = new User
             //{
             //    id = 5,
@@ -76,10 +82,28 @@ namespace OnTimeSpeed.Controllers
 
             model.OnTimeUser = _user;
             if (_user != null)
-                model.AllWorkTypes = DAL.GetWorkTypes();
+                model.AllWorkTypes = DAL.GetWorkTypes();         
 
             ViewBag.serial = VariousUtils.SerializeAndEncodeUser(_user);
             return View(model);
+        }
+
+        public async Task<string> GetHolidays()
+        {
+            if (DateUtils.Holidays.Count == 0 && _hrproUser != null)
+                DateUtils.Holidays = await DAL_HrProApi.GetHolidays(_hrproUser);
+            else
+            {
+                try
+                {
+                    DateUtils.Holidays = Holidays.GetHolidays(DateTime.Now.Year);
+                }
+                catch (Exception ex)
+                {
+                    LogUtils.LogException(ex);
+                }
+            }
+            return JsonConvert.SerializeObject(DateUtils.Holidays);
         }
 
         public async Task<bool> RecoverUser(string user)
@@ -155,7 +179,7 @@ namespace OnTimeSpeed.Controllers
         #region Add automatic
 
         [HttpPost]
-        [AuthorizeHrPro]
+        //[AuthorizeHrPro]
         public async Task<string> AddAllAutomatic(string amount = "0.5")
         {
             var addedOnDates = JsonConvert.DeserializeObject<List<string>>(await AddHolidays(true));
@@ -170,7 +194,7 @@ namespace OnTimeSpeed.Controllers
         }
 
         [HttpPost]
-        [AuthorizeHrPro]
+        //[AuthorizeHrPro]
         public async Task<string> AddLunchToToday(
             string amount, bool detailedLog = false)
         {
@@ -240,7 +264,7 @@ namespace OnTimeSpeed.Controllers
         #region Add semi automatic
 
         [HttpPost]
-        [AuthorizeHrPro]
+        //[AuthorizeHrPro]
         public async Task<string> AddLunch(
            float amount,
            string dateFromStr,

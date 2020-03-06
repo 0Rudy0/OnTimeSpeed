@@ -33,6 +33,8 @@
     background-size: 100%;
     background-repeat: no-repeat;
     margin: 10px;
+    top: 0;
+    left: 0;
     /*height:*/
 }
 
@@ -631,7 +633,8 @@
 
     #customEntryModalInfo {
         max-height: none;
-        height: 80%;
+        height: 90%;
+        top: 5% !important;
     }
 
     #customEntryModalInfo .btn {

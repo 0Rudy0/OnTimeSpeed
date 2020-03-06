@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using OnTimeSpeed.Utils;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -25,9 +26,12 @@ namespace OnTimeSpeed.Code
             var chartData = new HighChartsData();
             var groupedData = new Dictionary<string, float>();
             var plannedAmount = new Dictionary<string, float>();
+            var overAmount = new Dictionary<string, bool>();
+            var underAmount = new Dictionary<string, bool>();
+
             var workLogsOnDate = new Dictionary<string, List<WorkLogFriendly>>();
 
-            toDate = toDate ?? DateTime.Now;
+            toDate = toDate ?? DateTime.Now.ToLastOfMonth();
 
             for (var i = fromDate; i <= toDate; i = i.AddDays(1))
             {

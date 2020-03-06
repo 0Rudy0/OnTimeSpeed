@@ -6,43 +6,69 @@ using System.Threading.Tasks;
 using System.Web;
 using hrnet = HrNetMobile.Data;
 using hrnetModel = HrNetMobile.Models;
+using OnTimeSpeed.Utils;
+using System.Web.Caching;
 
 namespace OnTimeSpeed.Code
 {
     public static class Holidays
     {
         private static hrnet.DAL.VacationAPI _vacationAPI = new hrnet.DAL.VacationAPI();
-        public static List<DateTime> GetHolidays(int forYear, hrnetModel.User hrproUser)
+        public static Dictionary<DateTime, string> GetHolidays(int forYear)
         {
-            var _holidayList = new List<DateTime>();
-            _holidayList.Add(new DateTime(forYear, 1, 1)); //Nova godina
-            _holidayList.Add(new DateTime(forYear, 1, 6)); //Sveta tri kralja
-            _holidayList.Add(new DateTime(forYear, 5, 1)); //Praznik rada
-            _holidayList.Add(new DateTime(forYear, 6, 22)); //Dan antifašističke borbe
-            _holidayList.Add(new DateTime(forYear, 8, 5)); //Dan domovinske zahvalnosti
-            _holidayList.Add(new DateTime(forYear, 8, 15)); //Velika gospa
-            _holidayList.Add(new DateTime(forYear, 11, 1)); //Dan svih svetih
-            _holidayList.Add(new DateTime(forYear, 12, 25)); //Božić
-            _holidayList.Add(new DateTime(forYear, 12, 26)); //Štefanje
-
-            var easter = EasterDate(forYear);
-            _holidayList.Add(easter); //Uskrs
-            _holidayList.Add(easter.AddDays(1)); //Uskršnji ponedjeljak
-            _holidayList.Add(Tijelovo(easter)); //Tijelovo
-
-            if (forYear >= 2020)
+            string cacheKey = "holidaysTxtFile";
+            var _holidayList = (Dictionary<DateTime, string>)HttpRuntime.Cache.Get(cacheKey);
+            if (_holidayList == null)
             {
-                _holidayList.Add(new DateTime(forYear, 5, 30)); //Dan državnosti
-                _holidayList.Add(new DateTime(forYear, 11, 18)); //Dan sjećanja na žrtve Domovinskog rata
+                var holidaysByYear = Newtonsoft.Json.JsonConvert.DeserializeObject<List<HolidayRange>>(
+                System.IO.File.ReadAllText(
+                    AppDomain.CurrentDomain.BaseDirectory + "/config/holidays.json", System.Text.Encoding.UTF8));
+
+                holidaysByYear.ForEach(h =>
+                {
+                    h.yearFromDate = h.yearFrom.ToDate();
+                    h.yearToDate = h.yearTo.ToDate();
+                });
+
+                var holidaysForNow = holidaysByYear.Where(h => (h.yearFromDate == null || h.yearFromDate.Value.Year >= forYear) &&
+                    h.yearToDate == null || h.yearToDate.Value.AddYears(1).AddDays(-1).Year <= forYear);
+
+                holidaysForNow.Select(h => h.holidays).ToList().ForEach(h =>
+                {
+                    h.ForEach(hh =>
+                    {
+                        var holidayStr = "";
+                        try
+                        {
+                            holidayStr = $"{hh.date}{forYear}";
+
+                            _holidayList.Add(DateTime.ParseExact(holidayStr, $"dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture),
+                                hh.name);
+                        }
+                        catch (Exception ex)
+                        {
+                            LogUtils.LogException(ex, null, null, "date string: " + holidayStr);
+                        }
+                    });
+                });
+
+                var easter = EasterDate(forYear);
+                _holidayList.Add(easter, "Uskrs"); //Uskrs
+                _holidayList.Add(easter.AddDays(1), "Uskršnji ponedjeljak"); //Uskršnji ponedjeljak
+                _holidayList.Add(Tijelovo(easter), "Tijelovo"); //Tijelovo
+
+                HttpRuntime.Cache.Insert(cacheKey,
+                    _holidayList,
+                    null,
+                    Cache.NoAbsoluteExpiration,
+                    TimeSpan.FromMinutes(1440), //1 dan
+                    CacheItemPriority.Normal,
+                    null);
             }
 
-            else if (forYear <= 2019)
-            {
-                _holidayList.Add(new DateTime(forYear, 6, 25)); //Dan državnosti
-                _holidayList.Add(new DateTime(forYear, 10, 8)); //Dan nezavisnosti
-            }
 
-            return _holidayList.OrderBy(h => h).ToList();
+
+            return _holidayList;
         }
 
         /// <summary>
@@ -83,7 +109,7 @@ namespace OnTimeSpeed.Code
         /// </summary>
         /// <param name="easterDate"></param>
         /// <returns></returns>
-        private static DateTime Tijelovo (DateTime easterDate)
+        private static DateTime Tijelovo(DateTime easterDate)
         {
             var tijelovoDate = easterDate;
             for (var i = 0; i < 8; i++)
@@ -94,5 +120,21 @@ namespace OnTimeSpeed.Code
 
             return tijelovoDate;
         }
+    }
+
+    class HolidayRange
+    {
+        public string yearFrom { get; set; }
+        public string yearTo { get; set; }
+        public DateTime? yearFromDate { get; set; }
+        public DateTime? yearToDate { get; set; }
+
+        public List<HolidayManually> holidays { get; set; }
+    }
+
+    class HolidayManually
+    {
+        public string name { get; set; }
+        public string date { get; set; }
     }
 }

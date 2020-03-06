@@ -1,6 +1,6 @@
 ﻿@using OnTimeSpeed.Utils
 
-@{ 
+@{
     var startAddingFrom = DateTime.Now.AddMonths(AppSettings.GetInt("monthsBackToStartAdding") * -1).ToFirstOfMonth().ToShortDateString();
 }
 
@@ -65,11 +65,11 @@
                                     </div>
                                 </div>
                                 @*<div class="col s12 m6 l6 xl6">
-                                    <div class="input-field">
-                                        <label for="logMonthAmount">Povijest ispunjenosti za koliko  mjeseci</label>
-                                        <input id="logMonthAmount" type="number" min="1" max="10" placeholder="iznos" data-bind="value: $data.monthsBack">
-                                    </div>
-                                </div>*@
+                                        <div class="input-field">
+                                            <label for="logMonthAmount">Povijest ispunjenosti za koliko  mjeseci</label>
+                                            <input id="logMonthAmount" type="number" min="1" max="10" placeholder="iznos" data-bind="value: $data.monthsBack">
+                                        </div>
+                                    </div>*@
                                 <div class="col s12 m6 l6 xl8">
                                     <label>
                                         <input type="checkbox" data-bind="checked: $data.mergeAutoButtons" />
@@ -185,13 +185,19 @@
      data-bind="attr: {class: 'modal modal-fixed-footer modalInfo ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
     <div class="modal-content">
         <h5>Informacije o automagičnom unosu</h5>
-        
-            <i>Svi automagični unosi se sami brinu o tome da ne unesu 2 puta isti work log za isti dan što znači da ih možete klikati bilo kada koliko god puta želite.</i>
-        
+
+        <i>
+            Svi automagični unosi se sami brinu o tome da ne unesu 2 puta isti work log za isti dan što znači da ih možete klikati bilo kada koliko god puta želite.
+            Također, svi automatični unosi preskaču vikende.
+
+        </i>
+
         <br />
-        <p><span class="subtitle">Ručak</span> - Unosi ručno postavljeni iznos sati za ručak u iznosu od
-        <span data-bind="text: ($data.userSettings().lunchWorkAmount() * 60) + ' minuta'"></span> (iznos je moguće promijeniti u postavkama)
-        za svaki dan od @startAddingFrom pa do danas, uz uvjet da na taj dan nije praznik te da za taj dan ne postoji zahtjev za GO / plaćeni dopust (praznik / GO / plaćeni dopust ne mora biti unesen u OnTime). </p>
+        <p>
+            <span class="subtitle">Ručak</span> - Unosi ručno postavljeni iznos sati za ručak u iznosu od
+            <span data-bind="text: ($data.userSettings().lunchWorkAmount() * 60) + ' minuta'"></span> (iznos je moguće promijeniti u postavkama)
+            za svaki dan od @startAddingFrom pa do danas, uz uvjet da na taj dan nije praznik te da za taj dan ne postoji zahtjev za GO / plaćeni dopust (praznik / GO / plaćeni dopust ne mora biti unesen u OnTime).
+        </p>
         <p><span class="subtitle">Praznici</span> - Unosi sve praznike od @startAddingFrom param do kraja tekućeg mjeseca, 8h na dan po prazniku neovisno o logovima koji eventualno već postoje za taj dan. Neće unijeti 2 puta praznike ako se gumb klikne više puta</p>
         <p><span class="subtitle">Godišnji odmor</span> - Unosi sve godišnje odmore iz HrNet-a od @startAddingFrom pa do kraja tekućeg mjeseca koji su odobreni, 8h na dan neovisno o logovima koji eventualno već postoje za taj dan</p>
         <p><span class="subtitle">Plaćeni dopust</span> - Unosi sve plaćene dopuste iz HrNet-a od @startAddingFrom pa do kraja tekućeg mjeseca koji su odobreni, 8h na dan neovisno o logovima koji eventualno već postoje za taj dan</p>
@@ -208,16 +214,18 @@
     <div class="modal-content">
         <h5>Informacije o polu-automagičnom unosu</h5>
         <p>
-            Za određenje radnje postoje HRPRO taskovi za specifični period (npr poseban task za ručak za svaki kvartal, task za bolovanje za svaku godinu posebno, itd). 
+            Za određenje radnje postoje HRPRO taskovi za specifični period (npr poseban task za ručak za svaki kvartal, task za bolovanje za svaku godinu posebno, itd).
             <br />
             Aplikacija zna prepoznati određeni set takvih taskova (pa ne trebate sami odabrati task i work type) te se oni nalaze u ovoj sekciji.
+            <br />
+            Potrebno je odabrati dan (ili period), iznos sati te opcionalno opis kako bi unijeli novi log. U slučaju da odaberete period, aplikacija će automatski preskočiti vikende.
         </p>
         <br />
         <i>
             <b>Upozorenje:</b> polu-automatika <u>ne provjerava</u> da li već postoji isti unos za dan za koji se pokušava dodati work log pa treba pripaziti.
-            Međutim u postavkama postoji opcija "Ignoriraj puni dan kod unosa" koja je po defaultu uključena pa polu automagični unosi neće unijeti work log za željeni dan ako za taj dan već postoji logiranih 8h.
-         </i>
-        
+            Međutim u postavkama postoji opcija "Ignoriraj puni dan kod unosa" koja je po defaultu isključena pa polu automagični unosi neće unijeti work log za željeni dan ako za taj dan već postoji logiranih 8h.
+        </i>
+
     </div>
     <div data-bind="attr: {class: 'modal-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
@@ -229,12 +237,12 @@
     <div class="modal-content">
         <h5>Informacije o ručnom unosu</h5>
         <p>
-            Ovdje možete sami proizvoljno dodavati work logove za jedan dan ili za određeni period. Kako bi odabrali <i>Predmet</i> i <i>vrstu rada</i>, potrebno ih je prvo dodati u svoju listu klikom na
+            Ovdje možete sami proizvoljno dodavati work logove za jedan dan ili za određeni period U slučaju da odaberete period, aplikacija će automatski preskočiti vikende. Kako bi odabrali <i>Predmet</i> i <i>vrstu rada</i>, potrebno ih je prvo dodati u svoju listu klikom na
             <a class="waves-effect waves-light btn btn-small darken-2 withIcon blue-grey">
                 <i class="fad fa-plus"></i>
             </a>
             <br />
-            <i>Predmeti</i> se mogu pretraživati po ID-u ili po nazivu.
+            <i>Predmeti</i> se mogu pretraživati po ID-u ili po nazivu dok se <i>vrste rada</i> pretražuju po nazivu
             <br />
             <i>Predmeti</i> i <i>vrste rada</i>, jednom dodani, ostaju na listi i nakon refresha stranice.
             <br /><br />
@@ -261,8 +269,10 @@
             postoji i akcija
             <a href="#" class="waves-effect waves-light btn btn-small darken-4 blue-grey">Dodaj kao predložak</a>
             koja sve uneseno dodaje u posebnu sekciju "Predlošci" za akcije koje se znaju ponavljati (npr interni sastanci tima).
+            <br /><br />
+            <i>U postavkama postoji opcija "Ignoriraj puni dan kod unosa" koja je po defaultu isključena pa polu automagični unosi neće unijeti work log za željeni dan ako za taj dan već postoji logiranih 8h.</i>
         </p>
-     </div>
+    </div>
     <div data-bind="attr: {class: 'modal-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
     </div>

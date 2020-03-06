@@ -14,14 +14,30 @@ var dateFromPickers = {
     semiAutomaticDateFrom: null
 }
 
+var easeOutBounce = function (pos) {
+    if ((pos) < (1 / 2.75)) {
+        return (7.5625 * pos * pos);
+    }
+    if (pos < (2 / 2.75)) {
+        return (7.5625 * (pos -= (1.5 / 2.75)) * pos + 0.75);
+    }
+    if (pos < (2.5 / 2.75)) {
+        return (7.5625 * (pos -= (2.25 / 2.75)) * pos + 0.9375);
+    }
+    return (7.5625 * (pos -= (2.625 / 2.75)) * pos + 0.984375);
+};
+
+Math.easeOutBounce = easeOutBounce;
+
 $(function () {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems, {
     });
    
     if (loggedIn) {
+        getHolidays();
         getWorkLogs();
-        initWorkLogChart([], []);
+        initWorkLogChart([], []);        
     }
     else {
         $('.spinner').hide();
@@ -44,7 +60,17 @@ $(function () {
         var instance = M.Collapsible.getInstance($('.collapsible')[0]);
         instance.open(openedIndex);
     }
-    
+
+     if (loggedIn) {
+        if (!viewModel.hrproUser()) {
+            var tempToast = {
+                html: '<span style="color: black">Neuspješna prijava na HRPRO API</span>' + closeBtnHtml,
+                classes: toastClasses,
+                displayLength: toastLong
+            };
+            M.toast(tempToast);
+        }
+    }    
 })
 
 
@@ -62,6 +88,17 @@ function getWorkLogs(forDate, groupIndex) {
     refreshBreadCrumbs();
 
     getWorkLogsAction(forDate);
+}
+
+function getHolidays() {
+    ajaxGET({
+        url: '/Home/GetHolidays',
+        /*data: {
+            forDate: forDate,
+            groupType: groupTypes[currGroupIndex]
+        }*/
+    }, function (msg) {
+    });
 }
 
 function getWorkLogsAction(forDate) {
@@ -152,7 +189,7 @@ function getWorkLogsAction(forDate) {
         if (authPerformed) {
             sessionStorage.removeItem("reauthPreformed");
             var tempToast = {
-                html: '<span style="color: black">Ponovno ste prijavljeni u aplikaciju.<br>Ponovite zadnju akciju</span>' + closeBtn,
+                html: '<span style="color: black">Ponovno ste prijavljeni u aplikaciju.<br>Ponovite zadnju akciju</span>' + closeBtnHtml,
                 classes: toastClasses,
                 displayLength: toastLong
             };
@@ -193,6 +230,42 @@ function initWorkLogChart(categories, series) {
     if (currGroupIndex == null || currGroupIndex < 2) {
         tooltipFormatter = null;
     }
+
+    var planiranoBellowColor = 'rgb(216, 233, 206)';
+    var planiranoExactColor = 'rgb(216, 233, 206)';
+    var planiranoOverColor = 'rgb(216, 233, 206)';
+
+    var ostvarenoBellowColor = 'rgba(207, 84, 84, 0.9)';
+    var ostvarenoExactColor = 'rgba(102, 187, 106, 0.9)';
+    var ostvarenoOverColor = 'rgba(213, 145, 77, 0.8)';
+
+    
+    var planiranoSeriesData = [];
+    if (series.length > 1) {
+        for (var i = 0; i < series[0].ValuesArray.length; i++)  {
+            planiranoSeriesData.push({
+                x: i,
+                y: series[0].ValuesArray[i],
+                color: series[0].ValuesArray[i] > series[1].ValuesArray[i] ? planiranoBellowColor :
+                series[0].ValuesArray[i] < series[1].ValuesArray[i] ? planiranoOverColor : planiranoExactColor
+            })
+        }
+    }
+
+    var ostvarenoSeriesData = [];
+    if (series.length > 1) {
+        for (var i = 0; i < series[1].ValuesArray.length; i++)  {
+            ostvarenoSeriesData.push({
+                x: i,
+                y: series[1].ValuesArray[i],
+                color:  series[0].ValuesArray[i] > series[1].ValuesArray[i] ? ostvarenoBellowColor:
+                    series[0].ValuesArray[i] < series[1].ValuesArray[i] ? ostvarenoOverColor : ostvarenoExactColor
+            })
+        }
+    }
+    //console.log(ostvarenoSeriesData);
+
+
     $('#workLogChart').html('');
     Highcharts.chart('workLogChart', {
         chart: {
@@ -252,15 +325,21 @@ function initWorkLogChart(categories, series) {
         series: [{
             name: 'Planirano',
             color: 'rgb(200, 230, 201)',
-            data: series.length > 0 ? series[0].ValuesArray : [],
+            data: planiranoSeriesData,
             pointPadding: 0.3,
             dataLabels: {
                 enabled: false
             },
+            animation: {
+                duration: 500,
+                 //Uses jQuery.easing['swing']
+                easing: 'easeOutBounce2'
+            }
         }, {
             name: 'Ostvareno',
             color: 'rgba(102, 187, 106, 0.9)',
-            data: series.length > 1 ? series[1].ValuesArray : [],
+            //data: series.length > 1 ? series[1].ValuesArray : [],
+            data: ostvarenoSeriesData,
             pointPadding: 0.4,
             dataLabels: {
                 enabled: true,
@@ -278,7 +357,12 @@ function initWorkLogChart(categories, series) {
                     else
                         return (Math.round((ostvareno / planirano) * 100)) + '%';
                 }
-            }
+            },
+            // animation: {
+            //     duration: 1000,
+            //     // Uses Math.easeOutBounce
+            //     easing: 'easeOutBounce'
+            // }
         }]
     });
 }

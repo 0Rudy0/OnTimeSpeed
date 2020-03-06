@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnTimeSpeed", "OnTimeSpeed\OnTimeSpeed.csproj", "{12C4EF4D-B63A-4B6D-A5A8-D164A95D4CC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnTimeSpeed", "OnTimeSpeed\OnTimeSpeed.csproj", "{74CAD913-131F-40DB-8926-C342ACB3E310}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrNetMobile.Common", "..\HrNetMobile\HrNetMobile.Common\HrNetMobile.Common.csproj", "{586B693A-3A14-4C0A-A809-BDC270020C2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrNetMobile.Data", "..\HrNetMobile\HrNetMobile.Data\HrNetMobile.Data.csproj", "{B878AD80-9D99-4A90-BD11-9D5E6555CEBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrNetMobile.Models", "..\HrNetMobile\HrNetMobile.Models\HrNetMobile.Models.csproj", "{6D874127-81FA-4B91-B318-CB500EE6B881}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{12C4EF4D-B63A-4B6D-A5A8-D164A95D4CC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12C4EF4D-B63A-4B6D-A5A8-D164A95D4CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12C4EF4D-B63A-4B6D-A5A8-D164A95D4CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12C4EF4D-B63A-4B6D-A5A8-D164A95D4CC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74CAD913-131F-40DB-8926-C342ACB3E310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74CAD913-131F-40DB-8926-C342ACB3E310}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74CAD913-131F-40DB-8926-C342ACB3E310}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74CAD913-131F-40DB-8926-C342ACB3E310}.Release|Any CPU.Build.0 = Release|Any CPU
+		{586B693A-3A14-4C0A-A809-BDC270020C2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{586B693A-3A14-4C0A-A809-BDC270020C2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{586B693A-3A14-4C0A-A809-BDC270020C2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{586B693A-3A14-4C0A-A809-BDC270020C2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B878AD80-9D99-4A90-BD11-9D5E6555CEBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B878AD80-9D99-4A90-BD11-9D5E6555CEBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B878AD80-9D99-4A90-BD11-9D5E6555CEBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B878AD80-9D99-4A90-BD11-9D5E6555CEBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D874127-81FA-4B91-B318-CB500EE6B881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D874127-81FA-4B91-B318-CB500EE6B881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D874127-81FA-4B91-B318-CB500EE6B881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D874127-81FA-4B91-B318-CB500EE6B881}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
