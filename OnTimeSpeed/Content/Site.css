@@ -526,6 +526,43 @@
     margin: 20px 0 !important;
 }
 
+    #templates .card .collapseIcon,
+    #templates .card .expandIcon {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 15px;
+        color: white;
+        cursor: pointer;
+    }
+
+    #templates .card.collapsed .expandIcon {
+        display: block;
+        /*font-size: 18px;*/
+        opacity: 1;
+    }
+
+    #templates .card.collapsed .collapseIcon {
+        display: none;
+    }
+
+    #templates .card:not(.collapsed) .expandIcon {
+        display: none;
+    }
+
+    #templates .card:not(.collapsed) .collapseIcon {
+        display: block;
+        opacity: 0.5;
+    }
+
+    #templates .card.collapsed .templateDescAndAmount {
+        display: none !important;
+    }
+
+    #templates .card.collapsed .card-titlee {
+        margin-bottom: 10px;
+    }
+
 #templates .templatesList .card-content {
     display: flex;
     flex-direction: column;
@@ -561,14 +598,22 @@
     margin-bottom: 20px;
 }
 
+#templates .templateWorkItemId {
+    font-size: 14px;
+    opacity: 0.5;
+    margin-right: 5px;
+}
+
 #templates .templateWorkItem {
     font-weight: bold;
     font-size: 16px;
+    margin-right: 5px;
 }
 
 #templates .templateWorkType {
     font-style: italic;
     font-size: 14px;
+    opacity: 0.5;
 }
 
 #templates .templatesList > .card {

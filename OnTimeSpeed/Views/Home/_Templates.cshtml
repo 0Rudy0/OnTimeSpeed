@@ -4,11 +4,14 @@
 
         <div data-bind="template: { name: 'entry-template', data: $data }"></div>
         <div class="templatesList" data-bind="foreach: $parent.userSettings().templates">
-            <div class="card">
+            <div class="card" data-bind="css: { 'collapsed': $data.collapsed && $data.collapsed() }">
                 <i class="fad fa-trash-alt removeTemplate" data-bind="click: removeTemplate"></i>
+                <i class="fal fa-chevron-square-up collapseIcon" data-bind="click: collapseTemplate"></i>
+                <i class="fal fa-chevron-square-down expandIcon" data-bind="click: expandTemplate"></i>
                 <div data-bind="attr: {class : 'card-content white-text ' + $parentContext.$parent.templateModel().styleClass + ' ' + $parentContext.$parent.templateModel().styleType + ' ' + $parentContext.$parent.templateModel().textClass + ' ' + $parentContext.$parent.templateModel().textType}">
                     <span class="card-titlee">
-                        <span class="templateWorkItem" data-bind="text: $data.workItem.Id + ' - ' + $data.workItem.Name"></span>
+                        <span class="templateWorkItemId" data-bind="text: $data.workItem.Id"></span>
+                        <span class="templateWorkItem" data-bind="text: $data.workItem.Name"></span>
                         <span class="templateWorkType" data-bind="text: '(' + $data.workType.name + ')'"></span>
                     </span>
                     <div class="templateDescAndAmount">

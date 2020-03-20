@@ -3,7 +3,8 @@
         workItem: viewModel.activeWorkItem(),
         workType: viewModel.activeWorkType(),
         description: ko.observable(viewModel.customEntry().description()),
-        workAmount: ko.observable(viewModel.customEntry().workAmount())
+        workAmount: ko.observable(viewModel.customEntry().workAmount()),   
+        collapsed: ko.observable(false)
     }
 
     if (!data.workItem || !data.workType) {
@@ -44,5 +45,15 @@
 
 function removeTemplate() {
     viewModel.userSettings().templates.remove(this);
+    saveSettings();
+}
+
+function collapseTemplate() {
+    this.collapsed(true);
+    saveSettings();
+}
+
+function expandTemplate() {
+    this.collapsed(false);
     saveSettings();
 }

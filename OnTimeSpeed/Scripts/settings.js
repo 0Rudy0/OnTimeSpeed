@@ -30,7 +30,8 @@ function loadSettings() {
                 workItem: settings.templates[i].workItem,
                 workType: settings.templates[i].workType,
                 description: ko.observable(settings.templates[i].description),
-                workAmount: ko.observable(settings.templates[i].workAmount)
+                workAmount: ko.observable(settings.templates[i].workAmount),
+                collapsed: ko.observable(settings.templates[i].collapsed)
             })
         }
 
