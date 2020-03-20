@@ -9,6 +9,7 @@ var toastClasses = 'cyan lighten-4';
 var viewModel;
 var searchStack = [];
 var closeBtnHtml = '<button class="btn-flat toast-action" onclick="closeNotification(this)">X</button>';
+var firstLoad = true;
 
 var dateFromPickers = {
     semiAutomaticDateFrom: null
@@ -154,43 +155,47 @@ function getWorkLogsAction(forDate) {
             M.toast(toastObj);
             toastObj = null;
         }
-        M.Datepicker.init(document.querySelectorAll('#semiAutomaticEntry .datepicker.dateFrom'), {
-            autoClose: true,
-            format: 'dd.mm.yyyy',
-            firstDay: 1,
-            showDaysInNextAndPreviousMonths: true,
-            showClearBtn: true,
-            defaultDate: new Date(),
-            setDefaultDate: true,
-            onSelect: onDateFromSelect.bind(viewModel.semiAutomaticEntry())
-        });
-        M.Datepicker.init(document.querySelectorAll('#semiAutomaticEntry .datepicker.dateTo'), {
-            autoClose: true,
-            format: 'dd.mm.yyyy',
-            firstDay: 1,
-            showDaysInNextAndPreviousMonths: true,
-            showClearBtn: true,
-            onSelect: onDateToSelect.bind(viewModel.semiAutomaticEntry())
-        });
 
-        M.Datepicker.init(document.querySelectorAll('#customEntry .datepicker.dateFrom'), {
-            autoClose: true,
-            format: 'dd.mm.yyyy',
-            firstDay: 1,
-            showDaysInNextAndPreviousMonths: true,
-            showClearBtn: true,
-            defaultDate: new Date(),
-            setDefaultDate: true,
-            onSelect: onDateFromSelect.bind(viewModel.semiAutomaticEntry())
-        });
-        M.Datepicker.init(document.querySelectorAll('#customEntry .datepicker.dateTo'), {
-            autoClose: true,
-            format: 'dd.mm.yyyy',
-            firstDay: 1,
-            showDaysInNextAndPreviousMonths: true,
-            showClearBtn: true,
-            onSelect: onDateToSelect.bind(viewModel.customEntry())
-        });
+        if (firstLoad) {
+            firstLoad = false;
+
+            M.Datepicker.init(document.querySelectorAll('#semiAutomaticEntry .datepicker.dateFrom'), {
+                autoClose: true,
+                format: 'dd.mm.yyyy',
+                firstDay: 1,
+                showDaysInNextAndPreviousMonths: true,
+                showClearBtn: true,
+                defaultDate: new Date(),
+                setDefaultDate: true,
+                onSelect: onDateFromSelect.bind(viewModel.semiAutomaticEntry())
+            });
+            M.Datepicker.init(document.querySelectorAll('#semiAutomaticEntry .datepicker.dateTo'), {
+                autoClose: true,
+                format: 'dd.mm.yyyy',
+                firstDay: 1,
+                showDaysInNextAndPreviousMonths: true,
+                showClearBtn: true,
+                onSelect: onDateToSelect.bind(viewModel.semiAutomaticEntry())
+            });
+
+            M.Datepicker.init(document.querySelectorAll('#customEntry .datepicker.dateFrom'), {
+                autoClose: true,
+                format: 'dd.mm.yyyy',
+                firstDay: 1,
+                showDaysInNextAndPreviousMonths: true,
+                showClearBtn: true,
+                defaultDate: new Date(),
+                setDefaultDate: true,
+                onSelect: onDateFromSelect.bind(viewModel.semiAutomaticEntry())
+            });
+            M.Datepicker.init(document.querySelectorAll('#customEntry .datepicker.dateTo'), {
+                autoClose: true,
+                format: 'dd.mm.yyyy',
+                firstDay: 1,
+                showDaysInNextAndPreviousMonths: true,
+                showClearBtn: true,
+                onSelect: onDateToSelect.bind(viewModel.customEntry())
+            });
 
             M.Datepicker.init(document.querySelectorAll('#templates .datepicker.dateFrom'), {
                 autoClose: true,
@@ -211,25 +216,26 @@ function getWorkLogsAction(forDate) {
                 onSelect: onDateToSelect.bind(viewModel.customEntry())
             });
 
-        //var instances = M.Datepicker.init(document.querySelectorAll('.datepicker.dateTo'), {
-        //    autoClose: true,
-        //    format: 'dd.mm.yyyy',
-        //    firstDay: 1,
-        //    showDaysInNextAndPreviousMonths: true,
-        //    showClearBtn: true,
-        //    onSelect: onDateToSelect
-        //});
+            //var instances = M.Datepicker.init(document.querySelectorAll('.datepicker.dateTo'), {
+            //    autoClose: true,
+            //    format: 'dd.mm.yyyy',
+            //    firstDay: 1,
+            //    showDaysInNextAndPreviousMonths: true,
+            //    showClearBtn: true,
+            //    onSelect: onDateToSelect
+            //});
 
-        $('.modal').modal();
-        var authPerformed = sessionStorage.getItem("reauthPreformed");
-        if (authPerformed) {
-            sessionStorage.removeItem("reauthPreformed");
-            var tempToast = {
-                html: '<span style="color: black">Ponovno ste prijavljeni u aplikaciju.<br>Ponovite zadnju akciju</span>' + closeBtnHtml,
-                classes: toastClasses,
-                displayLength: toastLong
-            };
-            M.toast(tempToast);
+            $('.modal').modal();
+            var authPerformed = sessionStorage.getItem("reauthPreformed");
+            if (authPerformed) {
+                sessionStorage.removeItem("reauthPreformed");
+                var tempToast = {
+                    html: '<span style="color: black">Ponovno ste prijavljeni u aplikaciju.<br>Ponovite zadnju akciju</span>' + closeBtnHtml,
+                    classes: toastClasses,
+                    displayLength: toastLong
+                };
+                M.toast(tempToast);
+            }
         }
 
         //console.log(instances);
