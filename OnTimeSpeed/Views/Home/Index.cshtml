@@ -42,6 +42,11 @@ else
                         <div class="col s12" style="padding-left: 20px;" id="breadCrumbs">
                             <a href="#!" onclick="getWorkLogs()" class="breadcrumb clickable">Sve</a>
                         </div>
+                        <!-- ko if: breadCrumbs().length > 0 -->
+                        <div class="deleteWorkLogsIcon" data-bind="click: deleteWorkLogsValidate" title="Obriši logove u odabranom periodu">
+                            <i class="fad fa-eraser"></i>
+                        </div>
+                        <!-- /ko -->
                     </div>
                 </nav>
             </div>

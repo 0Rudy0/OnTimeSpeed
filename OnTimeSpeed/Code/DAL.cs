@@ -232,6 +232,18 @@ namespace OnTimeSpeed.Code
             return result;
         }
 
+        public static async Task<bool> DeleteWorkLogs(User user, IEnumerable<WorkLog> workLogs)
+        {
+            //return true;
+            foreach (var log in workLogs)
+            {
+                var param = new Dictionary<string, string>();
+                //param.Add("id", log.id.ToString());
+                await ApiHelper.DeleteRequestAsync($"{_ontimeUrl}/api/v5/work_logs/{log.id.ToString()}", param, user.Token);
+            }
+            return true;
+        }
+
         public static async Task<Dictionary<DateTime, float>> GetWorkLogsGroupped(User user, bool forceRefresh = false)
         {
             string cacheKey = "workLogsGroupped_" + user.id;
@@ -457,6 +469,7 @@ namespace OnTimeSpeed.Code
             var addedOnDates = new List<string>();
 
             var workLogs = await GetWorkLogsGroupped(user, true);
+            var workLogsRaw = await GetWorkLogs(user, false);
 
             for (var i = fromDate; i <= toDate; i = i.Value.AddDays(1))
             {
@@ -466,21 +479,37 @@ namespace OnTimeSpeed.Code
 
                 if (!i.Value.IsHoliday() && !i.Value.IsWeekend() && (alreadyLogedAmount < 8 || ignoreFullDays))
                 {
+
                     var amountToLog = amount > 8 ? 8 - alreadyLogedAmount : amount;
                     if (amountToLog > 0)
                     {
                         var workItem = entry.GetTaskForDate(tasks, i.Value);
                         var newLog = entry.CreateWorkLogObj(user.id, workItem.Id, i.Value, amountToLog, description);
-                        var content = await PostRequestAsync($"/work_logs", user.Token, newLog);
-                        if (content == null)
-                            addedOnDates.Add($"Unos nije uspio - {i.Value.ToShortDateString()}");
+                        var isDuplicate = false;
+                        if (entry is LunchEntry || entry is SickLeaveEntry)
+                        {
+                            if (workLogsRaw.Where(w => w.date_time.Date == i.Value.Date).Any(l => l.item.id == workItem.Id))
+                            {
+                                isDuplicate = true;
+                            }
+                        }
+                        if (isDuplicate)
+                        {
+                            addedOnDates.Add($"Već postoji ovakav unos - {i.Value.ToShortDateString()}");
+                        }
                         else
                         {
-                            var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
-                            var warningMsg = "";
-                            if (alreadyLogedAmount + amountToLog > 8)
-                                warningMsg = " *** više od 8h zalograno ***";
-                            addedOnDates.Add(i.Value.ToShortDateString() + warningMsg);
+                            var content = await PostRequestAsync($"/work_logs", user.Token, newLog);
+                            if (content == null)
+                                addedOnDates.Add($"Unos nije uspio - {i.Value.ToShortDateString()}");
+                            else
+                            {
+                                var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
+                                var warningMsg = "";
+                                if (alreadyLogedAmount + amountToLog > 8)
+                                    warningMsg = " *** više od 8h zalograno ***";
+                                addedOnDates.Add(i.Value.ToShortDateString() + warningMsg);
+                            }
                         }
                     }
                     else

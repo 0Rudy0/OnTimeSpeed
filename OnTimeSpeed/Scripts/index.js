@@ -90,6 +90,42 @@ function getWorkLogs(forDate, groupIndex) {
     getWorkLogsAction(forDate);
 }
 
+function deleteWorkLogs() {
+    $('.spinner').show();
+    ajaxPOST({
+        url: '/Home/DeleteWorkLogs',
+        data: {
+            forDate: breadCrumbs[breadCrumbs.length - 1],
+            groupType: groupTypes[currGroupIndex]
+        }
+    }, function (msg) {
+        $('.spinner').hide();
+        var tempToastObj = {
+            html: '<span style="color: black; text-align: right">Obrisano logova: <b>' + msg.logsCount + '</b> (Obrisano sati: <b>' + msg.workAmount + '</b>)</span>' + closeBtnHtml,
+            classes: toastClasses,
+            displayLength: toastLong
+        };
+        M.toast(tempToastObj);        
+        getWorkLogs();
+    });
+}
+
+function deleteWorkLogsValidate() {
+    $('.spinner').show();
+    ajaxGET({
+        url: '/Home/DeleteWorkLogsValidate',
+        data: {
+            forDate: breadCrumbs[breadCrumbs.length - 1],
+            groupType: groupTypes[currGroupIndex]
+        }
+    }, function (msg) {
+        $('.spinner').hide();
+        //console.log(msg);
+        viewModel.confirmDeleteModel(msg);
+        M.Modal.getInstance($('#confirmDeleteModal')[0]).open();
+    });
+}
+
 function getHolidays() {
     ajaxGET({
         url: '/Home/GetHolidays',
@@ -103,7 +139,7 @@ function getHolidays() {
 
 function getWorkLogsAction(forDate) {
     ajaxGET({
-        url: '/Home/getWorkLogs',
+        url: '/Home/GetWorkLogs',
         data: {
             forDate: forDate,
             groupType: groupTypes[currGroupIndex]

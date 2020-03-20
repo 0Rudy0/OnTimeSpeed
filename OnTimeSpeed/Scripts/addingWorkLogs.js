@@ -94,7 +94,6 @@ function addAllAutomatic() {
 
 //SEMI AUTOMATIC
 function addLunchSemi() {
-    $('.spinner').show();
     var data = {
         amount: this.workAmount(),
         dateFromStr: $('#semiAutomaticEntry .dateFrom').val(),
@@ -103,7 +102,9 @@ function addLunchSemi() {
         ignoreFullDays: viewModel.userSettings().overrideFullDaySemiAutomatic()
     }
 
-    if (validateSemiAutomaticForm.apply(data)) {
+    var invalidMsg = validateSemiAutomaticForm.apply(data);
+    if (invalidMsg.length === 0) {
+        $('.spinner').show();
         ajaxPOST({
             url: '/Home/AddLunch',
             data: data
@@ -113,7 +114,7 @@ function addLunchSemi() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
+            html: '<span style="color: black"Forma za unos nije ispravna<br>' + invalidMsg + '</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -122,7 +123,6 @@ function addLunchSemi() {
 }
 
 function addSickLeave() {
-    $('.spinner').show();
     var data = {
         amount: this.workAmount(),
         dateFromStr: $('#semiAutomaticEntry .dateFrom').val(),
@@ -131,7 +131,9 @@ function addSickLeave() {
         ignoreFullDays: viewModel.userSettings().overrideFullDaySemiAutomatic()
     }
 
-    if (validateSemiAutomaticForm.apply(data)) {
+    var invalidMsg = validateSemiAutomaticForm.apply(data);
+    if (invalidMsg.length === 0) {
+        $('.spinner').show();
         ajaxPOST({
             url: '/Home/AddSickLeave',
             data: data
@@ -141,7 +143,7 @@ function addSickLeave() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
+            html: '<span style="color: black"Forma za unos nije validna<br>' + invalidMsg + '</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -150,7 +152,6 @@ function addSickLeave() {
 }
 
 function addInternalMeeting() {
-    $('.spinner').show();
     var data = {
         amount: this.workAmount(),
         dateFromStr: $('#semiAutomaticEntry .dateFrom').val(),
@@ -159,7 +160,9 @@ function addInternalMeeting() {
         ignoreFullDays: viewModel.userSettings().overrideFullDaySemiAutomatic()
     }
 
-    if (validateSemiAutomaticForm.apply(data)) {
+    var invalidMsg = validateSemiAutomaticForm.apply(data);
+    if (invalidMsg.length === 0) {
+        $('.spinner').show();
         ajaxPOST({
             url: '/Home/AddInternalMeeting',
             data: data
@@ -169,7 +172,7 @@ function addInternalMeeting() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
+            html: '<span style="color: black"Forma za unos nije validna<br>' + invalidMsg + '</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -178,7 +181,6 @@ function addInternalMeeting() {
 }
 
 function addOnTimeEntry() {
-    $('.spinner').show();
     var data = {
         amount: this.workAmount(),
         dateFromStr: $('#semiAutomaticEntry .dateFrom').val(),
@@ -186,8 +188,9 @@ function addOnTimeEntry() {
         description: this.description(),
         ignoreFullDays: viewModel.userSettings().overrideFullDaySemiAutomatic()
     }
-
-    if (validateSemiAutomaticForm.apply(data)) {
+    var invalidMsg = validateSemiAutomaticForm.apply(data);
+    if (invalidMsg.length === 0) {
+        $('.spinner').show();
         ajaxPOST({
             url: '/Home/AddOnTimeEntry',
             data: data
@@ -197,7 +200,7 @@ function addOnTimeEntry() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
+            html: '<span style="color: black"Forma za unos nije validna<br>' + invalidMsg + '</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -206,7 +209,6 @@ function addOnTimeEntry() {
 }
 
 function addColegueSupport() {
-    $('.spinner').show();
     var data = {
         amount: this.workAmount(),
         dateFromStr: $('#semiAutomaticEntry .dateFrom').val(),
@@ -214,7 +216,9 @@ function addColegueSupport() {
         description: this.description(),
         ignoreFullDays: viewModel.userSettings().overrideFullDaySemiAutomatic()
     }
-    if (validateSemiAutomaticForm.apply(data)) {
+    var invalidMsg = validateSemiAutomaticForm.apply(data);
+    if (invalidMsg.length === 0) {
+        $('.spinner').show();
         ajaxPOST({
             url: '/Home/AddColegueSupport',
             data: data
@@ -224,7 +228,7 @@ function addColegueSupport() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
+            html: '<span style="color: black"Forma za unos nije validna<br>' + invalidMsg + '</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -233,7 +237,6 @@ function addColegueSupport() {
 }
 
 function addEducationButton() {
-    $('.spinner').show();
     var data = {
         amount: this.workAmount(),
         dateFromStr: $('#semiAutomaticEntry .dateFrom').val(),
@@ -241,7 +244,9 @@ function addEducationButton() {
         description: this.description(),
         ignoreFullDays: viewModel.userSettings().overrideFullDaySemiAutomatic()
     }
-    if (validateSemiAutomaticForm.apply(data)) {
+    var invalidMsg = validateSemiAutomaticForm.apply(data);
+    if (invalidMsg.length === 0) {
+        $('.spinner').show();
         ajaxPOST({
             url: '/Home/AddEducation',
             data: data
@@ -251,7 +256,7 @@ function addEducationButton() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos</span>' + closeBtnHtml,
+            html: '<span style="color: black"Forma za unos nije validna<br>' + invalidMsg + '</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };
@@ -261,14 +266,30 @@ function addEducationButton() {
 
 function validateSemiAutomaticForm() {
     var isValid = true;
+    var invalidFields = '';
 
     if (!this.amount) {
-        isValid = false;
+       isValid = false;
+       invalidFields += 'Iznos sati nije unesen'
     }
     if (!this.dateFromStr) {
         isValid = false;
+       invalidFields += 'Datumski raspon nije unesen'
     }
-    return isValid;
+
+    var dateFrom = M.Datepicker.getInstance($('#semiAutomaticEntry .dateFrom')[0]).date;
+    var dateTo = M.Datepicker.getInstance($('#semiAutomaticEntry .dateTo')[0]).date;
+
+    if (dateTo) {    
+        var daysSelected = (dateTo.getTime() - dateFrom.getTime()) / (1000 * 60 * 60 * 24)
+
+        if (!viewModel.userSettings().enableLargeDateSpans() && daysSelected > 35) {
+            isValid = false;
+            invalidFields += 'Raspon je veći od 35 dana'
+        }
+    }
+
+    return invalidFields;
 }
 
 
@@ -311,20 +332,32 @@ function validateForm() {
 
     if (!this.itemId) {
         isValid = false;
-        invalidFields += '<br>Predmet';
+        invalidFields += '<br>Predmet nije odabran';
     }
     if (!this.workTypeId) {
         isValid = false;
-        invalidFields += '<br>Vrsta rada';
+        invalidFields += '<br>Vrsta rada nije odabrana';
     }
     if (!this.amount) {
         isValid = false;
-        invalidFields += '<br>Iznos sati';
+        invalidFields += '<br>Iznos sati nije unesen';
     }
     if (!this.dateFromStr) {
         isValid = false;
-        invalidFields += '<br>Datum od';
+        invalidFields += '<br>Datumski raspon nije odabran';
     }
+    var dateFrom = M.Datepicker.getInstance($('#customEntry .dateFrom')[0]).date;
+    var dateTo = M.Datepicker.getInstance($('#customEntry .dateTo')[0]).date;
+
+    if (dateTo) {    
+        var daysSelected = (dateTo.getTime() - dateFrom.getTime()) / (1000 * 60 * 60 * 24)
+
+        if (!viewModel.userSettings().enableLargeDateSpans() && daysSelected > 35) {
+            isValid = false;
+            invalidFields += '<br>Raspon je veći od 35 dana'
+        }
+    }
+
     return invalidFields;
 }
 
@@ -341,7 +374,7 @@ function addWorkLogDo() {
     }
     else {
         var tempToast = {
-            html: '<span style="color: black">Nedostaju podaci u formi za unos:<br>' + validMsg + '</span>' + closeBtnHtml,
+            html: '<span style="color: black">Forma za unos nije ispravna:<br>' + validMsg + '</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastLong
         };

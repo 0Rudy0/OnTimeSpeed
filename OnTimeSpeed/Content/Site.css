@@ -38,6 +38,35 @@
     /*height:*/
 }
 
+.nav-wrapper {
+    position: relative;
+}
+
+.datepicker-calendar .selects-container input.select-dropdown {
+    color: black !important;
+}
+
+.deleteWorkLogsIcon {
+    position: absolute;
+    right: 25px;
+    top: 0px;
+    color: #ff7c7c;
+    cursor: pointer;
+}
+
+    .deleteWorkLogsIcon i {
+        font-size: 20px;
+    }
+
+        .deleteWorkLogsIcon i:hover {
+            color: #ff4848;
+        }
+
+        .deleteWorkLogsIcon i:active {
+            color: #ff4848;
+            transform: scale(0.95);
+        }
+
 .container {
     display: none;
     padding-top: 50px;
@@ -158,9 +187,9 @@
         font-size: 18px;
     }
 
-    .spinner {
-        display: block;
-    }
+.spinner {
+    display: block;
+}
 
 #workLogChart {
     margin-bottom: 13px;
@@ -212,7 +241,7 @@
         justify-content: center;
     }
 
-        .dateRangePickers .dateHolder input {
+        .dateRangePickers .dateHolder input:not(.dropdown-trigger) {
             text-align: center;
             color: white;
         }
@@ -631,11 +660,11 @@
         margin-bottom: 0;
     }
 
-    #customEntryModalInfo {
-        max-height: none;
-        height: 90%;
-        top: 5% !important;
-    }
+#customEntryModalInfo {
+    max-height: none;
+    height: 90%;
+    top: 5% !important;
+}
 
     #customEntryModalInfo .btn {
         margin: 0 10px;
@@ -643,4 +672,52 @@
 
     #customEntryModalInfo p {
         line-height: 35px;
+    }
+
+#confirmDeleteModal .modal-content {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#confirmDeleteModal .btn-small {
+    font-size: 10px;
+    padding: 1px 7px;
+    height: 21px;
+    line-height: 21px;
+    position: relative;
+    top: 7px;
+    background-color: #ff7c7c;
+    color: black;
+}
+
+    #confirmDeleteModal .btn-small:hover {
+        background-color: #ff4848;
+        color: white;
+    }
+
+#confirmDeleteModal .modal-content p:nth-child(2) {
+    text-align: center;
+}
+
+#confirmDeleteModal .modal-content .dateRange,
+#confirmDeleteModal .modal-content .deletingInfo {
+    font-size: 20px;
+    color: #ff7c7c;
+}
+
+#confirmDeleteModal .modal-content .deletingInfo {
+    margin-left: 7px;
+}
+
+#confirmDeleteModal .modal-content .deletingInfoList {
+    margin-top: 0px;
+}
+
+    #confirmDeleteModal .modal-content .deletingInfoList li {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
     }

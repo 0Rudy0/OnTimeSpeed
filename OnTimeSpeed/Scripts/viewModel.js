@@ -17,7 +17,8 @@
         showCollegueSupport: ko.observable(true),
         showEducation: ko.observable(true),
         overrideFullDayCustom: ko.observable(false),
-        overrideFullDaySemiAutomatic: ko.observable(false)
+        overrideFullDaySemiAutomatic: ko.observable(false),
+        enableLargeDateSpans: ko.observable(false)
     });
 
     self.breadCrumbs = ko.observableArray([]);
@@ -102,5 +103,12 @@
         workAmount: ko.observable(1),
         templates: ko.observableArray([]),
         showTimePicker: false
+    });
+
+    self.confirmDeleteModel = ko.observable({
+        logsCount: 0,
+        workAmount: 0,
+        fromDateStr: '',
+        toDateStr: ''
     });
 }

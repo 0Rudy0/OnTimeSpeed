@@ -3,12 +3,14 @@
 function addBreadCrumb(forDate) {
     breadCrumbs.push(forDate);
     refreshBreadCrumbs();
+    viewModel.breadCrumbs(breadCrumbs);
 }
 
 function removeBreadCrumb(toString) {
     while (breadCrumbs.length > 0 && breadCrumbs[breadCrumbs.length - 1] != toString) {
         breadCrumbs.pop();
     }
+    viewModel.breadCrumbs(breadCrumbs);
 }
 
 function refreshBreadCrumbs() {
@@ -24,4 +26,6 @@ function refreshBreadCrumbs() {
 
         $('#breadCrumbs').append(html)
     }
+    if (viewModel)
+        viewModel.breadCrumbs(breadCrumbs);
 }

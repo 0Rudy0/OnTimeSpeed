@@ -222,7 +222,7 @@
         </p>
         <br />
         <i>
-            <b>Upozorenje:</b> polu-automatika <u>ne provjerava</u> da li već postoji isti unos za dan za koji se pokušava dodati work log pa treba pripaziti.
+            <b>Upozorenje:</b> polu-automatika provjerava da li već postoji isti unos za dan za koji se pokušava dodati work log <u><i>samo za ručak i bolovanje</i></u> pa treba pripaziti.
             Međutim u postavkama postoji opcija "Ignoriraj puni dan kod unosa" koja je po defaultu isključena pa polu automagični unosi neće unijeti work log za željeni dan ako za taj dan već postoji logiranih 8h.
         </i>
 
@@ -289,5 +289,27 @@
     </div>
     <div data-bind="attr: {class: 'modal-footer ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zatvori</a>
+    </div>
+</div>
+
+<div id="confirmDeleteModal"
+     data-bind=" with: $data.confirmDeleteModel, attr: {class: 'modal modal-fixed-footer modalInfo ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+    <div class="modal-content" style="display: flex;">
+        <h5>!!! Potvrda brisanja !!!</h5>
+        <p>Jeste li sigurni da želite obrisati sve logove u periodu
+        <br /><span class="dateRange"><span data-bind="text: $data.fromDateStr"></span> - <span data-bind="text: $data.toDateStr"></span></span></p>
+        <p>
+            Biti će obrisano:
+            <ul class="deletingInfoList">
+                <li>Logova: <span data-bind="text: $data.logsCount" class="deletingInfo"></span></li>
+                <li>Iznos: <span data-bind="text: $data.workAmount + ' hrs'" class="deletingInfo"></span></li>
+            </ul>
+        </p>
+        <br />
+        <p style="font-size:20px;">Ova akcija se ne može poništiti!</p>
+    </div>
+    <div data-bind="attr: {class: 'modal-footer ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().styleType}">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float: right">Zatvori</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-small" style="float: left" data-bind="click: deleteWorkLogs">Potvrdi</a>
     </div>
 </div>

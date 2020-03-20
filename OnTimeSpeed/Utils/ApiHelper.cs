@@ -290,6 +290,46 @@ namespace OnTimeSpeed.Utils
 
             return returnvalue;
         }
+
+        public static async Task<string> DeleteRequestAsync(string url, Dictionary<string, string> formData, string token)
+        {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
+            WebRequest request = WebRequest.Create(url);
+            string formedUrl = request.RequestUri.Scheme + "://" + request.RequestUri.Host + ":" + request.RequestUri.Port + "/";
+            string[] segments = request.RequestUri.Segments;
+            foreach (string tempSegment in segments)
+            {
+                formedUrl += tempSegment;
+            }
+            formedUrl += request.RequestUri.Query;
+            request = WebRequest.Create(formedUrl);
+            request.Method = "DELETE";
+            if (token != null)
+                request.Headers.Add("Authorization", $"Bearer {token}");
+
+            String wholeRequestString = "";
+
+            //obtain a response
+            var response = await request.GetResponseAsync();
+            var objStream = response.GetResponseStream();
+            var objReader = new StreamReader(objStream);
+
+            //read line by line and construct a string response stream
+            String sLine = "";
+            int i = 0;
+
+            while (sLine != null)
+            {
+                i++;
+                sLine = objReader.ReadLine();
+                if (sLine != null)
+                    wholeRequestString += sLine;
+            }
+            return wholeRequestString;
+        }
+
+
         //for WEB API - POST
         public static async Task<string> PostRequestWithBodyAsync(string url, object data, string token)
         {

@@ -165,6 +165,41 @@ namespace OnTimeSpeed.Controllers
             return JsonConvert.SerializeObject(PrepareData.PrepareWorkLogChartData(data, groupBy, dateRange.Item1, dateRange.Item2));
         }
 
+        [HttpPost]
+        public async Task<string> DeleteWorkLogs(string forDate, int? groupType)
+        {
+            var groupByForDateRange = groupType == null ? GroupBy.Month : (GroupBy)(groupType - 1);
+            var dateRange = PrepareData.GetDateRange(forDate, groupByForDateRange);
+            var data = await DAL.GetWorkLogs(_user);
+            var toDelete = data.Where(l => l.date_time.Date >= dateRange.Item1 && l.date_time.Date <= dateRange.Item2);
+            var success = await DAL.DeleteWorkLogs(_user, toDelete);
+
+            HttpRuntime.Cache.Remove("workLogs_" + _user.id);
+
+            return JsonConvert.SerializeObject(new
+            {
+                logsCount = toDelete.Count(),
+                workAmount = toDelete.Sum(l => l.work_done.duration_minutes / 60),
+                fromDateStr = dateRange.Item1.ToStringCustom(),
+                toDateStr = dateRange.Item2.Value.ToStringCustom()
+            });
+        }
+
+        public async Task<string> DeleteWorkLogsValidate(string forDate, int? groupType)
+        {
+            var groupByForDateRange = groupType == null ? GroupBy.Month : (GroupBy)(groupType - 1);
+            var dateRange = PrepareData.GetDateRange(forDate, groupByForDateRange);
+            var data = await DAL.GetWorkLogs(_user);
+            var toDelete = data.Where(l => l.date_time.Date >= dateRange.Item1 && l.date_time.Date <= dateRange.Item2);
+
+            return JsonConvert.SerializeObject(new {
+                logsCount = toDelete.Count(),
+                workAmount = toDelete.Sum(l => l.work_done.duration_minutes / 60),
+                fromDateStr = dateRange.Item1.ToStringCustom(),
+                toDateStr = dateRange.Item2.Value.ToStringCustom()
+            });
+        }
+
         public async Task<string> SearchWorkItems(string searchStr)
         {
             var items = await DAL.GetWorkItems(_user,

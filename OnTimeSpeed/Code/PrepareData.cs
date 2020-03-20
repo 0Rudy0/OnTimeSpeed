@@ -31,7 +31,7 @@ namespace OnTimeSpeed.Code
 
             var workLogsOnDate = new Dictionary<string, List<WorkLogFriendly>>();
 
-            toDate = toDate ?? DateTime.Now.ToLastOfMonth();
+            toDate = toDate ?? new DateTime(Math.Max(DateTime.Now.ToLastOfMonth().Ticks, workLogs.LastOrDefault().date_time.Date.Ticks));
 
             for (var i = fromDate; i <= toDate; i = i.AddDays(1))
             {
