@@ -26,9 +26,9 @@ function generateToastObjs(msg, title, noNewEntryMsg) {
         };
     }
     if (msg.length > 0)
-        getWorkLogs();
+        getWorkLogs(viewModel.breadCrumbs()[currGroupIndex - 1], currGroupIndex);
     else {
-        $('.spinner').hide();
+        $('.spinner.main').hide();
         toastObj = {
             html: '<span style="color: black; text-align: right">' + noNewEntryMsg + '</span>' + closeBtnHtml,
             classes: toastClasses,
@@ -41,7 +41,7 @@ function generateToastObjs(msg, title, noNewEntryMsg) {
 
 //AUTOMATIC
 function addLunch() {
-    $('.spinner').show();
+    $('.spinner.main').show();
     ajaxPOST({
         url: '/Home/AddLunchToToday',
         data: {
@@ -53,7 +53,7 @@ function addLunch() {
 }
 
 function addHolidays() {
-    $('.spinner').show();
+    $('.spinner.main').show();
     ajaxPOST({
         url: '/Home/AddHolidays'
     }, function (msg) {
@@ -62,7 +62,7 @@ function addHolidays() {
 }
 
 function addVacations() {
-    $('.spinner').show();
+    $('.spinner.main').show();
     ajaxPOST({
         url: '/Home/AddVacations'
     }, function (msg) {
@@ -71,7 +71,7 @@ function addVacations() {
 }
 
 function addPaidLeaves() {
-    $('.spinner').show();
+    $('.spinner.main').show();
     ajaxPOST({
         url: '/Home/AddPaidLeaves'
     }, function (msg) {
@@ -80,7 +80,7 @@ function addPaidLeaves() {
 }
 
 function addAllAutomatic() {
-    $('.spinner').show();
+    $('.spinner.main').show();
     ajaxPOST({
         url: '/Home/AddAllAutomatic',
         data: {
@@ -104,7 +104,7 @@ function addLunchSemi() {
 
     var invalidMsg = validateSemiAutomaticForm.apply(data);
     if (invalidMsg.length === 0) {
-        $('.spinner').show();
+        $('.spinner.main').show();
         ajaxPOST({
             url: '/Home/AddLunch',
             data: data
@@ -133,7 +133,7 @@ function addSickLeave() {
 
     var invalidMsg = validateSemiAutomaticForm.apply(data);
     if (invalidMsg.length === 0) {
-        $('.spinner').show();
+        $('.spinner.main').show();
         ajaxPOST({
             url: '/Home/AddSickLeave',
             data: data
@@ -162,7 +162,7 @@ function addInternalMeeting() {
 
     var invalidMsg = validateSemiAutomaticForm.apply(data);
     if (invalidMsg.length === 0) {
-        $('.spinner').show();
+        $('.spinner.main').show();
         ajaxPOST({
             url: '/Home/AddInternalMeeting',
             data: data
@@ -190,7 +190,7 @@ function addOnTimeEntry() {
     }
     var invalidMsg = validateSemiAutomaticForm.apply(data);
     if (invalidMsg.length === 0) {
-        $('.spinner').show();
+        $('.spinner.main').show();
         ajaxPOST({
             url: '/Home/AddOnTimeEntry',
             data: data
@@ -218,7 +218,7 @@ function addColegueSupport() {
     }
     var invalidMsg = validateSemiAutomaticForm.apply(data);
     if (invalidMsg.length === 0) {
-        $('.spinner').show();
+        $('.spinner.main').show();
         ajaxPOST({
             url: '/Home/AddColegueSupport',
             data: data
@@ -246,7 +246,7 @@ function addEducationButton() {
     }
     var invalidMsg = validateSemiAutomaticForm.apply(data);
     if (invalidMsg.length === 0) {
-        $('.spinner').show();
+        $('.spinner.main').show();
         ajaxPOST({
             url: '/Home/AddEducation',
             data: data
@@ -366,7 +366,7 @@ function addWorkLogDo() {
 
     var validMsg = validateForm.apply(data);
     if (validMsg.length === 0) {
-        $('.spinner').show();
+        $('.spinner.main').show();
         ajaxPOST({
             url: '/Home/AddCustom',
             data: data
@@ -387,4 +387,50 @@ function onAddWorkLogSuccess(msg) {
     var data = this;
     generateToastObjs(msg, this.itemName + ' - ', "Nije bilo mjesta za unijeti log");
     saveSettings();
+}
+
+function updateWorkLog() {
+    var log = this;
+    //console.log(log);
+    //return;
+    $('#workLogsForDayModal .spinner.modal').show();
+    ajaxPOST({
+        url: '/Home/UpdateWorkLog',
+        data: {
+            logId: log.LogId,
+            description: log.Descripton,
+            amount: log.Amount
+        }
+    }, function (msg) {  
+        $('#workLogsForDayModal .spinner.modal').hide(); 
+        getWorkLogs(viewModel.breadCrumbs()[currGroupIndex - 1], currGroupIndex); 
+        M.toast({
+            html: '<span style="color: black; text-align: right">' + 'Unos ažuriran' + '</span>' + closeBtnHtml,
+            classes: toastClasses,
+            displayLength: 3000
+        })
+        //generateToastObjs(msg, "Interni sastanak", "Nije bilo mjesta za unijeti interni sastanak");
+    });
+}
+
+
+
+function deleteWorkLog() {
+    var log = this;
+    $('#logRow_' + log.LogId).hide();
+    $('#workLogsForDayModal .spinner.modal').show();
+    ajaxPOST({
+        url: '/Home/DeleteWorkLog',
+        data: {
+            logId: log.LogId
+        }
+    }, function (msg) {  
+        $('#workLogsForDayModal .spinner.modal').hide();          
+        getWorkLogs(viewModel.breadCrumbs()[currGroupIndex - 1], currGroupIndex); 
+        M.toast({
+            html: '<span style="color: black; text-align: right">' + 'Unos obrisan' + '</span>' + closeBtnHtml,
+            classes: toastClasses,
+            displayLength: 3000
+        })
+    });    
 }

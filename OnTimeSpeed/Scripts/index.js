@@ -41,7 +41,7 @@ $(function () {
         initWorkLogChart([], []);        
     }
     else {
-        $('.spinner').hide();
+        $('.spinner.main').hide();
     }
     $('.container').show();
     //$('#addLunchBtn').click(addLunch);
@@ -92,27 +92,29 @@ function getWorkLogs(forDate, groupIndex) {
 }
 
 function deleteWorkLogs() {
-    $('.spinner').show();
-    ajaxPOST({
-        url: '/Home/DeleteWorkLogs',
-        data: {
-            forDate: breadCrumbs[breadCrumbs.length - 1],
-            groupType: groupTypes[currGroupIndex]
-        }
-    }, function (msg) {
-        $('.spinner').hide();
-        var tempToastObj = {
-            html: '<span style="color: black; text-align: right">Obrisano logova: <b>' + msg.logsCount + '</b> (Obrisano sati: <b>' + msg.workAmount + '</b>)</span>' + closeBtnHtml,
-            classes: toastClasses,
-            displayLength: toastLong
-        };
-        M.toast(tempToastObj);        
-        getWorkLogs();
-    });
+    if ($('#confirmDeleteInput').val() === 'BRISANJE') {
+        $('.spinner.main').show();
+        ajaxPOST({
+            url: '/Home/DeleteWorkLogs',
+            data: {
+                forDate: breadCrumbs[breadCrumbs.length - 1],
+                groupType: groupTypes[currGroupIndex]
+            }
+        }, function (msg) {
+            $('.spinner.main').hide();
+            var tempToastObj = {
+                html: '<span style="color: black; text-align: right">Obrisano logova: <b>' + msg.logsCount + '</b> (Obrisano sati: <b>' + msg.workAmount + '</b>)</span>' + closeBtnHtml,
+                classes: toastClasses,
+                displayLength: toastLong
+            };
+            M.toast(tempToastObj);        
+            getWorkLogs();
+        });
+    }
 }
 
 function deleteWorkLogsValidate() {
-    $('.spinner').show();
+    $('.spinner.main').show();
     ajaxGET({
         url: '/Home/DeleteWorkLogsValidate',
         data: {
@@ -120,7 +122,7 @@ function deleteWorkLogsValidate() {
             groupType: groupTypes[currGroupIndex]
         }
     }, function (msg) {
-        $('.spinner').hide();
+        $('.spinner.main').hide();
         //console.log(msg);
         viewModel.confirmDeleteModel(msg);
         M.Modal.getInstance($('#confirmDeleteModal')[0]).open();
@@ -149,7 +151,7 @@ function getWorkLogsAction(forDate) {
         workLogData = msg;
         initWorkLogChart(msg.Categories_names, msg.Series)
 
-        $('.spinner').hide();
+        $('.spinner.main').hide();
 
         if (toastObj) {
             M.toast(toastObj);
@@ -358,6 +360,25 @@ function initWorkLogChart(categories, series) {
                                 currGroupIndex++;
                                 getWorkLogs(this.category, currGroupIndex);
                                 addBreadCrumb(this.category);
+                            }
+                            else {
+                                var newDayModel = {
+                                    dayText: this.category,
+                                    workLogs: []
+                                }
+                                for (var prop in workLogData.WorkLogs) {
+                                    if (Object.prototype.hasOwnProperty.call(workLogData.WorkLogs, prop)) {
+                                        if (prop == this.category) {
+                                            for (var i = 0; i < workLogData.WorkLogs[prop].length; i++) {
+                                                var log = workLogData.WorkLogs[prop][i];
+                                                newDayModel.workLogs.push(log);
+                                            }
+                                        }
+                                    }
+                                }
+                                //console.log(newDayModel);
+                                viewModel.workDayModel(newDayModel);
+                                M.Modal.getInstance($('#workLogsForDayModal')[0]).open();
                             }
                         }
                     }

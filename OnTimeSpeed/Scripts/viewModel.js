@@ -111,4 +111,9 @@
         fromDateStr: '',
         toDateStr: ''
     });
+
+    self.workDayModel = ko.observable({
+        dayText: '',
+        workLogs: []
+    });
 }

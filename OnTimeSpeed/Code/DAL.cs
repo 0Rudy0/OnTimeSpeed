@@ -241,6 +241,7 @@ namespace OnTimeSpeed.Code
                 //param.Add("id", log.id.ToString());
                 await ApiHelper.DeleteRequestAsync($"{_ontimeUrl}/api/v5/work_logs/{log.id.ToString()}", param, user.Token);
             }
+            HttpRuntime.Cache.Remove("workLogs_" + user.id);
             return true;
         }
 
@@ -573,6 +574,20 @@ namespace OnTimeSpeed.Code
                 HttpRuntime.Cache.Remove("workLogs_" + user.id);
 
             return addedOnDates;
+        }
+
+        public static async Task<bool> UpdateWorkLog(User user, int logId, string description, float amount)
+        {
+            var updatedWorkLog = PrepareData.CreateWorkLogObjectForUpdate(amount, description);
+
+            var content = await PostRequestAsync($"/work_logs/{logId}", user.Token, updatedWorkLog);
+            if (content == null)
+                throw new Exception("Unos nije uspio");
+            var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
+
+            HttpRuntime.Cache.Remove("workLogs_" + user.id);
+
+            return result != null;
         }
 
         #endregion

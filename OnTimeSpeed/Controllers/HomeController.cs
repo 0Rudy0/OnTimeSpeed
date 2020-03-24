@@ -185,6 +185,25 @@ namespace OnTimeSpeed.Controllers
             });
         }
 
+        public async Task<string> DeleteWorkLog(int logId)
+        {
+            var success = await DAL.DeleteWorkLogs(_user, new List<WorkLog> { new WorkLog { id = logId } });
+            return JsonConvert.SerializeObject(success);
+        }
+
+        public async Task<string> UpdateWorkLog(
+            int logId,
+            string description,
+            string amount)
+        {
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, new System.Globalization.CultureInfo("en"), out var amount1);
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, System.Threading.Thread.CurrentThread.CurrentCulture, out var amount2);
+            var amountParsed = amount1 > amount2 && amount1 > 0 ? amount1 : amount2;
+
+            var success = await DAL.UpdateWorkLog(_user, logId, description, amountParsed);
+            return JsonConvert.SerializeObject(success);
+        }
+
         public async Task<string> DeleteWorkLogsValidate(string forDate, int? groupType)
         {
             var groupByForDateRange = groupType == null ? GroupBy.Month : (GroupBy)(groupType - 1);
@@ -235,7 +254,7 @@ namespace OnTimeSpeed.Controllers
         {
             float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, new System.Globalization.CultureInfo("en"), out var amount1);
             float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, System.Threading.Thread.CurrentThread.CurrentCulture, out var amount2);
-            var amountParsed = amount1 > amount2 && amount2 > 0 ? amount2 : amount1;
+            var amountParsed = amount1 > amount2 && amount1 > 0 ? amount1 : amount2;
 
             var addedOnDates = await DAL.AddAutomatic(
                 new LunchEntry(),

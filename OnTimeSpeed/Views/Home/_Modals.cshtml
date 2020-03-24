@@ -296,8 +296,10 @@
      data-bind=" with: $data.confirmDeleteModel, attr: {class: 'modal modal-fixed-footer modalInfo ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
     <div class="modal-content" style="display: flex;">
         <h5>!!! Potvrda brisanja !!!</h5>
-        <p>Jeste li sigurni da želite obrisati sve logove u periodu
-        <br /><span class="dateRange"><span data-bind="text: $data.fromDateStr"></span> - <span data-bind="text: $data.toDateStr"></span></span></p>
+        <p>
+            Jeste li sigurni da želite obrisati sve logove u periodu
+            <br /><span class="dateRange"><span data-bind="text: $data.fromDateStr"></span> - <span data-bind="text: $data.toDateStr"></span></span>
+        </p>
         <p>
             Biti će obrisano:
             <ul class="deletingInfoList">
@@ -305,11 +307,58 @@
                 <li>Iznos: <span data-bind="text: $data.workAmount + ' hrs'" class="deletingInfo"></span></li>
             </ul>
         </p>
+        <p>
+            
+            <input type="text" id="confirmDeleteInput" placeholder="Upiši 'BRISANJE'" />
+        </p>
         <br />
         <p style="font-size:20px;">Ova akcija se ne može poništiti!</p>
     </div>
     <div data-bind="attr: {class: 'modal-footer ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().styleType}">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float: right">Zatvori</a>
         <a href="#!" class="modal-close waves-effect waves-green btn-small" style="float: left" data-bind="click: deleteWorkLogs">Potvrdi</a>
+    </div>
+</div>
+
+
+
+<div id="workLogsForDayModal"
+     data-bind=" with: $data.workDayModel, attr: {class: 'modal modal-fixed-footer modalInfo ' + $data.customEntry().styleClass + ' ' + $data.customEntry().styleType}">
+    <div class="modal-content" style="display: flex;">
+        <div class="spinner modal">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+        <h5>Logovi za <span data-bind="text: dayText"></span></h5>
+        <table class="stripedd highlight">
+            <thead>
+                <tr>
+                    <th style="width: 40px;"></th>
+                    <th style="width: 200px;">Predmet</th>
+                    <th style="width: 200px;">Work type</th>
+                    <th>Opis</th>
+                    <th style="width: 70px;">sati</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: $data.workLogs">
+                <tr data-bind="attr: {id: 'logRow_' + $data.LogId}">
+                    <td>
+                        <i class="fad fa-trash-alt removeWorkLog" data-bind="click: deleteWorkLog"></i>
+                    </td>
+                    <td data-bind="text: $data.ItemName"></td>
+                    <td data-bind="text: $data.WorkType"></td>
+                    <td class="descCol">
+                        <input type="text" class="workLogDescriptionInput" data-bind="value: $data.Descripton, event: {blur: updateWorkLog}" />
+                    </td>
+                    <td>
+                        <input type="text" class="workAmountInput" data-bind="value: $data.Amount, event: {blur: updateWorkLog}" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div data-bind="attr: {class: 'modal-footer ' + $parent.customEntry().styleClass + ' ' + $parent.customEntry().styleType}">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float: right">Zatvori</a>
     </div>
 </div>

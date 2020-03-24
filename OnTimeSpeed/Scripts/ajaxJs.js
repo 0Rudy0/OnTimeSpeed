@@ -9,7 +9,7 @@
         cache: false,
         success: callback.bind(this),
         error: function (er) {
-            $('.spinner').hide();            
+            $('.spinner.main').hide();            
         }
     });
 }
@@ -25,7 +25,7 @@ function ajaxPOST(ajaxObj, callback) {
         cache: false,
         success: callback.bind(this),
         error: function (er) {
-            $('.spinner').hide();
+            $('.spinner.main').hide();
         }
     });
 }
@@ -34,12 +34,12 @@ $(document).ajaxError(function (event, request, settings, thrownError) {
     //debugger;
 
     if (request.getResponseHeader('REQUIRES_AUTH_ONTIME') === '1') {
-        $('.spinner').show();
+        $('.spinner.main').show();
         sessionStorage.setItem("reauthPreformed", 1);
         location.reload();
     }
     if (request.getResponseHeader('REQUIRES_AUTH_HRPRO') === '1') {
-        $('.spinner').show();
+        $('.spinner.main').show();
         sessionStorage.setItem("reauthPreformed", 1);
         location.reload();
     }
@@ -57,12 +57,12 @@ $(document).ajaxSuccess(function (event, request, settings) {
     //debugger;
 
     if (request.getResponseHeader('REQUIRES_AUTH_ONTIME') === '1') {
-        $('.spinner').show();
+        $('.spinner.main').show();
         sessionStorage.setItem("reauthPreformed", 1);
         location.reload();
     }
     if (request.getResponseHeader('REQUIRES_AUTH_HRPRO') === '1') {
-        $('.spinner').show();
+        $('.spinner.main').show();
         sessionStorage.setItem("reauthPreformed", 1);
         location.reload();
     }

@@ -104,6 +104,7 @@ namespace OnTimeSpeed.Code
                     }
                     workLogsOnDate[key].Add(new WorkLogFriendly
                     {
+                        LogId = log.id,
                         ItemName = log.item.name,
                         Amount = log.work_done.duration_minutes / 60,
                         Descripton = log.description,
@@ -121,6 +122,7 @@ namespace OnTimeSpeed.Code
                     }
                     workLogsOnDate[key].Add(new WorkLogFriendly
                     {
+                        LogId = log.id,
                         ItemName = log.item.name,
                         Amount = log.work_done.duration_minutes / 60,
                         Descripton = log.description,
@@ -318,6 +320,23 @@ namespace OnTimeSpeed.Code
                 date_time = forDate.ToString("yyyy-MM-ddT12:00:00")
             };
         }
+
+        public static object CreateWorkLogObjectForUpdate(float durationHrs, string description = null)
+        {
+            return new
+            {               
+                work_done = new
+                {
+                    duration = durationHrs,
+                    time_unit = new
+                    {
+                        id = 2
+                    }
+                },
+                description,
+            };
+        }
+
 
         public static WorkItem GetTaskForDate(
             List<WorkItem> items, 

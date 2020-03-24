@@ -25,6 +25,7 @@ namespace OnTimeSpeed.Models
 
     public class WorkLogFriendly
     {
+        public int LogId { get; set; }
         public string ItemName { get; set; }
         public string Descripton { get; set; }
         public float Amount { get; set; }

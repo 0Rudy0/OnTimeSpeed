@@ -766,3 +766,59 @@
         align-items: center;
         justify-content: center;
     }
+
+#workLogsForDayModal .workAmountInput {
+    width: 40px;
+    text-align: center;
+}
+
+#workLogsForDayModal table th {
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0.4;
+}
+
+#workLogsForDayModal table.highlight > tbody > tr:hover {
+    background-color: rgba(242,242,242,0.2);
+}
+
+#workLogsForDayModal table tr {
+    /*display: flex;*/
+    height: 110px;
+    align-items: center;
+    justify-content: center;
+}
+    #workLogsForDayModal table tr td {
+        padding: 0 10px;
+    }
+
+
+    #workLogsForDayModal table tr td:not(.descCol) {
+        text-align: center;
+        /*flex: 1;
+        display: inline-block;*/
+    }
+
+    .removeWorkLog {
+        color: #ff7c7c;
+        cursor: pointer;
+        transition-duration: 0.1s;
+    }
+
+        .removeWorkLog:hover {
+            color: #f90000;
+            transform: scale(1.5);
+        }
+
+    .removeWorkLog:active {
+        color: #ff4848;
+        transform: scale(0.95);
+    }
+
+#workLogsForDayModal .spinner.modal {
+    width: 100px;
+    height: 50px;
+    padding: 17px;
+    display: none;
+    overflow: hidden;
+}
