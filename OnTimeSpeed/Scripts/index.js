@@ -93,6 +93,7 @@ function getWorkLogs(forDate, groupIndex) {
 
 function deleteWorkLogs() {
     if ($('#confirmDeleteInput').val() === 'BRISANJE') {
+        M.Modal.getInstance($('#confirmDeleteModal')[0]).close();
         $('.spinner.main').show();
         ajaxPOST({
             url: '/Home/DeleteWorkLogs',
@@ -101,7 +102,7 @@ function deleteWorkLogs() {
                 groupType: groupTypes[currGroupIndex]
             }
         }, function (msg) {
-            $('.spinner.main').hide();
+            //$('.spinner.main').hide();
             var tempToastObj = {
                 html: '<span style="color: black; text-align: right">Obrisano logova: <b>' + msg.logsCount + '</b> (Obrisano sati: <b>' + msg.workAmount + '</b>)</span>' + closeBtnHtml,
                 classes: toastClasses,
@@ -110,6 +111,13 @@ function deleteWorkLogs() {
             M.toast(tempToastObj);        
             getWorkLogs();
         });
+    }
+    else {
+        M.toast({
+            html: '<span style="color: black; text-align: right">Niste upisali "BRISANJE" u input</span>' + closeBtnHtml,
+            classes: toastClasses,
+            displayLength: 2000
+        });    
     }
 }
 

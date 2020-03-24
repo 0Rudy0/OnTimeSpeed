@@ -767,6 +767,10 @@
         justify-content: center;
     }
 
+#confirmDeleteInput {
+    text-align: center;
+}
+
 #workLogsForDayModal .workAmountInput {
     width: 40px;
     text-align: center;
