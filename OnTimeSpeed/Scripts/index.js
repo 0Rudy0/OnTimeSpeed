@@ -10,6 +10,8 @@ var viewModel;
 var searchStack = [];
 var closeBtnHtml = '<button class="btn-flat toast-action" onclick="closeNotification(this)">X</button>';
 var firstLoad = true;
+var lastAjaxRequest;
+var pingStack = [];
 
 var dateFromPickers = {
     semiAutomaticDateFrom: null
@@ -65,14 +67,44 @@ $(function () {
      if (loggedIn) {
         if (!viewModel.hrproUser()) {
             var tempToast = {
-                html: '<span style="color: black">Neuspješna prijava na HRPRO API</span>' + closeBtnHtml,
+                html: '<span style="color: black">Neuspješna prijava u HrNet<br>Neke funckionalnosti zbog toga nisu dostupne</span>' + closeBtnHtml,
                 classes: toastClasses,
                 displayLength: toastLong
             };
             M.toast(tempToast);
         }
-    }    
+    }   
+
+    $('.container').removeClass('hide');
+    $('.connectBtn').removeClass('hide');
+    $('.modals').removeClass('hide');
+
+    window.addEventListener("focus", function(event) { 
+        var now = new Date();
+        var secondsPassed = (now.getTime() - lastAjaxRequest.getTime()) / 1000;
+        if (secondsPassed > inactivityIntervalSeconds) {
+            //console.log("prošlo " + secondsPassed + " minuta");
+            ping();
+        }
+        //console.log(("focused: " + new Date()).toLocaleString());
+    }, false);
+ 
 })
+
+function ping() {
+    pingStack.push(0);
+    setTimeout(function() {
+        if (pingStack.length > 0) {
+            $('.spinner.main').show(); 
+        }
+    }, 200);
+    ajaxGET({
+        url: '/Home/Ping'
+    }, function (msg) {
+        pingStack = [];
+        $('.spinner.main').hide(); 
+    });
+}
 
 
 function getWorkLogs(forDate, groupIndex) {
@@ -239,12 +271,12 @@ function getWorkLogsAction(forDate) {
             var authPerformed = sessionStorage.getItem("reauthPreformed");
             if (authPerformed) {
                 sessionStorage.removeItem("reauthPreformed");
-                var tempToast = {
+                /*var tempToast = {
                     html: '<span style="color: black">Ponovno ste prijavljeni u aplikaciju.<br>Ponovite zadnju akciju</span>' + closeBtnHtml,
                     classes: toastClasses,
                     displayLength: toastLong
                 };
-                M.toast(tempToast);
+                M.toast(tempToast);*/
             }
         }
 

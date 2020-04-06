@@ -32,16 +32,20 @@ function ajaxPOST(ajaxObj, callback) {
 
 $(document).ajaxError(function (event, request, settings, thrownError) {
     //debugger;
+    lastAjaxRequest = new Date();
+    //console.log(thrownError);
 
     if (request.getResponseHeader('REQUIRES_AUTH_ONTIME') === '1') {
         $('.spinner.main').show();
         sessionStorage.setItem("reauthPreformed", 1);
-        location.reload();
+        recoverUser();
+        //location.reload();
     }
     if (request.getResponseHeader('REQUIRES_AUTH_HRPRO') === '1') {
         $('.spinner.main').show();
         sessionStorage.setItem("reauthPreformed", 1);
-        location.reload();
+        recoverUser();
+        //location.reload();
     }
     else if (request.getResponseHeader('REQUIRES_AUTH_ONTIME') != '1' && request.getResponseHeader('REQUIRES_AUTH_HRPRO') != '1') {
         var tempToast = {
@@ -55,15 +59,18 @@ $(document).ajaxError(function (event, request, settings, thrownError) {
 
 $(document).ajaxSuccess(function (event, request, settings) {
     //debugger;
+    lastAjaxRequest = new Date();
 
     if (request.getResponseHeader('REQUIRES_AUTH_ONTIME') === '1') {
         $('.spinner.main').show();
         sessionStorage.setItem("reauthPreformed", 1);
-        location.reload();
+        recoverUser();
+        //location.reload();
     }
     if (request.getResponseHeader('REQUIRES_AUTH_HRPRO') === '1') {
         $('.spinner.main').show();
         sessionStorage.setItem("reauthPreformed", 1);
-        location.reload();
+        recoverUser();
+        //location.reload();
     }
 });

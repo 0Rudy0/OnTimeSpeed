@@ -455,7 +455,6 @@ namespace OnTimeSpeed.Code
         public static async Task<List<string>> AddSemiAutomatic(
             ISemiAutomaticEntry entry,
             User user,
-            hrnetModel.User hrproUser,
             DateTime? fromDate,
             DateTime? toDate,
             float amount,

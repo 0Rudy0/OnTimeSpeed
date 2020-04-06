@@ -88,6 +88,14 @@ namespace OnTimeSpeed.Controllers
             return View(model);
         }
 
+        public async Task<string> Ping()
+        {
+            return JsonConvert.SerializeObject(new
+            {
+                success = true
+            });
+        }
+
         public async Task<string> GetHolidays()
         {
             if (DateUtils.Holidays.Count == 0 && _hrproUser != null)
@@ -106,11 +114,14 @@ namespace OnTimeSpeed.Controllers
             return JsonConvert.SerializeObject(DateUtils.Holidays);
         }
 
-        public async Task<bool> RecoverUser(string user)
+        public async Task<string> RecoverUser(string user)
         {
+            bool ontimeSuccess;
+            bool hrproSuccess;
+
             if (String.IsNullOrEmpty(user))
             {
-                return false;
+                ontimeSuccess = false;
             }
             else
             {
@@ -123,19 +134,59 @@ namespace OnTimeSpeed.Controllers
                         if (ontimeUser != null)
                         {
                             Session["user"] = userObj;
-                            return true;
+                            ontimeSuccess = true;
                         }
                         else
-                            return false;
+                            ontimeSuccess = false;
                     }
                     else
-                        return false;
+                        ontimeSuccess = false;
                 }
                 catch (Exception ex)
                 {
-                    return false;
+                    ontimeSuccess = false;
                 }
             }
+            if (_hrproUser == null)
+            {
+                try
+                {
+                    var userName = User.Identity.Name;
+
+                    LogUtils.Debug("Pokušaj logina s " + userName);
+                    _hrproUser = DAL.AuthHrNet(new hrnetModel.User
+                    {
+                        Username = userName
+                    });
+                    if (_hrproUser == null)
+                    {
+                        LogUtils.Debug("neuspješna prijava");
+                        hrproSuccess = false;
+                    }
+                    else
+                    {
+                        LogUtils.Debug("Prijava uspješna!");
+                        hrproSuccess = true;
+                    }
+
+                    Session["hrproUser"] = _hrproUser;
+                }
+                catch (Exception ex)
+                {
+                    LogUtils.LogException(ex);
+                    hrproSuccess = false;
+                }
+            }
+            else
+            {
+                hrproSuccess = true;
+            }
+
+            return JsonConvert.SerializeObject(new
+            {
+                ontimeUser = Session["user"],
+                hrproUser = Session["hrproUser"]
+            });
         }
 
         public ActionResult GetAuthCode(string code)
@@ -236,9 +287,13 @@ namespace OnTimeSpeed.Controllers
         //[AuthorizeHrPro]
         public async Task<string> AddAllAutomatic(string amount = "0.5")
         {
-            var addedOnDates = JsonConvert.DeserializeObject<List<string>>(await AddHolidays(true));
-            addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddVacations(true)));
-            addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddPaidLeaves(true)));
+            var addedOnDates = new List<string>(); 
+            if (_hrproUser != null)
+            {
+                addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddHolidays(true)));
+                addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddVacations(true)));
+                addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddPaidLeaves(true)));
+            }
             addedOnDates.AddRange(JsonConvert.DeserializeObject<List<string>>(await AddLunchToToday(amount, true)));
 
             if (addedOnDates.Count > 0 && addedOnDates.ElementAt(addedOnDates.Count - 1).Contains("-------"))
@@ -318,7 +373,6 @@ namespace OnTimeSpeed.Controllers
         #region Add semi automatic
 
         [HttpPost]
-        //[AuthorizeHrPro]
         public async Task<string> AddLunch(
            float amount,
            string dateFromStr,
@@ -329,7 +383,6 @@ namespace OnTimeSpeed.Controllers
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new LunchEntry(),
                 _user,
-                _hrproUser,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
@@ -340,7 +393,6 @@ namespace OnTimeSpeed.Controllers
         }
 
         [HttpPost]
-        [AuthorizeHrPro]
         public async Task<string> AddSickLeave(
             float amount,
             string dateFromStr,
@@ -351,7 +403,6 @@ namespace OnTimeSpeed.Controllers
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new SickLeaveEntry(),
                 _user,
-                _hrproUser,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
@@ -362,7 +413,6 @@ namespace OnTimeSpeed.Controllers
         }
 
         [HttpPost]
-        [AuthorizeHrPro]
         public async Task<string> AddInternalMeeting(
             float amount,
             string dateFromStr,
@@ -373,7 +423,6 @@ namespace OnTimeSpeed.Controllers
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new InternalMeetingEntry(),
                 _user,
-                _hrproUser,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
@@ -384,7 +433,6 @@ namespace OnTimeSpeed.Controllers
         }
 
         [HttpPost]
-        [AuthorizeHrPro]
         public async Task<string> AddOnTimeEntry(
             float amount,
             string dateFromStr,
@@ -395,7 +443,6 @@ namespace OnTimeSpeed.Controllers
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new OnTimeEntry(),
                 _user,
-                _hrproUser,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
@@ -406,7 +453,6 @@ namespace OnTimeSpeed.Controllers
         }
 
         [HttpPost]
-        [AuthorizeHrPro]
         public async Task<string> AddColegueSupport(
             float amount,
             string dateFromStr,
@@ -417,7 +463,6 @@ namespace OnTimeSpeed.Controllers
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new ColleagueSupportEntry(),
                 _user,
-                _hrproUser,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
@@ -428,7 +473,6 @@ namespace OnTimeSpeed.Controllers
         }
 
         [HttpPost]
-        [AuthorizeHrPro]
         public async Task<string> AddEducation(
             float amount,
             string dateFromStr,
@@ -439,7 +483,6 @@ namespace OnTimeSpeed.Controllers
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new EducationEntry(),
                 _user,
-                _hrproUser,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                 amount,
@@ -452,7 +495,6 @@ namespace OnTimeSpeed.Controllers
         #endregion
 
         [HttpPost]
-        [AuthorizeHrPro]
         public async Task<string> AddCustom(
             int itemId,
             int workTypeId,

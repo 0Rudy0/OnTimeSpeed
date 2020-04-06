@@ -32,7 +32,7 @@
                         <div class="userImage" style="background-image: url(@imgUrl)">
                         </div>
                         <span class="userName">@name</span>
-                        
+
                         <i class="fas fa-cog"></i>
                     </div>
                 }
@@ -42,14 +42,14 @@
 
 
     <div class="footer" style="position: fixed; bottom: 5px; left: 10px; font-size: 16px; opacity: 0.3;">
-            <b>OnTime Speed</b> by Dr. Udman
-        </div>
+        <b>OnTime Speed</b> by Dr. Udman
+    </div>
 
     @RenderBody()
     @Scripts.Render("~/bundles/Layout")
     @*<footer class="page-footer">
-        <b>OnTimeSpeed</b> by Dr. Udman
-    </footer>*@
+            <b>OnTimeSpeed</b> by Dr. Udman
+        </footer>*@
     <script type="text/javascript">
         var appName = '@System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath';
         var loggedIn = @loggedIn.ToString().ToLower();
@@ -57,13 +57,18 @@
         if (serial && serial != 'bnVsbA==') //bnVsbA== - null
             localStorage.setItem('serial', serial);
         else {
-            serial = localStorage.getItem('serial');
+            recoverUser();
+        }
+
+        function recoverUser() {
+            //debugger;
+            var serial = localStorage.getItem('serial');
             if (serial) {
                 $.ajax({
                     url: appName + '/Home/RecoverUser',
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
-                    dataType: "text",
+                    dataType: "json",
                     data: JSON.stringify({
                         user: serial
                     }),
@@ -72,28 +77,70 @@
                     success: function (msg) {
                         $('.spinner').hide();
 
-                        if (msg == "True")
-                            location.reload();
+                        if (msg.ontimeUser) {
+                            viewModel.ontimeUser(msg.ontimeUser);
+                            //location.reload();
+                            var authPerformed = sessionStorage.getItem("reauthPreformed");
+                            if (authPerformed) {
+                                sessionStorage.removeItem("reauthPreformed");
+                                if ($('.container').hasClass('hide')) {
+                                   location.reload();
+                                }
+                                else {
+                                    var tempToast = {
+                                        html: '<span style="color: black">Sessija obnovljena</span>' + closeBtnHtml,
+                                        classes: toastClasses,
+                                        displayLength: toastLong
+                                    };
+                                    M.toast(tempToast);
+                                }
+                            }
+                        }
                         else {
                             console.log(msg);
                             $('.connectBtn').removeClass('hide');
                             localStorage.removeItem('serial');
                             console.log('removing user from local storage');
+                            location.reload();
+                            viewModel.ontimeUser(null);
+                        }
+                        if (!msg.hrproUser) {
+                            viewModel.hrproUser(null);
+                            var tempToast = {
+                                html: '<span style="color: black">Neuspješna prijava u HrNet<br>Neke funckionalnosti zbog toga nisu dostupne</span>' + closeBtnHtml,
+                                classes: toastClasses,
+                                displayLength: toastLong
+                            };
+                            M.toast(tempToast);
+                        }
+                        else {
+                            viewModel.hrproUser(msg.hrproUser);
                         }
                     },
                     error: function (err) {
+                        $('.spinner').hide();
                         console.log(err);
                         $('.connectBtn').removeClass('hide');
                         localStorage.removeItem('serial');
                         console.log('removing user from local storage');
+                        location.reload();
 
                         $('.spinner').hide();
                     }
                 });
             }
             else {
-                $('.connectBtn').removeClass('hide');
-                $('.spinner').hide();
+                setTimeout(function() {
+                    viewModel.hrproUser(null);
+                    viewModel.ontimeUser(null);   
+
+                    $('.container').removeClass('hide');
+                    $('.connectBtn').removeClass('hide');
+                    $('.modals').removeClass('hide');
+                }, 200);
+                //location.reload();
+                //$('.connectBtn').removeClass('hide');
+                //$('.spinner').hide();
             }
         }
     </script>

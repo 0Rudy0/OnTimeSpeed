@@ -19,109 +19,111 @@
 }
 
 
-@if (Model.OnTimeUser == null)
-{
-    <a href="@connectUrl" class="connectBtn hide">
-        <i class="fas fa-sign-in-alt"></i>
-        Prijavi se u OnTime
-    </a>
-}
-else
-{
-    <div class="spinner main">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
-    </div>
-    <div class="container">
+<!-- ko if: ontimeUser() == null -->
 
-        <div class="row">
-            <div class="col s12">
-                <nav>
-                    <div class="nav-wrapper blue-grey darken-3">
-                        <div class="col s12" style="padding-left: 20px;" id="breadCrumbs">
-                            <a href="#!" onclick="getWorkLogs()" class="breadcrumb clickable">Sve</a>
-                        </div>
-                        <!-- ko if: breadCrumbs().length > 0 -->
-                        <div class="deleteWorkLogsIcon" data-bind="click: deleteWorkLogsValidate" title="Obriši logove u odabranom periodu">
-                            <i class="fad fa-eraser"></i>
-                        </div>
-                        <!-- /ko -->
+<a href="@connectUrl" class="connectBtn hide">
+    <i class="fas fa-sign-in-alt"></i>
+    Prijavi se u OnTime
+</a>
+<!-- /ko -->
+<!-- ko if: ontimeUser() != null -->
+<div class="spinner main">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div>
+<div class="container hide">
+
+    <div class="row">
+        <div class="col s12">
+            <nav>
+                <div class="nav-wrapper blue-grey darken-3">
+                    <div class="col s12" style="padding-left: 20px;" id="breadCrumbs">
+                        <a href="#!" onclick="getWorkLogs()" class="breadcrumb clickable">Sve</a>
                     </div>
-                </nav>
-            </div>
-            <div class="col s12">
-                <div id="workLogChart"></div>
-            </div>
-            <br />
-            <div class="col s12">
-                <ul class="collapsible popout">
-                    <li data-bind="with: automaticEntry">
-                        <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 0),
-                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $data.textClass + ' ' + $data.textType}">
-                            <i class="fad fa-magic"></i>
-                            <i class="fad fa-info-circle infoIcon" data-bind="click: openAutomaticEntryModalInfo"></i>
-                            Automagični unos
-                        </div>
-                        <div class="collapsible-body">
-                            @Html.Partial("_AutomaticEntry")
-                        </div>
-                    </li>
-                    <li data-bind="with: semiAutomaticEntry">
-                        <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 1),
-                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $.data.textClass + ' ' + $data.textType}">
-                            <i class="fad fa-sparkles"></i>
-                            <i class="fad fa-info-circle infoIcon" data-bind="click: openSemiAutomaticEntryModalInfo"></i>
-                            Polu-automagični unos
-                        </div>
-                        <div class="collapsible-body">
-                            @Html.Partial("_SemiAutomaticEntry")
-                        </div>
-                    </li>
-                    <li data-bind="with: customEntry">
-                        <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 2),
-                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $.data.textClass + ' ' + $data.textType}">
-                            <i class="fad fa-user-edit"></i>
-                            <i class="fad fa-info-circle infoIcon" data-bind="click: openCustomEntryModalInfo"></i>
-                            Ručni unos
-                        </div>
-                        <div class="collapsible-body">
-                            @Html.Partial("_CustomEntry")
-                        </div>
-                    </li>
-                    <!-- ko if: $data.userSettings().templates().length > 0-->
-                    <li data-bind="with: templateModel">
-                        <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 3),
-                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $.data.textClass + ' ' + $data.textType}">
-                            <i class="fad fa-stream"></i>
-                            @*<i class="fad fa-info-circle infoIcon" data-bind="click: openTemplateEntryModalInfo"></i>*@
-                            Predlošci
-                        </div>
-                        <div class="collapsible-body">
-                            @Html.Partial("_Templates")
-                        </div>
-                    </li>
+                    <!-- ko if: breadCrumbs().length > 0 -->
+                    <div class="deleteWorkLogsIcon" data-bind="click: deleteWorkLogsValidate" title="Obriši logove u odabranom periodu">
+                        <i class="fad fa-eraser"></i>
+                    </div>
                     <!-- /ko -->
-                </ul>
-            </div>
-            @*<div class="col s12 m12">
-                    @Html.Partial("_AutomaticEntry")
                 </div>
-                <div class="col s12 m12">
-                    @Html.Partial("_SemiAutomaticEntry")
-                </div>
-                <div class="col s12 m12">
-                    @Html.Partial("_CustomEntry")
-                </div>*@
-
-
-
+            </nav>
         </div>
+        <div class="col s12">
+            <div id="workLogChart"></div>
+        </div>
+        <br />
+        <div class="col s12">
+            <ul class="collapsible popout">
+                <li data-bind="with: automaticEntry">
+                    <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 0),
+                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $data.textClass + ' ' + $data.textType}">
+                        <i class="fad fa-magic"></i>
+                        <i class="fad fa-info-circle infoIcon" data-bind="click: openAutomaticEntryModalInfo"></i>
+                        Automagični unos
+                    </div>
+                    <div class="collapsible-body">
+                        @Html.Partial("_AutomaticEntry")
+                    </div>
+                </li>
+                <li data-bind="with: semiAutomaticEntry">
+                    <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 1),
+                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $.data.textClass + ' ' + $data.textType}">
+                        <i class="fad fa-sparkles"></i>
+                        <i class="fad fa-info-circle infoIcon" data-bind="click: openSemiAutomaticEntryModalInfo"></i>
+                        Polu-automagični unos
+                    </div>
+                    <div class="collapsible-body">
+                        @Html.Partial("_SemiAutomaticEntry")
+                    </div>
+                </li>
+                <li data-bind="with: customEntry">
+                    <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 2),
+                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $.data.textClass + ' ' + $data.textType}">
+                        <i class="fad fa-user-edit"></i>
+                        <i class="fad fa-info-circle infoIcon" data-bind="click: openCustomEntryModalInfo"></i>
+                        Ručni unos
+                    </div>
+                    <div class="collapsible-body">
+                        @Html.Partial("_CustomEntry")
+                    </div>
+                </li>
+                <!-- ko if: $data.userSettings().templates().length > 0-->
+                <li data-bind="with: templateModel">
+                    <div class="collapsible-header" data-bind="click: onAccordionOpen.bind($data, 3),
+                             attr: {class : 'collapsible-header ' + $data.styleClass + ' ' + $data.titleType + ' ' + $.data.textClass + ' ' + $data.textType}">
+                        <i class="fad fa-stream"></i>
+                        @*<i class="fad fa-info-circle infoIcon" data-bind="click: openTemplateEntryModalInfo"></i>*@
+                        Predlošci
+                    </div>
+                    <div class="collapsible-body">
+                        @Html.Partial("_Templates")
+                    </div>
+                </li>
+                <!-- /ko -->
+            </ul>
+        </div>
+        @*<div class="col s12 m12">
+                @Html.Partial("_AutomaticEntry")
+            </div>
+            <div class="col s12 m12">
+                @Html.Partial("_SemiAutomaticEntry")
+            </div>
+            <div class="col s12 m12">
+                @Html.Partial("_CustomEntry")
+            </div>*@
+
+
+
     </div>
+</div>
 
+<div class="modals hide">
     @Html.Partial("_Modals")
+</div>
 
-}
+
+<!-- /ko -->
 
 @section scripts {
     <script type="text/html" id="entry-template">
@@ -186,6 +188,7 @@ else
         var onTimeUserSerialized = '@Html.Raw(JsonConvert.SerializeObject(Model.OnTimeUser))';
         var hrproUserSerialized = '@Html.Raw(raw)';
         var monthsBack = @AppSettings.GetInt("monthsBack");
+        var inactivityIntervalSeconds = @AppSettings.GetInt("inactivityIntervalSeconds");
 
     </script>
     @Scripts.Render("~/bundles/Index")

@@ -75,5 +75,6 @@ function unchooseWorkItem() {
 
 function addMoreWorkItems() {
     M.Modal.getInstance($('#addMoreWorkItemsModal')[0]).open();
+    $('#addMoreWorkItemsModal .spinner').hide();
     $('#searchWorkItems').focus();
 }
