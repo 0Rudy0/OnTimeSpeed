@@ -9,6 +9,17 @@ namespace OnTimeSpeed.Code
     {
         public string Name { get; set; }
         public IEnumerable<string> Templates { get; set; }
+
+        public override string ToString()
+        {
+            var templateStr = "";
+            foreach (var t in Templates)
+            {
+                templateStr += t + "; ";
+            }
+            templateStr = templateStr.Substring(0, templateStr.Length - 2);
+            return $"{Name} - {templateStr}";
+        }
     }
 
     public static class Templates

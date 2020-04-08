@@ -434,10 +434,16 @@ namespace OnTimeSpeed.Code
                     var newLog = entry.CreateWorkLogObj(user.id, workItem.Id, i, addAmount, vacations);
                     var content = await PostRequestAsync($"/work_logs", user.Token, newLog);
                     var result = await Task.Factory.StartNew(() => ApiHelper.GetObjectFromApiResponse<WorkLog>(content));
+                    var desc = newLog.GetType().GetProperty("description")?.GetValue(newLog)?.ToString();
+                    if (!String.IsNullOrEmpty(desc))
+                    {
+                        desc = $" ({desc})";
+                    }
+
                     if (detailedLog)
-                        addedOnDates.Add($"{i.ToShortDateString()} - {entry.GetEntryDescription()}");
+                        addedOnDates.Add($"{i.ToShortDateString()}{desc} - {entry.GetEntryDescription()}");
                     else
-                        addedOnDates.Add(i.ToShortDateString());
+                        addedOnDates.Add($"{i.ToShortDateString()}{desc}");
                 }
             }
             if (addedOnDates.Count > 0)

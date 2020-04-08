@@ -16872,3 +16872,1625 @@ Parameter name: s</code></span><br />
 		</div>
 	</div>
 
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:44:34</span><span class='timeUtc' style='display: none'>2020-04-08T11:44:34.5590814+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:44:35</span><span class='timeUtc' style='display: none'>2020-04-08T11:44:35.2793217+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:45:21</span><span class='timeUtc' style='display: none'>2020-04-08T11:45:21.4851059+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>An item with the same key has already been added.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void ThrowArgumentException(System.ExceptionResource)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+  <br>at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+  <br>at OnTimeSpeed.Code.DAL_HrProApi.<GetApprovedVacationDays>d__2.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL_HrProApi.cs:line 84
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.EntryImplementations.LunchEntry.<GetApprovedVacationDays>d__4.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\EntryImplementations\LunchEntry.cs:line 67
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Code.DAL.<AddAutomatic>d__19.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 425
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Controllers.HomeController.<AddLunchToToday>d__16.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 314
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass8_0.<BeginInvokeAsynchronousActionMethod>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.InvokeEndHandler(IAsyncResult ar)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.OnAsyncHandlerCompletion(IAsyncResult ar)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:45:48</span><span class='timeUtc' style='display: none'>2020-04-08T11:45:48.6590095+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>An item with the same key has already been added.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void ThrowArgumentException(System.ExceptionResource)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+  <br>at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+  <br>at OnTimeSpeed.Code.DAL_HrProApi.<GetApprovedVacationDays>d__2.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL_HrProApi.cs:line 84
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.EntryImplementations.LunchEntry.<GetApprovedVacationDays>d__4.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\EntryImplementations\LunchEntry.cs:line 67
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Code.DAL.<AddAutomatic>d__19.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 425
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Controllers.HomeController.<AddLunchToToday>d__16.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 314
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass8_0.<BeginInvokeAsynchronousActionMethod>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.InvokeEndHandler(IAsyncResult ar)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.OnAsyncHandlerCompletion(IAsyncResult ar)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:48:14</span><span class='timeUtc' style='display: none'>2020-04-08T11:48:14.5132505+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>An item with the same key has already been added.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void ThrowArgumentException(System.ExceptionResource)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+  <br>at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+  <br>at OnTimeSpeed.Code.DAL_HrProApi.<GetApprovedVacationDays>d__2.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL_HrProApi.cs:line 84
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.EntryImplementations.LunchEntry.<GetApprovedVacationDays>d__4.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\EntryImplementations\LunchEntry.cs:line 67
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Code.DAL.<AddAutomatic>d__19.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 425
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Controllers.HomeController.<AddLunchToToday>d__16.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 314
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass8_0.<BeginInvokeAsynchronousActionMethod>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.InvokeEndHandler(IAsyncResult ar)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.OnAsyncHandlerCompletion(IAsyncResult ar)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:49:33</span><span class='timeUtc' style='display: none'>2020-04-08T11:49:33.5482827+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>An item with the same key has already been added.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void ThrowArgumentException(System.ExceptionResource)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+  <br>at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+  <br>at OnTimeSpeed.Code.DAL_HrProApi.<GetApprovedVacationDays>d__2.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL_HrProApi.cs:line 84
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.EntryImplementations.LunchEntry.<GetApprovedVacationDays>d__4.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\EntryImplementations\LunchEntry.cs:line 67
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Code.DAL.<AddAutomatic>d__19.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 425
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Controllers.HomeController.<AddLunchToToday>d__16.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 314
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass8_0.<BeginInvokeAsynchronousActionMethod>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.InvokeEndHandler(IAsyncResult ar)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.OnAsyncHandlerCompletion(IAsyncResult ar)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:50:31</span><span class='timeUtc' style='display: none'>2020-04-08T11:50:31.1491082+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>An item with the same key has already been added.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void ThrowArgumentException(System.ExceptionResource)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+  <br>at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+  <br>at OnTimeSpeed.Code.DAL_HrProApi.<GetApprovedVacationDays>d__2.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL_HrProApi.cs:line 84
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.EntryImplementations.LunchEntry.<GetApprovedVacationDays>d__4.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\EntryImplementations\LunchEntry.cs:line 67
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Code.DAL.<AddAutomatic>d__19.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 425
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Controllers.HomeController.<AddLunchToToday>d__16.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 314
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass8_0.<BeginInvokeAsynchronousActionMethod>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.InvokeEndHandler(IAsyncResult ar)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.OnAsyncHandlerCompletion(IAsyncResult ar)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:50:53</span><span class='timeUtc' style='display: none'>2020-04-08T11:50:53.2250127+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>An item with the same key has already been added.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void ThrowArgumentException(System.ExceptionResource)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+  <br>at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+  <br>at OnTimeSpeed.Code.DAL_HrProApi.<GetApprovedVacationDays>d__2.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL_HrProApi.cs:line 84
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.EntryImplementations.LunchEntry.<GetApprovedVacationDays>d__4.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\EntryImplementations\LunchEntry.cs:line 67
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Code.DAL.<AddAutomatic>d__19.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 425
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Controllers.HomeController.<AddLunchToToday>d__16.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 314
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass8_0.<BeginInvokeAsynchronousActionMethod>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.InvokeEndHandler(IAsyncResult ar)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.OnAsyncHandlerCompletion(IAsyncResult ar)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:51:01</span><span class='timeUtc' style='display: none'>2020-04-08T11:51:01.2457563+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>An item with the same key has already been added.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void ThrowArgumentException(System.ExceptionResource)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+  <br>at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+  <br>at OnTimeSpeed.Code.DAL_HrProApi.<GetApprovedVacationDays>d__2.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL_HrProApi.cs:line 84
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.EntryImplementations.LunchEntry.<GetApprovedVacationDays>d__4.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\EntryImplementations\LunchEntry.cs:line 67
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Code.DAL.<AddAutomatic>d__19.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 425
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Controllers.HomeController.<AddLunchToToday>d__16.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 314
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass8_0.<BeginInvokeAsynchronousActionMethod>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.InvokeEndHandler(IAsyncResult ar)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.OnAsyncHandlerCompletion(IAsyncResult ar)
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:56:35</span><span class='timeUtc' style='display: none'>2020-04-08T11:56:35.2370502+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>An item with the same key has already been added.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void ThrowArgumentException(System.ExceptionResource)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+  <br>at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+  <br>at OnTimeSpeed.Code.DAL_HrProApi.<GetApprovedVacationDays>d__2.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL_HrProApi.cs:line 84
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.EntryImplementations.LunchEntry.<GetApprovedVacationDays>d__4.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\EntryImplementations\LunchEntry.cs:line 67
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Code.DAL.<AddAutomatic>d__19.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 425
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Controllers.HomeController.<AddLunchToToday>d__16.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 314
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass8_0.<BeginInvokeAsynchronousActionMethod>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.InvokeEndHandler(IAsyncResult ar)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.OnAsyncHandlerCompletion(IAsyncResult ar)
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:58:39</span><span class='timeUtc' style='display: none'>2020-04-08T11:58:39.6224106+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:58:40</span><span class='timeUtc' style='display: none'>2020-04-08T11:58:40.7646984+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:58:41</span><span class='timeUtc' style='display: none'>2020-04-08T11:58:41.2964050+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 11:58:41</span><span class='timeUtc' style='display: none'>2020-04-08T11:58:41.5719332+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:12:08</span><span class='timeUtc' style='display: none'>2020-04-08T12:12:08.0565737+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>An item with the same key has already been added.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void ThrowArgumentException(System.ExceptionResource)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+  <br>at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+  <br>at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+  <br>at OnTimeSpeed.Code.DAL_HrProApi.<GetApprovedVacationDays>d__2.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL_HrProApi.cs:line 84
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+  <br>at OnTimeSpeed.EntryImplementations.LunchEntry.<GetApprovedVacationDays>d__4.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\EntryImplementations\LunchEntry.cs:line 67
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+  <br>at OnTimeSpeed.Code.DAL.<AddAutomatic>d__19.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 425
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+  <br>at OnTimeSpeed.Controllers.HomeController.<AddLunchToToday>d__16.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 314
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass8_0.<BeginInvokeAsynchronousActionMethod>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+  <br>at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+  <br>at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.InvokeEndHandler(IAsyncResult ar)
+  <br>at System.Web.HttpApplication.CallHandlerExecutionStep.OnAsyncHandlerCompletion(IAsyncResult ar)
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:12:37</span><span class='timeUtc' style='display: none'>2020-04-08T12:12:37.2843085+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:12:38</span><span class='timeUtc' style='display: none'>2020-04-08T12:12:38.3378967+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:12:38</span><span class='timeUtc' style='display: none'>2020-04-08T12:12:38.4058612+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:12:38</span><span class='timeUtc' style='display: none'>2020-04-08T12:12:38.6330182+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:17:16</span><span class='timeUtc' style='display: none'>2020-04-08T12:17:16.6718991+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:17:16</span><span class='timeUtc' style='display: none'>2020-04-08T12:17:16.9005505+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:17:17</span><span class='timeUtc' style='display: none'>2020-04-08T12:17:17.2814773+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:17:17</span><span class='timeUtc' style='display: none'>2020-04-08T12:17:17.4560689+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:17:17</span><span class='timeUtc' style='display: none'>2020-04-08T12:17:17.5801583+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:17:17</span><span class='timeUtc' style='display: none'>2020-04-08T12:17:17.7502791+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:17:37</span><span class='timeUtc' style='display: none'>2020-04-08T12:17:37.8119684+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Object reference not set to an instance of an object.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>OnTimeSpeed</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void <GetHolidays>b__4(OnTimeSpeed.Code.HolidayManually)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>date string: 01.01.2020</code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at OnTimeSpeed.Code.Holidays.<>c__DisplayClass1_0.<GetHolidays>b__4(HolidayManually hh) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\Holidays.cs:line 45
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:17:53</span><span class='timeUtc' style='display: none'>2020-04-08T12:17:53.5985758+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:17:54</span><span class='timeUtc' style='display: none'>2020-04-08T12:17:54.6677151+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:17:55</span><span class='timeUtc' style='display: none'>2020-04-08T12:17:55.1909520+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:18:32</span><span class='timeUtc' style='display: none'>2020-04-08T12:18:32.5776585+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>GetObjectFromApiResponse: Response is null or empty for unknown request</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:18:32</span><span class='timeUtc' style='display: none'>2020-04-08T12:18:32.5870876+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Thread was being aborted.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void AwaitUnsafeOnCompleted[TAwaiter,TStateMachine](TAwaiter ByRef, TStateMachine ByRef)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>POST request to https://dev03/HrNetApi_HrPro//PersonnelRecords/Vacations/VacationRequests - </code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AwaitUnsafeOnCompleted[TAwaiter,TStateMachine](TAwaiter& awaiter, TStateMachine& stateMachine)
+  <br>at HrNetMobile.Data.Utils.ApiHelper.<PostRequestWithBodyAsync>d__11.MoveNext() in C:\Projects\HrNetMobile\HrNetMobile.Data\Utils\ApiHelper.cs:line 329
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:18:32</span><span class='timeUtc' style='display: none'>2020-04-08T12:18:32.8335937+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Thread was being aborted.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>HrNetMobile.Data</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void MoveNext()</code></span><br />
+			<span class="classTest"><span class="title">Url:</span>	<code><a href=https://dev03/HrNetApi_HrPro//PersonnelRecords/Vacations/VacationRequests target='_blank'>https://dev03/HrNetApi_HrPro//PersonnelRecords/Vacations/VacationRequests</a></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at HrNetMobile.Data.Utils.ApiHelper.<PostRequestWithBodyAsync>d__11.MoveNext() in C:\Projects\HrNetMobile\HrNetMobile.Data\Utils\ApiHelper.cs:line 344
+  <br>at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Start[TStateMachine](TStateMachine& stateMachine)
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBodyAsync(String url, Object data, String token)
+  <br>at HrNetMobile.Data.DAL.DALWebApi.<PostRequestAsync>d__7.MoveNext() in C:\Projects\HrNetMobile\HrNetMobile.Data\DAL\DALWebApi.cs:line 96
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:18:45</span><span class='timeUtc' style='display: none'>2020-04-08T12:18:45.7712242+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>GetObjectFromApiResponse: Response is null or empty for unknown request</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:18:45</span><span class='timeUtc' style='display: none'>2020-04-08T12:18:45.7727201+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Thread was being aborted.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void AwaitUnsafeOnCompleted[TAwaiter,TStateMachine](TAwaiter ByRef, TStateMachine ByRef)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>POST request to https://dev03/HrNetApi_HrPro//PersonnelRecords/Vacations/VacationRequests - </code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AwaitUnsafeOnCompleted[TAwaiter,TStateMachine](TAwaiter& awaiter, TStateMachine& stateMachine)
+  <br>at HrNetMobile.Data.Utils.ApiHelper.<PostRequestWithBodyAsync>d__11.MoveNext() in C:\Projects\HrNetMobile\HrNetMobile.Data\Utils\ApiHelper.cs:line 329
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:18:45</span><span class='timeUtc' style='display: none'>2020-04-08T12:18:45.9145678+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Thread was being aborted.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>HrNetMobile.Data</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void MoveNext()</code></span><br />
+			<span class="classTest"><span class="title">Url:</span>	<code><a href=https://dev03/HrNetApi_HrPro//PersonnelRecords/Vacations/VacationRequests target='_blank'>https://dev03/HrNetApi_HrPro//PersonnelRecords/Vacations/VacationRequests</a></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at HrNetMobile.Data.Utils.ApiHelper.<PostRequestWithBodyAsync>d__11.MoveNext() in C:\Projects\HrNetMobile\HrNetMobile.Data\Utils\ApiHelper.cs:line 344
+  <br>at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Start[TStateMachine](TStateMachine& stateMachine)
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBodyAsync(String url, Object data, String token)
+  <br>at HrNetMobile.Data.DAL.DALWebApi.<PostRequestAsync>d__7.MoveNext() in C:\Projects\HrNetMobile\HrNetMobile.Data\DAL\DALWebApi.cs:line 96
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:19:14</span><span class='timeUtc' style='display: none'>2020-04-08T12:19:14.9639675+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>GetObjectFromApiResponse: Response is null or empty for unknown request</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:19:14</span><span class='timeUtc' style='display: none'>2020-04-08T12:19:14.9674432+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Thread was being aborted.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void AwaitUnsafeOnCompleted[TAwaiter,TStateMachine](TAwaiter ByRef, TStateMachine ByRef)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>POST request to https://dev03/HrNetApi_HrPro//PersonnelRecords/Vacations/VacationRequests - </code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AwaitUnsafeOnCompleted[TAwaiter,TStateMachine](TAwaiter& awaiter, TStateMachine& stateMachine)
+  <br>at HrNetMobile.Data.Utils.ApiHelper.<PostRequestWithBodyAsync>d__11.MoveNext() in C:\Projects\HrNetMobile\HrNetMobile.Data\Utils\ApiHelper.cs:line 329
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:19:15</span><span class='timeUtc' style='display: none'>2020-04-08T12:19:15.1808485+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Thread was being aborted.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>HrNetMobile.Data</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void MoveNext()</code></span><br />
+			<span class="classTest"><span class="title">Url:</span>	<code><a href=https://dev03/HrNetApi_HrPro//PersonnelRecords/Vacations/VacationRequests target='_blank'>https://dev03/HrNetApi_HrPro//PersonnelRecords/Vacations/VacationRequests</a></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at HrNetMobile.Data.Utils.ApiHelper.<PostRequestWithBodyAsync>d__11.MoveNext() in C:\Projects\HrNetMobile\HrNetMobile.Data\Utils\ApiHelper.cs:line 344
+  <br>at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Start[TStateMachine](TStateMachine& stateMachine)
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBodyAsync(String url, Object data, String token)
+  <br>at HrNetMobile.Data.DAL.DALWebApi.<PostRequestAsync>d__7.MoveNext() in C:\Projects\HrNetMobile\HrNetMobile.Data\DAL\DALWebApi.cs:line 96
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:24:14</span><span class='timeUtc' style='display: none'>2020-04-08T12:24:14.8410730+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>GetObjectFromApiResponse: Response is null or empty for unknown request</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:24:15</span><span class='timeUtc' style='display: none'>2020-04-08T12:24:15.0087213+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>GetObjectFromApiResponse: Response is null or empty for unknown request</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:24:15</span><span class='timeUtc' style='display: none'>2020-04-08T12:24:15.0092178+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>A task was canceled.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>Void ThrowForNonSuccess(System.Threading.Tasks.Task)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>POST request to https://dev03/HrNetApi_HrPro//PersonnelRecords/Vacations/VacationRequests - </code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+  <br>at HrNetMobile.Data.Utils.ApiHelper.<PostRequestWithBodyAsync>d__11.MoveNext() in C:\Projects\HrNetMobile\HrNetMobile.Data\Utils\ApiHelper.cs:line 329
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:27:50</span><span class='timeUtc' style='display: none'>2020-04-08T12:27:50.5151163+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:27:51</span><span class='timeUtc' style='display: none'>2020-04-08T12:27:51.1066981+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:31:50</span><span class='timeUtc' style='display: none'>2020-04-08T12:31:50.5237081+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:31:50</span><span class='timeUtc' style='display: none'>2020-04-08T12:31:50.7275664+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:31:50</span><span class='timeUtc' style='display: none'>2020-04-08T12:31:50.8947155+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:31:51</span><span class='timeUtc' style='display: none'>2020-04-08T12:31:51.0301192+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:31:51</span><span class='timeUtc' style='display: none'>2020-04-08T12:31:51.1833830+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:31:51</span><span class='timeUtc' style='display: none'>2020-04-08T12:31:51.3163378+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:38:34</span><span class='timeUtc' style='display: none'>2020-04-08T12:38:34.3625759+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:38:35</span><span class='timeUtc' style='display: none'>2020-04-08T12:38:35.5989253+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:38:35</span><span class='timeUtc' style='display: none'>2020-04-08T12:38:35.7765152+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:38:36</span><span class='timeUtc' style='display: none'>2020-04-08T12:38:36.0468348+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:42:37</span><span class='timeUtc' style='display: none'>2020-04-08T12:42:37.9125815+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:42:38</span><span class='timeUtc' style='display: none'>2020-04-08T12:42:38.1521160+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:42:38</span><span class='timeUtc' style='display: none'>2020-04-08T12:42:38.2964523+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:42:38</span><span class='timeUtc' style='display: none'>2020-04-08T12:42:38.4353410+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:42:38</span><span class='timeUtc' style='display: none'>2020-04-08T12:42:38.5573531+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String was not recognized as a valid DateTime.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:42:38</span><span class='timeUtc' style='display: none'>2020-04-08T12:42:38.6803565+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:44:40</span><span class='timeUtc' style='display: none'>2020-04-08T12:44:40.9285880+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:44:41</span><span class='timeUtc' style='display: none'>2020-04-08T12:44:41.8398796+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:44:41</span><span class='timeUtc' style='display: none'>2020-04-08T12:44:41.8760959+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:44:42</span><span class='timeUtc' style='display: none'>2020-04-08T12:44:42.0354453+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:47:19</span><span class='timeUtc' style='display: none'>2020-04-08T12:47:19.2576050+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:47:19</span><span class='timeUtc' style='display: none'>2020-04-08T12:47:19.7912602+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:48:53</span><span class='timeUtc' style='display: none'>2020-04-08T12:48:53.8012125+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:48:54</span><span class='timeUtc' style='display: none'>2020-04-08T12:48:54.9209637+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:48:55</span><span class='timeUtc' style='display: none'>2020-04-08T12:48:55.0047902+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:48:55</span><span class='timeUtc' style='display: none'>2020-04-08T12:48:55.2190632+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:51:48</span><span class='timeUtc' style='display: none'>2020-04-08T12:51:48.9445752+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:51:49</span><span class='timeUtc' style='display: none'>2020-04-08T12:51:49.8393617+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:51:49</span><span class='timeUtc' style='display: none'>2020-04-08T12:51:49.9370654+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:51:50</span><span class='timeUtc' style='display: none'>2020-04-08T12:51:50.1463794+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:53:49</span><span class='timeUtc' style='display: none'>2020-04-08T12:53:49.2186058+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:53:50</span><span class='timeUtc' style='display: none'>2020-04-08T12:53:50.0974137+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:53:50</span><span class='timeUtc' style='display: none'>2020-04-08T12:53:50.1619327+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 12:53:50</span><span class='timeUtc' style='display: none'>2020-04-08T12:53:50.5448431+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:04:49</span><span class='timeUtc' style='display: none'>2020-04-08T13:04:49.8632429+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:04:51</span><span class='timeUtc' style='display: none'>2020-04-08T13:04:51.5992453+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:04:52</span><span class='timeUtc' style='display: none'>2020-04-08T13:04:52.0402023+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:04:52</span><span class='timeUtc' style='display: none'>2020-04-08T13:04:52.2549512+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:07:07</span><span class='timeUtc' style='display: none'>2020-04-08T13:07:07.0414848+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:07:07</span><span class='timeUtc' style='display: none'>2020-04-08T13:07:07.9117239+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:10:34</span><span class='timeUtc' style='display: none'>2020-04-08T13:10:34.6599331+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:10:35</span><span class='timeUtc' style='display: none'>2020-04-08T13:10:35.6992120+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:10:35</span><span class='timeUtc' style='display: none'>2020-04-08T13:10:35.7607218+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:10:36</span><span class='timeUtc' style='display: none'>2020-04-08T13:10:36.0419494+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:10:36</span><span class='timeUtc' style='display: none'>2020-04-08T13:10:36.4516437+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:15:04</span><span class='timeUtc' style='display: none'>2020-04-08T13:15:04.0586275+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:15:04</span><span class='timeUtc' style='display: none'>2020-04-08T13:15:04.8412475+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:15:04</span><span class='timeUtc' style='display: none'>2020-04-08T13:15:04.8953356+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:15:05</span><span class='timeUtc' style='display: none'>2020-04-08T13:15:05.0589946+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:15:56</span><span class='timeUtc' style='display: none'>2020-04-08T13:15:56.3617247+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:15:57</span><span class='timeUtc' style='display: none'>2020-04-08T13:15:57.1137131+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:15:57</span><span class='timeUtc' style='display: none'>2020-04-08T13:15:57.1360339+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:15:57</span><span class='timeUtc' style='display: none'>2020-04-08T13:15:57.3478272+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>8.4.2020. 13:18:28</span><span class='timeUtc' style='display: none'>2020-04-08T13:18:28.1799251+02:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>mscorlib</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.DateTime ParseExact(System.String, System.String, System.IFormatProvider)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 24
+		</div>
+	</div>
+

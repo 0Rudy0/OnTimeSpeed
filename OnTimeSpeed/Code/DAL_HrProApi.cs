@@ -55,7 +55,7 @@ namespace OnTimeSpeed.Code
 
         public static async Task<Dictionary<DateTime, string>> GetApprovedVacationDays(hrnetModel.User hrproUser)
         {
-            var cacheKey = "vacations_" + hrproUser.Username;
+            var cacheKey = "vacations_" + hrproUser.Username + DateTime.Now.Ticks;
 
             var vacationDays = (Dictionary<DateTime, string>)HttpRuntime.Cache.Get(cacheKey);
             if (vacationDays == null && hrproUser != null)
@@ -80,7 +80,7 @@ namespace OnTimeSpeed.Code
                 {
                     for (var i = req.DateFrom; i <= req.DateTo; i = i.AddDays(1))
                     {
-                        if (i.DayOfWeek != DayOfWeek.Saturday && i.DayOfWeek != DayOfWeek.Sunday)
+                        if (i.DayOfWeek != DayOfWeek.Saturday && i.DayOfWeek != DayOfWeek.Sunday && !vacationDays.ContainsKey(i))
                             vacationDays.Add(i, "GO");
                     }
                 }
@@ -89,7 +89,7 @@ namespace OnTimeSpeed.Code
                     vacationDays,
                     null,
                     Cache.NoAbsoluteExpiration,
-                    TimeSpan.FromMinutes(30),
+                    TimeSpan.FromMinutes(5),
                     CacheItemPriority.Normal,
                     null);
             }

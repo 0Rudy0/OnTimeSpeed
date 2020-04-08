@@ -116,6 +116,11 @@
                         else {
                             viewModel.hrproUser(msg.hrproUser);
                         }
+
+                        if ($('.container').hasClass('hide')) {
+                            location.reload();
+                        }
+
                     },
                     error: function (err) {
                         $('.spinner').hide();

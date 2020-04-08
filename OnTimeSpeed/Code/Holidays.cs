@@ -20,6 +20,8 @@ namespace OnTimeSpeed.Code
             var _holidayList = (Dictionary<DateTime, string>)HttpRuntime.Cache.Get(cacheKey);
             if (_holidayList == null)
             {
+                _holidayList = new Dictionary<DateTime, string>();
+
                 var holidaysByYear = Newtonsoft.Json.JsonConvert.DeserializeObject<List<HolidayRange>>(
                 System.IO.File.ReadAllText(
                     AppDomain.CurrentDomain.BaseDirectory + "/config/holidays.json", System.Text.Encoding.UTF8));

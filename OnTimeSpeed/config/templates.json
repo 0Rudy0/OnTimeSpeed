@@ -15,13 +15,15 @@
 		"Name": "praznikTemplate",
 		"Templates": [
 			"HRPRO - YYYY - Državni praznik/Neradni dan/Slobodni dan",
+			"HRPRO - YYYY -  Državni praznik/Neradni dan/Slobodni dan",
 			"Državni praznik - Neradni dan - Slobodni dan - YYYY"
 		]
 	},
 	{
 		"Name": "godisnjiTemplate",
 		"Templates": [
-			"HRPRO - YYYY - Godišnji odmor / plaćeni dopust"
+			"HRPRO - YYYY - Godišnji odmor / plaćeni dopust",
+			"HRPRO - YYYY -  Godišnji odmor / plaćeni dopust"
 		]
 	},
 	{

@@ -348,6 +348,8 @@ namespace OnTimeSpeed.Code
 
             foreach (var item in items)
             {
+                item.Name = item.Name.Trim();
+
                 var fromDate = DateFromName(item.Name, templates.FirstOrDefault(t => t.Name == dateFromTemplateName).Templates, out var dateFromMonthSpecified, out var dateFromDaySpecified);
                 DateTime? toDate = null;
 

@@ -2,7 +2,7 @@
 function generateToastObjs(msg, title, noNewEntryMsg) {
     var realCounter = 0;
     for (var i = 0; i < msg.length; i++) {
-        if (msg[i].indexOf("Dan je već popunjen") < 0)
+        if (msg[i].indexOf("Dan je već popunjen") < 0 && msg[i].indexOf("-----") < 0)
             realCounter++;
     }
     if (msg.length > maxDetailsLng) {
