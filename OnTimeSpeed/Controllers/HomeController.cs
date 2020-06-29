@@ -100,7 +100,7 @@ namespace OnTimeSpeed.Controllers
         {
             if (DateUtils.Holidays.Count == 0 && _hrproUser != null)
                 DateUtils.Holidays = await DAL_HrProApi.GetHolidays(_hrproUser);
-            else
+            else if (DateUtils.Holidays.Count == 0)
             {
                 try
                 {
@@ -374,18 +374,22 @@ namespace OnTimeSpeed.Controllers
 
         [HttpPost]
         public async Task<string> AddLunch(
-           float amount,
+           string amount,
            string dateFromStr,
            string dateToStr,
            string description,
            bool ignoreFullDays)
         {
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, new System.Globalization.CultureInfo("en"), out var amount1);
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, System.Threading.Thread.CurrentThread.CurrentCulture, out var amount2);
+            var amountParsed = amount1 > amount2 && amount1 > 0 ? amount1 : amount2;
+
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new LunchEntry(),
                 _user,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
-                amount,
+                amountParsed,
                 description,
                 ignoreFullDays);
 
@@ -394,18 +398,22 @@ namespace OnTimeSpeed.Controllers
 
         [HttpPost]
         public async Task<string> AddSickLeave(
-            float amount,
+            string amount,
             string dateFromStr,
             string dateToStr,
             string description,
             bool ignoreFullDays)
         {
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, new System.Globalization.CultureInfo("en"), out var amount1);
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, System.Threading.Thread.CurrentThread.CurrentCulture, out var amount2);
+            var amountParsed = amount1 > amount2 && amount1 > 0 ? amount1 : amount2;
+
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new SickLeaveEntry(),
                 _user,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
-                amount,
+                amountParsed,
                 description,
                 ignoreFullDays);
 
@@ -414,18 +422,22 @@ namespace OnTimeSpeed.Controllers
 
         [HttpPost]
         public async Task<string> AddInternalMeeting(
-            float amount,
+            string amount,
             string dateFromStr,
             string dateToStr,
             string description,
             bool ignoreFullDays)
         {
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, new System.Globalization.CultureInfo("en"), out var amount1);
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, System.Threading.Thread.CurrentThread.CurrentCulture, out var amount2);
+            var amountParsed = amount1 > amount2 && amount1 > 0 ? amount1 : amount2;
+
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new InternalMeetingEntry(),
                 _user,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
-                amount,
+                amountParsed,
                 description,
                 ignoreFullDays);
 
@@ -434,18 +446,22 @@ namespace OnTimeSpeed.Controllers
 
         [HttpPost]
         public async Task<string> AddOnTimeEntry(
-            float amount,
+            string amount,
             string dateFromStr,
             string dateToStr,
             string description,
             bool ignoreFullDays)
         {
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, new System.Globalization.CultureInfo("en"), out var amount1);
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, System.Threading.Thread.CurrentThread.CurrentCulture, out var amount2);
+            var amountParsed = amount1 > amount2 && amount1 > 0 ? amount1 : amount2;
+
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new OnTimeEntry(),
                 _user,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
-                amount,
+                amountParsed,
                 description,
                 ignoreFullDays);
 
@@ -454,18 +470,22 @@ namespace OnTimeSpeed.Controllers
 
         [HttpPost]
         public async Task<string> AddColegueSupport(
-            float amount,
+            string amount,
             string dateFromStr,
             string dateToStr,
             string description,
             bool ignoreFullDays)
         {
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, new System.Globalization.CultureInfo("en"), out var amount1);
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, System.Threading.Thread.CurrentThread.CurrentCulture, out var amount2);
+            var amountParsed = amount1 > amount2 && amount1 > 0 ? amount1 : amount2;
+
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new ColleagueSupportEntry(),
                 _user,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
-                amount,
+                amountParsed,
                 description,
                 ignoreFullDays);
 
@@ -474,18 +494,22 @@ namespace OnTimeSpeed.Controllers
 
         [HttpPost]
         public async Task<string> AddEducation(
-            float amount,
+            string amount,
             string dateFromStr,
             string dateToStr,
             string description,
             bool ignoreFullDays)
         {
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, new System.Globalization.CultureInfo("en"), out var amount1);
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, System.Threading.Thread.CurrentThread.CurrentCulture, out var amount2);
+            var amountParsed = amount1 > amount2 && amount1 > 0 ? amount1 : amount2;
+
             var addedOnDates = await DAL.AddSemiAutomatic(
                 new EducationEntry(),
                 _user,
                 dateFromStr.ToDate(),
                 String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
-                amount,
+                amountParsed,
                 description,
                 ignoreFullDays);
 
@@ -498,14 +522,18 @@ namespace OnTimeSpeed.Controllers
         public async Task<string> AddCustom(
             int itemId,
             int workTypeId,
-            float amount,
+            string amount,
             string dateFromStr,
             string dateToStr,
             string itemType,
             string description,
             bool ignoreFullDays)
         {
-            if (amount > 0)
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, new System.Globalization.CultureInfo("en"), out var amount1);
+            float.TryParse(amount, System.Globalization.NumberStyles.AllowDecimalPoint, System.Threading.Thread.CurrentThread.CurrentCulture, out var amount2);
+            var amountParsed = amount1 > amount2 && amount1 > 0 ? amount1 : amount2;
+
+            if (amountParsed > 0)
             {
                 var addedOnDates = await DAL.AddCustom(
                     _user,
@@ -513,7 +541,7 @@ namespace OnTimeSpeed.Controllers
                     String.IsNullOrEmpty(dateToStr) ? dateFromStr.ToDate() : dateToStr.ToDate(),
                     itemId,
                     workTypeId,
-                    amount,
+                    amountParsed,
                     itemType,
                     description,
                     ignoreFullDays);

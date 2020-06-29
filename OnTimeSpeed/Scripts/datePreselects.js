@@ -26,7 +26,7 @@ function preselectRange(range, a, b) {
     switch (range) {
         case 'lastM':
             var d = dateFrom.subtract(1, 'months')._d;
-            d = moment(new Date(d.getFullYear(), d.getMonth() + 1, 1));
+            d = moment(new Date(d.getFullYear(), d.getMonth(), 1));
             dateFrom = toDate(d);
             dateTo = toDate(d.add(1, 'months').subtract(1, 'days'));
             break;
@@ -51,7 +51,7 @@ function preselectRange(range, a, b) {
 
         case 'thisM':
             var d = dateFrom._d;
-            d = moment(new Date(d.getFullYear(), d.getMonth() + 1, 1));
+            d = moment(new Date(d.getFullYear(), d.getMonth(), 1));
             dateFrom = toDate(d);
             dateTo = toDate(d.add(1, 'months').subtract(1, 'days'));
             break;

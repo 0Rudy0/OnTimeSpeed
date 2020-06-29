@@ -96,7 +96,8 @@ namespace OnTimeSpeed.Code
 
                 if (!groupedData.ContainsKey(key) && (fromDate == null || log.date_time.Date >= fromDate) && (toDate == null || log.date_time.Date <= toDate))
                 {
-                    groupedData.Add(key, log.work_done.duration_minutes / 60);
+                    if (forDate < DateTime.Now.Date.AddDays(1) || groupBy == GroupBy.Day)
+                        groupedData.Add(key, log.work_done.duration_minutes / 60);
 
                     if (!workLogsOnDate.ContainsKey(key))
                     {
@@ -114,7 +115,8 @@ namespace OnTimeSpeed.Code
                 }
                 else if (groupedData.ContainsKey(key) && (fromDate == null || log.date_time.Date >= fromDate) && (toDate == null || log.date_time.Date <= toDate))
                 {
-                    groupedData[key] += log.work_done.duration_minutes / 60;
+                    if (forDate < DateTime.Now.Date.AddDays(1) || groupBy == GroupBy.Day)
+                        groupedData[key] += log.work_done.duration_minutes / 60;
 
                     if (!workLogsOnDate.ContainsKey(key))
                     {

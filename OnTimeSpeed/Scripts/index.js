@@ -81,6 +81,9 @@ $(function () {
 
     window.addEventListener("focus", function(event) { 
         var now = new Date();
+        if (lastAjaxRequest == null)
+            lastAjaxRequest = new Date();
+
         var secondsPassed = (now.getTime() - lastAjaxRequest.getTime()) / 1000;
         if (secondsPassed > inactivityIntervalSeconds) {
             //console.log("prošlo " + secondsPassed + " minuta");

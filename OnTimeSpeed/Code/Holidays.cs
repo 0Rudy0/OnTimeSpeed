@@ -32,10 +32,12 @@ namespace OnTimeSpeed.Code
                     h.yearToDate = h.yearTo.ToDate();
                 });
 
-                var holidaysForNow = holidaysByYear.Where(h => (h.yearFromDate == null || h.yearFromDate.Value.Year >= forYear) &&
-                    h.yearToDate == null || h.yearToDate.Value.AddYears(1).AddDays(-1).Year <= forYear);
+                var holidaysForNow = holidaysByYear.Where(h => (h.yearFromDate == null || h.yearFromDate.Value.Year <= forYear) &&
+                    h.yearToDate == null || h.yearToDate.Value.AddYears(1).AddDays(-1).Year >= forYear);
 
-                holidaysForNow.Select(h => h.holidays).ToList().ForEach(h =>
+                holidaysForNow.Where(h => (h.yearFrom == null || int.Parse(h.yearFrom) <= forYear) &&
+                                           (h.yearTo == null || int.Parse(h.yearTo) >= forYear))
+                .Select(h => h.holidays).ToList().ForEach(h =>
                 {
                     h.ForEach(hh =>
                     {

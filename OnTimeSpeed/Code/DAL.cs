@@ -490,6 +490,11 @@ namespace OnTimeSpeed.Code
                     if (amountToLog > 0)
                     {
                         var workItem = entry.GetTaskForDate(tasks, i.Value);
+                        if (workItem == null)
+                        {
+                            addedOnDates.Add($"Ne postoji work item za \"{entry.GetEntryDescription()}\" za {i.Value.ToShortDateString()}");
+                            continue;
+                        }
                         var newLog = entry.CreateWorkLogObj(user.id, workItem.Id, i.Value, amountToLog, description);
                         var isDuplicate = false;
                         if (entry is LunchEntry || entry is SickLeaveEntry)

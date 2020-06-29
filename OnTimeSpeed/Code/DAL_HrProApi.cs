@@ -124,7 +124,7 @@ namespace OnTimeSpeed.Code
                 {
                     for (var i = req.DateFrom; i <= req.DateTo; i = i.AddDays(1))
                     {
-                        if (i.DayOfWeek != DayOfWeek.Saturday && i.DayOfWeek != DayOfWeek.Sunday)
+                        if (i.DayOfWeek != DayOfWeek.Saturday && i.DayOfWeek != DayOfWeek.Sunday && !paidLeaves.ContainsKey(i))
                             paidLeaves.Add(i, req.RequestTypeName ?? "Plaćeni dopust");
                     }
                 }

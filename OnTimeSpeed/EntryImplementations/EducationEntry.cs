@@ -30,5 +30,10 @@ namespace OnTimeSpeed.EntryImplementations
         {
             return PrepareData.CreateWorkLogObject(userId, addAmount, AppSettings.GetInt("skolovanjekWorkType"), itemId, "tasks", forDate, description);
         }
+
+        public string GetEntryDescription()
+        {
+            return "Edukacija";
+        }
     }
 }
