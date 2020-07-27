@@ -10,7 +10,7 @@ function searchWorkItemsPush() {
 }
 
 function searchItems(searchStr) {
-    $('#addMoreWorkItemsModal .spinner.main').show();
+    $('#addMoreWorkItemsModal .spinner').show();
 
     ajaxGET({
         url: '/Home/SearchWorkItems',
@@ -18,7 +18,7 @@ function searchItems(searchStr) {
             searchStr: searchStr
         }
     }, function (msg) {
-        $('#addMoreWorkItemsModal .spinner.main').hide();
+        $('#addMoreWorkItemsModal .spinner').hide();
 
         viewModel.searchResultWorkItems.splice(0);
         for (var i = 0; i < msg.length; i++) {

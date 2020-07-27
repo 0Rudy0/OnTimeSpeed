@@ -28,6 +28,27 @@
         };
         M.toast(tempToast); 
 
+        if (viewModel.userSettings().templates.length == 0) {
+         M.Datepicker.init(document.querySelectorAll('#templates .datepicker.dateFrom'), {
+                autoClose: true,
+                format: 'dd.mm.yyyy',
+                firstDay: 1,
+                showDaysInNextAndPreviousMonths: true,
+                showClearBtn: true,
+                defaultDate: new Date(),
+                setDefaultDate: true,
+                onSelect: onDateFromSelect.bind(viewModel.templateModel())
+            });
+            M.Datepicker.init(document.querySelectorAll('#templates .datepicker.dateTo'), {
+                autoClose: true,
+                format: 'dd.mm.yyyy',
+                firstDay: 1,
+                showDaysInNextAndPreviousMonths: true,
+                showClearBtn: true,
+                onSelect: onDateToSelect.bind(viewModel.customEntry())
+            });
+        }
+
         /*if (validateForm.apply(data)) {    
             viewModel.userSettings().templates.push(data);
             saveSettings();
