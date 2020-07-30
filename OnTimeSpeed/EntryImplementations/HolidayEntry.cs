@@ -45,7 +45,7 @@ namespace OnTimeSpeed.EntryImplementations
         {
             string cacheKey = "holidayTasks";
             var searchStrings = SearchStrings.Get().FirstOrDefault(s => s.Name == "holidaySearchString").SearchStrings;
-            var result = await DAL.GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey);
+            var result = await DAL.GetWorkItems(user, searchStrings, new List<string> { "tasks" }, cacheKey, false);
 
             return result;
         }

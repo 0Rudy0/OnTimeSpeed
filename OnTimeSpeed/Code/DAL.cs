@@ -265,7 +265,8 @@ namespace OnTimeSpeed.Code
             User user,
             IEnumerable<string> searchStrings,
             List<string> itemTypes,
-            string cacheKey = null)
+            string cacheKey = null,
+            bool expandedName = true)
         {
             List<WorkItem> result = null;
 
@@ -299,7 +300,7 @@ namespace OnTimeSpeed.Code
                                 result.Add(new WorkItem
                                 {
                                     Id = rr.id,
-                                    Name = $"{rr.name} [{rr.project.name}]{status}",
+                                    Name = expandedName ? $"{rr.name} [{rr.project.name}]{status}" : rr.name,
                                     Type = WorkItemType.Item,
                                     TypeString = rr.item_type
                                 });
