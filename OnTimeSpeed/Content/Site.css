@@ -422,6 +422,12 @@
     background-color: #3b4c54 !important;
 }
 
+.chosenWorkItemsList .collection,
+.chosenWorkTypesList .collection {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
 .chosenWorkItemsList .workItem.active,
 .chosenWorkTypesList .workType.active {
     /*background-color: red !important;*/

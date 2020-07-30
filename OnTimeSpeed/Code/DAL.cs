@@ -291,10 +291,15 @@ namespace OnTimeSpeed.Code
                         {
                             if (!result.Any(r => r.Id == rr.id && r.TypeString == rr.item_type))
                             {
+                                var status = "";
+                                if (!String.IsNullOrEmpty(rr.status.name) && rr.status.name.ToLower().Trim() == "zatvoreno")
+                                {
+                                    status = $" - <b style=\"color: #e57373\">{rr.status.name.ToUpper()}</b>";
+                                }
                                 result.Add(new WorkItem
                                 {
                                     Id = rr.id,
-                                    Name = rr.name,
+                                    Name = $"{rr.name} [{rr.project.name}]{status}",
                                     Type = WorkItemType.Item,
                                     TypeString = rr.item_type
                                 });
@@ -315,7 +320,7 @@ namespace OnTimeSpeed.Code
                 }
             }
 
-            return result;
+            return result.OrderByDescending(i => i.Id).ToList();
         }
 
         public static async Task<List<OnTimeUser>> GetUser(string searchString, User user)
