@@ -334,10 +334,10 @@ function validateForm() {
         isValid = false;
         invalidFields += '<br>Predmet nije odabran';
     }
-    if (!this.workTypeId) {
+    /*if (!this.workTypeId) {
         isValid = false;
         invalidFields += '<br>Vrsta rada nije odabrana';
-    }
+    }*/
     if (!this.amount) {
         isValid = false;
         invalidFields += '<br>Iznos sati nije unesen';

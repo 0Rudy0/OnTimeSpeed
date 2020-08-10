@@ -7,9 +7,9 @@
         collapsed: ko.observable(false)
     }
 
-    if (!data.workItem || !data.workType) {
+    if (!data.workItem) {
          var tempToast = {
-            html: '<span style="color: black">Predmet i vrsta rada trebaju biti odabrani</span>' + closeBtnHtml,
+            html: '<span style="color: black">Predmet treba biti odabran</span>' + closeBtnHtml,
             classes: toastClasses,
             displayLength: toastShort
         };
