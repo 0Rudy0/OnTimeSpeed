@@ -315,7 +315,7 @@ namespace OnTimeSpeed.Controllers
                 new LunchEntry(),
                 _user,
                 _hrproUser,
-                DateTime.Now.AddMonths(AppSettings.GetInt("monthsBackToStartAdding") * -1).ToFirstOfMonth(),
+                DateTime.Now.ToFirstOfMonth(),
                 DateTime.Now,
                 detailedLog,
                 amountParsed);

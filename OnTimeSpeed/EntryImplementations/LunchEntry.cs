@@ -45,7 +45,7 @@ namespace OnTimeSpeed.EntryImplementations
 
         public object CreateWorkLogObj(int userId, int itemId, DateTime forDate, float addAmount, Dictionary<DateTime, string> vacationDays)
         {
-            return PrepareData.CreateWorkLogObject(userId, addAmount, AppSettings.GetInt("rucakWorkLogType"), itemId, "tasks", forDate);
+            return PrepareData.CreateWorkLogObject(userId, addAmount, AppSettings.GetInt("rucakWorkLogType"), itemId, "tasks", forDate, "Ručak kroz ontimespeed");
         }
 
         public object CreateWorkLogObj(int userId, int itemId, DateTime forDate, float addAmount, string description)

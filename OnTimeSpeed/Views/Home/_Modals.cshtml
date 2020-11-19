@@ -2,6 +2,7 @@
 
 @{
     var startAddingFrom = DateTime.Now.AddMonths(AppSettings.GetInt("monthsBackToStartAdding") * -1).ToFirstOfMonth().ToShortDateString();
+    var startAddingLunch = DateTime.Now.ToFirstOfMonth().ToShortDateString();
 }
 
 <div id="addMoreWorkItemsModal"
@@ -196,7 +197,7 @@
         <p>
             <span class="subtitle">Ručak</span> - Unosi ručno postavljeni iznos sati za ručak u iznosu od
             <span data-bind="text: ($data.userSettings().lunchWorkAmount() * 60) + ' minuta'"></span> (iznos je moguće promijeniti u postavkama)
-            za svaki dan od @startAddingFrom pa do danas, uz uvjet da na taj dan nije praznik te da za taj dan ne postoji zahtjev za GO / plaćeni dopust (praznik / GO / plaćeni dopust ne mora biti unesen u OnTime).
+            za svaki dan od @startAddingLunch pa do danas, uz uvjet da na taj dan nije praznik te da za taj dan ne postoji zahtjev za GO / plaćeni dopust (praznik / GO / plaćeni dopust ne mora biti unesen u OnTime).
         </p>
         <p><span class="subtitle">Praznici</span> - Unosi sve praznike od @startAddingFrom pa do kraja tekućeg mjeseca, 8h na dan po prazniku neovisno o logovima koji eventualno već postoje za taj dan. Neće unijeti 2 puta praznike ako se gumb klikne više puta</p>
         <p><span class="subtitle">Godišnji odmor</span> - Unosi sve godišnje odmore iz HrNet-a od @startAddingFrom pa do kraja tekućeg mjeseca koji su odobreni, 8h na dan neovisno o logovima koji eventualno već postoje za taj dan</p>

@@ -561,7 +561,15 @@ namespace OnTimeSpeed.Code
                 if (workLogs.ContainsKey(i.Value.Date))
                     alreadyLogedAmount = workLogs[i.Value.Date];
 
-                if (!i.Value.IsHoliday() && !i.Value.IsWeekend() && (alreadyLogedAmount < 8 || ignoreFullDays))
+                if (i.Value.IsHoliday())
+                {
+                    addedOnDates.Add($"Nije moguće dodati novi unos na praznik - {i.Value.ToShortDateString()}");
+                }
+                else if (i.Value.IsWeekend())
+                {
+                    addedOnDates.Add($"Nije moguće dodati novi unos na vikend - {i.Value.ToShortDateString()}");
+                }
+                else if (!i.Value.IsHoliday() && !i.Value.IsWeekend() && (alreadyLogedAmount < 8 || ignoreFullDays))
                 {
                     var amountToLog = amount > 8 ? 8 - alreadyLogedAmount : amount;
                     if (amountToLog > 0)

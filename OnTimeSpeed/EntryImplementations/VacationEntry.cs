@@ -43,7 +43,7 @@ namespace OnTimeSpeed.EntryImplementations
 
         public object CreateWorkLogObj(int userId, int itemId, DateTime forDate, float addAmount, Dictionary<DateTime, string> vacationDays)
         {
-            return PrepareData.CreateWorkLogObject(userId, addAmount, AppSettings.GetInt("godisnjiWorkType"), itemId, "tasks", forDate);
+            return PrepareData.CreateWorkLogObject(userId, addAmount, AppSettings.GetInt("godisnjiWorkType"), itemId, "tasks", forDate, "GO kroz ontimespeed");
         }
 
         public async Task<List<WorkItem>> GetAllRelatedTasks(Models.User user)
