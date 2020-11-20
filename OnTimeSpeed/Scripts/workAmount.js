@@ -20,3 +20,14 @@ function maxWorkAmount() {
         this.workAmount(99);
     }
 }
+
+function fillWorkAmount(dayLogs, viewModel, dayLog) {
+    var totalHours = 0;
+    for (var i = 0; i < dayLogs.workLogs.length; i++) {
+        var wl = dayLogs.workLogs[i];
+        totalHours += wl.Amount()
+    }
+    var overflow = totalHours - 8;
+    dayLog.Amount(dayLog.Amount() - overflow);    
+    updateWorkLog.call(dayLog);
+}

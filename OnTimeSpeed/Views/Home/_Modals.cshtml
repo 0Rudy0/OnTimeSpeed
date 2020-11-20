@@ -340,6 +340,7 @@
                     <th style="width: 200px;">Work type</th>
                     <th>Opis</th>
                     <th style="width: 70px;">sati</th>
+                    <th style="width: 70px;"></th>
                 </tr>
             </thead>
             <tbody data-bind="foreach: $data.workLogs">
@@ -354,6 +355,12 @@
                     </td>
                     <td>
                         <input type="text" class="workAmountInput" data-bind="value: $data.Amount, event: {blur: updateWorkLog}" />
+                    </td>
+                    <td>
+                        <a href="#" data-bind="click: fillWorkAmount.bind($data, $parent, $root)" title="Napuni do 8h po danu" 
+                           class="waves-effect waves-light btn btn-plusMax btn-small blue-grey darken-2">
+                            <i class="fal fa-chevron-double-right"></i>
+                        </a>
                     </td>
                 </tr>
             </tbody>

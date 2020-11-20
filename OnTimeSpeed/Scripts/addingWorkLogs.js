@@ -399,7 +399,7 @@ function updateWorkLog() {
         data: {
             logId: log.LogId,
             description: log.Descripton,
-            amount: log.Amount
+            amount: log.Amount()
         }
     }, function (msg) {  
         $('#workLogsForDayModal .spinner.modal').hide(); 

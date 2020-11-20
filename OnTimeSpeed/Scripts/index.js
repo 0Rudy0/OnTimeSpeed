@@ -414,6 +414,7 @@ function initWorkLogChart(categories, series) {
                                         if (prop == this.category) {
                                             for (var i = 0; i < workLogData.WorkLogs[prop].length; i++) {
                                                 var log = workLogData.WorkLogs[prop][i];
+                                                log.Amount = ko.observable(log.Amount);
                                                 newDayModel.workLogs.push(log);
                                             }
                                         }

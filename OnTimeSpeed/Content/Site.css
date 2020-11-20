@@ -777,6 +777,13 @@
     text-align: center;
 }
 
+#workLogsForDayModal {
+    width: 70%;
+    max-height: 90%;
+    height: 90%;
+    top: 5% !important;
+}
+
 #workLogsForDayModal .workAmountInput {
     width: 40px;
     text-align: center;
