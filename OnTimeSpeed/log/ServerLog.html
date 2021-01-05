@@ -26456,3 +26456,538 @@ Parameter name: s</code></span><br />
 		</div>
 	</div>
 
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:00:28</span><span class='timeUtc' style='display: none'>2020-12-21T15:00:28.8043942+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:00:29</span><span class='timeUtc' style='display: none'>2020-12-21T15:00:29.2543788+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>The remote server returned an error: (404) Not Found.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>System</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.Net.WebResponse GetResponse()</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>endpoint: https://dev03/HrNetApi_HrPro/Auth/WinAuthorize</code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Net.HttpWebRequest.GetResponse()
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBody(String url, Dictionary`2 formData, String token) in C:\Projects\HrNetMobile\HrNetMobile.Data\Utils\ApiHelper.cs:line 297
+  <br>at HrNetMobile.Data.DAL.DALWebApi.PostRequest(String endPoint, String token, Dictionary`2 formData) in C:\Projects\HrNetMobile\HrNetMobile.Data\DAL\DALWebApi.cs:line 25
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:00:35</span><span class='timeUtc' style='display: none'>2020-12-21T15:00:35.8674583+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>The remote server returned an error: (401) Unauthorized.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>System</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.Net.WebResponse EndGetResponse(System.IAsyncResult)</code></span><br />
+			<span class="classTest"><span class="title">Url:</span>	<code><a href=https://support.hrnet.hr/axosoft/api/v5api/v5/me target='_blank'>https://support.hrnet.hr/axosoft/api/v5api/v5/me</a></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+  <br>at System.Threading.Tasks.TaskFactory`1.FromAsyncCoreLogic(IAsyncResult iar, Func`2 endFunction, Action`1 endAction, Task`1 promise, Boolean requiresSynchronization)
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Utils.ApiHelper.<GetRequestAsync>d__2.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\ApiHelper.cs:line 149
+--- End of stack trace from previous location where exception was thrown ---
+  <br>at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+  <br>at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+  <br>at OnTimeSpeed.Code.DAL.<GetRequestAsync>d__5.MoveNext() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 77
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:00:35</span><span class='timeUtc' style='display: none'>2020-12-21T15:00:35.9265333+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>The remote server returned an error: (404) Not Found.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>System</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.Net.WebResponse GetResponse()</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>endpoint: https://dev03/HrNetApi_HrPro/Auth/WinAuthorize</code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Net.HttpWebRequest.GetResponse()
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBody(String url, Dictionary`2 formData, String token) in C:\Projects\HrNetMobile\HrNetMobile.Data\Utils\ApiHelper.cs:line 297
+  <br>at HrNetMobile.Data.DAL.DALWebApi.PostRequest(String endPoint, String token, Dictionary`2 formData) in C:\Projects\HrNetMobile\HrNetMobile.Data\DAL\DALWebApi.cs:line 25
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:00:36</span><span class='timeUtc' style='display: none'>2020-12-21T15:00:36.0019862+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>The remote server returned an error: (404) Not Found.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>System</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.Net.WebResponse GetResponse()</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>endpoint: https://dev03/HrNetApi_HrPro/Auth/WinAuthorize</code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Net.HttpWebRequest.GetResponse()
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBody(String url, Dictionary`2 formData, String token) in C:\Projects\HrNetMobile\HrNetMobile.Data\Utils\ApiHelper.cs:line 297
+  <br>at HrNetMobile.Data.DAL.DALWebApi.PostRequest(String endPoint, String token, Dictionary`2 formData) in C:\Projects\HrNetMobile\HrNetMobile.Data\DAL\DALWebApi.cs:line 25
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:00:59</span><span class='timeUtc' style='display: none'>2020-12-21T15:00:59.2046768+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:00:59</span><span class='timeUtc' style='display: none'>2020-12-21T15:00:59.2455679+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Failed to login to WEB API for user HRPRO\danijel.rudman</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>HrNetMobile.Data</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>HrNetMobile.Models.TokenDataWebApi AuthenticateWebApiWin(HrNetMobile.Models.User)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at HrNetMobile.Data.DAL.DALWebApi.AuthenticateWebApiWin(User info) in C:\Projects\HrNetMobile\HrNetMobile.Data\DAL\DALWebApi.cs:line 137
+  <br>at OnTimeSpeed.Code.DAL.AuthHrNet(User user) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 381
+  <br>at OnTimeSpeed.Controllers.HomeController.Index() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 53
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:01:00</span><span class='timeUtc' style='display: none'>2020-12-21T15:01:00.9480422+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>String reference not set to an instance of a String.
+Parameter name: s</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>OnTimeSpeed</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.Nullable`1[System.DateTime] ToDate(System.String)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at OnTimeSpeed.Utils.DateUtils.ToDate(String dateStr) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Utils\DateUtils.cs:line 23
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:01:06</span><span class='timeUtc' style='display: none'>2020-12-21T15:01:07.0001674+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:01:07</span><span class='timeUtc' style='display: none'>2020-12-21T15:01:07.0420635+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Failed to login to WEB API for user HRPRO\danijel.rudman</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>HrNetMobile.Data</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>HrNetMobile.Models.TokenDataWebApi AuthenticateWebApiWin(HrNetMobile.Models.User)</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code></code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at HrNetMobile.Data.DAL.DALWebApi.AuthenticateWebApiWin(User info) in C:\Projects\HrNetMobile\HrNetMobile.Data\DAL\DALWebApi.cs:line 137
+  <br>at OnTimeSpeed.Code.DAL.AuthHrNet(User user) in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Code\DAL.cs:line 381
+  <br>at OnTimeSpeed.Controllers.HomeController.Index() in C:\Projects\OnTimeSpeed.git\OnTimeSpeed\Controllers\HomeController.cs:line 53
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:01:52</span><span class='timeUtc' style='display: none'>2020-12-21T15:01:52.4492809+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='exception card card-danger'>
+		<div class='card-header'>
+			<h3 class='exception card-title'> EXCEPTION </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong>unknown</strong> (-1)</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:01:52</span><span class='timeUtc' style='display: none'>2020-12-21T15:01:52.6786622+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>The remote server returned an error: (404) Not Found.</code></span><br />
+			<span class="exceptionSource"><span class="title">Source:</span>	<code>System</code></span><br />
+			<span class="exceptionTargetSite"><span class="title">TargetSite:</span>	<code>System.Net.WebResponse GetResponse()</code></span><br />
+			<span class="classTest"><span class="title">Additional info:</span>	<code>endpoint: https://dev03/HrNetApi_HrPro/Auth/WinAuthorize</code></span><br />
+			<span class="title">StackTrace:</span><br />
+  <br>at System.Net.HttpWebRequest.GetResponse()
+  <br>at HrNetMobile.Data.Utils.ApiHelper.PostRequestWithBody(String url, Dictionary`2 formData, String token)
+  <br>at HrNetMobile.Data.DAL.DALWebApi.PostRequest(String endPoint, String token, Dictionary`2 formData)
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:02:08</span><span class='timeUtc' style='display: none'>2020-12-21T15:02:08.0661496+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>21.12.2020. 15:02:08</span><span class='timeUtc' style='display: none'>2020-12-21T15:02:08.3254550+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 13:47:45</span><span class='timeUtc' style='display: none'>2021-01-05T13:47:45.8984349+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 13:47:46</span><span class='timeUtc' style='display: none'>2021-01-05T13:47:46.2295364+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:02:41</span><span class='timeUtc' style='display: none'>2021-01-05T14:02:41.5982406+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:02:42</span><span class='timeUtc' style='display: none'>2021-01-05T14:02:42.5379270+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:02:42</span><span class='timeUtc' style='display: none'>2021-01-05T14:02:42.6246458+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:02:42</span><span class='timeUtc' style='display: none'>2021-01-05T14:02:42.7234153+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:06:20</span><span class='timeUtc' style='display: none'>2021-01-05T14:06:20.3085078+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:06:20</span><span class='timeUtc' style='display: none'>2021-01-05T14:06:20.6785041+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:06:20</span><span class='timeUtc' style='display: none'>2021-01-05T14:06:20.8101514+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:06:20</span><span class='timeUtc' style='display: none'>2021-01-05T14:06:20.8939294+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:10:56</span><span class='timeUtc' style='display: none'>2021-01-05T14:10:56.3515439+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:10:56</span><span class='timeUtc' style='display: none'>2021-01-05T14:10:56.7307000+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:10:56</span><span class='timeUtc' style='display: none'>2021-01-05T14:10:56.8154865+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:10:57</span><span class='timeUtc' style='display: none'>2021-01-05T14:10:57.1800754+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:12:20</span><span class='timeUtc' style='display: none'>2021-01-05T14:12:20.7282330+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:12:21</span><span class='timeUtc' style='display: none'>2021-01-05T14:12:21.0141041+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:12:21</span><span class='timeUtc' style='display: none'>2021-01-05T14:12:21.1427681+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:12:21</span><span class='timeUtc' style='display: none'>2021-01-05T14:12:21.2305353+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:12:21</span><span class='timeUtc' style='display: none'>2021-01-05T14:12:21.3372517+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:14:04</span><span class='timeUtc' style='display: none'>2021-01-05T14:14:04.4815148+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:14:05</span><span class='timeUtc' style='display: none'>2021-01-05T14:14:05.0897185+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:14:05</span><span class='timeUtc' style='display: none'>2021-01-05T14:14:05.2432964+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:14:05</span><span class='timeUtc' style='display: none'>2021-01-05T14:14:05.3330723+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:16:01</span><span class='timeUtc' style='display: none'>2021-01-05T14:16:01.1085193+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:16:01</span><span class='timeUtc' style='display: none'>2021-01-05T14:16:01.4703365+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:16:01</span><span class='timeUtc' style='display: none'>2021-01-05T14:16:01.5331728+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:16:01</span><span class='timeUtc' style='display: none'>2021-01-05T14:16:01.6248917+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:18:51</span><span class='timeUtc' style='display: none'>2021-01-05T14:18:51.1326693+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Pokušaj logina s HRPRO\danijel.rudman</code></span><br />
+		</div>
+	</div>
+
+	<div class='debug card card-primary'>
+		<div class='card-header'>
+			<h3 class='debug card-title'> DEBUG </h3>
+		</div>
+		<div class='card-body'>
+			<h5 class='loggedUser'>Used token: <strong></strong> ()</h5>
+			<span class="exceptionTime"><span class="title">Time: </span><span>5.1.2021. 14:18:51</span><span class='timeUtc' style='display: none'>2021-01-05T14:18:51.3953373+01:00</span> <br />
+			<span class="exceptionMessage"><span class="title">Message:</span>	<code>Prijava uspješna!</code></span><br />
+		</div>
+	</div>
+

@@ -174,6 +174,10 @@ namespace OnTimeSpeed.Code
         {
             CultureInfo ciCurr = CultureInfo.CurrentCulture;
             int weekNum = ciCurr.Calendar.GetWeekOfYear(forDate, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            //if (weekNum > 50 && forDate.Month == 1)
+            //    return 1;
+            //else
+            //    return weekNum;
             return weekNum;
         }
 
@@ -218,8 +222,8 @@ namespace OnTimeSpeed.Code
                                     fromSet = true;
                                 }
                             }
-                            else if (forWeek > week && i.Year >= year)
-                                break;
+                            //else if (forWeek > week && i.Year >= year)
+                            //    break;
                         }
                         break;
                 }                
